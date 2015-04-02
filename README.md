@@ -1,4 +1,4 @@
-  PURPOSE AND USAGE
+#  PURPOSE AND USAGE
 
   This XSLT is a proof of concept for the implementation of the suite of 
   specifications concerning the INSPIRE profile of DCAT-AP (INSPIRE+DCAT-AP), 
