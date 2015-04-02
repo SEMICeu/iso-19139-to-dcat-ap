@@ -10,7 +10,8 @@ Unless required by applicable law or agreed to in writing, software distributed 
  
 Date: 02/04/2015
 
-# Authors:
+# Authors
 
 European Commission - Joint Research Centre
+
 Andrea Perego <andrea.perego@jrc.ec.europa.eu>
