@@ -33,7 +33,8 @@
 
   This XSLT is a proof of concept for the implementation of the suite of 
   specifications concerning the INSPIRE profile of DCAT-AP (INSPIRE+DCAT-AP), 
-  available in the collaboration space of the INSPIRE MIG:
+  available in the collaboration space of the INSPIRE Maintenance and 
+  Implementation Group (MIG):
   
     https://ies-svn.jrc.ec.europa.eu/projects/metadata/wiki/Alignment_of_INSPIRE_metadata_with_DCAT-AP
     
