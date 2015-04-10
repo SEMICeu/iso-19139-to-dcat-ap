@@ -482,7 +482,7 @@
 <!-- Temporal extent -->
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent"/>
 <!-- Creation date, publication date, date of last revision -->
-      <xsl:apply-templates select="gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:date/gmd:CI_Date"/>
+      <xsl:apply-templates select="gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation"/>
 <!-- Lineage -->
       <xsl:if test="$ResourceType != 'service' and $profile = 'extended'">
         <dct:provenance>
@@ -924,7 +924,7 @@
   
 <!-- Dates of publication, last revision, creation -->  
 
-  <xsl:template name="ResourceDates" match="gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:date/gmd:CI_Date">
+  <xsl:template name="ResourceDates" match="gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation">
     <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
   </xsl:template>
   
