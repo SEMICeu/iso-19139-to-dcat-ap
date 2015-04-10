@@ -435,6 +435,27 @@
       <xsl:apply-templates select="gmd:contact/gmd:CI_ResponsibleParty">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
       </xsl:apply-templates>
+<!-- Metadata file identifier -->
+      <xsl:for-each select="gmd:fileIdentifier/gco:CharacterString">
+        <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="."/></dct:identifier>
+      </xsl:for-each>  
+<!-- Metadata standard -->
+      <xsl:for-each select="gmd:metadataStandardName/gco:CharacterString">
+        <xsl:if test="text() != '' or ../../gmd:metadataStandardVersion/gco:CharacterString/text() != ''">
+          <dct:source rdf:parseType="Resource">
+            <dct:conformsTo>
+              <xsl:if test="text() != ''">
+<!-- Metadata standard name -->              
+                <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
+              </xsl:if>
+              <xsl:if test="../../gmd:metadataStandardName/gco:CharacterString/text() != ''">
+<!-- Metadata standard version -->              
+                <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="../../gmd:metadataStandardVersion/gco:CharacterString"/></owl:versionInfo>
+              </xsl:if>
+            </dct:conformsTo>    
+          </dct:source>
+        </xsl:if>
+      </xsl:for-each>
     </xsl:param>  
 
     <xsl:param name="ResourceDescription">
