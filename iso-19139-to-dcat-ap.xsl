@@ -51,6 +51,7 @@
     xmlns:xsl    = "http://www.w3.org/1999/XSL/Transform"
     xmlns:rdf    = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs   = "http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl    = "http://www.w3.org/2002/07/owl#"
     xmlns:skos   = "http://www.w3.org/2004/02/skos/core#"
     xmlns:cnt    = "http://www.w3.org/2011/content#"
     xmlns:dc     = "http://purl.org/dc/elements/1.1/" 
@@ -111,7 +112,7 @@
 -->
 
 <!-- Uncomment to use INSPIRE+DCAT-AP Core -->
-  <xsl:param name="profile">core</xsl:param>
+  <xsl:param name="profile">extended</xsl:param>
 <!-- Uncomment to use INSPIRE+DCAT-AP Extended -->
 <!--
   <xsl:param name="profile">extended</xsl:param>
@@ -410,7 +411,21 @@
       </xsl:for-each>
     </xsl:param>
 
+    <xsl:param name="ConstraintsRelatedToAccessAndUse">
+      <xsl:apply-templates select="gmd:identificationInfo[1]/*/gmd:resourceConstraints/*">
+        <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+      </xsl:apply-templates>
+    </xsl:param>
+    
+    <xsl:param name="ResourceCharacterEncoding">
+      <xsl:for-each select="gmd:identificationInfo/gmd:MD_DataIdentification">
+        <xsl:apply-templates select="gmd:characterSet/gmd:MD_CharacterSetCode"/>
+      </xsl:for-each>  
+    </xsl:param>
+    
+    
     <xsl:param name="MetadataDescription">
+<!-- Metadata language -->
       <dct:language rdf:resource="{concat($oplang,translate($ormlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
 <!-- Metadata date -->
       <dct:modified rdf:datatype="{$xsd}date">
@@ -420,7 +435,7 @@
       <xsl:apply-templates select="gmd:contact/gmd:CI_ResponsibleParty">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
       </xsl:apply-templates>
-    </xsl:param>
+    </xsl:param>  
 
     <xsl:param name="ResourceDescription">
       <xsl:choose>
@@ -458,10 +473,12 @@
       </xsl:apply-templates>
 -->        
 <!-- Resource locators -->
+<!--
       <xsl:apply-templates select="gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine/*/gmd:linkage">
         <xsl:with-param name="ResourceType" select="$ResourceType"/>
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
       </xsl:apply-templates>
+-->      
 <!-- Unique Resource Identifier -->
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/gmd:RS_Identifier"/>
 <!-- Coupled resources -->
@@ -470,7 +487,7 @@
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
       </xsl:apply-templates>
 <!-- Resource Language -->        
-      <dct:language rdf:resource="{concat($oplang,translate($ormlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
+      <dct:language rdf:resource="{concat($oplang,translate($orrlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
 <!-- Spatial service type -->
       <xsl:if test="$profile = 'extended'">
         <xsl:apply-templates select="gmd:identificationInfo/*/srv:serviceType">
@@ -501,22 +518,26 @@
       <xsl:apply-templates select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
       </xsl:apply-templates>
-      <dcat:distribution>
-        <dcat:Distribution>
-<!-- Constraint related to access and use -->
-          <xsl:apply-templates select="gmd:identificationInfo[1]/*/gmd:resourceConstraints/*">
-            <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
-          </xsl:apply-templates>
-          <xsl:if test="$ResourceType = 'dataset' or $ResourceType = 'series'">
-<!-- Encoding -->            
-            <dcat:mediaType rdf:resource="http://publications.europa.eu/resource/authority/file-type/TIFF"/>
-<!-- Character encoding -->         
+<!-- Distributions -->
+      <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution">
+        <dcat:distribution>
+          <dcat:Distribution>
+<!-- Resource locators (access / download URLs) -->          
+            <xsl:apply-templates select="gmd:transferOptions/*/gmd:onLine/*/gmd:linkage">
+              <xsl:with-param name="ResourceType" select="$ResourceType"/>
+              <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+            </xsl:apply-templates>
+<!-- Constraints related to access and use -->
+            <xsl:copy-of select="$ConstraintsRelatedToAccessAndUse"/>
+<!-- Encoding -->      
+            <xsl:apply-templates select="gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString"/>
+<!-- Resource character encoding -->
             <xsl:if test="$profile = 'extended'">
-              <cnt:characterEncoding rdf:datatype="{$xsd}string">UTF-8</cnt:characterEncoding>
+              <xsl:copy-of select="$ResourceCharacterEncoding"/>
             </xsl:if>
-          </xsl:if>
-        </dcat:Distribution>
-      </dcat:distribution>
+          </dcat:Distribution>
+        </dcat:distribution>
+      </xsl:for-each>    
 <!-- Responsible organisation -->
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:pointOfContact/gmd:CI_ResponsibleParty">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
@@ -753,7 +774,7 @@
   </xsl:template>
 
 <!-- Resource locator -->
-
+<!-- Old version, applied to the resource (not to the resource distribution)
   <xsl:template name="ResourceLocator" match="gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine/*/gmd:linkage">
     <xsl:param name="ResourceType"/>
     <xsl:choose>
@@ -763,6 +784,22 @@
       <xsl:when test="$ResourceType = 'service'">
         <foaf:homepage rdf:resource="{gmd:URL}"/>
       </xsl:when>
+    </xsl:choose>
+  </xsl:template>
+-->
+  <xsl:template name="ResourceLocator" match="gmd:transferOptions/*/gmd:onLine/*/gmd:linkage">
+    <xsl:param name="MetadataLanguage"/>
+    <xsl:param name="ResourceType"/>
+    <xsl:choose>
+      <xsl:when test="$ResourceType = 'dataset' or $ResourceType = 'series'">
+        <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="../gmd:description/gco:CharacterString"/></dct:title>
+        <dcat:accessURL rdf:resource="{gmd:URL}"/>
+     </xsl:when>
+<!--      
+      <xsl:when test="$ResourceType = 'service'">
+        <foaf:homepage rdf:resource="{gmd:URL}"/>
+      </xsl:when>
+-->      
     </xsl:choose>
   </xsl:template>
 
@@ -958,7 +995,7 @@
 
 <!-- Constraints related to access and use -->
 
-  <xsl:template name="ConstraintRelatedToAccesAndUse" match="gmd:identificationInfo[1]/*/gmd:resourceConstraints/*">
+  <xsl:template name="ConstraintsRelatedToAccesAndUse" match="gmd:identificationInfo[1]/*/gmd:resourceConstraints/*">
     <xsl:param name="MetadataLanguage"/>
     <xsl:param name="LimitationsOnPublicAccess">
       <xsl:value-of select="gmd:MD_LegalConstraints/gmd:otherConstraints/gco:CharacterString"/>
@@ -1075,6 +1112,26 @@
       <dcat:granularity rdf:datatype="{$xsd}string">1/<xsl:value-of select="gco:Integer"/></dcat:granularity>
     </xsl:for-each>
 -->    
+  </xsl:template>
+
+<!-- Character encoding -->
+
+  <xsl:template name="CharacterEncoding" match="gmd:characterSet/gmd:MD_CharacterSetCode">
+    <cnt:characterEncoding rdf:datatype="{$xsd}string"><xsl:value-of select="@codeListValue"/></cnt:characterEncoding>
+  </xsl:template>
+
+<!-- Encoding -->
+
+  <xsl:template name="Encoding" match="gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString">
+    <dct:format rdf:parseType="Resource">
+      <rdfs:label><xsl:value-of select="."/></rdfs:label>
+    </dct:format>
+  </xsl:template>
+  
+<!-- Coordinate reference system -->
+
+  <xsl:template name="CoordinateReferenceSystem" match="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
+<!-- TBD -->  
   </xsl:template>
 
 </xsl:transform>
