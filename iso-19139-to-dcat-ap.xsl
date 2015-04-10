@@ -16,7 +16,6 @@
   See the Licence for the specific language governing permissions and
   limitations under the Licence.
  
-  Date: 30/03/2015
   Authors: European Commission - Joint Research Centre
            Andrea Perego <andrea.perego@jrc.ec.europa.eu>
  
