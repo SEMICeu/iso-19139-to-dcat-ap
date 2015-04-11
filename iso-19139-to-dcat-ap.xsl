@@ -492,11 +492,11 @@
       <xsl:apply-templates select="gmd:contact/gmd:CI_ResponsibleParty">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
       </xsl:apply-templates>
-<!-- Metadata file identifier (proposal) -->
+<!-- Metadata file identifier (tentative) -->
       <xsl:for-each select="gmd:fileIdentifier/gco:CharacterString">
         <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="."/></dct:identifier>
       </xsl:for-each>  
-<!-- Metadata standard (proposal) -->
+<!-- Metadata standard (tentative) -->
       <xsl:for-each select="gmd:metadataStandardName/gco:CharacterString">
         <xsl:if test="text() != '' or ../../gmd:metadataStandardVersion/gco:CharacterString/text() != ''">
           <dct:source rdf:parseType="Resource">
@@ -534,7 +534,7 @@
       <dct:description xml:lang="{$MetadataLanguage}">
         <xsl:value-of select="normalize-space($ResourceAbstract)"/>
       </dct:description>
-<!-- Maintenance information (proposal) -->
+<!-- Maintenance information (tentative) -->
       <xsl:for-each select="gmd:identificationInfo/*/gmd:resourceMaintenance">
         <xsl:apply-templates select="gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode"/>      
       </xsl:for-each>
