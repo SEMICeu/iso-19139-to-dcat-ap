@@ -603,25 +603,40 @@
         <xsl:with-param name="Conformity" select="$Conformity"/>
       </xsl:apply-templates>
 <!-- Distributions -->
-      <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution">
-        <dcat:distribution>
-          <dcat:Distribution>
+      <xsl:choose>
+        <xsl:when test="$ResourceType = 'dataset' or $ResourceType = 'series'">
+          <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution">
+<!-- Encoding --> 
+            <xsl:variable name="Encoding">     
+               <xsl:apply-templates select="gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString"/>
+            </xsl:variable>             
 <!-- Resource locators (access / download URLs) -->          
-            <xsl:apply-templates select="gmd:transferOptions/*/gmd:onLine/*/gmd:linkage">
-              <xsl:with-param name="ResourceType" select="$ResourceType"/>
-              <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
-            </xsl:apply-templates>
+            <xsl:for-each select="gmd:transferOptions/*/gmd:onLine/*">
+              <dcat:distribution>
+                <dcat:Distribution>
+                  <xsl:for-each select="gmd:name/gco:CharacterString">
+                    <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
+                  </xsl:for-each>
+                  <xsl:for-each select="gmd:description/gco:CharacterString">
+                    <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:description>
+                  </xsl:for-each>
+                  <xsl:for-each select="gmd:linkage/gmd:URL">
+                    <dcat:accessURL rdf:resource="{.}"/>
+                  </xsl:for-each>
 <!-- Constraints related to access and use -->
-            <xsl:copy-of select="$ConstraintsRelatedToAccessAndUse"/>
-<!-- Encoding -->      
-            <xsl:apply-templates select="gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString"/>
+                  <xsl:copy-of select="$ConstraintsRelatedToAccessAndUse"/>
+<!-- Encoding -->
+                  <xsl:copy-of select="$Encoding"/>
 <!-- Resource character encoding -->
-            <xsl:if test="$profile = 'extended'">
-              <xsl:copy-of select="$ResourceCharacterEncoding"/>
-            </xsl:if>
-          </dcat:Distribution>
-        </dcat:distribution>
-      </xsl:for-each>    
+                  <xsl:if test="$profile = 'extended'">
+                    <xsl:copy-of select="$ResourceCharacterEncoding"/>
+                  </xsl:if>
+                </dcat:Distribution>
+              </dcat:distribution>
+            </xsl:for-each>
+          </xsl:for-each>    
+        </xsl:when>
+      </xsl:choose>               
 <!-- Responsible organisation -->
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:pointOfContact/gmd:CI_ResponsibleParty">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
