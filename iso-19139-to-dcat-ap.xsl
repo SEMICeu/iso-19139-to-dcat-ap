@@ -418,6 +418,62 @@
       </xsl:apply-templates>
     </xsl:param>
     
+<!-- Conformity, expressed by using an earl:Assertion (only for the extended profile) -->    
+    
+    <xsl:param name="Conformity">
+      <xsl:for-each select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
+    <xsl:variable name="specinfo">
+      <dct:title xml:lang="{$MetadataLanguage}">
+        <xsl:value-of select="gmd:title/gco:CharacterString"/>
+      </dct:title>
+      <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
+    </xsl:variable>
+    <xsl:variable name="degree">
+      <xsl:choose>
+        <xsl:when test="../../gmd:pass = 'true'">
+          <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/conformant')"/>
+        </xsl:when>
+        <xsl:when test="../../gmd:pass = 'false'">
+          <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notConformant')"/>
+        </xsl:when>
+        <xsl:otherwise>
+<!--        
+        <xsl:when test="../../gmd:pass = ''">
+-->        
+          <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notEvaluated')"/>
+<!--          
+        </xsl:when>
+-->        
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+        <earl:Assertion>
+          <xsl:if test="$ResourceUri != ''">
+            <earl:subject rdf:resource="{$ResourceUri}"/>
+          </xsl:if>
+          <xsl:choose>
+            <xsl:when test="../@xlink:href and ../@xlink:href != ''">
+              <earl:test>
+                <rdf:Description rdf:about="{../@xlink:href}">
+                  <xsl:copy-of select="$specinfo"/>
+                </rdf:Description>
+              </earl:test>
+            </xsl:when>
+            <xsl:otherwise>
+              <earl:test rdf:parseType="Resource">
+                <xsl:copy-of select="$specinfo"/>
+              </earl:test>
+            </xsl:otherwise>
+          </xsl:choose>
+          <earl:result>
+            <earl:TestResult>
+              <earl:outcome rdf:resource="{$degree}"/>
+            </earl:TestResult>
+          </earl:result>
+        </earl:Assertion>
+      </xsl:for-each>
+    </xsl:param>
+    
     <xsl:param name="ResourceCharacterEncoding">
       <xsl:for-each select="gmd:identificationInfo/gmd:MD_DataIdentification">
         <xsl:apply-templates select="gmd:characterSet/gmd:MD_CharacterSetCode"/>
@@ -542,7 +598,9 @@
       </xsl:if>
 <!-- Conformity -->
       <xsl:apply-templates select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
+        <xsl:with-param name="ResourceUri" select="$ResourceUri"/>
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+        <xsl:with-param name="Conformity" select="$Conformity"/>
       </xsl:apply-templates>
 <!-- Distributions -->
       <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution">
@@ -605,6 +663,11 @@
         </rdf:Description>
       </xsl:otherwise>
     </xsl:choose>
+    
+    <xsl:if test="$profile = 'extended' and $ResourceUri != '' and $Conformity != ''">
+      <xsl:copy-of select="$Conformity"/>
+    </xsl:if>
+    
       
   </xsl:template>
   
@@ -843,7 +906,9 @@
   
 <!-- Conformity -->  
   <xsl:template name="Conformity" match="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
+    <xsl:param name="ResourceUri"/>
     <xsl:param name="MetadataLanguage"/>
+    <xsl:param name="Conformity"/>
     <xsl:variable name="specinfo">
       <dct:title xml:lang="{$MetadataLanguage}">
         <xsl:value-of select="gmd:title/gco:CharacterString"/>
@@ -886,6 +951,12 @@
       </xsl:choose>
     </xsl:if>
     <xsl:if test="$profile = 'extended'">
+      <xsl:if test="$Conformity != '' and $ResourceUri = ''">
+        <wdrs:describedby>
+          <xsl:copy-of select="$Conformity"/>
+        </wdrs:describedby>
+      </xsl:if>
+<!--    
       <xsl:choose>
         <xsl:when test="../@xlink:href and ../@xlink:href != ''">
           <wdrs:describedby>
@@ -918,6 +989,7 @@
           </wdrs:describedby>
         </xsl:otherwise>
       </xsl:choose>
+-->    
     </xsl:if>
   </xsl:template>
   
