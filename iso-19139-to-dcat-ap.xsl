@@ -148,6 +148,7 @@
   <xsl:param name="opcountry" select="concat($op,'country/')"/>
   <xsl:param name="oplang" select="concat($op,'language/')"/>
   <xsl:param name="opcb" select="concat($op,'corporate-body/')"/>
+  <xsl:param name="cldFrequency">http://purl.org/cld/freq/"</xsl:param>
 
   <xsl:param name="geojsonMediaTypeUri">https://www.iana.org/assignments/media-types/application/vnd.geo+json</xsl:param>
 
@@ -435,11 +436,11 @@
       <xsl:apply-templates select="gmd:contact/gmd:CI_ResponsibleParty">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
       </xsl:apply-templates>
-<!-- Metadata file identifier -->
+<!-- Metadata file identifier (proposal) -->
       <xsl:for-each select="gmd:fileIdentifier/gco:CharacterString">
         <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="."/></dct:identifier>
       </xsl:for-each>  
-<!-- Metadata standard -->
+<!-- Metadata standard (proposal) -->
       <xsl:for-each select="gmd:metadataStandardName/gco:CharacterString">
         <xsl:if test="text() != '' or ../../gmd:metadataStandardVersion/gco:CharacterString/text() != ''">
           <dct:source rdf:parseType="Resource">
@@ -477,6 +478,10 @@
       <dct:description xml:lang="{$MetadataLanguage}">
         <xsl:value-of select="normalize-space($ResourceAbstract)"/>
       </dct:description>
+<!-- Maintenance information (proposal) -->
+      <xsl:for-each select="gmd:identificationInfo/*/gmd:resourceMaintenance">
+        <xsl:apply-templates select="gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode"/>      
+      </xsl:for-each>
 <!-- Topic category -->
       <xsl:if test="$profile = 'extended'">
         <xsl:apply-templates select="gmd:identificationInfo/*/gmd:topicCategory">
@@ -1149,6 +1154,66 @@
     </dct:format>
   </xsl:template>
   
+<!-- Maintenance information -->
+
+  <xsl:template name="MaintenanceInformation" match="gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode">
+<!-- The following parameter maps frequency codes used in ISO 19139 metadata to the corresponding ones of the Dublin Core Collection Description Frequency Vocabulary (when available). -->
+    <xsl:param name="FrequencyCodeURI">
+      <xsl:if test="@codeListValue != ''">
+        <xsl:choose>
+          <xsl:when test="@codeListValue = 'continual'">
+            <xsl:value-of select="concat($cldFrequency,'continuous')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'continual'">
+            <xsl:value-of select="concat($cldFrequency,'continuous')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'daily'">
+            <xsl:value-of select="concat($cldFrequency,'daily')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'weekly'">
+            <xsl:value-of select="concat($cldFrequency,'weekly')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'fortnightly'">
+            <xsl:value-of select="concat($cldFrequency,'biweekly')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'monthly'">
+            <xsl:value-of select="concat($cldFrequency,'monthly')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'quarterly'">
+            <xsl:value-of select="concat($cldFrequency,'quarterly')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'biannually'">
+            <xsl:value-of select="concat($cldFrequency,'biennial')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'annually'">
+            <xsl:value-of select="concat($cldFrequency,'annual')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'asNeeded'">
+<!--          
+            <xsl:value-of select="concat($cldFrequency,'??')"/>
+-->            
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'irregular'">
+            <xsl:value-of select="concat($cldFrequency,'irregular')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'notPlanned'">
+<!--          
+            <xsl:value-of select="concat($cldFrequency,'??')"/>
+-->            
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'unknown'">
+<!--          
+            <xsl:value-of select="concat($cldFrequency,'??')"/>
+-->            
+          </xsl:when>
+        </xsl:choose>
+      </xsl:if>
+    </xsl:param>
+    <xsl:if test="$FrequencyCodeURI != ''">
+      <dct:accrualPeriodicity rdf:resource="{$FrequencyCodeURI}"/>
+    </xsl:if>      
+  </xsl:template>
+
 <!-- Coordinate reference system -->
 
   <xsl:template name="CoordinateReferenceSystem" match="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
