@@ -500,7 +500,7 @@
       <xsl:for-each select="gmd:metadataStandardName/gco:CharacterString">
         <xsl:if test="text() != '' or ../../gmd:metadataStandardVersion/gco:CharacterString/text() != ''">
           <dct:source rdf:parseType="Resource">
-            <dct:conformsTo>
+            <dct:conformsTo rdf:parseType="Resource">
               <xsl:if test="text() != ''">
 <!-- Metadata standard name -->              
                 <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
