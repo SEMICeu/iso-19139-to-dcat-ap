@@ -569,7 +569,21 @@
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
       </xsl:apply-templates>
 <!-- Resource Language -->        
-      <dct:language rdf:resource="{concat($oplang,translate($orrlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
+      <xsl:if test="$ResourceType = 'dataset' or $ResourceType = 'series'">
+        <xsl:choose>
+          <xsl:when test="$orrlang != ''">
+            <dct:language rdf:resource="{concat($oplang,translate($orrlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
+          </xsl:when>
+          <xsl:otherwise>
+<!-- To be decided (when the resource language is not specified, it defaults to the metadata language): -->
+<!-- 
+             <xsl:if test="$ormlang != ''">
+               <dct:language rdf:resource="{concat($oplang,translate($ormlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
+             </xsl:if>
+-->            
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
 <!-- Spatial service type -->
       <xsl:if test="$profile = 'extended'">
         <xsl:apply-templates select="gmd:identificationInfo/*/srv:serviceType">
