@@ -20,3 +20,5 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 * Minor fixes.
 
 ## 2015-04-07: First version online (v0.1)
+
+Preliminary version.
