@@ -6,7 +6,7 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 
 * Fixed ambiguous rule in template "ResourceDates", causing processing warnings or errors.
 * Values for resource format (encoding) and character encoding are no longer hard-coded, but taken from the relevant ISO 19139 elements. 
-* Revised methodology for the creation of distributions:
+* Revised creation of distributions:
     * Added character encoding for metadata record and resource distributions (only for the extended profile).
     * Added distribution title (`gmd:transferOptions/*/gmd:onLine/*/gmd:name`).
     * Added distribution description (`gmd:transferOptions/*/gmd:onLine/*/gmd:description`).
@@ -14,7 +14,7 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 * Fixed and revised specification of the resource language.
 * Added tentative mapping for ISO 19139 element "Metadata file identifier". For this, `dct:identifier` has been used.
 * Added tentative mappings for ISO 19139 elements "Metadata standard name" and "Metadata standard version". They have been modelled as characteristics of the source metadata record (`dct:source`), and specified by using `dct:conformsTo` + `dct:title` / `owl:versionInfo`.
-* Added tentative mapping for ISO 19139 element "Maintenance information". For this, `dct:accrualPeriodicity` has been used, and the frequency codes in the original ISO 19139 record have been mapped to the corresponding ones of the of the Dublin Core Collection Description Frequency Vocabulary (when available).
+* Added tentative mapping for ISO 19139 element "Maintenance information". For this, `dct:accrualPeriodicity` has been used, and the frequency codes in the original ISO 19139 record have been mapped to the corresponding ones of the of the [Dublin Core Collection Description Frequency Vocabulary](http://dublincore.org/groups/collections/frequency/) (when available).
 * Fixed axis order in the coordinates of the bounding box.
 * Revised generation of `earl:Assertion`'s to express conformity, based on whether the resource has or not a URI.
 * Minor fixes.
