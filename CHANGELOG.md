@@ -5,6 +5,7 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 <dl>
 <dt>2015-04-13: Revised version (v0.2)</dt>
 <dd>
+
 * Fixed ambiguous rule in template "ResourceDates", causing processing warnings or errors.
 * Values for resource format (encoding) and character encoding are no longer hard-coded, but taken from the relevant ISO 19139 elements. 
 * Revised methodology for the creation of distributions:
@@ -19,6 +20,7 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 * Fixed axis order in the coordinates of the bounding box.
 * Revised generation of `earl:Assertion`'s to express conformity, based on whether the resource has or not a URI.
 * Minor fixes.
+
 </dd>
 <dt>2015-04-07: First version online (v0.1)</dt>
 </dl>
