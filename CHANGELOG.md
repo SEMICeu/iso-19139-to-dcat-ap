@@ -7,10 +7,10 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 * Fixed ambiguous rule in template "ResourceDates", causing processing warnings or errors.
 * Values for resource format (encoding) and character encoding are no longer hard-coded, but taken from the relevant ISO 19139 elements. 
 * Revised methodology for the creation of distributions:
-  * Added character encoding for metadata record and resource distributions (only for the extended profile).
-  * Added distribution title (`gmd:transferOptions/*/gmd:onLine/*/gmd:name`).
-  * Added distribution description (`gmd:transferOptions/*/gmd:onLine/*/gmd:description`).
-  * Resource format (encoding), conditions for access and use, limitations on public access (only for the extended profile), is applied to each distribution (in ISO 19139, these are all associated with the resource, not with its distributions, as in DCAT/DCAT-AP).
+    * Added character encoding for metadata record and resource distributions (only for the extended profile).
+    * Added distribution title (`gmd:transferOptions/*/gmd:onLine/*/gmd:name`).
+    * Added distribution description (`gmd:transferOptions/*/gmd:onLine/*/gmd:description`).
+    * Resource format (encoding), conditions for access and use, limitations on public access (only for the extended profile), is applied to each distribution (in ISO 19139, these are all associated with the resource, not with its distributions, as in DCAT/DCAT-AP).
 * Fixed and revised specification of the resource language.
 * Added tentative mapping for ISO 19139 element "Metadata file identifier". For this, `dct:identifier` has been used.
 * Added tentative mappings for ISO 19139 elements "Metadata standard name" and "Metadata standard version". They have been modelled as characteristics of the source metadata record (`dct:source`), and specified by using `dct:conformsTo` + `dct:title` / `owl:versionInfo`.
