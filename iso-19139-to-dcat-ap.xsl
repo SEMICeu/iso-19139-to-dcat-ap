@@ -635,29 +635,59 @@
             </xsl:variable>             
 <!-- Resource locators (access / download URLs) -->          
             <xsl:for-each select="gmd:transferOptions/*/gmd:onLine/*">
-              <dcat:distribution>
-                <dcat:Distribution>
-                  <xsl:for-each select="gmd:name/gco:CharacterString">
-                    <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
-                  </xsl:for-each>
-                  <xsl:for-each select="gmd:description/gco:CharacterString">
-                    <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:description>
-                  </xsl:for-each>
-                  <xsl:for-each select="gmd:linkage/gmd:URL">
-                    <dcat:accessURL rdf:resource="{.}"/>
-                  </xsl:for-each>
+              <xsl:variable name="function" select="gmd:function/gmd:CI_OnLineFunctionCode/@codeListValue"/>
+              <xsl:variable name="TitleAndDescription">
+                <xsl:for-each select="gmd:name/gco:CharacterString">
+                  <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
+                </xsl:for-each>
+                <xsl:for-each select="gmd:description/gco:CharacterString">
+                  <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:description>
+                </xsl:for-each>
+              </xsl:variable>
+              <xsl:choose>
+                <xsl:when test="$function = 'download'or $function = 'offlineAccess' or $function = 'order'"> 
+                  <dcat:distribution>
+                    <dcat:Distribution>
+<!-- Title and description -->
+                      <xsl:copy-of select="$TitleAndDescription"/>
+<!-- Access URL -->                      
+                      <xsl:for-each select="gmd:linkage/gmd:URL">
+                        <dcat:accessURL rdf:resource="{.}"/>
+                      </xsl:for-each>
 <!-- Constraints related to access and use -->
-                  <xsl:copy-of select="$ConstraintsRelatedToAccessAndUse"/>
-<!-- Spatial represenation type -->
-                  <xsl:copy-of select="$SpatialRepresentationType"/>
+                      <xsl:copy-of select="$ConstraintsRelatedToAccessAndUse"/>
+<!-- Spatial representation type -->
+                      <xsl:copy-of select="$SpatialRepresentationType"/>
 <!-- Encoding -->
-                  <xsl:copy-of select="$Encoding"/>
+                      <xsl:copy-of select="$Encoding"/>
 <!-- Resource character encoding -->
-                  <xsl:if test="$profile = 'extended'">
-                    <xsl:copy-of select="$ResourceCharacterEncoding"/>
-                  </xsl:if>
-                </dcat:Distribution>
-              </dcat:distribution>
+                      <xsl:if test="$profile = 'extended'">
+                        <xsl:copy-of select="$ResourceCharacterEncoding"/>
+                      </xsl:if>
+                    </dcat:Distribution>
+                  </dcat:distribution>
+                </xsl:when>
+                <xsl:when test="$function = 'information' or $function = 'search'">
+<!-- Should foaf:page be detailed with title, description, etc.? -->                
+                  <xsl:for-each select="gmd:linkage/gmd:URL">
+                    <foaf:page>
+                      <foaf:Document rdf:about="{.}">
+                        <xsl:copy-of select="$TitleAndDescription"/>
+                      </foaf:Document>
+                    </foaf:page>
+                  </xsl:for-each>
+                </xsl:when>
+<!-- Should dcat:landingPage be detailed with title, description, etc.? -->                
+                <xsl:otherwise>
+                  <xsl:for-each select="gmd:linkage/gmd:URL">
+                    <dcat:landingPage>
+                      <foaf:Document rdf:about="{.}">
+                        <xsl:copy-of select="$TitleAndDescription"/>
+                      </foaf:Document>
+                    </dcat:landingPage>
+                  </xsl:for-each>
+                </xsl:otherwise>
+              </xsl:choose>
             </xsl:for-each>
           </xsl:for-each>    
         </xsl:when>
