@@ -1295,7 +1295,7 @@
             <xsl:value-of select="concat($cldFrequency,'quarterly')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'biannually'">
-            <xsl:value-of select="concat($cldFrequency,'biennial')"/>
+            <xsl:value-of select="concat($cldFrequency,'semiannual')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'annually'">
             <xsl:value-of select="concat($cldFrequency,'annual')"/>
