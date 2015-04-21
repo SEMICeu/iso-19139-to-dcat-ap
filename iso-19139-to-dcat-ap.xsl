@@ -65,6 +65,7 @@
     xmlns:wdrs   = "http://www.w3.org/2007/05/powder-s#"
     xmlns:prov   = "http://www.w3.org/ns/prov#"
     xmlns:vcard  = "http://www.w3.org/2006/vcard/ns#"
+    xmlns:adms   = "http://www.w3.org/ns/adms#"
     xmlns:gsp    = "http://www.opengis.net/ont/geosparql#"
     xmlns:ecodp  = "http://ec.europa.eu/open-data/ontologies/ec-odp#"
     xmlns:locn   = "http://www.w3.org/ns/locn#"
@@ -161,6 +162,10 @@
   <xsl:param name="ResponsiblePartyRoleCodelistUri" select="concat($INSPIRECodelistUri,'ResponsiblePartyRole')"/>
   <xsl:param name="SpatialDataServiceTypeCodelistUri" select="concat($INSPIRECodelistUri,'SpatialDataServiceType')"/>
   <xsl:param name="TopicCategoryCodelistUri" select="concat($INSPIRECodelistUri,'TopicCategory')"/>
+
+<!-- INSPIRE code list URIs (not yet supported; the URI pattern is tentative) -->  
+  
+  <xsl:param name="SpatialRepresentationTypeCodelistUri" select="concat($INSPIRECodelistUri,'SpatialRepresentationType')"/>
 
 <!-- EPSG SRID for spatial reference system -->
 
@@ -619,6 +624,10 @@
 <!-- Distributions -->
       <xsl:choose>
         <xsl:when test="$ResourceType = 'dataset' or $ResourceType = 'series'">
+<!-- Spatial representation type -->        
+          <xsl:variable name="SpatialRepresentationType">
+            <xsl:apply-templates select="gmd:identificationInfo/*/gmd:spatialRepresentationType/gmd:MD_SpatialRepresentationTypeCode"/>
+          </xsl:variable>
           <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution">
 <!-- Encoding --> 
             <xsl:variable name="Encoding">     
@@ -639,6 +648,8 @@
                   </xsl:for-each>
 <!-- Constraints related to access and use -->
                   <xsl:copy-of select="$ConstraintsRelatedToAccessAndUse"/>
+<!-- Spatial represenation type -->
+                  <xsl:copy-of select="$SpatialRepresentationType"/>
 <!-- Encoding -->
                   <xsl:copy-of select="$Encoding"/>
 <!-- Resource character encoding -->
@@ -1330,6 +1341,18 @@
 
   <xsl:template name="CoordinateReferenceSystem" match="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
 <!-- TBD -->  
+  </xsl:template>
+
+<!-- Temporal reference system -->
+
+  <xsl:template name="TemporalReferenceSystem" match="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
+<!-- TBD -->  
+  </xsl:template>
+
+<!-- Spatial representation type (tentative) -->
+
+  <xsl:template name="SpatialRepresentationType" match="gmd:identificationInfo/*/gmd:spatialRepresentationType/gmd:MD_SpatialRepresentationTypeCode">
+    <adms:representationTechnique rdf:resource="{$SpatialRepresentationTypeCodelistUri}/{@codeListValue}"/>
   </xsl:template>
 
 </xsl:transform>
