@@ -113,11 +113,11 @@
 -->
 
 <!-- Uncomment to use INSPIRE+DCAT-AP Core -->
-  <xsl:param name="profile">extended</xsl:param>
-<!-- Uncomment to use INSPIRE+DCAT-AP Extended -->
 <!--
-  <xsl:param name="profile">extended</xsl:param>
+  <xsl:param name="profile">core</xsl:param>
 -->
+<!-- Uncomment to use INSPIRE+DCAT-AP Extended -->
+  <xsl:param name="profile">extended</xsl:param>
 
 <!--
 
@@ -668,7 +668,7 @@
                   </dcat:distribution>
                 </xsl:when>
                 <xsl:when test="$function = 'information' or $function = 'search'">
-<!-- Should foaf:page be detailed with title, description, etc.? -->                
+<!-- ?? Should foaf:page be detailed with title, description, etc.? -->                
                   <xsl:for-each select="gmd:linkage/gmd:URL">
                     <foaf:page>
                       <foaf:Document rdf:about="{.}">
@@ -677,7 +677,7 @@
                     </foaf:page>
                   </xsl:for-each>
                 </xsl:when>
-<!-- Should dcat:landingPage be detailed with title, description, etc.? -->                
+<!-- ?? Should dcat:landingPage be detailed with title, description, etc.? -->                
                 <xsl:otherwise>
                   <xsl:for-each select="gmd:linkage/gmd:URL">
                     <dcat:landingPage>
@@ -792,6 +792,10 @@
         <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString">
           <foaf:mbox rdf:resource="mailto:{.}"/>
         </xsl:for-each>
+        <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL">
+<!-- ?? Should another property be used instead? E.g., foaf:homepage? -->        
+          <foaf:workplaceHomepage rdf:resource="{.}"/>
+        </xsl:for-each>
       </foaf:Organization>
     </xsl:param>
     <xsl:param name="ResponsibleParty">
@@ -801,6 +805,9 @@
         </vcard:organization-name>
         <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString">
           <vcard:hasEmail rdf:resource="mailto:{.}"/>
+        </xsl:for-each>
+        <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL">
+          <vcard:hasURL rdf:resource="{.}"/>
         </xsl:for-each>
       </vcard:Kind>
     </xsl:param>
