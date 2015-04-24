@@ -602,7 +602,7 @@
 <!-- Creation date, publication date, date of last revision -->
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation"/>
 <!-- Lineage -->
-      <xsl:if test="$ResourceType != 'service' and $profile = 'extended'">
+      <xsl:if test="$ResourceType != 'service'">
         <dct:provenance>
           <dct:ProvenanceStatement>
             <rdfs:label xml:lang="{$MetadataLanguage}">
@@ -849,7 +849,7 @@
         </rdarole:distributor>
       </xsl:when>
 -->        
-      <xsl:when test="$role = 'originator' and $profile = 'extended'">
+      <xsl:when test="$role = 'originator'">
         <dct:creator>
           <xsl:copy-of select="$ROInfo"/>
         </dct:creator>
