@@ -149,7 +149,7 @@
   <xsl:param name="opcountry" select="concat($op,'country/')"/>
   <xsl:param name="oplang" select="concat($op,'language/')"/>
   <xsl:param name="opcb" select="concat($op,'corporate-body/')"/>
-  <xsl:param name="cldFrequency">http://purl.org/cld/freq/"</xsl:param>
+  <xsl:param name="cldFrequency">http://purl.org/cld/freq/</xsl:param>
 
   <xsl:param name="geojsonMediaTypeUri">https://www.iana.org/assignments/media-types/application/vnd.geo+json</xsl:param>
 
@@ -199,11 +199,25 @@
   =====================================================================================
 
   These parameters must be customised depending on the strategy used to assign HTTP URIs.
+  
+  The default rule implies that HTTP URIs are specified for the metadata file identifier
+  (metadata URI) and the resource identifier (resource URI).
 
 -->  
 
-  <xsl:param name="ResourceUri"/>
-  <xsl:param name="MetadataUri"/>
+  <xsl:param name="ResourceUri">
+    <xsl:variable name="rURI" select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString"/>
+    <xsl:if test="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString and starts-with(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString, 'http')">
+      <xsl:value-of select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString"/>
+    </xsl:if>
+  </xsl:param>
+
+  <xsl:param name="MetadataUri">
+    <xsl:variable name="mURI" select="gmd:fileIdentifier/gco:CharacterString"/>
+    <xsl:if test="gmd:fileIdentifier/gco:CharacterString and starts-with(gmd:fileIdentifier/gco:CharacterString, 'http')">
+      <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/>
+    </xsl:if>
+  </xsl:param>
 
 <!-- 
 
@@ -427,31 +441,34 @@
     
     <xsl:param name="Conformity">
       <xsl:for-each select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
-    <xsl:variable name="specinfo">
-      <dct:title xml:lang="{$MetadataLanguage}">
-        <xsl:value-of select="gmd:title/gco:CharacterString"/>
-      </dct:title>
-      <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
-    </xsl:variable>
-    <xsl:variable name="degree">
-      <xsl:choose>
-        <xsl:when test="../../gmd:pass = 'true'">
-          <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/conformant')"/>
-        </xsl:when>
-        <xsl:when test="../../gmd:pass = 'false'">
-          <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notConformant')"/>
-        </xsl:when>
-        <xsl:otherwise>
+        <xsl:variable name="specinfo">
+          <dct:title xml:lang="{$MetadataLanguage}">
+            <xsl:value-of select="gmd:title/gco:CharacterString"/>
+          </dct:title>
+          <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
+        </xsl:variable>
+        <xsl:variable name="degree">
+          <xsl:choose>
+            <xsl:when test="../../gmd:pass/gco:Boolean = 'true'">
+              <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/conformant')"/>
+            </xsl:when>
+            <xsl:when test="../../gmd:pass/gco:Boolean = 'false'">
+              <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notConformant')"/>
+            </xsl:when>
+            <xsl:otherwise>
 <!--        
-        <xsl:when test="../../gmd:pass = ''">
+            <xsl:when test="../../gmd:pass/gco:Boolean = ''">
 -->        
-          <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notEvaluated')"/>
+              <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notEvaluated')"/>
 <!--          
-        </xsl:when>
+            </xsl:when>
 -->        
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="explanation">
+          <xsl:value-of select="../../gmd:explanation/gco:CharacterString"/>
+        </xsl:variable>
         <earl:Assertion>
           <xsl:if test="$ResourceUri != ''">
             <earl:subject rdf:resource="{$ResourceUri}"/>
@@ -473,6 +490,9 @@
           <earl:result>
             <earl:TestResult>
               <earl:outcome rdf:resource="{$degree}"/>
+              <xsl:if test="$explanation and $explanation != ''">
+                <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$explanation"/></dct:description>
+              </xsl:if>
             </earl:TestResult>
           </earl:result>
         </earl:Assertion>
@@ -529,7 +549,12 @@
           <rdf:type rdf:resource="{$dcat}Dataset"/>
         </xsl:when>
         <xsl:when test="$ResourceType = 'service'">
-          <rdf:type rdf:resource="{$dcat}Catalog"/>
+          <xsl:if test="$profile = 'extended'">
+            <rdf:type rdf:resource="{$dctype}Service"/>
+          </xsl:if>
+          <xsl:if test="gmd:identificationInfo/*/srv:serviceType/gco:LocalName = 'discovery'">
+            <rdf:type rdf:resource="{$dcat}Catalog"/>
+          </xsl:if>
         </xsl:when>
       </xsl:choose>
       <xsl:if test="$profile = 'extended'">
@@ -631,7 +656,7 @@
           <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution">
 <!-- Encoding --> 
             <xsl:variable name="Encoding">     
-               <xsl:apply-templates select="gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString"/>
+               <xsl:apply-templates select="gmd:distributionFormat/gmd:MD_Format/gmd:name/*"/>
             </xsl:variable>             
 <!-- Resource locators (access / download URLs) -->          
             <xsl:for-each select="gmd:transferOptions/*/gmd:onLine/*">
@@ -992,26 +1017,28 @@
       </dct:title>
       <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
     </xsl:variable>
+<!--    
     <xsl:variable name="degree">
       <xsl:choose>
-        <xsl:when test="../../gmd:pass = 'true'">
+        <xsl:when test="../../gmd:pass/gco:Boolean = 'true'">
           <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/conformant')"/>
         </xsl:when>
-        <xsl:when test="../../gmd:pass = 'false'">
+        <xsl:when test="../../gmd:pass/gco:Boolean = 'false'">
           <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notConformant')"/>
         </xsl:when>
         <xsl:otherwise>
-<!--        
-        <xsl:when test="../../gmd:pass = ''">
--->        
+        
+        <xsl:when test="../../gmd:pass/gco:Boolean = ''">
+       
           <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notEvaluated')"/>
-<!--          
+          
         </xsl:when>
--->        
+       
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:if test="../../gmd:pass = 'true'">
+-->    
+    <xsl:if test="../../gmd:pass/gco:Boolean = 'true'">
       <xsl:choose>
         <xsl:when test="../@xlink:href and ../@xlink:href != ''">
           <dct:conformsTo>
@@ -1308,10 +1335,21 @@
 
 <!-- Encoding -->
 
-  <xsl:template name="Encoding" match="gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString">
-    <dct:format rdf:parseType="Resource">
-      <rdfs:label><xsl:value-of select="."/></rdfs:label>
-    </dct:format>
+  <xsl:template name="Encoding" match="gmd:distributionFormat/gmd:MD_Format/gmd:name/*">
+    <xsl:choose>
+      <xsl:when test="@xlink:href and @xlink:href != ''">
+        <dct:format>
+          <rdf:Description rdf:about="@xlink:href">
+            <rdfs:label><xsl:value-of select="."/></rdfs:label>
+          </rdf:Description>
+        </dct:format>
+      </xsl:when>
+      <xsl:otherwise>
+        <dct:format rdf:parseType="Resource">
+          <rdfs:label><xsl:value-of select="."/></rdfs:label>
+        </dct:format>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
 <!-- Maintenance information -->
