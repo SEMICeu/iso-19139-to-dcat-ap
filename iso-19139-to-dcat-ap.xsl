@@ -491,7 +491,7 @@
             <earl:TestResult>
               <earl:outcome rdf:resource="{$degree}"/>
               <xsl:if test="$explanation and $explanation != ''">
-                <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$explanation"/></dct:description>
+                <earl:info xml:lang="{$MetadataLanguage}"><xsl:value-of select="$explanation"/></earl:info>
               </xsl:if>
             </earl:TestResult>
           </earl:result>
