@@ -2,6 +2,27 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-04-27: Revised version (v0.3)
+
+* Added tentative revision to mappings for services:
+    * All services are typed (`rdf:type`) as `dctype:Service`'s (only for the extended profile).
+    * Discovery / catalogue services are typed (`rdf:type`) as `dcat:Catalog`'s (for both the core and extended profiles). 
+* Revised mapping of element "Encoding", to use the value of attribute `@xlink:href`, if available, as the format URI.
+* Fix to mapping of conformity degree.
+* Included mapping for `gmd:explanation` (`earl:info`), concerning conformity test results.
+* Updated parameters `MetadataUri` and `ResourceUri` based on the default rule, according to which HTTP URIs are specified for the metadata file identifier (metadata URI) and the resource identifier (resource URI).
+* Moved "Lineage" and responsible organisations with role "originator" to the core profile, according with the revision to DCAT-AP.
+* Fixed disalignment between the ISO 19115 maintenance frequency codes and the Dublin Core Collection Description Frequency Vocabulary.
+* Added tentative mapping for ISO 19139 element "Spatial representation type". For this, `adms:representationTechnique` has been used for `dcat:Distribution`, and the spatial representation type codes in the original ISO 19139 record have been mapped to the corresponding URIs that may be made available through the INSPIRE Registry.
+* Revised transformation of "Resource locator"'s based on the function code: 
+    * `download` / `offlineAccess` / `order` -> `dcat:distribution` + `dcat:accessURL`.
+    * `information` / `search` -> `foaf:page`.
+    * `dcat:landingPage` when the function code is missing.
+* Added URL for responsible organisations, when available. This has been modelled as follows:
+    * with `foaf:workplaceHomepage`, when the responsible organisation has been modelled as a `foaf:Organization`.
+    * with `vcard:hasURL`, when the responsible organisation has been modelled as a `vcard:Kind`. 
+* Minor fixes.
+
 ## 2015-04-13: Revised version (v0.2)
 
 * Fixed ambiguous rule in template "ResourceDates", causing processing warnings or errors.
