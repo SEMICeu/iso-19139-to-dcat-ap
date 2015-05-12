@@ -503,46 +503,64 @@
       </xsl:for-each>
     </xsl:param>
     
+    <xsl:param name="MetadataCharacterEncoding">
+      <xsl:apply-templates select="gmd:characterSet/gmd:MD_CharacterSetCode"/>
+    </xsl:param>
+
     <xsl:param name="ResourceCharacterEncoding">
       <xsl:for-each select="gmd:identificationInfo/gmd:MD_DataIdentification">
         <xsl:apply-templates select="gmd:characterSet/gmd:MD_CharacterSetCode"/>
       </xsl:for-each>  
     </xsl:param>
-    
+
+<!-- Metadata description (metadata on metadata) -->    
     
     <xsl:param name="MetadataDescription">
+      <rdf:type rdf:resource="{$dcat}CatalogRecord"/>
 <!-- Metadata language -->
       <dct:language rdf:resource="{concat($oplang,translate($ormlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
 <!-- Metadata date -->
       <dct:modified rdf:datatype="{$xsd}date">
         <xsl:value-of select="$MetadataDate"/>
       </dct:modified>
-<!-- Metadata point of contact -->
-      <xsl:apply-templates select="gmd:contact/gmd:CI_ResponsibleParty">
-        <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
-      </xsl:apply-templates>
-<!-- Metadata file identifier (tentative) -->
-      <xsl:for-each select="gmd:fileIdentifier/gco:CharacterString">
-        <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="."/></dct:identifier>
-      </xsl:for-each>  
-<!-- Metadata standard (tentative) -->
-      <xsl:for-each select="gmd:metadataStandardName/gco:CharacterString">
-        <xsl:if test="text() != '' or ../../gmd:metadataStandardVersion/gco:CharacterString/text() != ''">
-          <dct:source rdf:parseType="Resource">
-            <dct:conformsTo rdf:parseType="Resource">
-              <xsl:if test="text() != ''">
+<!-- Metadata point of contact: only for the extended profile -->
+      <xsl:if test="$profile = 'extended'">
+        <xsl:apply-templates select="gmd:contact/gmd:CI_ResponsibleParty">
+          <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+        </xsl:apply-templates>
+      </xsl:if>
+<!-- Metadata file identifier (tentative): only for the extended profile -->
+      <xsl:if test="$profile = 'extended'">
+        <xsl:for-each select="gmd:fileIdentifier/gco:CharacterString">
+          <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="."/></dct:identifier>
+        </xsl:for-each>  
+      </xsl:if>
+<!-- Metadata standard (tentative): only for the extended profile -->
+      <xsl:if test="$profile = 'extended'">
+        <xsl:for-each select="gmd:metadataStandardName/gco:CharacterString">
+          <xsl:if test="text() != '' or ../../gmd:metadataStandardVersion/gco:CharacterString/text() != ''">
+            <dct:source rdf:parseType="Resource">
+              <xsl:if test="$MetadataCharacterEncoding != ''">
+                <xsl:copy-of select="$MetadataCharacterEncoding"/>
+              </xsl:if>
+              <dct:conformsTo rdf:parseType="Resource">
+                <xsl:if test="text() != ''">
 <!-- Metadata standard name -->              
-                <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
-              </xsl:if>
-              <xsl:if test="../../gmd:metadataStandardName/gco:CharacterString/text() != ''">
+                  <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
+                </xsl:if>
+                <xsl:if test="../../gmd:metadataStandardName/gco:CharacterString/text() != ''">
 <!-- Metadata standard version -->              
-                <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="../../gmd:metadataStandardVersion/gco:CharacterString"/></owl:versionInfo>
-              </xsl:if>
-            </dct:conformsTo>    
-          </dct:source>
-        </xsl:if>
-      </xsl:for-each>
+                  <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="../../gmd:metadataStandardVersion/gco:CharacterString"/></owl:versionInfo>
+                </xsl:if>
+<!-- Metadata character encoding (tentative): only for the extended profile -->
+              </dct:conformsTo>    
+            </dct:source>
+          </xsl:if>
+        </xsl:for-each>
+      </xsl:if>
     </xsl:param>  
+    
+<!-- Resource description (resource metadata) -->    
 
     <xsl:param name="ResourceDescription">
       <xsl:choose>
@@ -731,12 +749,15 @@
 <!-- Responsible organisation -->
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:pointOfContact/gmd:CI_ResponsibleParty">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+        <xsl:with-param name="ResourceType" select="$ResourceType"/>
       </xsl:apply-templates>
     </xsl:param>
 
     <xsl:choose>
       <xsl:when test="$ResourceUri != ''">
-        <xsl:if test="$profile = 'extended'">
+<!--      
+        <xsl:if test="$profile = 'extended'"> 
+-->        
           <xsl:choose>
             <xsl:when test="$MetadataUri != ''">
               <rdf:Description rdf:about="{$MetadataUri}">
@@ -751,20 +772,26 @@
               </rdf:Description>
             </xsl:otherwise>
           </xsl:choose>
+<!--          
         </xsl:if>
+-->        
         <rdf:Description rdf:about="{$ResourceUri}">
           <xsl:copy-of select="$ResourceDescription"/>
         </rdf:Description>
       </xsl:when>
       <xsl:otherwise>
         <rdf:Description>
+<!--        
           <xsl:if test="$profile = 'extended'">
+-->          
             <foaf:isPrimaryTopicOf>
               <rdf:Description>
                 <xsl:copy-of select="$MetadataDescription"/>
               </rdf:Description>
             </foaf:isPrimaryTopicOf>
+<!--            
           </xsl:if>
+-->          
           <xsl:copy-of select="$ResourceDescription"/>
         </rdf:Description>
       </xsl:otherwise>
@@ -810,6 +837,7 @@
 
   <xsl:template name="ResponsibleOrganisation" match="gmd:identificationInfo/*/gmd:pointOfContact/gmd:CI_ResponsibleParty">
     <xsl:param name="MetadataLanguage"/>
+    <xsl:param name="ResourceType"/>
     <xsl:param name="role">
 <!-- ISSUE The same problem we have for ResourceLocator function: the RDSI editor saves the relevant code as the text node of the relevant element, instead of using the correct attribute (@codeListValue) -->
       <xsl:value-of select="gmd:role/gmd:CI_RoleCode/@codeListValue"/>
@@ -885,12 +913,12 @@
         </rdarole:distributor>
       </xsl:when>
 -->        
-      <xsl:when test="$role = 'originator'">
+      <xsl:when test="$role = 'originator' and $ResourceType != 'service'">
         <dct:creator>
           <xsl:copy-of select="$ROInfo"/>
         </dct:creator>
       </xsl:when>
-      <xsl:when test="$role = 'pointOfContact'">
+      <xsl:when test="$role = 'pointOfContact' and $ResourceType != 'service'">
         <dcat:contactPoint>
           <xsl:copy-of select="$ResponsibleParty"/>
         </dcat:contactPoint>
@@ -965,14 +993,16 @@
     <dcat:contactPoint>
       <xsl:copy-of select="$ResponsibleParty"/>
     </dcat:contactPoint>
-    <prov:qualifiedAttribution>
-      <prov:Attribution>
-        <prov:agent>
-          <xsl:copy-of select="$ResponsibleParty"/>
-        </prov:agent>
-        <dct:type rdf:resource="{$ResponsiblePartyRole}"/>
-      </prov:Attribution>
-    </prov:qualifiedAttribution>    
+    <xsl:if test="$profile = 'extended'">
+      <prov:qualifiedAttribution>
+        <prov:Attribution>
+          <prov:agent>
+            <xsl:copy-of select="$ResponsibleParty"/>
+          </prov:agent>
+          <dct:type rdf:resource="{$ResponsiblePartyRole}"/>
+        </prov:Attribution>
+      </prov:qualifiedAttribution>    
+    </xsl:if>
   </xsl:template>
 
 <!-- Resource locator -->
