@@ -117,7 +117,7 @@
   <xsl:param name="profile">core</xsl:param>
 -->
 <!-- Uncomment to use INSPIRE+DCAT-AP Extended -->
-  <xsl:param name="profile">core</xsl:param>
+  <xsl:param name="profile">extended</xsl:param>
 
 <!--
 
@@ -395,6 +395,10 @@
       <xsl:value-of select="gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode/@codeListValue"/>
     </xsl:param>
     
+    <xsl:param name="ServiceType">
+      <xsl:value-of select="gmd:identificationInfo/*/srv:serviceType/gco:LocalName"/>
+    </xsl:param>
+    
     <xsl:param name="ResourceTitle">
       <xsl:value-of select="gmd:identificationInfo[1]/*/gmd:citation/*/gmd:title/gco:CharacterString"/>
     </xsl:param>
@@ -552,7 +556,7 @@
           <xsl:if test="$profile = 'extended'">
             <rdf:type rdf:resource="{$dctype}Service"/>
           </xsl:if>
-          <xsl:if test="gmd:identificationInfo/*/srv:serviceType/gco:LocalName = 'discovery'">
+          <xsl:if test="$ServiceType = 'discovery'">
             <rdf:type rdf:resource="{$dcat}Catalog"/>
           </xsl:if>
         </xsl:when>
@@ -615,10 +619,14 @@
         </xsl:choose>
       </xsl:if>
 <!-- Spatial service type -->
-      <xsl:if test="$profile = 'extended'">
+      <xsl:if test="$ResourceType = 'service' and $profile = 'extended'">
+<!-- Replaced by param $ServiceType -->
+<!--      
         <xsl:apply-templates select="gmd:identificationInfo/*/srv:serviceType">
           <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
         </xsl:apply-templates>
+-->        
+        <dct:type rdf:resource="{$SpatialDataServiceTypeCodelistUri}/{$ServiceType}"/>
       </xsl:if>
 <!-- Spatial extent -->
       <xsl:apply-templates select="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox"/>
@@ -646,8 +654,11 @@
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
         <xsl:with-param name="Conformity" select="$Conformity"/>
       </xsl:apply-templates>
-<!-- Distributions -->
       <xsl:choose>
+        <xsl:when test="$ResourceType = 'service' and ($ServiceType = 'discovery' or $profile = 'extended')">
+          <xsl:copy-of select="$ConstraintsRelatedToAccessAndUse"/>
+        </xsl:when>
+<!-- Distributions -->
         <xsl:when test="$ResourceType = 'dataset' or $ResourceType = 'series'">
 <!-- Spatial representation type -->        
           <xsl:variable name="SpatialRepresentationType">
@@ -1001,11 +1012,12 @@
   </xsl:template>
   
 <!-- Spatial data service type -->  
-  
+<!-- Replaced by param $ServiceType -->
+<!--  
   <xsl:template match="gmd:identificationInfo/*/srv:serviceType">
     <dct:type rdf:resource="{$SpatialDataServiceTypeCodelistUri}/{gco:LocalName}"/>
   </xsl:template>
-  
+-->  
 <!-- Conformity -->  
   <xsl:template name="Conformity" match="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
     <xsl:param name="ResourceUri"/>
