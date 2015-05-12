@@ -2,6 +2,17 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-05-12: Revised version (v0.4)
+* Core and extended profiles revised to match with the current version of the DCAT-AP specification.
+* Metadata and resource character encodings: ISO 19115 characterset codes have been mapped to the IANA character set names.
+* Added metadata character encoding (only for the extended profile).
+* Metadata description (metadata on metadata) typed as `dcat:CatalogRecord`, and partially moved to the core profile (as per the DCAT-AP specification). 
+* Added licence and access rights to services.
+* Revision to transformation rules for "service type".
+* Moved "creation date" to the extended profile (it is not supported in DCAT-AP).
+* Added bounding box encoding in WKT and GeoJSON.
+* Fixed axis order to WKT and GeoJSON bounding box encodings.
+
 ## 2015-04-27: Revised version (v0.3)
 
 * Added tentative revision to mappings for services:
