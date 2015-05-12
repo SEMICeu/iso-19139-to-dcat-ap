@@ -1368,7 +1368,103 @@
 <!-- Character encoding -->
 
   <xsl:template name="CharacterEncoding" match="gmd:characterSet/gmd:MD_CharacterSetCode">
+    <xsl:variable name="CharSetID">
+      <xsl:choose>
+        <xsl:when test="@codeListValue = 'ucs2'">
+          <xsl:text>ISO-10646-UCS-2</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = 'ucs4'">
+          <xsl:text>ISO-10646-UCS-4</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = 'utf7'">
+          <xsl:text>UTF-7</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = 'utf8'">
+          <xsl:text>UTF-8</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = 'utf16'">
+          <xsl:text>UTF-16</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part1'">
+          <xsl:text>ISO-8859-1</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part2'">
+          <xsl:text>ISO-8859-2</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part3'">
+          <xsl:text>ISO-8859-3</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part4'">
+          <xsl:text>ISO-8859-4</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part5'">
+          <xsl:text>ISO-8859-5</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part6'">
+          <xsl:text>ISO-8859-6</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part7'">
+          <xsl:text>ISO-8859-7</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part8'">
+          <xsl:text>ISO-8859-8</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part9'">
+          <xsl:text>ISO-8859-9</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part10'">
+          <xsl:text>ISO-8859-10</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part11'">
+          <xsl:text>ISO-8859-11</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part12'">
+          <xsl:text>ISO-8859-12</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part13'">
+          <xsl:text>ISO-8859-13</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part14'">
+          <xsl:text>ISO-8859-14</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part15'">
+          <xsl:text>ISO-8859-15</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = '8859part16'">
+          <xsl:text>ISO-8859-16</xsl:text>
+        </xsl:when>
+<!-- Mapping to be verified: multiple candidates are available in the IANA register for jis -->
+        <xsl:when test="@codeListValue = 'jis'">
+          <xsl:text>JIS_Encoding</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = 'shiftJIS'">
+          <xsl:text>Shift_JIS</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = 'eucJP'">
+          <xsl:text>EUC-JP</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = 'usAscii'">
+          <xsl:text>US-ASCII</xsl:text>
+        </xsl:when>
+<!-- Mapping to be verified: multiple candidates are available in the IANA register ebcdic  -->
+        <xsl:when test="@codeListValue = 'ebcdic'">
+          <xsl:text>IBM037</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = 'eucKR'">
+          <xsl:text>EUC-KR</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = 'big5'">
+          <xsl:text>Big5</xsl:text>
+        </xsl:when>
+        <xsl:when test="@codeListValue = 'GB2312'">
+          <xsl:text>GB2312</xsl:text>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <cnt:characterEncoding rdf:datatype="{$xsd}string"><xsl:value-of select="$CharSetID"/></cnt:characterEncoding>
+<!--  
     <cnt:characterEncoding rdf:datatype="{$xsd}string"><xsl:value-of select="@codeListValue"/></cnt:characterEncoding>
+-->    
   </xsl:template>
 
 <!-- Encoding -->
