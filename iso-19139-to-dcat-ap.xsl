@@ -1368,7 +1368,7 @@
 <!-- Character encoding -->
 
   <xsl:template name="CharacterEncoding" match="gmd:characterSet/gmd:MD_CharacterSetCode">
-    <xsl:variable name="CharSetID">
+    <xsl:variable name="CharSetCode">
       <xsl:choose>
         <xsl:when test="@codeListValue = 'ucs2'">
           <xsl:text>ISO-10646-UCS-2</xsl:text>
@@ -1461,7 +1461,7 @@
         </xsl:when>
       </xsl:choose>
     </xsl:variable>
-    <cnt:characterEncoding rdf:datatype="{$xsd}string"><xsl:value-of select="$CharSetID"/></cnt:characterEncoding>
+    <cnt:characterEncoding rdf:datatype="{$xsd}string"><xsl:value-of select="$CharSetCode"/></cnt:characterEncoding>
 <!--  
     <cnt:characterEncoding rdf:datatype="{$xsd}string"><xsl:value-of select="@codeListValue"/></cnt:characterEncoding>
 -->    
