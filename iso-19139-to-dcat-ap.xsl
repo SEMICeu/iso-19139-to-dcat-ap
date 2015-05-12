@@ -117,7 +117,7 @@
   <xsl:param name="profile">core</xsl:param>
 -->
 <!-- Uncomment to use INSPIRE+DCAT-AP Extended -->
-  <xsl:param name="profile">extended</xsl:param>
+  <xsl:param name="profile">core</xsl:param>
 
 <!--
 
@@ -1194,7 +1194,7 @@
           <xsl:value-of select="$date"/>
         </dct:modified>
       </xsl:when>
-      <xsl:when test="$type = 'creation'">
+      <xsl:when test="$type = 'creation' and $profile = 'extended'">
         <dct:created rdf:datatype="{$xsd}date">
           <xsl:value-of select="$date"/>
         </dct:created>
