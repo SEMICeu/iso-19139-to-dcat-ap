@@ -30,20 +30,15 @@
 
   PURPOSE AND USAGE
 
-  This XSLT is a proof of concept for the implementation of the suite of 
-  specifications concerning the INSPIRE profile of DCAT-AP (INSPIRE+DCAT-AP), 
-  available in the collaboration space of the INSPIRE Maintenance and 
-  Implementation Group (MIG):
-  
-    https://ies-svn.jrc.ec.europa.eu/projects/metadata/wiki/Alignment_of_INSPIRE_metadata_with_DCAT-AP
-    
-  As such, this XSLT must be considered as unstable, and can be updated any 
-  time based on the revisions to the INSPIRE+DCAT-AP specifications and 
-  related work in the framework of INSPIRE and the EU ISA Programme, in 
-  particular with respect to the work concerning the definition of a 
-  geospatial extension to DCAT-AP (GeoDCAT-AP):
+  This XSLT is a proof of concept for the implementation of the specification
+  concerning the geospatial profile of DCAT-AP (GeoDCAT-AP), available on 
+  Joinup, the collaboration platform of the EU ISA Programme:
   
     https://joinup.ec.europa.eu/node/139283/
+    
+  As such, this XSLT must be considered as unstable, and can be updated any 
+  time based on the revisions to the GeoDCAT-AP specifications and 
+  related work in the framework of INSPIRE and the EU ISA Programme.
   
 -->
 
@@ -98,25 +93,21 @@
 <!-- Parameter $profile -->
 <!--
 
-  This parameter specifies the INSPIRE+DCAT-AP profile to be used:
-  - value "core": the INSPIRE+DCAT-AP Core profile, which includes only the INSPIRE metadata elements supported in
-    DCAT-AP
-  - value "extended": the INSPIRE+DCAT-AP Extended profile, which defines mappings for all the INSPIRE metadata elements
+  This parameter specifies the GeoDCAT-AP profile to be used:
+  - value "core": the GeoDCAT-AP Core profile, which includes only the INSPIRE and ISO 19115 core metadata elements supported in DCAT-AP
+  - value "extended": the GeoDCAT-AP Extended profile, which defines mappings for all the INSPIRE and ISO 19115 core metadata elements
   
-  The current specifications for the core and extended INSPIRE+DCAT-AP profiles are available in the collaboration 
-  space of the INSPIRE MIG:
-  - INSPIRE+DCAT-AP Core:
-    https://ies-svn.jrc.ec.europa.eu/projects/metadata/wiki/INSPIRE_profile_of_DCAT-AP_-_Core_version
-  - INSPIRE+DCAT-AP Extended:
-    https://ies-svn.jrc.ec.europa.eu/projects/metadata/wiki/INSPIRE_profile_of_DCAT-AP_-_Extended_version   
+  The current specifications for the core and extended GeoDCAT-AP profiles are available on the Joinup collaboration platform:
+
+    https://joinup.ec.europa.eu/node/139283/
 
 -->
 
-<!-- Uncomment to use INSPIRE+DCAT-AP Core -->
+<!-- Uncomment to use GeoDCAT-AP Core -->
 <!--
   <xsl:param name="profile">core</xsl:param>
 -->
-<!-- Uncomment to use INSPIRE+DCAT-AP Extended -->
+<!-- Uncomment to use GeoDCAT-AP Extended -->
   <xsl:param name="profile">extended</xsl:param>
 
 <!--
@@ -126,31 +117,59 @@
   
 -->  
   
+<!-- URI and URN of the spatial reference system (SRS) used in the bounding box.
+     The default SRS is CRS84. If a different SRS is used, also parameter 
+     $SrsAxisOrder must be specified. -->
+
+<!-- Old param
+  <xsl:param name="srid">4326</xsl:param>
+-->  
+<!-- The SRS URI is used in the WKT and GML encodings of the bounding box. -->
+  <xsl:param name="SrsUri">http://www.opengis.net/def/crs/OGC/1.3/CRS84</xsl:param>
+<!-- The SRS URN is used in the GeoJSON encoding of the bounding box. -->
+  <xsl:param name="SrsUrn">urn:ogc:def:crs:OGC:1.3:CRS84</xsl:param>
+
+<!-- Axis order for the reference SRS: 
+     - "LonLat" = longitude / latitude
+     - "LatLon": latitude / longitude.
+     The axis order must be specified only if the reference SRS is different from CRS84. 
+     If the reference SRS is CRS84, this parameter is ignored. -->  
+  
+  <xsl:param name="SrsAxisOrder">LonLat</xsl:param>
+
 <!-- Namespaces -->
 
   <xsl:param name="xsd">http://www.w3.org/2001/XMLSchema#</xsl:param>
   <xsl:param name="dct">http://purl.org/dc/terms/</xsl:param>
   <xsl:param name="dctype">http://purl.org/dc/dcmitype/</xsl:param>
+<!-- Currently not used.
   <xsl:param name="timeUri">http://placetime.com/</xsl:param>
   <xsl:param name="timeInstantUri" select="concat($timeUri,'instant/gregorian/')"/>
   <xsl:param name="timeIntervalUri" select="concat($timeUri,'interval/gregorian/')"/>
+-->  
   <xsl:param name="dcat">http://www.w3.org/ns/dcat#</xsl:param>
   <xsl:param name="gsp">http://www.opengis.net/ont/geosparql#</xsl:param>
+<!-- Old params used for the SRS 
   <xsl:param name="ogcCrsBaseUri">http://www.opengis.net/def/EPSG/0/</xsl:param>
   <xsl:param name="ogcCrsBaseUrn">urn:ogc:def:EPSG::</xsl:param>
+-->  
+<!-- Currently not used.
   <xsl:param name="inspire">http://inspire.ec.europa.eu/schemas/md/</xsl:param>
+-->  
+<!-- Currently not used.
   <xsl:param name="kos">http://ec.europa.eu/open-data/kos/</xsl:param>
   <xsl:param name="kosil" select="concat($kos,'interoperability-level/')"/>
   <xsl:param name="kosdst" select="concat($kos,'dataset-type/')"/>
   <xsl:param name="kosdss" select="concat($kos,'dataset-status/Completed')"/>
   <xsl:param name="kosdoct" select="concat($kos,'documentation-type/')"/>
   <xsl:param name="koslic" select="concat($kos,'licence/EuropeanCommission')"/>
+-->  
   <xsl:param name="op">http://publications.europa.eu/resource/authority/</xsl:param>
   <xsl:param name="opcountry" select="concat($op,'country/')"/>
   <xsl:param name="oplang" select="concat($op,'language/')"/>
   <xsl:param name="opcb" select="concat($op,'corporate-body/')"/>
   <xsl:param name="cldFrequency">http://purl.org/cld/freq/</xsl:param>
-
+<!-- This is used as the datatype for the GeoJSON-based encoding of the bounding box. -->
   <xsl:param name="geojsonMediaTypeUri">https://www.iana.org/assignments/media-types/application/vnd.geo+json</xsl:param>
 
 <!-- INSPIRE code list URIs -->  
@@ -167,10 +186,6 @@
   
   <xsl:param name="SpatialRepresentationTypeCodelistUri" select="concat($INSPIRECodelistUri,'SpatialRepresentationType')"/>
 
-<!-- EPSG SRID for spatial reference system -->
-
-  <xsl:param name="srid">4326</xsl:param>
-    
 <!-- 
 
   Master template     
@@ -207,15 +222,15 @@
 
   <xsl:param name="ResourceUri">
     <xsl:variable name="rURI" select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString"/>
-    <xsl:if test="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString and starts-with(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString, 'http')">
-      <xsl:value-of select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString"/>
+    <xsl:if test="$rURI != '' and ( starts-with($rURI, 'http://') or starts-with($rURI, 'https://') )">
+      <xsl:value-of select="$rURI"/>
     </xsl:if>
   </xsl:param>
 
   <xsl:param name="MetadataUri">
     <xsl:variable name="mURI" select="gmd:fileIdentifier/gco:CharacterString"/>
-    <xsl:if test="gmd:fileIdentifier/gco:CharacterString and starts-with(gmd:fileIdentifier/gco:CharacterString, 'http')">
-      <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/>
+    <xsl:if test="$mURI != '' and ( starts-with($mURI, 'http://') or starts-with($mURI, 'https://') )">
+      <xsl:value-of select="$mURI"/>
     </xsl:if>
   </xsl:param>
 
@@ -647,7 +662,12 @@
         <dct:type rdf:resource="{$SpatialDataServiceTypeCodelistUri}/{$ServiceType}"/>
       </xsl:if>
 <!-- Spatial extent -->
+<!--
       <xsl:apply-templates select="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox"/>
+-->      
+      <xsl:apply-templates select="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*">
+        <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+      </xsl:apply-templates>
 <!-- Temporal extent -->
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent"/>
 <!-- Creation date, publication date, date of last revision -->
@@ -710,7 +730,7 @@
                       </xsl:for-each>
 <!-- Constraints related to access and use -->
                       <xsl:copy-of select="$ConstraintsRelatedToAccessAndUse"/>
-<!-- Spatial representation type -->
+<!-- Spatial representation type (tentative) -->
                       <xsl:copy-of select="$SpatialRepresentationType"/>
 <!-- Encoding -->
                       <xsl:copy-of select="$Encoding"/>
@@ -1139,40 +1159,114 @@
     </xsl:if>
   </xsl:template>
   
+<!-- Geographic extent -->  
+
+  <xsl:template name="GeographicExtent" match="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*">
+    <xsl:param name="MetadataLanguage"/>
+    <dct:spatial>
+      <dct:Location>
+        <xsl:for-each select="gmd:description">
+          <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></rdfs:label>
+        </xsl:for-each>
+        <xsl:apply-templates select="gmd:geographicElement/gmd:EX_GeographicDescription">
+          <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+        </xsl:apply-templates>
+        <xsl:apply-templates select="gmd:geographicElement/gmd:EX_GeographicBoundingBox"/>
+      </dct:Location>
+    </dct:spatial>
+  </xsl:template>
+
+<!-- Geographic identifier -->  
+
+  <xsl:template name="GeographicIdentifier" match="gmd:geographicElement/gmd:EX_GeographicDescription">
+    <xsl:param name="MetadataLanguage"/>
+    <xsl:for-each select="gmd:geographicIdentifier/gmd:MD_Identifier">
+      <rdfs:seeAlso>
+        <xsl:choose>
+          <xsl:when test="gmd:code/gco:CharacterString">
+            <skos:Concept>
+              <skos:prefLabel xml:lang="{$MetadataLanguage}">
+                <xsl:value-of select="gmd:code/gco:CharacterString"/>
+              </skos:prefLabel>
+              <xsl:for-each select="gmd:authority/gmd:CI_Citation">
+                <skos:inScheme>
+                  <skos:ConceptScheme>
+                    <rdfs:label xml:lang="{$MetadataLanguage}">
+                      <xsl:value-of select="gmd:title/gco:CharacterString"/>
+                    </rdfs:label>
+                    <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
+                  </skos:ConceptScheme>
+                </skos:inScheme>
+              </xsl:for-each>
+            </skos:Concept>
+          </xsl:when>
+          <xsl:when test="gmd:code/gmx:Anchor/@xlink:href">
+            <skos:Concept rdf:about="{gmd:code/gmx:Anchor/@xlink:href}">
+              <skos:prefLabel xml:lang="{$MetadataLanguage}">
+                <xsl:value-of select="gmd:code/gmx:Anchor"/>
+              </skos:prefLabel>
+              <xsl:for-each select="gmd:authority/gmd:CI_Citation">
+                <skos:inScheme>
+                  <skos:ConceptScheme>
+                    <rdfs:label xml:lang="{$MetadataLanguage}">
+                      <xsl:value-of select="gmd:title/gco:CharacterString"/>
+                    </rdfs:label>
+                    <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
+                  </skos:ConceptScheme>
+                </skos:inScheme>
+              </xsl:for-each>
+            </skos:Concept>
+          </xsl:when>
+        </xsl:choose>
+      </rdfs:seeAlso>
+    </xsl:for-each>
+  </xsl:template>
+
 <!-- Geographic bounding box -->  
 
+<!--  
   <xsl:template name="GeographicBoundingBox" match="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox">
+-->  
+  <xsl:template name="GeographicBoundingBox" match="gmd:geographicElement/gmd:EX_GeographicBoundingBox">
+
+<!-- Bbox as a dct:Box -->
 <!-- Need to check whether this is correct - in particular, the "projection" parameter -->
 <!--    
     <xsl:param name="DCTBox">northlimit=<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>; eastlimit=<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/>; southlimit=<xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>; westlimit=<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>; projection=EPSG:<xsl:value-of select="$srid"/></xsl:param>
 -->
-<!-- Axis order (for, e.g., EPSG:4326): lat/long. -->
 
-    <xsl:param name="GMLLiteral">&lt;gml:Envelope srsName="<xsl:value-of select="concat($ogcCrsBaseUri,$srid)"/>"&gt;&lt;gml:lowerCorner&gt;<xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/>&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;</xsl:param>
-<!--    
-    <xsl:param name="WKTLiteral">&lt;<xsl:value-of select="concat($ogcCrsBaseUri,$srid)"/>&gt; POLYGON((<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>,<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/>,<xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/>,<xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>,<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>))</xsl:param>
+<!-- Bbox as GML (GeoSPARQL) -->
 
-    <xsl:param name="GeoJSONLiteral">{"type":"Polygon","crs":{"type":"name","properties":{"name":"<xsl:value-of select="concat($ogcCrsBaseUrn,$srid)"/>"}},"coordinates":[[[<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>],[<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/>],[<xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/>],[<xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>],[<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>]]]}</xsl:param>
--->
-<!-- Axis order: lon/lat. -->
-<!--    
-    <xsl:param name="GMLLiteral">&lt;gml:Envelope srsName="<xsl:value-of select="concat($ogcCrsBaseUri,$srid)"/>"&gt;&lt;gml:lowerCorner&gt;<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;</xsl:param>
--->
-    <xsl:param name="WKTLiteral">&lt;<xsl:value-of select="concat($ogcCrsBaseUri,$srid)"/>&gt; POLYGON((<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>))</xsl:param>
+    <xsl:param name="GMLLiteral">
+      <xsl:choose>
+        <xsl:when test="$SrsUri = 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'">&lt;gml:Envelope srsName="<xsl:value-of select="$SrsUri"/>"&gt;&lt;gml:lowerCorner&gt;<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;</xsl:when>
+        <xsl:when test="$SrsAxisOrder = 'LonLat'">&lt;gml:Envelope srsName="<xsl:value-of select="$SrsUri"/>"&gt;&lt;gml:lowerCorner&gt;<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;</xsl:when>
+        <xsl:when test="$SrsAxisOrder = 'LatLon'">&lt;gml:Envelope srsName="<xsl:value-of select="$SrsUri"/>"&gt;&lt;gml:lowerCorner&gt;<xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/>&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;</xsl:when>
+      </xsl:choose>
+    </xsl:param>
 
-    <xsl:param name="GeoJSONLiteral">{"type":"Polygon","crs":{"type":"name","properties":{"name":"<xsl:value-of select="concat($ogcCrsBaseUrn,$srid)"/>"}},"coordinates":[[[<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>]]]}</xsl:param>
+<!-- Bbox as WKT (GeoSPARQL) -->
+
+    <xsl:param name="WKTLiteral">
+      <xsl:choose>
+        <xsl:when test="$SrsUri = 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'">POLYGON((<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>))</xsl:when>
+        <xsl:when test="$SrsAxisOrder = 'LonLat'">&lt;<xsl:value-of select="$SrsUri"/>&gt; POLYGON((<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>,<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>))</xsl:when>
+        <xsl:when test="$SrsAxisOrder = 'LatLon'">&lt;<xsl:value-of select="$SrsUri"/>&gt; POLYGON((<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>,<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/>,<xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/>,<xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>,<xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/><xsl:text> </xsl:text><xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/>))</xsl:when>
+        </xsl:choose>
+    </xsl:param>
+
+<!-- Bbox as GeoJSON -->
+
+    <xsl:param name="GeoJSONLiteral">{"type":"Polygon","crs":{"type":"name","properties":{"name":"<xsl:value-of select="$SrsUrn"/>"}},"coordinates":[[[<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>]]]}</xsl:param>
+    
+<!-- Recommended geometry encodings -->
+    <locn:geometry rdf:datatype="{$gsp}wktLiteral"><xsl:value-of select="$WKTLiteral"/></locn:geometry>
+    <locn:geometry rdf:datatype="{$gsp}gmlLiteral"><xsl:value-of select="$GMLLiteral"/></locn:geometry>
+<!-- Additional geometry encodings -->    
+    <locn:geometry rdf:datatype="{$geojsonMediaTypeUri}"><xsl:value-of select="$GeoJSONLiteral"/></locn:geometry>
 <!--
-    <dct:spatial>
-      <rdf:value rdf:datatype="{$dct}Box"><xsl:value-of select="$DCTBox"/></rdf:value>
-    </dct:spatial>
+    <locn:geometry rdf:datatype="{$dct}Box"><xsl:value-of select="$DCTBox"/></locn:geometry>
 -->    
-    <dct:spatial>
-      <dct:Location>
-        <locn:geometry rdf:datatype="{$gsp}gmlLiteral"><xsl:value-of select="$GMLLiteral"/></locn:geometry>
-        <locn:geometry rdf:datatype="{$gsp}wktLiteral"><xsl:value-of select="$WKTLiteral"/></locn:geometry>
-        <locn:geometry rdf:datatype="{$geojsonMediaTypeUri}"><xsl:value-of select="$GeoJSONLiteral"/></locn:geometry>
-      </dct:Location>
-    </dct:spatial>
   </xsl:template>
   
 <!-- Temporal extent -->  
@@ -1182,23 +1276,23 @@
       <xsl:if test="local-name(.) = 'TimeInstant' or ( local-name(.) = 'TimePeriod' and gml:beginPosition and gml:endPosition )">
 <!--      
         <xsl:variable name="dctperiod">
-            <xsl:choose>
-              <xsl:when test="local-name(.) = 'TimeInstant'">start=<xsl:value-of select="gml:timePosition"/>; end=<xsl:value-of select="gml:timePosition"/></xsl:when>
-              <xsl:otherwise>start=<xsl:value-of select="gml:beginPosition"/>; end=<xsl:value-of select="gml:endPosition"/></xsl:otherwise>
-            </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="local-name(.) = 'TimeInstant'">start=<xsl:value-of select="gml:timePosition"/>; end=<xsl:value-of select="gml:timePosition"/></xsl:when>
+            <xsl:otherwise>start=<xsl:value-of select="gml:beginPosition"/>; end=<xsl:value-of select="gml:endPosition"/></xsl:otherwise>
+          </xsl:choose>
         </xsl:variable>
 -->        
         <xsl:variable name="dateStart">
-            <xsl:choose>
-              <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="gml:timePosition"/></xsl:when>
-              <xsl:otherwise><xsl:value-of select="gml:beginPosition"/></xsl:otherwise>
-            </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="gml:timePosition"/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="gml:beginPosition"/></xsl:otherwise>
+          </xsl:choose>
         </xsl:variable>
         <xsl:variable name="dateEnd">
-            <xsl:choose>
-              <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="gml:timePosition"/></xsl:when>
-              <xsl:otherwise><xsl:value-of select="gml:endPosition"/></xsl:otherwise>
-            </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="gml:timePosition"/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="gml:endPosition"/></xsl:otherwise>
+          </xsl:choose>
         </xsl:variable>
         <dct:temporal>
           <dct:PeriodOfTime>
@@ -1253,7 +1347,7 @@
     </xsl:param>
     <xsl:for-each select="gmd:useLimitation">
       <xsl:choose>
-<!-- In case the rights/licence URL is NOT provided -->      
+<!-- In case the rights/licence URL IS NOT provided -->      
         <xsl:when test="gco:CharacterString">                                                                       
           <dct:rights>
             <dct:RightsStatement>
@@ -1261,13 +1355,13 @@
             </dct:RightsStatement>
           </dct:rights>
         </xsl:when>
-<!-- In case the rights/licence URL is provided -->      
+<!-- In case the rights/licence URL IS provided -->      
         <xsl:when test="gmx:Anchor/@xlink:href">
-          <dct:rights>
-            <dct:RightsStatement rdf:about="{gmx:Anchor/@xlink:href}">
+          <dct:license>
+            <dct:LicenseDocument rdf:about="{gmx:Anchor/@xlink:href}">
               <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gmx:Anchor)"/></rdfs:label>
-            </dct:RightsStatement>
-          </dct:rights>
+            </dct:LicenseDocument>
+          </dct:license>
         </xsl:when>
       </xsl:choose>
     </xsl:for-each>
@@ -1528,11 +1622,13 @@
           <xsl:when test="@codeListValue = 'irregular'">
             <xsl:value-of select="concat($cldFrequency,'irregular')"/>
           </xsl:when>
+<!-- A mapping is missing in Dublin Core -->          
           <xsl:when test="@codeListValue = 'notPlanned'">
 <!--          
             <xsl:value-of select="concat($cldFrequency,'??')"/>
 -->            
           </xsl:when>
+<!-- A mapping is missing in Dublin Core -->          
           <xsl:when test="@codeListValue = 'unknown'">
 <!--          
             <xsl:value-of select="concat($cldFrequency,'??')"/>
