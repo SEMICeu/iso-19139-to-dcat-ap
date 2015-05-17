@@ -2,9 +2,15 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-05-18: Revised version (v0.5)
+* Minor fixes.
+* When a URL is available in `gmd:useLimitations`, `dct:license` + `dct:LicenseDocument` are used, instead of `dct:rights` + `dct:RightsStatement`.
+* Added mapping for geographic identifier and extent description (spatial coverage). The geographic identifier is modelled as a `skos:Concept`, the code is specified with `skos:prefLabel`, the authority is modelled as a `skos:ConceptScheme`. If the code is associated with an HTTP URI by using `gmx:Anchor/@xlink:href`, this will be used as the URI of the geographic identifier (`skos:Concept`).
+* Revised generation of bounding box encodings wrt axis order. The default spatial reference system (SRS) is now CRS84 (and not EPSG:4326), and, consequently, the axis order is now longitude / latitude for both WKT and GML (in GeoJSON, the axis order is always longitude / latitude irrespective of the SRS used). If a different SRS is used, the axis order must be explicitly specified by using a specific parameter (`$SrsAxisOrder`).
+
 ## 2015-05-12: Revised version (v0.4)
 * Core and extended profiles revised to match with the current version of the DCAT-AP specification.
-* Metadata and resource character encodings: ISO 19115 characterset codes have been mapped to the IANA character set names.
+* Metadata and resource character encodings: ISO 19115 character set codes have been mapped to the IANA character set names.
 * Added metadata character encoding (only for the extended profile).
 * Metadata description (metadata on metadata) typed as `dcat:CatalogRecord`, and partially moved to the core profile (as per the DCAT-AP specification). 
 * Added licence and access rights to services.
