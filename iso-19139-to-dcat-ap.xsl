@@ -682,6 +682,10 @@
           </dct:ProvenanceStatement>
         </dct:provenance>
       </xsl:if>
+<!-- Coordinate and temporal reference systems (tentative) -->      
+      <xsl:apply-templates select="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier">
+        <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+      </xsl:apply-templates>
 <!-- Spatial resolution -->
       <xsl:if test="$profile = 'extended'">
         <xsl:apply-templates select="gmd:identificationInfo/*/gmd:spatialResolution/gmd:MD_Resolution"/>
@@ -1642,16 +1646,52 @@
     </xsl:if>      
   </xsl:template>
 
-<!-- Coordinate reference system -->
+<!-- Coordinate and temporal reference system (tentative) -->
 
-  <xsl:template name="CoordinateReferenceSystem" match="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
-<!-- TBD -->  
-  </xsl:template>
-
-<!-- Temporal reference system -->
-
-  <xsl:template name="TemporalReferenceSystem" match="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
-<!-- TBD -->  
+  <xsl:template name="ReferenceSystem" match="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier">
+    <xsl:param name="MetadataLanguage"/>
+    <xsl:param name="code" select="gmd:code/gco:CharacterString"/>
+    <xsl:param name="codespace" select="gmd:codeSpace/gco:CharacterString"/>
+    <xsl:param name="version" select="gmd:version/gco:CharacterString"/>
+    <xsl:choose>
+      <xsl:when test="starts-with($code, 'http://') or starts-with($code, 'https://')">
+        <dct:conformsTo rdf:resource="{$code}"/>
+      </xsl:when>
+      <xsl:when test="starts-with($code, 'urn:')">
+        <dct:conformsTo>
+          <skos:Concept>
+            <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
+            <xsl:if test="$codespace != ''">
+              <skos:inScheme>
+                <skos:ConceptScheme>
+                  <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></rdfs:label>
+                </skos:ConceptScheme>
+              </skos:inScheme>
+            </xsl:if>
+            <xsl:if test="$version != ''">
+              <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
+            </xsl:if>
+          </skos:Concept>
+        </dct:conformsTo>
+      </xsl:when>
+      <xsl:otherwise>
+        <dct:conformsTo>
+          <skos:Concept>
+            <skos:prefLabel xml:lang="{$MetadataLanguage}"><xsl:value-of select="$code"/></skos:prefLabel>
+            <xsl:if test="$codespace != ''">
+              <skos:inScheme>
+                <skos:ConceptScheme>
+                  <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></rdfs:label>
+                </skos:ConceptScheme>
+              </skos:inScheme>
+            </xsl:if>
+            <xsl:if test="$version != ''">
+              <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
+            </xsl:if>
+          </skos:Concept>
+        </dct:conformsTo>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 <!-- Spatial representation type (tentative) -->
