@@ -457,7 +457,7 @@
     </xsl:param>
     
 <!-- Conformity, expressed by using an earl:Assertion (only for the extended profile) -->    
-    
+<!--    
     <xsl:param name="Conformity">
       <xsl:for-each select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
         <xsl:variable name="specinfo">
@@ -475,13 +475,7 @@
               <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notConformant')"/>
             </xsl:when>
             <xsl:otherwise>
-<!--        
-            <xsl:when test="../../gmd:pass/gco:Boolean = ''">
--->        
               <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notEvaluated')"/>
-<!--          
-            </xsl:when>
--->        
             </xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
@@ -517,6 +511,76 @@
         </earl:Assertion>
       </xsl:for-each>
     </xsl:param>
+-->
+<!-- Conformity, expressed by using a prov:Activity (only for the extended profile) -->    
+    
+    <xsl:param name="Conformity">
+      <xsl:for-each select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
+        <xsl:variable name="specinfo">
+          <dct:title xml:lang="{$MetadataLanguage}">
+            <xsl:value-of select="gmd:title/gco:CharacterString"/>
+          </dct:title>
+          <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
+        </xsl:variable>
+        <xsl:variable name="degree">
+          <xsl:choose>
+            <xsl:when test="../../gmd:pass/gco:Boolean = 'true'">
+              <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/conformant')"/>
+            </xsl:when>
+            <xsl:when test="../../gmd:pass/gco:Boolean = 'false'">
+              <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notConformant')"/>
+            </xsl:when>
+            <xsl:otherwise>
+<!--        
+            <xsl:when test="../../gmd:pass/gco:Boolean = ''">
+-->        
+              <xsl:value-of select="concat($DegreeOfConformityCodelistUri,'/notEvaluated')"/>
+<!--          
+            </xsl:when>
+-->        
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="explanation">
+          <xsl:value-of select="../../gmd:explanation/gco:CharacterString"/>
+        </xsl:variable>
+        <prov:Activity>
+          <xsl:if test="$ResourceUri != ''">
+            <prov:used rdf:resource="{$ResourceUri}"/>
+          </xsl:if>
+          <prov:qualifiedAssociation>
+            <prov:hadPlan>
+              <prov:Plan>
+                <xsl:choose>
+                  <xsl:when test="../@xlink:href and ../@xlink:href != ''">
+                    <prov:wasDerivedFrom>
+                      <rdf:Description rdf:about="{../@xlink:href}">
+                        <xsl:copy-of select="$specinfo"/>
+                      </rdf:Description>
+                    </prov:wasDerivedFrom>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <prov:wasDerivedFrom rdf:parseType="Resource">
+                      <xsl:copy-of select="$specinfo"/>
+                    </prov:wasDerivedFrom>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </prov:Plan>
+            </prov:hadPlan>
+          </prov:qualifiedAssociation>
+          <prov:generated>
+            <prov:Entity>
+              <dct:type rdf:resource="{$degree}"/>
+              <xsl:if test="$explanation and $explanation != ''">
+                <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$explanation"/></dct:description>
+              </xsl:if>
+            </prov:Entity>
+          </prov:generated>
+        </prov:Activity>
+      </xsl:for-each>
+    </xsl:param>
+
+<!-- Metadata character encoding (only for the extended profile) -->
     
     <xsl:param name="MetadataCharacterEncoding">
       <xsl:apply-templates select="gmd:characterSet/gmd:MD_CharacterSetCode"/>
@@ -1122,9 +1186,9 @@
     </xsl:if>
     <xsl:if test="$profile = 'extended'">
       <xsl:if test="$Conformity != '' and $ResourceUri = ''">
-        <wdrs:describedby>
+        <prov:wasUsedBy>
           <xsl:copy-of select="$Conformity"/>
-        </wdrs:describedby>
+        </prov:wasUsedBy>
       </xsl:if>
 <!--    
       <xsl:choose>
