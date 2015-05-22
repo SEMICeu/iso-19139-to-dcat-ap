@@ -1542,6 +1542,12 @@
       <dcat:granularity rdf:datatype="{$xsd}string">1/<xsl:value-of select="gco:Integer"/></dcat:granularity>
     </xsl:for-each>
 -->    
+    <xsl:for-each select="gmd:distance/gco:Distance">
+      <rdfs:comment>Resolution (distance): <xsl:value-of select="."/> <xsl:value-of select="@uom"/></rdfs:comment>
+    </xsl:for-each>
+    <xsl:for-each select="gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator">
+      <rdfs:comment>Resolution (equivalent scale): 1/<xsl:value-of select="gco:Integer"/></rdfs:comment>
+    </xsl:for-each>
   </xsl:template>
 
 <!-- Character encoding -->
