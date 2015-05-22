@@ -548,33 +548,29 @@
           <xsl:if test="$ResourceUri != ''">
             <prov:used rdf:resource="{$ResourceUri}"/>
           </xsl:if>
-          <prov:qualifiedAssociation>
-            <prov:hadPlan>
-              <prov:Plan>
-                <xsl:choose>
-                  <xsl:when test="../@xlink:href and ../@xlink:href != ''">
-                    <prov:wasDerivedFrom>
-                      <rdf:Description rdf:about="{../@xlink:href}">
-                        <xsl:copy-of select="$specinfo"/>
-                      </rdf:Description>
-                    </prov:wasDerivedFrom>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <prov:wasDerivedFrom rdf:parseType="Resource">
+          <prov:qualifiedAssociation rdf:parseType="Resource">
+            <prov:hadPlan rdf:parseType="Resource">
+              <xsl:choose>
+                <xsl:when test="../@xlink:href and ../@xlink:href != ''">
+                  <prov:wasDerivedFrom>
+                    <rdf:Description rdf:about="{../@xlink:href}">
                       <xsl:copy-of select="$specinfo"/>
-                    </prov:wasDerivedFrom>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </prov:Plan>
+                    </rdf:Description>
+                  </prov:wasDerivedFrom>
+                </xsl:when>
+                <xsl:otherwise>
+                  <prov:wasDerivedFrom rdf:parseType="Resource">
+                    <xsl:copy-of select="$specinfo"/>
+                  </prov:wasDerivedFrom>
+                </xsl:otherwise>
+              </xsl:choose>
             </prov:hadPlan>
           </prov:qualifiedAssociation>
-          <prov:generated>
-            <prov:Entity>
-              <dct:type rdf:resource="{$degree}"/>
-              <xsl:if test="$explanation and $explanation != ''">
-                <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$explanation"/></dct:description>
-              </xsl:if>
-            </prov:Entity>
+          <prov:generated rdf:parseType="Resource">
+            <dct:type rdf:resource="{$degree}"/>
+            <xsl:if test="$explanation and $explanation != ''">
+              <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$explanation"/></dct:description>
+            </xsl:if>
           </prov:generated>
         </prov:Activity>
       </xsl:for-each>
@@ -729,7 +725,7 @@
 <!--
       <xsl:apply-templates select="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox"/>
 -->      
-      <xsl:apply-templates select="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*">
+      <xsl:apply-templates select="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*/gmd:geographicElement">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
       </xsl:apply-templates>
 <!-- Temporal extent -->
@@ -1229,24 +1225,45 @@
   
 <!-- Geographic extent -->  
 
-  <xsl:template name="GeographicExtent" match="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*">
+  <xsl:template name="GeographicExtent" match="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*/gmd:geographicElement">
     <xsl:param name="MetadataLanguage"/>
-    <dct:spatial>
-      <dct:Location>
-        <xsl:for-each select="gmd:description">
-          <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></rdfs:label>
-        </xsl:for-each>
-        <xsl:apply-templates select="gmd:geographicElement/gmd:EX_GeographicDescription">
-          <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
-        </xsl:apply-templates>
-        <xsl:apply-templates select="gmd:geographicElement/gmd:EX_GeographicBoundingBox"/>
-      </dct:Location>
-    </dct:spatial>
+    <xsl:param name="GeoID" select="gmd:EX_GeographicDescription/gmd:geographicIdentifier/gmd:MD_Identifier/gmd:code/gco:CharacterString"/>
+    <xsl:choose>
+      <xsl:when test="starts-with($GeoID,'http://') or starts-with($GeoID,'https://')">
+        <xsl:choose>
+          <xsl:when test="gmd:EX_GeographicBoundingBox">
+            <dct:spatial>
+              <dct:Location rdf:about="{$GeoID}">
+                <xsl:apply-templates select="gmd:EX_GeographicBoundingBox"/>
+              </dct:Location>
+            </dct:spatial>
+          </xsl:when>
+          <xsl:otherwise>
+            <dct:spatial rdf:resource="{$GeoID}"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:otherwise>
+        <dct:spatial>
+          <dct:Location>
+<!--      
+            <xsl:for-each select="gmd:description">
+              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></rdfs:label>
+            </xsl:for-each>
+-->        
+            <xsl:apply-templates select="gmd:EX_GeographicDescription">
+              <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+            </xsl:apply-templates>
+            <xsl:apply-templates select="gmd:EX_GeographicBoundingBox"/>
+          </dct:Location>
+        </dct:spatial>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 <!-- Geographic identifier -->  
 
-  <xsl:template name="GeographicIdentifier" match="gmd:geographicElement/gmd:EX_GeographicDescription">
+  <xsl:template name="GeographicIdentifier" match="gmd:EX_GeographicDescription">
     <xsl:param name="MetadataLanguage"/>
     <xsl:for-each select="gmd:geographicIdentifier/gmd:MD_Identifier">
       <rdfs:seeAlso>
@@ -1295,7 +1312,7 @@
 <!--  
   <xsl:template name="GeographicBoundingBox" match="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox">
 -->  
-  <xsl:template name="GeographicBoundingBox" match="gmd:geographicElement/gmd:EX_GeographicBoundingBox">
+  <xsl:template name="GeographicBoundingBox" match="gmd:EX_GeographicBoundingBox">
 
 <!-- Bbox as a dct:Box -->
 <!-- Need to check whether this is correct - in particular, the "projection" parameter -->
@@ -1516,7 +1533,7 @@
 <!-- Spatial resolution -->
 
   <xsl:template name="SpatialResolution" match="gmd:identificationInfo/*/gmd:spatialResolution/gmd:MD_Resolution">
-<!-- dcat:granularity is no longer existing -->  
+<!-- dcat:granularity is deprecated -->  
 <!--
     <xsl:for-each select="gmd:distance/gco:Distance">
       <dcat:granularity rdf:datatype="{$xsd}string"><xsl:value-of select="."/> <xsl:value-of select="@uom"/></dcat:granularity>
