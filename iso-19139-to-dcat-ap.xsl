@@ -1227,84 +1227,79 @@
 
   <xsl:template name="GeographicExtent" match="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*/gmd:geographicElement">
     <xsl:param name="MetadataLanguage"/>
-    <xsl:param name="GeoID" select="gmd:EX_GeographicDescription/gmd:geographicIdentifier/gmd:MD_Identifier/gmd:code/gco:CharacterString"/>
+<!--      
+
+      <xsl:otherwise>
+        <dct:spatial>
+          <dct:Location>
+            <xsl:for-each select="gmd:description">
+              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></rdfs:label>
+            </xsl:for-each>
+-->        
+            <xsl:apply-templates select="gmd:EX_GeographicDescription/gmd:geographicIdentifier/gmd:MD_Identifier">
+              <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+            </xsl:apply-templates>
+            <xsl:apply-templates select="gmd:EX_GeographicBoundingBox"/>
+<!--            
+          </dct:Location>
+        </dct:spatial>
+      </xsl:otherwise>
+    </xsl:choose>
+-->    
+  </xsl:template>
+
+<!-- Geographic identifier -->  
+
+  <xsl:template name="GeographicIdentifier" match="gmd:EX_GeographicDescription/gmd:geographicIdentifier/gmd:MD_Identifier">
+    <xsl:param name="MetadataLanguage"/>
+    <xsl:param name="GeoCode" select="gmd:code/*[self::gco:CharacterString|self::gmx:Anchor]"/>
+    <xsl:param name="GeoURI" select="gmd:code/gmx:Anchor/@xlink:href"/>
     <xsl:choose>
-      <xsl:when test="starts-with($GeoID,'http://') or starts-with($GeoID,'https://')">
+      <xsl:when test="$GeoURI != ''">
+<!--      
         <xsl:choose>
           <xsl:when test="gmd:EX_GeographicBoundingBox">
             <dct:spatial>
-              <dct:Location rdf:about="{$GeoID}">
+              <dct:Location rdf:about="{$GeoURI}">
+                <xsl:if test="$GeoCode != ''">
+                  <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$GeoCode"/></rdfs:label>
+                </xsl:if>
                 <xsl:apply-templates select="gmd:EX_GeographicBoundingBox"/>
               </dct:Location>
             </dct:spatial>
           </xsl:when>
           <xsl:otherwise>
-            <dct:spatial rdf:resource="{$GeoID}"/>
+-->          
+            <dct:spatial rdf:resource="{$GeoURI}"/>
+<!--            
           </xsl:otherwise>
         </xsl:choose>
-      </xsl:when>
-      <xsl:otherwise>
-        <dct:spatial>
-          <dct:Location>
-<!--      
-            <xsl:for-each select="gmd:description">
-              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></rdfs:label>
-            </xsl:for-each>
 -->        
-            <xsl:apply-templates select="gmd:EX_GeographicDescription">
-              <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
-            </xsl:apply-templates>
-            <xsl:apply-templates select="gmd:EX_GeographicBoundingBox"/>
-          </dct:Location>
+      </xsl:when>
+      <xsl:when test="$GeoCode != ''">
+        <dct:spatial rdf:parseType="Resource">
+<!--        
+          <rdfs:seeAlso rdf:parseType="Resource">
+-->          
+            <skos:prefLabel xml:lang="{$MetadataLanguage}">
+              <xsl:value-of select="$GeoCode"/>
+            </skos:prefLabel>
+            <xsl:for-each select="gmd:authority/gmd:CI_Citation">
+              <skos:inScheme>
+                <skos:ConceptScheme>
+                  <rdfs:label xml:lang="{$MetadataLanguage}">
+                    <xsl:value-of select="gmd:title/gco:CharacterString"/>
+                  </rdfs:label>
+                  <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
+                </skos:ConceptScheme>
+              </skos:inScheme>
+            </xsl:for-each>
+<!--            
+          </rdfs:seeAlso>
+-->          
         </dct:spatial>
-      </xsl:otherwise>
+      </xsl:when>
     </xsl:choose>
-  </xsl:template>
-
-<!-- Geographic identifier -->  
-
-  <xsl:template name="GeographicIdentifier" match="gmd:EX_GeographicDescription">
-    <xsl:param name="MetadataLanguage"/>
-    <xsl:for-each select="gmd:geographicIdentifier/gmd:MD_Identifier">
-      <rdfs:seeAlso>
-        <xsl:choose>
-          <xsl:when test="gmd:code/gco:CharacterString">
-            <skos:Concept>
-              <skos:prefLabel xml:lang="{$MetadataLanguage}">
-                <xsl:value-of select="gmd:code/gco:CharacterString"/>
-              </skos:prefLabel>
-              <xsl:for-each select="gmd:authority/gmd:CI_Citation">
-                <skos:inScheme>
-                  <skos:ConceptScheme>
-                    <rdfs:label xml:lang="{$MetadataLanguage}">
-                      <xsl:value-of select="gmd:title/gco:CharacterString"/>
-                    </rdfs:label>
-                    <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
-                  </skos:ConceptScheme>
-                </skos:inScheme>
-              </xsl:for-each>
-            </skos:Concept>
-          </xsl:when>
-          <xsl:when test="gmd:code/gmx:Anchor/@xlink:href">
-            <skos:Concept rdf:about="{gmd:code/gmx:Anchor/@xlink:href}">
-              <skos:prefLabel xml:lang="{$MetadataLanguage}">
-                <xsl:value-of select="gmd:code/gmx:Anchor"/>
-              </skos:prefLabel>
-              <xsl:for-each select="gmd:authority/gmd:CI_Citation">
-                <skos:inScheme>
-                  <skos:ConceptScheme>
-                    <rdfs:label xml:lang="{$MetadataLanguage}">
-                      <xsl:value-of select="gmd:title/gco:CharacterString"/>
-                    </rdfs:label>
-                    <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
-                  </skos:ConceptScheme>
-                </skos:inScheme>
-              </xsl:for-each>
-            </skos:Concept>
-          </xsl:when>
-        </xsl:choose>
-      </rdfs:seeAlso>
-    </xsl:for-each>
   </xsl:template>
 
 <!-- Geographic bounding box -->  
@@ -1343,15 +1338,16 @@
 <!-- Bbox as GeoJSON -->
 
     <xsl:param name="GeoJSONLiteral">{"type":"Polygon","crs":{"type":"name","properties":{"name":"<xsl:value-of select="$SrsUrn"/>"}},"coordinates":[[[<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:eastBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:southBoundLatitude/gco:Decimal"/>],[<xsl:value-of select="gmd:westBoundLongitude/gco:Decimal"/><xsl:text>,</xsl:text><xsl:value-of select="gmd:northBoundLatitude/gco:Decimal"/>]]]}</xsl:param>
-    
+    <dct:spatial rdf:parseType="Resource">
 <!-- Recommended geometry encodings -->
-    <locn:geometry rdf:datatype="{$gsp}wktLiteral"><xsl:value-of select="$WKTLiteral"/></locn:geometry>
-    <locn:geometry rdf:datatype="{$gsp}gmlLiteral"><xsl:value-of select="$GMLLiteral"/></locn:geometry>
+      <locn:geometry rdf:datatype="{$gsp}wktLiteral"><xsl:value-of select="$WKTLiteral"/></locn:geometry>
+      <locn:geometry rdf:datatype="{$gsp}gmlLiteral"><xsl:value-of select="$GMLLiteral"/></locn:geometry>
 <!-- Additional geometry encodings -->    
-    <locn:geometry rdf:datatype="{$geojsonMediaTypeUri}"><xsl:value-of select="$GeoJSONLiteral"/></locn:geometry>
+      <locn:geometry rdf:datatype="{$geojsonMediaTypeUri}"><xsl:value-of select="$GeoJSONLiteral"/></locn:geometry>
 <!--
-    <locn:geometry rdf:datatype="{$dct}Box"><xsl:value-of select="$DCTBox"/></locn:geometry>
+      <locn:geometry rdf:datatype="{$dct}Box"><xsl:value-of select="$DCTBox"/></locn:geometry>
 -->    
+    </dct:spatial>
   </xsl:template>
   
 <!-- Temporal extent -->  
@@ -1543,10 +1539,10 @@
     </xsl:for-each>
 -->    
     <xsl:for-each select="gmd:distance/gco:Distance">
-      <rdfs:comment>Resolution (distance): <xsl:value-of select="."/> <xsl:value-of select="@uom"/></rdfs:comment>
+      <rdfs:comment>Spatial resolution (distance): <xsl:value-of select="."/> <xsl:value-of select="@uom"/></rdfs:comment>
     </xsl:for-each>
     <xsl:for-each select="gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator">
-      <rdfs:comment>Resolution (equivalent scale): 1/<xsl:value-of select="gco:Integer"/></rdfs:comment>
+      <rdfs:comment>Spatial resolution (equivalent scale): 1:<xsl:value-of select="gco:Integer"/></rdfs:comment>
     </xsl:for-each>
   </xsl:template>
 
