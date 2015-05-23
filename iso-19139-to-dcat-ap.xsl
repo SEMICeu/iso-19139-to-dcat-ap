@@ -1269,8 +1269,31 @@
 
   <xsl:template name="GeographicIdentifier" match="gmd:EX_GeographicDescription/gmd:geographicIdentifier/*">
     <xsl:param name="MetadataLanguage"/>
-    <xsl:param name="GeoCode" select="gmd:code/*[self::gco:CharacterString|self::gmx:Anchor]"/>
+<!--    
+    <xsl:param name="GeoCode" select="gmd:code/*[self::gco:CharacterString|self::gmx:Anchor/@xlink:href]"/>
     <xsl:param name="GeoURI" select="gmd:code/gmx:Anchor/@xlink:href"/>
+-->
+    <xsl:param name="GeoCode">
+      <xsl:choose>
+        <xsl:when test="gmd:code/gco:CharacterString">
+          <xsl:value-of select="gmd:code/gco:CharacterString"/>
+        </xsl:when>
+        <xsl:when test="gmd:code/gmx:Anchor">
+          <xsl:value-of select="gmd:code/gmx:Anchor/@xlink:href"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:param>
+    <xsl:param name="GeoURI">
+      <xsl:if test="starts-with($GeoCode,'http://') or starts-with($GeoCode,'https://')">
+        <xsl:value-of select="$GeoCode"/>
+      </xsl:if>
+    </xsl:param>
+    <xsl:param name="GeoURN">
+      <xsl:if test="starts-with($GeoCode,'urn:')">
+        <xsl:value-of select="$GeoCode"/>
+      </xsl:if>
+    </xsl:param>
+    
     <xsl:choose>
       <xsl:when test="$GeoURI != ''">
 <!--      
@@ -1298,19 +1321,26 @@
 <!--        
           <rdfs:seeAlso rdf:parseType="Resource">
 -->          
-            <skos:prefLabel xml:lang="{$MetadataLanguage}">
-              <xsl:value-of select="$GeoCode"/>
-            </skos:prefLabel>
-            <xsl:for-each select="gmd:authority/gmd:CI_Citation">
-              <skos:inScheme>
-                <skos:ConceptScheme>
-                  <rdfs:label xml:lang="{$MetadataLanguage}">
-                    <xsl:value-of select="gmd:title/gco:CharacterString"/>
-                  </rdfs:label>
-                  <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
-                </skos:ConceptScheme>
-              </skos:inScheme>
-            </xsl:for-each>
+          <xsl:choose>
+            <xsl:when test="$GeoURN != ''">
+              <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$GeoURN"/></dct:identifier>
+            </xsl:when>
+            <xsl:otherwise>
+              <skos:prefLabel xml:lang="{$MetadataLanguage}">
+                <xsl:value-of select="$GeoCode"/>
+              </skos:prefLabel>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:for-each select="gmd:authority/gmd:CI_Citation">
+            <skos:inScheme>
+              <skos:ConceptScheme>
+                <rdfs:label xml:lang="{$MetadataLanguage}">
+                  <xsl:value-of select="gmd:title/gco:CharacterString"/>
+                </rdfs:label>
+                <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
+              </skos:ConceptScheme>
+            </skos:inScheme>
+          </xsl:for-each>
 <!--            
           </rdfs:seeAlso>
 -->          
