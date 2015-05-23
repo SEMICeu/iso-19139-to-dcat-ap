@@ -907,14 +907,31 @@
     <xsl:param name="id">
       <xsl:choose>
         <xsl:when test="$ns != ''">
+          <xsl:choose>
+            <xsl:when test="substring($ns,string-length($ns),1) = '/'">
+          <xsl:value-of select="concat(translate($ns,' ','%20'),translate($code,' ','%20'))"/>
+            </xsl:when>
+            <xsl:otherwise>
           <xsl:value-of select="concat(translate($ns,' ','%20'),'/',translate($code,' ','%20'))"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="translate($code,' ','%20')"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:param>
-    <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$id"/></dct:identifier>
+    <xsl:param name="idDatatypeURI">
+      <xsl:choose>
+        <xsl:when test="starts-with($id, 'http://') or starts-with($id, 'https://') or starts-with($id, 'urn:')">
+          <xsl:value-of select="concat($xsd,'anyURI')"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="concat($xsd,'string')"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:param>
+    <dct:identifier rdf:datatype="{$idDatatypeURI}"><xsl:value-of select="$id"/></dct:identifier>
   </xsl:template>
 
 <!-- Responsible Organisation -->      
@@ -1236,7 +1253,7 @@
               <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></rdfs:label>
             </xsl:for-each>
 -->        
-            <xsl:apply-templates select="gmd:EX_GeographicDescription/gmd:geographicIdentifier/gmd:MD_Identifier">
+            <xsl:apply-templates select="gmd:EX_GeographicDescription/gmd:geographicIdentifier/*">
               <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
             </xsl:apply-templates>
             <xsl:apply-templates select="gmd:EX_GeographicBoundingBox"/>
@@ -1250,7 +1267,7 @@
 
 <!-- Geographic identifier -->  
 
-  <xsl:template name="GeographicIdentifier" match="gmd:EX_GeographicDescription/gmd:geographicIdentifier/gmd:MD_Identifier">
+  <xsl:template name="GeographicIdentifier" match="gmd:EX_GeographicDescription/gmd:geographicIdentifier/*">
     <xsl:param name="MetadataLanguage"/>
     <xsl:param name="GeoCode" select="gmd:code/*[self::gco:CharacterString|self::gmx:Anchor]"/>
     <xsl:param name="GeoURI" select="gmd:code/gmx:Anchor/@xlink:href"/>
