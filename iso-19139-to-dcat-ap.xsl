@@ -1759,37 +1759,33 @@
         <dct:conformsTo rdf:resource="{$code}"/>
       </xsl:when>
       <xsl:when test="starts-with($code, 'urn:')">
-        <dct:conformsTo>
-          <skos:Concept>
-            <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
-            <xsl:if test="$codespace != ''">
-              <skos:inScheme>
-                <skos:ConceptScheme>
-                  <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></rdfs:label>
-                </skos:ConceptScheme>
-              </skos:inScheme>
-            </xsl:if>
-            <xsl:if test="$version != ''">
-              <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
-            </xsl:if>
-          </skos:Concept>
+        <dct:conformsTo rdf:parseType="Resource">
+          <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
+          <xsl:if test="$codespace != ''">
+            <skos:inScheme>
+              <skos:ConceptScheme>
+                <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></rdfs:label>
+              </skos:ConceptScheme>
+            </skos:inScheme>
+          </xsl:if>
+          <xsl:if test="$version != ''">
+            <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
+          </xsl:if>
         </dct:conformsTo>
       </xsl:when>
       <xsl:otherwise>
-        <dct:conformsTo>
-          <skos:Concept>
-            <skos:prefLabel xml:lang="{$MetadataLanguage}"><xsl:value-of select="$code"/></skos:prefLabel>
-            <xsl:if test="$codespace != ''">
-              <skos:inScheme>
-                <skos:ConceptScheme>
-                  <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></rdfs:label>
-                </skos:ConceptScheme>
-              </skos:inScheme>
-            </xsl:if>
-            <xsl:if test="$version != ''">
-              <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
-            </xsl:if>
-          </skos:Concept>
+        <dct:conformsTo rdf:parseType="Resource">
+          <skos:prefLabel xml:lang="{$MetadataLanguage}"><xsl:value-of select="$code"/></skos:prefLabel>
+          <xsl:if test="$codespace != ''">
+            <skos:inScheme>
+              <skos:ConceptScheme>
+                <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></rdfs:label>
+              </skos:ConceptScheme>
+            </skos:inScheme>
+          </xsl:if>
+          <xsl:if test="$version != ''">
+            <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
+          </xsl:if>
         </dct:conformsTo>
       </xsl:otherwise>
     </xsl:choose>
