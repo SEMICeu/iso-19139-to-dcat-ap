@@ -1484,36 +1484,37 @@
           <dcat:keyword xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></dcat:keyword>
         </xsl:when>
         <xsl:otherwise>
-          <dcat:theme>
-            <xsl:choose>
+          <xsl:choose>
 <!-- In case the concept's URI is NOT provided -->              
-              <xsl:when test="gco:CharacterString">
-                <skos:Concept>
-                  <skos:prefLabel xml:lang="{$MetadataLanguage}">
-                    <xsl:value-of select="gco:CharacterString"/>
-                  </skos:prefLabel>
-                  <skos:inScheme>
-                    <skos:ConceptScheme>
-                      <xsl:copy-of select="$OriginatingControlledVocabulary"/>
-                    </skos:ConceptScheme>
-                  </skos:inScheme>
-                </skos:Concept>
-              </xsl:when>
+            <xsl:when test="gco:CharacterString">
+              <dcat:theme rdf:parseType="Resource">
+                <skos:prefLabel xml:lang="{$MetadataLanguage}">
+                  <xsl:value-of select="gco:CharacterString"/>
+                </skos:prefLabel>
+                <skos:inScheme>
+                  <skos:ConceptScheme>
+                    <xsl:copy-of select="$OriginatingControlledVocabulary"/>
+                  </skos:ConceptScheme>
+                </skos:inScheme>
+              </dcat:theme>
+            </xsl:when>
 <!-- In case the concept's URI is provided -->              
-              <xsl:when test="gmx:Anchor/@xlink:href">
-                <skos:Concept rdf:about="{gmx:Anchor/@xlink:href}">
-                  <skos:prefLabel xml:lang="{$MetadataLanguage}">
-                    <xsl:value-of select="gmx:Anchor"/>
-                  </skos:prefLabel>
-                  <skos:inScheme>
-                    <skos:ConceptScheme>
-                      <xsl:copy-of select="$OriginatingControlledVocabulary"/>
-                    </skos:ConceptScheme>
-                  </skos:inScheme>
-                </skos:Concept>
-              </xsl:when>
-            </xsl:choose>
-          </dcat:theme>
+            <xsl:when test="gmx:Anchor/@xlink:href">
+              <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
+<!--              
+              <skos:Concept rdf:about="{gmx:Anchor/@xlink:href}">
+                <skos:prefLabel xml:lang="{$MetadataLanguage}">
+                  <xsl:value-of select="gmx:Anchor"/>
+                </skos:prefLabel>
+                <skos:inScheme>
+                  <skos:ConceptScheme>
+                    <xsl:copy-of select="$OriginatingControlledVocabulary"/>
+                  </skos:ConceptScheme>
+                </skos:inScheme>
+              </skos:Concept>
+-->                
+            </xsl:when>
+          </xsl:choose>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:for-each>
