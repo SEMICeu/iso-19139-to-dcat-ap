@@ -130,7 +130,7 @@
   <xsl:param name="SrsUrn">urn:ogc:def:crs:OGC:1.3:CRS84</xsl:param>
 
 <!-- Axis order for the reference SRS: 
-     - "LonLat" = longitude / latitude
+     - "LonLat": longitude / latitude
      - "LatLon": latitude / longitude.
      The axis order must be specified only if the reference SRS is different from CRS84. 
      If the reference SRS is CRS84, this parameter is ignored. -->  
