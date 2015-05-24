@@ -2,11 +2,21 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-05-25: Revised version (v0.6)
+* Minor fixes and revisions.
+* Revised mapping for keywords when used for services (only for the extended profile): `dct:subject` and `dc:subject` are used instead of `dcat:theme` and `dcat:keyword`.
+* Revised mapping for "use limitations". It always maps to `dct:license`, and the free text description is omitted when an HTTP URI is provided via `gmx:Anchor/@xlink:href`.
+* Revised mapping of keywords from controlled vocabularies: if the keyword is denoted by an HTTP URI, the information on the originating controlled vocabulary is not included in the mapping. The motivation is that this information can be obtained by accessing the keyword URI.
+* Added mapping for spatial resolution, by using `rdfs:comment` with a human-readable presentation of distance or equivalent scale. This includes mappings from EPSG codes / OGC URNs to UCUM codes (for units of measure).
+* Revised mapping of geographic identifier, based on whether the geographic identifier is or not an HTTP URI.
+* Revised mapping for conformance result, based on the W3C PROV ontology (only for the extended profile).
+* Added mapping for spatial and temporal reference systems, by using `dct:conformsTo` (only for the extended profile). The representation of the reference system varies depending on whether it is specified with an HTTP URI (`@rdf:resource`), a URN (`dct:identifier`), or as free text  (`skos:prefLabel`). The code space is modelled as a `skos:ConceptScheme` and the version as `owl:versionInfo`. 
+
 ## 2015-05-18: Revised version (v0.5)
 * Minor fixes.
 * When a URL is available in `gmd:useLimitations`, `dct:license` + `dct:LicenseDocument` are used, instead of `dct:rights` + `dct:RightsStatement`.
 * Added mapping for geographic identifier and extent description (spatial coverage). The geographic identifier is modelled as a `skos:Concept`, the code is specified with `skos:prefLabel`, the authority is modelled as a `skos:ConceptScheme`. If the code is associated with an HTTP URI by using `gmx:Anchor/@xlink:href`, this will be used as the URI of the geographic identifier (`skos:Concept`).
-* Revised generation of bounding box encodings wrt axis order. The default spatial reference system (SRS) is now CRS84 (and not EPSG:4326), and, consequently, the axis order is now longitude / latitude for both WKT and GML (in GeoJSON, the axis order is always longitude / latitude irrespective of the SRS used). If a different SRS is used, the axis order must be explicitly specified by using a specific parameter (`$SrsAxisOrder`).
+* Revised generation of bounding box encodings wrt axis order. The default spatial reference system (SRS) is now CRS84 (and not EPSG:4326). Consequently, the default axis order is now longitude / latitude for both WKT and GML (in GeoJSON, the axis order is always longitude / latitude irrespective of the SRS used). If a different SRS is used, the axis order must be explicitly specified by using a specific parameter (`$SrsAxisOrder`).
 
 ## 2015-05-12: Revised version (v0.4)
 * Core and extended profiles revised to match with the current version of the DCAT-AP specification.
