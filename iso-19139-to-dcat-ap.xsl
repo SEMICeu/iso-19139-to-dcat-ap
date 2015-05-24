@@ -1589,10 +1589,10 @@
     <xsl:for-each select="gmd:distance/gco:Distance">
       <xsl:variable name="UoM">
         <xsl:choose>
-          <xsl:when test="@uom = 'urn:ogc:def:uom:EPSG::9001'">
+          <xsl:when test="@uom = 'EPSG::9001' or @uom = 'urn:ogc:def:uom:EPSG::9001' or @uom = 'urn:ogc:def:uom:UCUM::m' or @uom = 'urn:ogc:def:uom:OGC::m'">
             <xsl:value-of select="concat('m',' (',@uom,')')"/>
           </xsl:when>
-          <xsl:when test="@uom = 'urn:ogc:def:uom:EPSG::9002'">
+          <xsl:when test="@uom = 'EPSG::9002' or @uom = 'urn:ogc:def:uom:EPSG::9002' or @uom = 'urn:ogc:def:uom:UCUM::[ft_i]' or @uom = 'urn:ogc:def:uom:OGC::[ft_i]'">
             <xsl:value-of select="concat('ft',' (',@uom,')')"/>
           </xsl:when>
 <!-- To be completed -->          
