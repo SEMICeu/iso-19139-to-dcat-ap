@@ -1476,12 +1476,19 @@
     <xsl:for-each select="gmd:useLimitation">
       <xsl:choose>
 <!-- In case the rights/licence URL IS NOT provided -->      
-        <xsl:when test="gco:CharacterString">                                                                       
+        <xsl:when test="gco:CharacterString">
+          <dct:license>
+            <dct:LicenseDocument>
+              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gmx:Anchor)"/></rdfs:label>
+            </dct:LicenseDocument>
+          </dct:license>
+<!--                                                                               
           <dct:rights>
             <dct:RightsStatement>
               <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></rdfs:label>
             </dct:RightsStatement>
           </dct:rights>
+-->          
         </xsl:when>
 <!-- In case the rights/licence URL IS provided -->      
         <xsl:when test="gmx:Anchor/@xlink:href">
