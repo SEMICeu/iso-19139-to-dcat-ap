@@ -1492,11 +1492,14 @@
         </xsl:when>
 <!-- In case the rights/licence URL IS provided -->      
         <xsl:when test="gmx:Anchor/@xlink:href">
+          <dct:license rdf:resource="{gmx:Anchor/@xlink:href}"/>
+<!--        
           <dct:license>
             <dct:LicenseDocument rdf:about="{gmx:Anchor/@xlink:href}">
               <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gmx:Anchor)"/></rdfs:label>
             </dct:LicenseDocument>
           </dct:license>
+-->          
         </xsl:when>
       </xsl:choose>
     </xsl:for-each>
