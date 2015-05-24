@@ -1587,7 +1587,20 @@
     </xsl:for-each>
 -->    
     <xsl:for-each select="gmd:distance/gco:Distance">
-      <rdfs:comment>Spatial resolution (distance): <xsl:value-of select="."/> <xsl:value-of select="@uom"/></rdfs:comment>
+      <xsl:variable name="UoM">
+        <xsl:choose>
+          <xsl:when test="@uom = 'urn:ogc:def:uom:EPSG::9001'">
+            <xsl:value-of select="concat('m',' (',@uom,')')"/>
+          </xsl:when>
+          <xsl:when test="@uom = 'urn:ogc:def:uom:EPSG::9002'">
+            <xsl:value-of select="concat('ft',' (',@uom,')')"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="@uom"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <rdfs:comment>Spatial resolution (distance): <xsl:value-of select="."/>&#160;<xsl:value-of select="$UoM"/></rdfs:comment>
     </xsl:for-each>
     <xsl:for-each select="gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator">
       <rdfs:comment>Spatial resolution (equivalent scale): 1:<xsl:value-of select="gco:Integer"/></rdfs:comment>
