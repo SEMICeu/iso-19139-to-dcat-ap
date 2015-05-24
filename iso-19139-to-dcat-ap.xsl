@@ -1574,7 +1574,7 @@
     <dct:subject rdf:resource="{$TopicCategoryCodelistUri}/{$TopicCategory}"/>
   </xsl:template>
 
-<!-- Spatial resolution -->
+<!-- Spatial resolution (unstable - to be replaced with a standard-based solution, when available) -->
 
   <xsl:template name="SpatialResolution" match="gmd:identificationInfo/*/gmd:spatialResolution/gmd:MD_Resolution">
 <!-- dcat:granularity is deprecated -->  
@@ -1595,15 +1595,16 @@
           <xsl:when test="@uom = 'urn:ogc:def:uom:EPSG::9002'">
             <xsl:value-of select="concat('ft',' (',@uom,')')"/>
           </xsl:when>
+<!-- To be completed -->          
           <xsl:otherwise>
             <xsl:value-of select="@uom"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
-      <rdfs:comment>Spatial resolution (distance): <xsl:value-of select="."/>&#160;<xsl:value-of select="$UoM"/></rdfs:comment>
+      <rdfs:comment xml:lang="en">Spatial resolution (distance): <xsl:value-of select="."/>&#160;<xsl:value-of select="$UoM"/></rdfs:comment>
     </xsl:for-each>
     <xsl:for-each select="gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator">
-      <rdfs:comment>Spatial resolution (equivalent scale): 1:<xsl:value-of select="gco:Integer"/></rdfs:comment>
+      <rdfs:comment xml:lang="en">Spatial resolution (equivalent scale): 1:<xsl:value-of select="gco:Integer"/></rdfs:comment>
     </xsl:for-each>
   </xsl:template>
 
