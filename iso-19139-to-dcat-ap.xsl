@@ -674,6 +674,8 @@
 <!-- Keyword -->
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:descriptiveKeywords/gmd:MD_Keywords">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+        <xsl:with-param name="ResourceType" select="$ResourceType"/>
+        <xsl:with-param name="ServiceType" select="$ServiceType"/>
       </xsl:apply-templates>
 <!-- Identifier, 0..1 -->
 <!--        
@@ -1526,6 +1528,8 @@
 
   <xsl:template name="Keyword" match="gmd:identificationInfo/*/gmd:descriptiveKeywords/gmd:MD_Keywords">
     <xsl:param name="MetadataLanguage"/>
+    <xsl:param name="ResourceType"/>
+    <xsl:param name="ServiceType"/>
     <xsl:param name="OriginatingControlledVocabulary">
       <xsl:for-each select="gmd:thesaurusName/gmd:CI_Citation">
         <rdfs:label xml:lang="{$MetadataLanguage}">
@@ -1538,38 +1542,73 @@
       <xsl:variable name="lckw" select="translate(gco:CharacterString,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
       <xsl:choose>
         <xsl:when test="$OriginatingControlledVocabulary = ''">
-          <dcat:keyword xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></dcat:keyword>
+          <xsl:choose>
+            <xsl:when test="$ResourceType = 'service'">
+              <xsl:if test="$profile = 'extended'">
+                <dc:subject xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></dc:subject>
+              </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+              <dcat:keyword xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></dcat:keyword>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
           <xsl:choose>
 <!-- In case the concept's URI is NOT provided -->              
             <xsl:when test="gco:CharacterString">
-              <dcat:theme rdf:parseType="Resource">
-                <skos:prefLabel xml:lang="{$MetadataLanguage}">
-                  <xsl:value-of select="gco:CharacterString"/>
-                </skos:prefLabel>
-                <skos:inScheme>
-                  <skos:ConceptScheme>
-                    <xsl:copy-of select="$OriginatingControlledVocabulary"/>
-                  </skos:ConceptScheme>
-                </skos:inScheme>
-              </dcat:theme>
+              <xsl:choose>
+                <xsl:when test="$ResourceType != 'service'">
+                  <dcat:theme rdf:parseType="Resource">
+                    <skos:prefLabel xml:lang="{$MetadataLanguage}">
+                      <xsl:value-of select="gco:CharacterString"/>
+                    </skos:prefLabel>
+                    <skos:inScheme>
+                      <skos:ConceptScheme>
+                        <xsl:copy-of select="$OriginatingControlledVocabulary"/>
+                      </skos:ConceptScheme>
+                    </skos:inScheme>
+                  </dcat:theme>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:if test="$profile = 'extended'">
+                    <dct:subject rdf:parseType="Resource">
+                      <skos:prefLabel xml:lang="{$MetadataLanguage}">
+                        <xsl:value-of select="gco:CharacterString"/>
+                      </skos:prefLabel>
+                      <skos:inScheme>
+                        <skos:ConceptScheme>
+                          <xsl:copy-of select="$OriginatingControlledVocabulary"/>
+                        </skos:ConceptScheme>
+                      </skos:inScheme>
+                    </dct:subject>
+                  </xsl:if>
+                </xsl:otherwise>
+              </xsl:choose>
             </xsl:when>
 <!-- In case the concept's URI is provided -->              
             <xsl:when test="gmx:Anchor/@xlink:href">
-              <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
+              <xsl:choose>
+                <xsl:when test="$ResourceType != 'service'">
+                  <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
 <!--              
-              <skos:Concept rdf:about="{gmx:Anchor/@xlink:href}">
-                <skos:prefLabel xml:lang="{$MetadataLanguage}">
-                  <xsl:value-of select="gmx:Anchor"/>
-                </skos:prefLabel>
-                <skos:inScheme>
-                  <skos:ConceptScheme>
-                    <xsl:copy-of select="$OriginatingControlledVocabulary"/>
-                  </skos:ConceptScheme>
-                </skos:inScheme>
-              </skos:Concept>
+                  <skos:Concept rdf:about="{gmx:Anchor/@xlink:href}">
+                    <skos:prefLabel xml:lang="{$MetadataLanguage}">
+                      <xsl:value-of select="gmx:Anchor"/>
+                    </skos:prefLabel>
+                    <skos:inScheme>
+                      <skos:ConceptScheme>
+                        <xsl:copy-of select="$OriginatingControlledVocabulary"/>
+                      </skos:ConceptScheme>
+                    </skos:inScheme>
+                  </skos:Concept>
 -->                
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:if test="$profile = 'extended'">
+                    <dct:subject rdf:resource="{gmx:Anchor/@xlink:href}"/>
+                  </xsl:if>
+                </xsl:otherwise>
             </xsl:when>
           </xsl:choose>
         </xsl:otherwise>
