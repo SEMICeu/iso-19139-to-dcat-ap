@@ -20,7 +20,7 @@
 
 <h2>Used namespaces</h2>
 
-<table border="1">
+<table>
 	<thead>
 		<tr>
 			<th>Prefix</th>
@@ -122,7 +122,7 @@
 	<li>URI registers operated by the Publications Office of the EU, whose use is recommended in DCAT-AP.</li>
 </ul>
 
-<table border="1">
+<table>
 	<thead>
 		<tr>
 			<th>Metadata elements (ISO 19115 / INSPIRE)</th>
@@ -231,7 +231,7 @@
 <h3>Metadata on metadata for INSPIRE data sets, data set series, and services</h3>
 <p>The domain of the mappings is <code>dcat:CatalogRecord</code>.</p>
 
-<table border="1">
+<table>
 	<thead>
 		<tr>
 			<th colspan="2" rowspan="2">Metadata elements (ISO 19115 / INSPIRE)</th>
@@ -277,7 +277,7 @@
 
 <h3>Resource metadata common to data sets, data set series, and services</h3>
 <p>As a rule, the domain of the mappings is either <code>dcat:Dataset</code> (when the element is used for datasets and series) or <code>dctype:Service</code> / <code>dcat:Catalog</code> (when the element is used for services). However, “starred” elements – i.e., elements whose name is preceded by an asterisk (“*”) – are those having as domain either <code>dcat:Distribution</code> (when the element is used for datasets and series) or <code>dctype:Service</code> / <code>dcat:Catalog</code> (when the element is used for services).</p>
-<table border="1">
+<table>
   <thead>
 		<tr>
 			<th colspan="2" rowspan="2">Metadata elements (ISO 19115 / INSPIRE)</th>
@@ -545,7 +545,7 @@
 <h3>Resource metadata specific to data sets and data set series</h3>
 <p>As a rule, the domain of the mappings is <code>dcat:Dataset</code>. However, “starred” elements – i.e., elements whose name is preceded by an asterisk (“*”) – are those having as domain <code>dcat:Distribution</code>.</p>
 
-<table border="1">
+<table>
 	<thead>
 		<tr>
 			<th rowspan="2" colspan="2">Metadata elements</th>
@@ -700,7 +700,7 @@
 <h3>Resource metadata specific to services</h3>
 <p>The domain of the mappings is <code>dcat:Catalog</code> for catalogue / discovery service, and <code>dctype:Service</code> for all the other services.</p>
 
-<table border="1">
+<table>
 	<thead>
 		<tr>
 			<th rowspan="2" colspan="2">Metadata elements</th>
@@ -765,4 +765,7 @@
 	</tbody>
 </table>
 
+<h2>Mappings of individual metadata elements</h2>
+
+TBD
 
