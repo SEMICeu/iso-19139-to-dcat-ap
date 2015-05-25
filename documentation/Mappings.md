@@ -812,7 +812,7 @@
 If specified with an HTTP URI:
 
 ````xml
-  <dct:spatial rdf:resource="http://some.site/loc"/>
+  <dct:spatial rdf:resource="http://publications.europa.eu/resource/authority/country/EUR"/>
 ````
 
 If specified with a literal:
