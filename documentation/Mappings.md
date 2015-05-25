@@ -78,8 +78,8 @@
 		</tr>
 		<tr>
 			<td><code>owl</code></td>
-			<td><code><a href=""></a></code></td>
-			<td><a href=""></a></td>
+			<td><code><a href="http://www.w3.org/2002/07/owl#">http://www.w3.org/2002/07/owl#</a></code></td>
+			<td><a href="http://www.w3.org/TR/2004/REC-owl-ref-20040210/">OWL Web Ontology Language Reference</a></td>
 		</tr>
 		<tr>
 			<td><code>prov</code></td>
