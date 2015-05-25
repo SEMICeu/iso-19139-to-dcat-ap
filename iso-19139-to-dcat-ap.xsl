@@ -184,7 +184,7 @@
 
 <!-- INSPIRE code list URIs (not yet supported; the URI pattern is tentative) -->  
   
-  <xsl:param name="SpatialRepresentationTypeCodelistUri" select="concat($INSPIRECodelistUri,'SpatialRepresentationType')"/>
+  <xsl:param name="SpatialRepresentationTypeCodelistUri" select="concat($INSPIRECodelistUri,'SpatialRepresentationTypeCode')"/>
 
 <!-- 
 
