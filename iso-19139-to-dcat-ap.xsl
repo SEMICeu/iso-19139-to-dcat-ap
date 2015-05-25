@@ -616,6 +616,7 @@
         <xsl:for-each select="gmd:metadataStandardName/gco:CharacterString">
           <xsl:if test="text() != '' or ../../gmd:metadataStandardVersion/gco:CharacterString/text() != ''">
             <dct:source rdf:parseType="Resource">
+<!-- Metadata character encoding (tentative): only for the extended profile -->
               <xsl:if test="$MetadataCharacterEncoding != ''">
                 <xsl:copy-of select="$MetadataCharacterEncoding"/>
               </xsl:if>
@@ -628,7 +629,6 @@
 <!-- Metadata standard version -->              
                   <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="../../gmd:metadataStandardVersion/gco:CharacterString"/></owl:versionInfo>
                 </xsl:if>
-<!-- Metadata character encoding (tentative): only for the extended profile -->
               </dct:conformsTo>    
             </dct:source>
           </xsl:if>
@@ -1340,9 +1340,9 @@
           <xsl:for-each select="gmd:authority/gmd:CI_Citation">
             <skos:inScheme>
               <skos:ConceptScheme>
-                <rdfs:label xml:lang="{$MetadataLanguage}">
+                <dct:title xml:lang="{$MetadataLanguage}">
                   <xsl:value-of select="gmd:title/gco:CharacterString"/>
-                </rdfs:label>
+                </dct:title>
                 <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
               </skos:ConceptScheme>
             </skos:inScheme>
@@ -1536,9 +1536,9 @@
     <xsl:param name="ServiceType"/>
     <xsl:param name="OriginatingControlledVocabulary">
       <xsl:for-each select="gmd:thesaurusName/gmd:CI_Citation">
-        <rdfs:label xml:lang="{$MetadataLanguage}">
+        <dct:title xml:lang="{$MetadataLanguage}">
           <xsl:value-of select="gmd:title/gco:CharacterString"/>
-        </rdfs:label>
+        </dct:title>
         <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
       </xsl:for-each>
     </xsl:param>
@@ -1857,7 +1857,7 @@
           <xsl:if test="$codespace != ''">
             <skos:inScheme>
               <skos:ConceptScheme>
-                <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></rdfs:label>
+                <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></dct:title>
               </skos:ConceptScheme>
             </skos:inScheme>
           </xsl:if>
@@ -1872,7 +1872,7 @@
           <xsl:if test="$codespace != ''">
             <skos:inScheme>
               <skos:ConceptScheme>
-                <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></rdfs:label>
+                <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></dct:title>
               </skos:ConceptScheme>
             </skos:inScheme>
           </xsl:if>
