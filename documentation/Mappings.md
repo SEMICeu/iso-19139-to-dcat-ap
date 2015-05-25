@@ -77,6 +77,11 @@
 			<td><a href="http://www.w3.org/ns/locn">ISA Programme Core Location Vocabulary</a></td>
 		</tr>
 		<tr>
+			<td><code>owl</code></td>
+			<td><code><a href=""></a></code></td>
+			<td><a href=""></a></td>
+		</tr>
+		<tr>
 			<td><code>prov</code></td>
 			<td><code><a href="http://www.w3.org/ns/prov#">http://www.w3.org/ns/prov#</a></code></td>
 			<td><a href="http://www.w3.org/TR/2013/REC-prov-o-20130430/">PROV-O: The PROV Ontology</a></td>
@@ -192,7 +197,7 @@
 		<tr>
 			<td><code><a href="http://inspire.ec.europa.eu/media-types">http://inspire.ec.europa.eu/media-types</a></code></td>
 			<td>Register of media types used for datasets in INSPIRE download services</td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 		</tr>
 		<tr>
 			<td rowspan="2">Maintenance frequency (Maintenance information)</td>
@@ -203,13 +208,13 @@
 		<tr>
 			<td><code>http://inspire.ec.europa.eu/metadata-codelist/MaintenanceFrequencyCode</code></td>
 			<td>Register operated by the INSPIRE Registry for maintenance frequency codes defined in ISO 19115 (not yet available)</td>
-			<td>testing</td>
+			<td><strong>unstable</strong></td>
 		</tr>
 		<tr>
 			<td>Spatial representation type</td>
 			<td><code>http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationTypeCode</code></td>
 			<td>Register operated by the INSPIRE Registry for spatial representation type codes defined in ISO 19115 (not yet available)</td>
-			<td>testing</td>
+			<td><strong>unstable</strong></td>
 		</tr>
 	</tbody>
 </table>
@@ -229,7 +234,7 @@
 <p>The alignments supported only in the extended profile of GeoDCAT-AP are in <strong>bold</strong>.</p>
 
 <h3>Metadata on metadata for INSPIRE data sets, data set series, and services</h3>
-<p>The domain of the mappings is <code>dcat:CatalogRecord</code>.</p>
+<p>The domain of the mappings is <code>dcat:CatalogRecord</code>, with the exception of metadata standard title and version, whose domain is <code>dct:Standard</code>.</p>
 
 <table>
 	<thead>
@@ -249,20 +254,20 @@
 			<td colspan="2" rowspan="2">Metadata point of contact</td>
 			<td><strong><code>prov:qualifiedAttribution</code><strong></td>
 			<td><strong><code>prov:Attribution</code><strong></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>Only for the extended profile</td>
 		</tr>
 		<tr>
 			<td><strong><code>dcat:contactPoint</code><strong></td>
 			<td><strong><code>vcard:Kind</code><strong></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>Only for the extended profile</td>
 		</tr>
 		<tr>
 			<td colspan="2">Metadata date</td>
 			<td><code>dct:modified</code></td>
 			<td><code>xsd:date</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td></td>
 		</tr>
 		<tr>
@@ -271,6 +276,41 @@
 			<td><code>dct:LinguisticSystem</code></td>
 			<td>stable</td>
 			<td></td>
+		</tr>
+		<tr>
+			<td colspan="2">Metadata file identifier</td>
+			<td><strong><code>dct:identifier</code></strong></td>
+			<td><strong><code>rdfs:Literal</code></strong></td>
+			<td>stable</td>
+			<td>Only for the extended profile</td>
+		</tr>
+		<tr>
+			<td colspan="2">Metadata character encoding</td>
+			<td><strong><code>cnt:characterEncoding</code></strong></td>
+			<td><strong><code>rdfs:Literal</code></strong></td>
+			<td>stable</td>
+			<td>Only for the extended profile</td>
+		</tr>
+		<tr>
+			<td colspan="2">Metadata standard</td>
+			<td><code>dct:conformsTo</code></td>
+			<td><code>dct:Standard</code></td>
+			<td>stable</td>
+			<td>The metadata standard is described by a title and a version - see below</td>
+		</tr>
+		<tr>
+			<td colspan="2">* Metadata standard name</td>
+			<td><code>dct:title</code></td>
+			<td><code>rdf:PlainLiteral</code></td>
+			<td>stable</td>
+			<td>The domain is <code>dct:Standard</code></td>
+		</tr>
+		<tr>
+			<td colspan="2">* Metadata standard version</td>
+			<td><code>owl:versionInfo</code></td>
+			<td><code>rdf:PlainLiteral</code></td>
+			<td>stable</td>
+			<td>The domain is <code>dct:Standard</code></td>
 		</tr>
 	</tbody>
 </table>
@@ -408,7 +448,7 @@
 			<td colspan="2">Spatial resolution</td>
 			<td><strong><code>rdfs:comment</code></strong></td>
 			<td><strong><code>rdf:PlainLiteral</code></strong></td>
-			<td>unstable</td>
+			<td><strong>unstable</strong></td>
 			<td>Only for the extended profile. To be replaced with an appropriate mapping to a standard vocabulary, when available</td>
 		</tr>
 		<tr>
@@ -416,7 +456,7 @@
 			<td><em>Any degree</em></td>
 			<td><strong><code>prov:wasUsedBy</code></strong></td>
 			<td><strong><code>prov:Activity</code></strong></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>Only for the extended profile</td>
 		</tr>
 		<tr>
@@ -444,14 +484,14 @@
 			<td colspan="2">* Use limitation / Conditions for access and use</td>
 			<td><code><code>dct:license</code></td>
 			<td><code>dct:LicenseDocument</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>For datasets and dataset series, the domain is <code>dcat:Distribution</code>.</td>
 		</tr>
 		<tr>
 			<td colspan="2">* Access constraints, other constraints / Limitations on public access</td>
 			<td><code>dct:accessRights</code></td>
 			<td><code>dct:RightsStatement</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>For datasets and dataset series, the domain is <code>dcat:Distribution</code>.</td>
 		</tr>
 		<tr>
@@ -459,7 +499,7 @@
 			<td><em>Any role</em></td>
 			<td><strong><code>prov:qualifiedAttribution</code></strong></td>
 			<td><strong><code>prov:Attribution</code></strong></td>
-			<td>unstable</td>
+			<td><strong>unstable</strong></td>
 			<td>Only for the extended profile.</td>
 		</tr>
 		<tr>
@@ -501,7 +541,7 @@
 			<td>Originator</td>
 			<td><code>dct:creator</code></td>
 			<td><code>foaf:Agent</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
@@ -571,28 +611,28 @@
 			<td>Information</td>
 			<td><code>foaf:page</code></td>
 			<td><code>foaf:Document</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td></td>
 		</tr>
 		<tr>
 			<td>* Offline access</td>
 			<td><code>dcat:accessURL</code></td>
 			<td><code>rdfs:Resource</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>The domain is <code>dcat:Distribution</code></td>
 		</tr>
 		<tr>
 			<td>* Order</td>
 			<td><code>dcat:accessURL</code></td>
 			<td><code>rdfs:Resource</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>The domain is <code>dcat:Distribution</code></td>
 		</tr>
 		<tr>
 			<td>Search</td>
 			<td><code>foaf:page</code></td>
 			<td><code>foaf:Document</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td></td>
 		</tr>
 		<tr>
@@ -606,7 +646,7 @@
 			<td colspan="2">Resource identifier / Unique resource identifier</td>
 			<td><code>dct:identifier</code></td>
 			<td><code>rdfs:Literal</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td></td>
 		</tr>
 		<tr>
@@ -633,7 +673,7 @@
 			<td colspan="2">Topic category</td>
 			<td><code>dct:subject</code></td>
 			<td><code>skos:Concept</code></td>
-			<td>unstable</td>
+			<td><strong>unstable</strong></td>
 			<td></td>
 		</tr>
 		<tr>
@@ -654,35 +694,35 @@
 			<td colspan="2">Coordinate reference system</td>
 			<td><strong><code>dct:conformsTo</code></strong></td>
 			<td><strong><code>rdfs:Resource</code></strong></td>
-			<td>unstable</td>
+			<td><strong>unstable</strong></td>
 			<td>Only for the extended profile. To be replaced with an appropriate mapping to a standard vocabulary, when available</td>
 		</tr>
 		<tr>
 			<td colspan="2">Temporal reference system</td>
 			<td><strong><code>dct:conformsTo</code></strong></td>
 			<td><strong><code>rdfs:Resource</code></strong></td>
-			<td>unstable</td>
+			<td><strong>unstable</strong></td>
 			<td>Only for the extended profile. To be replaced with an appropriate mapping to a standard vocabulary, when available</td>
 		</tr>
 		<tr>
 			<td colspan="2">Spatial representation type</td>
 			<td><strong><code>adms:representationTechnique</code></strong></td>
 			<td><strong><code>rdfs:Resource</code></strong></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>Only for the extended profile</td>
 		</tr>
 		<tr>
 			<td colspan="2">* Encoding</td>
 			<td><code>dcat:mediaType</code></td>
 			<td><code>dct:MediaTypeOrExtent</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td></td>
 		</tr>
 		<tr>
 			<td colspan="2">* Character encoding</td>
 			<td><code>cnt:characterEncoding</code></td>
 			<td><code>rdfs:Literal</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td></td>
 		</tr>
 <!--		
@@ -719,7 +759,7 @@
 			<td><em>Any function</em></td>
 			<td><code>foaf:homepage</code></td>
 			<td><code>foaf:Document</code></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td></td>
 		</tr>
 		<tr>
@@ -733,33 +773,33 @@
 			<td colspan="2">Spatial data service type</td>
 			<td><strong><code>dct:type</code></strong></td>
 			<td><strong><code>skos:Concept</code></strong></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>Only for the extended profile</td>
 		</tr>
 		<tr>
 			<td colspan="2" rowspan="3">Keyword</td>
 			<td><strong><code>dct:type</code></strong></td>
 			<td><strong><code>skos:Concept</code></strong></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>Only for the extended profile. For spatial data service categories defined in ISO 19119</td>
 		</tr>
 		<tr>
 			<td><strong><code>dct:subject</code></strong></td>
 			<td><strong><code>skos:Concept</code></strong></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>Only for the extended profile. For keywords from controlled vocabularies (as the INSPIRE spatial data themes and GEMET)</td>
 		</tr>
 		<tr>
 			<td><strong><code>dc:subject</code></strong></td>
 			<td><strong><code>rdfs:Literal</code></strong></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>Only for the extended profile. For free text keywords</td>
 		</tr>
 		<tr>
 			<td colspan="2">Spatial data service category</td>
 			<td><strong><code>dct:type</code></strong></td>
 			<td><strong><code>skos:Concept</code></strong></td>
-			<td>testing</td>
+			<td><em>testing</em></td>
 			<td>Only for the extended profile</td>
 		</tr>
 	</tbody>
@@ -767,5 +807,100 @@
 
 <h2>Mappings of individual metadata elements</h2>
 
-TBD
+<h3>Geographic identifier</h3>
+
+If specified with an HTTP URI:
+
+````xml
+  <dct:spatial rdf:resource="http://some.site/loc"/>
+````
+
+If specified with a literal:
+
+````xml
+  <dct:spatial rdf:parseType="Resource">
+<!-- Code -->
+    <skos:prefLabel xml:lang="en">Location &gt; Geographic Region &gt; Global Ocean</skos:prefLabel>
+    <skos:inScheme>
+<!-- Authority -->    
+      <skos:ConceptScheme>
+        <rdfs:label xml:lang="en">NASA/GCMD Location Keywords</rdfs:label>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2009-01-01</dct:modified>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+  </dct:spatial>
+````
+
+
+<h3>Geographic bounding box</h3>
+
+The XSLT outputs a geographic bounding box in multiple encodings, namely, the ones recommended in GeoDCAT-AP (i.e., WKT and GML), and GeoJSON.
+
+````xml
+  <dct:spatial rdf:parseType="Resource">
+    <locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"><![CDATA[POLYGON((-6.41736 55.7447,2.05827 55.7447,2.05827 49.8625,-6.41736 49.8625,-6.41736 55.7447))]]></locn:geometry>
+    <locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#gmlLiteral"><![CDATA[<gml:Envelope srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84"><gml:lowerCorner>-6.41736 49.8625</gml:lowerCorner><gml:upperCorner>2.05827 55.7447</gml:upperCorner></gml:Envelope>]]></locn:geometry>
+    <locn:geometry rdf:datatype="https://www.iana.org/assignments/media-types/application/vnd.geo+json"><![CDATA[{"type":"Polygon","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"coordinates":[[[-6.41736,55.7447],[2.05827,55.7447],[2.05827,49.8625],[-6.41736,49.8625],[-6.41736,55.7447]]]}]]></locn:geometry>
+  </dct:spatial
+````
+
+<h3>Conformance result / Conformity (Data quality)</h3>
+
+GeoDCAT-AP provides only a partial mapping for data quality information, limited to the component "conformance result".
+
+````xml
+  <prov:wasUsedBy>
+    <prov:Activity>
+      <prov:qualifiedAssociation rdf:parseType="Resource">
+        <prov:hadPlan rdf:parseType="Resource">
+          <prov:wasDerivedFrom>
+<!-- Specification -->          
+            <rdf:Description rdf:about="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32010R1089:EN:NOT">
+              <dct:title xml:lang="en">COMMISSION REGULATION (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services</dct:title>
+              <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-12-08</dct:issued>
+            </rdf:Description>
+          </prov:wasDerivedFrom>
+        </prov:hadPlan>
+      </prov:qualifiedAssociation>
+<!-- Conformance result / conformity degree -->      
+      <prov:generated rdf:parseType="Resource">
+        <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/notEvaluated"/>
+        <dct:description xml:lang="en">See the referenced specification</dct:description>
+      </prov:generated>
+    </prov:Activity>
+  </prov:wasUsedBy>
+````
+
+<h3>Responsible party</h3>
+
+
+
+<h4>GeoDCAT-AP core</h4>
+
+````xml
+  <dcat:contactPoint>
+    <vcard:Kind>
+      <vcard:organization-name xml:lang="en">European Commission, Joint Research Centre</vcard:organization-name>
+      <vcard:hasEmail rdf:resource="mailto:efdac@jrc.ec.europa.eu"/>
+    </vcard:Kind>
+  </dcat:contactPoint>
+````
+
+<h3>GeoDCAT-AP extended</h3>
+
+````xml
+  <prov:qualifiedAttribution>
+    <prov:Attribution>
+      <prov:agent>
+<!-- Responsible organisation -->      
+        <vcard:Kind>
+          <vcard:organization-name xml:lang="en">European Commission, Joint Research Centre</vcard:organization-name>
+          <vcard:hasEmail rdf:resource="mailto:efdac@jrc.ec.europa.eu"/>
+        </vcard:Kind>
+      </prov:agent>
+<!-- Responsible party role -->      
+      <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
+    </prov:Attribution>
+  </prov:qualifiedAttribution>
+````
 
