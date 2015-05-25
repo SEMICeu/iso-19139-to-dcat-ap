@@ -185,7 +185,7 @@
 <!-- INSPIRE code list URIs (not yet supported; the URI pattern is tentative) -->  
   
   <xsl:param name="SpatialRepresentationTypeCodelistUri" select="concat($INSPIRECodelistUri,'SpatialRepresentationTypeCode')"/>
-  <xsl:param name="MaintenanceFrequencyCodelistUriFrequency" select="concat($INSPIRECodelistUri,'MaintenanceFrequencyCode')"/>
+  <xsl:param name="MaintenanceFrequencyCodelistUri" select="concat($INSPIRECodelistUri,'MaintenanceFrequencyCode')"/>
 
 <!-- 
 
@@ -1613,6 +1613,7 @@
                     <dct:subject rdf:resource="{gmx:Anchor/@xlink:href}"/>
                   </xsl:if>
                 </xsl:otherwise>
+              </xsl:choose>
             </xsl:when>
           </xsl:choose>
         </xsl:otherwise>
