@@ -1142,7 +1142,10 @@
 <!-- Coupled resource -->
 
   <xsl:template name="CoupledResource" match="gmd:identificationInfo[1]/*/srv:operatesOn">
+<!--  
     <dcat:dataset rdf:resource="{@xlink:href}"/>
+-->    
+    <dct:hasPart rdf:resource="{@xlink:href}"/>
   </xsl:template>
   
 <!-- Spatial data service type -->  
