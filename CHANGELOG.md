@@ -2,6 +2,13 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-05-26: Revised version (v0.6.1)
+* Minor fixes and revisions.
+* Replaced `rdfs:label` with `dct:title` for the name of a controlled vocabulary (`skos:ConceptScheme`).
+* Replaced `dcat:dataset` with `dct:hasPart` to model coupled resources (only for the extended profile).
+* Added ISO 19115 code list for maintenance frequency. The URI is tentative, since that code list is not yet available via the INSPIRE Registry.
+* Updated URI for spatial representation type code list.
+
 ## 2015-05-25: Revised version (v0.6)
 * Minor fixes and revisions.
 * Revised mapping for keywords when used for services (only for the extended profile): `dct:subject` and `dc:subject` are used instead of `dcat:theme` and `dcat:keyword`.
@@ -10,7 +17,7 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 * Added mapping for spatial resolution, by using `rdfs:comment` with a human-readable presentation of distance or equivalent scale. This includes mappings from EPSG codes / OGC URNs to UCUM codes (for units of measure).
 * Revised mapping of geographic identifier, based on whether the geographic identifier is or not an HTTP URI.
 * Revised mapping for conformance result, based on the W3C PROV ontology (only for the extended profile).
-* Added mapping for spatial and temporal reference systems, by using `dct:conformsTo` (only for the extended profile). The representation of the reference system varies depending on whether it is specified with an HTTP URI (`@rdf:resource`), a URN (`dct:identifier`), or as free text  (`skos:prefLabel`). The code space is modelled as a `skos:ConceptScheme` and the version as `owl:versionInfo`. 
+* Added mapping for spatial and temporal reference systems, by using `dct:conformsTo` (only for the extended profile). The representation of the reference system varies depending on whether it is specified with an HTTP URI (`@rdf:resource`), a URN (`dct:identifier`), or as free text (`skos:prefLabel`). The code space is modelled as a `skos:ConceptScheme` and the version as `owl:versionInfo`. 
 
 ## 2015-05-18: Revised version (v0.5)
 * Minor fixes.
