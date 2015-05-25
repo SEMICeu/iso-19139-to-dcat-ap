@@ -874,9 +874,6 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
 <h3>Responsible party</h3>
 
 
-
-<h4>GeoDCAT-AP core</h4>
-
 ````xml
   <dcat:contactPoint>
     <vcard:Kind>
@@ -886,7 +883,6 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
   </dcat:contactPoint>
 ````
 
-<h3>GeoDCAT-AP extended</h3>
 
 ````xml
   <prov:qualifiedAttribution>
