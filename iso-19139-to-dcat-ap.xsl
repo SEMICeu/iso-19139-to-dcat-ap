@@ -185,6 +185,7 @@
 <!-- INSPIRE code list URIs (not yet supported; the URI pattern is tentative) -->  
   
   <xsl:param name="SpatialRepresentationTypeCodelistUri" select="concat($INSPIRECodelistUri,'SpatialRepresentationTypeCode')"/>
+  <xsl:param name="MaintenanceFrequencyCodelistUriFrequency" select="concat($INSPIRECodelistUri,'MaintenanceFrequencyCode')"/>
 
 <!-- 
 
@@ -1812,25 +1813,20 @@
           <xsl:when test="@codeListValue = 'annually'">
             <xsl:value-of select="concat($cldFrequency,'annual')"/>
           </xsl:when>
+<!-- A mapping is missing in Dublin Core -->          
           <xsl:when test="@codeListValue = 'asNeeded'">
-<!--          
-            <xsl:value-of select="concat($cldFrequency,'??')"/>
--->            
+            <xsl:value-of select="concat($MaintenanceFrequencyCodelistUri,'/',@codeListValue)"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'irregular'">
             <xsl:value-of select="concat($cldFrequency,'irregular')"/>
           </xsl:when>
 <!-- A mapping is missing in Dublin Core -->          
           <xsl:when test="@codeListValue = 'notPlanned'">
-<!--          
-            <xsl:value-of select="concat($cldFrequency,'??')"/>
--->            
+            <xsl:value-of select="concat($MaintenanceFrequencyCodelistUri,'/',@codeListValue)"/>
           </xsl:when>
 <!-- A mapping is missing in Dublin Core -->          
           <xsl:when test="@codeListValue = 'unknown'">
-<!--          
-            <xsl:value-of select="concat($cldFrequency,'??')"/>
--->            
+            <xsl:value-of select="concat($MaintenanceFrequencyCodelistUri,'/',@codeListValue)"/>
           </xsl:when>
         </xsl:choose>
       </xsl:if>
