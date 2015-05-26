@@ -705,25 +705,25 @@
 			<td>Only for the extended profile. To be replaced with an appropriate mapping to a standard vocabulary, when available</td>
 		</tr>
 		<tr>
-			<td colspan="2">Spatial representation type</td>
+			<td colspan="2">* Spatial representation type</td>
 			<td><strong><code>adms:representationTechnique</code></strong></td>
 			<td><strong><code>rdfs:Resource</code></strong></td>
 			<td><em>testing</em></td>
-			<td>Only for the extended profile</td>
+			<td>Only for the extended profile. The domain is <code>dcat:Distribution</code></td>
 		</tr>
 		<tr>
-			<td colspan="2">* Encoding</td>
+			<td colspan="2">* Format / Encoding</td>
 			<td><code>dcat:mediaType</code></td>
 			<td><code>dct:MediaTypeOrExtent</code></td>
 			<td><em>testing</em></td>
-			<td></td>
+			<td>The domain is <code>dcat:Distribution</code></td>
 		</tr>
 		<tr>
 			<td colspan="2">* Character encoding</td>
 			<td><code>cnt:characterEncoding</code></td>
 			<td><code>rdfs:Literal</code></td>
 			<td><em>testing</em></td>
-			<td></td>
+			<td>The domain is <code>dcat:Distribution</code></td>
 		</tr>
 <!--		
 		<tr>
