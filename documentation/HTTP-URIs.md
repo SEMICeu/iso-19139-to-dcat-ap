@@ -111,7 +111,7 @@ For GEMET concepts:
       </gmd:MD_Identifier>
     </gmd:geographicIdentifier>
   </gmd:EX_GeographicDescription>
-</gmd:geographicElement>        
+</gmd:geographicElement>
 ````
 
 ## Conformity specification URI: Conformity specification (INSPIRE / ISO 19115)
