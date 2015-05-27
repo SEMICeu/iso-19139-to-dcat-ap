@@ -5,20 +5,28 @@
 <p>This document is organised in the following sections:</p>
 
 <ul>
-  <li>Used namespaces</li>
-  <li>Reference code lists for metadata elements</li>
-  <li>Mapping summary
+  <li><a href="#used-namespaces">Used namespaces</a></li>
+  <li><a href="#ref-code-lists">Reference code lists for metadata elements</a></li>
+  <li><a href="#mapping-summary">Mapping summary</a>
     <ul>
-      <li>Metadata on metadata for INSPIRE data sets, data set series, and services</li>
-      <li>Resource metadata common to data sets, data set series, and services</li>
-      <li>Resource metadata specific to data sets and data set series</li>
-      <li>Resource metadata specific to services</li>
+      <li><a href="#md-on-md">Metadata on metadata for INSPIRE data sets, data set series, and services</a></li>
+      <li><a href="#md-common">Resource metadata common to data sets, data set series, and services</a></li>
+      <li><a href="#md-specific-data">Resource metadata specific to data sets and data set series</a></li>
+      <li><a href="#md-specific-service">Resource metadata specific to services</a></li>
     </ul>
   </li>
-  <li>Mappings of individual metadata elements (TBD)</li>
+  <li><a href="#mapping-individual">Mappings of individual metadata elements</a>
+    <ul>
+      <li><a href="#mapping-geo-id">Geographic identifier</a></li>
+      <li><a href="#mapping-bbox">Geographic bounding box</a></li>
+      <li><a href="#mapping-conformance-result">Conformance result / Conformity (Data quality)</a></li>
+      <li><a href="#mapping-responsible-party">Responsible party</a></li>
+      <li><a href="#">...</a></li>
+    </ul>
+  </li>
 </ul>
 
-<h2>Used namespaces</h2>
+<h2 id="used-namespaces">Used namespaces</h2>
 
 <table>
 	<thead>
@@ -60,7 +68,7 @@
 			<td><code><a href="http://www.w3.org/ns/earl#">http://www.w3.org/ns/earl#</a></code></td>
 			<td><a href="http://www.w3.org/TR/2011/WD-EARL10-Schema-20110510/">Evaluation and Report Language (EARL) 1.0</a></td>
 		</tr>
--->			
+-->
 		<tr>
 			<td><code>foaf</code></td>
 			<td><code><a href="http://xmlns.com/foaf/0.1/">http://xmlns.com/foaf/0.1/</a></code></td>
@@ -119,7 +127,7 @@
 	</tbody>
 </table>
 
-<h2>Reference code lists for metadata elements</h2>
+<h2 id="ref-code-lists">Reference code lists for metadata elements</h2>
 
 <p>For a number of INSPIRE metadata elements, this document proposes the use of URI code list registers. These registers include:</p>
 <ul>
@@ -219,7 +227,7 @@
 	</tbody>
 </table>
 
-<h2>Mapping summary</h2>
+<h2 id="mapping-summary">Mapping summary</h2>
 
 <p>The following sections provide a summary of the alignments defined in GeoDCAT-AP.</p>
 
@@ -233,7 +241,7 @@
 
 <p>The alignments supported only in the extended profile of GeoDCAT-AP are in <strong>bold</strong>.</p>
 
-<h3>Metadata on metadata for INSPIRE data sets, data set series, and services</h3>
+<h3 id="md-on-md">Metadata on metadata for INSPIRE data sets, data set series, and services</h3>
 <p>The domain of the mappings is <code>dcat:CatalogRecord</code>, with the exception of metadata standard title and version, whose domain is <code>dct:Standard</code>.</p>
 
 <table>
@@ -292,11 +300,11 @@
 			<td>Only for the extended profile</td>
 		</tr>
 		<tr>
-			<td colspan="2">Metadata standard</td>
+			<td colspan="2"><em>Metadata standard</em></td>
 			<td><code>dct:conformsTo</code></td>
 			<td><code>dct:Standard</code></td>
 			<td>stable</td>
-			<td>The metadata standard is described by a title and a version - see below</td>
+			<td>The metadata standard is modelled with <code>dct:Standard</code>, and it is described by a title and a version - see below</td>
 		</tr>
 		<tr>
 			<td colspan="2">* Metadata standard name</td>
@@ -315,7 +323,7 @@
 	</tbody>
 </table>
 
-<h3>Resource metadata common to data sets, data set series, and services</h3>
+<h3 id="md-common">Resource metadata common to data sets, data set series, and services</h3>
 <p>As a rule, the domain of the mappings is either <code>dcat:Dataset</code> (when the element is used for datasets and series) or <code>dctype:Service</code> / <code>dcat:Catalog</code> (when the element is used for services). However, “starred” elements – i.e., elements whose name is preceded by an asterisk (“*”) – are those having as domain either <code>dcat:Distribution</code> (when the element is used for datasets and series) or <code>dctype:Service</code> / <code>dcat:Catalog</code> (when the element is used for services).</p>
 <table>
   <thead>
@@ -375,7 +383,7 @@
 			<td>For all the other services. Only for the extended profile</td>
 		</tr>
 		<tr>
-			<td colspan="2">Spatial extent</td>
+			<td colspan="2"><em>Spatial extent</em></td>
 			<td><code>dct:spatial</code></td>
 			<td><code>dct:Location</code></td>
 			<td>stable</td>
@@ -582,7 +590,7 @@
 	</tbody>
 </table>
 
-<h3>Resource metadata specific to data sets and data set series</h3>
+<h3 id="md-specific-data">Resource metadata specific to data sets and data set series</h3>
 <p>As a rule, the domain of the mappings is <code>dcat:Dataset</code>. However, “starred” elements – i.e., elements whose name is preceded by an asterisk (“*”) – are those having as domain <code>dcat:Distribution</code>.</p>
 
 <table>
@@ -737,7 +745,7 @@
 	</tbody>
 </table>
 
-<h3>Resource metadata specific to services</h3>
+<h3 id="md-specific-service">Resource metadata specific to services</h3>
 <p>The domain of the mappings is <code>dcat:Catalog</code> for catalogue / discovery service, and <code>dctype:Service</code> for all the other services.</p>
 
 <table>
@@ -805,14 +813,16 @@
 	</tbody>
 </table>
 
-<h2>Mappings of individual metadata elements</h2>
+<h2 id="mapping-individual">Mappings of individual metadata elements</h2>
 
-<h3>Geographic identifier</h3>
+This section illustrates with examples specific metadata elements whose mappings are not completely described in the <a href="#mapping-summary">mapping summary</a>.
+
+<h3 id="mapping-geo-id">Geographic identifier</h3>
 
 If specified with an HTTP URI:
 
 ````xml
-  <dct:spatial rdf:resource="http://publications.europa.eu/resource/authority/country/EUR"/>
+  <dct:spatial rdf:resource="http://publications.europa.eu/resource/authority/continent/EUROPE"/>
 ````
 
 If specified with a literal:
@@ -820,9 +830,9 @@ If specified with a literal:
 ````xml
   <dct:spatial rdf:parseType="Resource">
 <!-- Code -->
-    <skos:prefLabel xml:lang="en">Location &gt; Geographic Region &gt; Global Ocean</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">Location &gt; Continent &gt; Europe</skos:prefLabel>
     <skos:inScheme>
-<!-- Authority -->    
+<!-- Authority -->
       <skos:ConceptScheme>
         <rdfs:label xml:lang="en">NASA/GCMD Location Keywords</rdfs:label>
         <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2009-01-01</dct:modified>
@@ -832,19 +842,24 @@ If specified with a literal:
 ````
 
 
-<h3>Geographic bounding box</h3>
+<h3 id="mapping-bbox">Geographic bounding box</h3>
 
 The XSLT outputs a geographic bounding box in multiple encodings, namely, the ones recommended in GeoDCAT-AP (i.e., WKT and GML), and GeoJSON.
 
+To denote the datatype of the GeoJSON literal, [the URL of the relevant IANA Media Type](https://www.iana.org/assignments/media-types/application/vnd.geo+json) is used.
+
 ````xml
   <dct:spatial rdf:parseType="Resource">
+<!-- As WKT -->
     <locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"><![CDATA[POLYGON((-6.41736 55.7447,2.05827 55.7447,2.05827 49.8625,-6.41736 49.8625,-6.41736 55.7447))]]></locn:geometry>
+<!- As GML -->
     <locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#gmlLiteral"><![CDATA[<gml:Envelope srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84"><gml:lowerCorner>-6.41736 49.8625</gml:lowerCorner><gml:upperCorner>2.05827 55.7447</gml:upperCorner></gml:Envelope>]]></locn:geometry>
+<!-- As GeoJSON -->
     <locn:geometry rdf:datatype="https://www.iana.org/assignments/media-types/application/vnd.geo+json"><![CDATA[{"type":"Polygon","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"coordinates":[[[-6.41736,55.7447],[2.05827,55.7447],[2.05827,49.8625],[-6.41736,49.8625],[-6.41736,55.7447]]]}]]></locn:geometry>
   </dct:spatial
 ````
 
-<h3>Conformance result / Conformity (Data quality)</h3>
+<h3 id="mapping-conformance-result">Conformance result / Conformity (Data quality)</h3>
 
 GeoDCAT-AP provides only a partial mapping for data quality information, limited to the component "conformance result".
 
@@ -854,7 +869,7 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
       <prov:qualifiedAssociation rdf:parseType="Resource">
         <prov:hadPlan rdf:parseType="Resource">
           <prov:wasDerivedFrom>
-<!-- Specification -->          
+<!-- Specification -->
             <rdf:Description rdf:about="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32010R1089:EN:NOT">
               <dct:title xml:lang="en">COMMISSION REGULATION (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services</dct:title>
               <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-12-08</dct:issued>
@@ -871,7 +886,7 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
   </prov:wasUsedBy>
 ````
 
-<h3>Responsible party</h3>
+<h3 id="mapping-responsible party">Responsible party</h3>
 
 
 ````xml
