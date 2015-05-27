@@ -1,4 +1,4 @@
-<h1>Mappings defined in GeoDCAT-AP</h1>
+<h1>Mappings defined in GeoDCAT-AP</a></h1>
 
 <p>This documents illustrates the mappings defined in GeoDCAT-AP, as implemented in the [`iso-19139-to-dcat-ap.xsl`](../iso-19139-to-dcat-ap.xsl) XSLT.
 
@@ -26,7 +26,7 @@
   </li>
 </ul>
 
-<h2 id="used-namespaces">Used namespaces</h2>
+<h2><a name="used-namespaces">Used namespaces</a></h2>
 
 <table>
 	<thead>
@@ -127,7 +127,7 @@
 	</tbody>
 </table>
 
-<h2 id="ref-code-lists">Reference code lists for metadata elements</h2>
+<h2><a name="ref-code-lists">Reference code lists for metadata elements</a></h2>
 
 <p>For a number of INSPIRE metadata elements, this document proposes the use of URI code list registers. These registers include:</p>
 <ul>
@@ -227,7 +227,7 @@
 	</tbody>
 </table>
 
-<h2 id="mapping-summary">Mapping summary</h2>
+<h2><a name="mapping-summary">Mapping summary</a></h2>
 
 <p>The following sections provide a summary of the alignments defined in GeoDCAT-AP.</p>
 
@@ -241,7 +241,7 @@
 
 <p>The alignments supported only in the extended profile of GeoDCAT-AP are in <strong>bold</strong>.</p>
 
-<h3 id="md-on-md">Metadata on metadata for INSPIRE data sets, data set series, and services</h3>
+<h3><a name="md-on-md">Metadata on metadata for INSPIRE data sets, data set series, and services</a></h3>
 <p>The domain of the mappings is <code>dcat:CatalogRecord</code>, with the exception of metadata standard title and version, whose domain is <code>dct:Standard</code>.</p>
 
 <table>
@@ -323,7 +323,7 @@
 	</tbody>
 </table>
 
-<h3 id="md-common">Resource metadata common to data sets, data set series, and services</h3>
+<h3><a name="md-common">Resource metadata common to data sets, data set series, and services</a></h3>
 <p>As a rule, the domain of the mappings is either <code>dcat:Dataset</code> (when the element is used for datasets and series) or <code>dctype:Service</code> / <code>dcat:Catalog</code> (when the element is used for services). However, “starred” elements – i.e., elements whose name is preceded by an asterisk (“*”) – are those having as domain either <code>dcat:Distribution</code> (when the element is used for datasets and series) or <code>dctype:Service</code> / <code>dcat:Catalog</code> (when the element is used for services).</p>
 <table>
   <thead>
@@ -590,7 +590,7 @@
 	</tbody>
 </table>
 
-<h3 id="md-specific-data">Resource metadata specific to data sets and data set series</h3>
+<h3><a name="md-specific-data">Resource metadata specific to data sets and data set series</a></h3>
 <p>As a rule, the domain of the mappings is <code>dcat:Dataset</code>. However, “starred” elements – i.e., elements whose name is preceded by an asterisk (“*”) – are those having as domain <code>dcat:Distribution</code>.</p>
 
 <table>
@@ -745,7 +745,7 @@
 	</tbody>
 </table>
 
-<h3 id="md-specific-service">Resource metadata specific to services</h3>
+<h3><a name="md-specific-service">Resource metadata specific to services</a></h3>
 <p>The domain of the mappings is <code>dcat:Catalog</code> for catalogue / discovery service, and <code>dctype:Service</code> for all the other services.</p>
 
 <table>
@@ -813,11 +813,11 @@
 	</tbody>
 </table>
 
-<h2 id="mapping-individual">Mappings of individual metadata elements</h2>
+<h2><a name="mapping-individual">Mappings of individual metadata elements</a></h2>
 
 This section illustrates with examples specific metadata elements whose mappings are not completely described in the <a href="#mapping-summary">mapping summary</a>.
 
-<h3 id="mapping-geo-id">Geographic identifier</h3>
+<h3><a name="mapping-geo-id">Geographic identifier</a></h3>
 
 If specified with an HTTP URI:
 
@@ -842,7 +842,7 @@ If specified with a literal:
 ````
 
 
-<h3 id="mapping-bbox">Geographic bounding box</h3>
+<h3><a name="mapping-bbox">Geographic bounding box</a></h3>
 
 The XSLT outputs a geographic bounding box in multiple encodings, namely, the ones recommended in GeoDCAT-AP (i.e., WKT and GML), and GeoJSON.
 
@@ -859,7 +859,7 @@ To denote the datatype of the GeoJSON literal, [the URL of the relevant IANA Med
   </dct:spatial
 ````
 
-<h3 id="mapping-conformance-result">Conformance result / Conformity (Data quality)</h3>
+<h3><a name="mapping-conformance-result">Conformance result / Conformity (Data quality)</a></h3>
 
 GeoDCAT-AP provides only a partial mapping for data quality information, limited to the component "conformance result".
 
@@ -886,7 +886,7 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
   </prov:wasUsedBy>
 ````
 
-<h3 id="mapping-responsible party">Responsible party</h3>
+<h3><a name="mapping-responsible party">Responsible party</h3>
 
 
 ````xml
@@ -903,13 +903,13 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
   <prov:qualifiedAttribution>
     <prov:Attribution>
       <prov:agent>
-<!-- Responsible organisation -->      
+<!-- Responsible organisation -->
         <vcard:Kind>
           <vcard:organization-name xml:lang="en">European Commission, Joint Research Centre</vcard:organization-name>
           <vcard:hasEmail rdf:resource="mailto:efdac@jrc.ec.europa.eu"/>
         </vcard:Kind>
       </prov:agent>
-<!-- Responsible party role -->      
+<!-- Responsible party role -->
       <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
     </prov:Attribution>
   </prov:qualifiedAttribution>
