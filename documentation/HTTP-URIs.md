@@ -101,17 +101,17 @@ For GEMET concepts:
 ### Examples 
 
 ````xml
-          <gmd:geographicElement>
-            <gmd:EX_GeographicDescription>
-              <gmd:geographicIdentifier>
-                <gmd:MD_Identifier>
-                  <gmd:code>
-                    <gco:CharacterString>http://publications.europa.eu/resource/authority/country/EUR</gco:CharacterString>
-                  </gmd:code>
-                </gmd:MD_Identifier>
-              </gmd:geographicIdentifier>
-            </gmd:EX_GeographicDescription>
-          </gmd:geographicElement>        
+<gmd:geographicElement>
+  <gmd:EX_GeographicDescription>
+    <gmd:geographicIdentifier>
+      <gmd:MD_Identifier>
+        <gmd:code>
+          <gco:CharacterString>http://publications.europa.eu/resource/authority/country/EUR</gco:CharacterString>
+        </gmd:code>
+      </gmd:MD_Identifier>
+    </gmd:geographicIdentifier>
+  </gmd:EX_GeographicDescription>
+</gmd:geographicElement>        
 ````
 
 ## Conformity specification URI: Conformity specification (INSPIRE / ISO 19115)
