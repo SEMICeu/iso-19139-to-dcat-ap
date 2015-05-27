@@ -1,4 +1,4 @@
-# Supported usage patterns for URIs
+# Supported usage patterns for HTTP URIs
 
 This section illustrates "where", in ISO 19139 metadata records, the XSLT expects to find URIs (if available), and how they are interpreted.
 
