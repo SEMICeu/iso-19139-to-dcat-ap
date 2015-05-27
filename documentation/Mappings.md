@@ -728,10 +728,10 @@
 		</tr>
 		<tr>
 			<td colspan="2">* Character encoding</td>
-			<td><code>cnt:characterEncoding</code></td>
-			<td><code>rdfs:Literal</code></td>
+			<td><strong><code>cnt:characterEncoding</code></strong></td>
+			<td><strong><code>rdfs:Literal</code></strong></td>
 			<td><em>testing</em></td>
-			<td>The domain is <code>dcat:Distribution</code></td>
+			<td>Only for the extended profile. The domain is <code>dcat:Distribution</code></td>
 		</tr>
 <!--		
 		<tr>
