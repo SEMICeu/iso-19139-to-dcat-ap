@@ -127,7 +127,7 @@
   </tbody>
 </table>
 
-<h2><a name="ref-code-lists">Reference code lists for metadata elements</a></h2>
+<h2><a name="ref-code-lists">&star;</a>&nbsp;Reference code lists for metadata elements</h2>
 
 <p>For a number of INSPIRE metadata elements, this document proposes the use of URI code list registers. These registers include:</p>
 <ul>
@@ -390,7 +390,7 @@
       <td>Spatial extent / coverage is specified as a geographic identifier and/or bounding box - see below</td>
     </tr>
     <tr>
-      <td rowspan="4">Spatial extent: Geographic identifier</td>
+      <td rowspan="4"><a href="#mapping-geo-id" title="see details">Spatial extent: Geographic identifier</a></td>
       <td rowspan="3">Code</td>
       <td><code>dct:spatial</code></td>
       <td><code>rdfs:Resource</code> (URI reference)</td>
@@ -417,7 +417,7 @@
       <td>If the geographic identifier is an HTTP URI, the information about the authority is omitted. The domain is <code>dct:Location</code></td>
     </tr>
     <tr>
-      <td colspan="2">Spatial extent: Geographic bounding box</td>
+      <td colspan="2"><a href="#mapping-bbox" title="see details">Spatial extent: Geographic bounding box</a></td>
       <td><code>locn:geometry</code></td>
       <td><code>locn:Geometry</code> (<code>rdfs:Literal</code> or <code>rdfs:Class</code>)</td>
       <td>stable</td>
