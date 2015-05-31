@@ -865,9 +865,13 @@ To denote the datatype of the GeoJSON literal, [the URL of the relevant IANA Med
 This is currently mapped to a free text field (namely, `rdfs:comment`).
 
 The text is built by using the following pattern:
+
 * If spatial resolution is specified with a distance:
+
     Spatial resolution (distance): <number> <uom>
+
 * If spatial resolution is specified with an equivalent scale:
+
     Spatial resolution (equivalent scale): 1:<denominator>
 
 Examples:
