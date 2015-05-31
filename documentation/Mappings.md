@@ -877,13 +877,13 @@ The text is built by using the following pattern:
 Examples:
 
 ````xml
-  <rdfs:comment>
+  <rdfs:comment xml:lang="en">
     Spatial resolution (distance): 5 km
   </rdfs:comment>
 ````
 
 ````xml
-  <rdfs:comment>
+  <rdfs:comment xml:lang="en">
     Spatial resolution (equivalent scale): 1:10000
   </rdfs:comment>
 ````
