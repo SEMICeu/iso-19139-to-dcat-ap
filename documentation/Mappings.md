@@ -19,6 +19,7 @@
     <ul>
       <li><a href="#mapping-geo-id">Geographic identifier</a></li>
       <li><a href="#mapping-bbox">Geographic bounding box</a></li>
+      <li><a href="#mapping-spatial-resolution">Spatial resolution</a></li>
       <li><a href="#mapping-conformance-result">Conformance result / Conformity (Data quality)</a></li>
       <li><a href="#mapping-responsible-party">Responsible party</a></li>
       <li><a href="#">...</a></li>
@@ -127,7 +128,7 @@
   </tbody>
 </table>
 
-<h2><a name="ref-code-lists">&star;</a>&nbsp;Reference code lists for metadata elements</h2>
+<h2><a name="ref-code-lists">Reference code lists for metadata elements</a></h2>
 
 <p>For a number of INSPIRE metadata elements, this document proposes the use of URI code list registers. These registers include:</p>
 <ul>
@@ -453,14 +454,14 @@
       <td>Only for the extended profile</td>
     </tr>
     <tr>
-      <td colspan="2">Spatial resolution</td>
+      <td colspan="2"><a href="#mapping-spatial-resolution" title="see details">Spatial resolution</a></td>
       <td><strong><code>rdfs:comment</code></strong></td>
       <td><strong><code>rdf:PlainLiteral</code></strong></td>
       <td><strong>unstable</strong></td>
       <td>Only for the extended profile. To be replaced with an appropriate mapping to a standard vocabulary, when available</td>
     </tr>
     <tr>
-      <td rowspan="4">Conformance result / Conformity (Data quality)</td>
+      <td rowspan="4"><a href="#mapping-conformance-result" title="see details">Conformance result / Conformity (Data quality)</a></td>
       <td><em>Any degree</em></td>
       <td><strong><code>prov:wasUsedBy</code></strong></td>
       <td><strong><code>prov:Activity</code></strong></td>
@@ -503,7 +504,7 @@
       <td>For datasets and dataset series, the domain is <code>dcat:Distribution</code>.</td>
     </tr>
     <tr>
-      <td rowspan="12">Responsible organisation</td>
+      <td rowspan="12"><a href="#mapping-responsible-party" title="see details">Responsible organisation</a></td>
       <td><em>Any role</em></td>
       <td><strong><code>prov:qualifiedAttribution</code></strong></td>
       <td><strong><code>prov:Attribution</code></strong></td>
@@ -859,9 +860,43 @@ To denote the datatype of the GeoJSON literal, [the URL of the relevant IANA Med
   </dct:spatial
 ````
 
+<h3><a name="mapping-spatial-resolution">Spatial resolution</a></h3>
+
+This is currently mapped to a free text field (namely, `rdfs:comment`).
+
+The text is built by using the following pattern:
+* If spatial resolution is specified with a distance:
+    Spatial resolution (distance): <number> <uom>
+* If spatial resolution is specified with an equivalent scale:
+    Spatial resolution (equivalent scale): 1:<denominator>
+
+Examples:
+
+````xml
+  <rdfs:comment>
+    Spatial resolution (distance): 5 km
+  </rdfs:comment>
+````
+
+````xml
+  <rdfs:comment>
+    Spatial resolution (equivalent scale): 1:10000
+  </rdfs:comment>
+````
+
 <h3><a name="mapping-conformance-result">Conformance result / Conformity (Data quality)</a></h3>
 
 GeoDCAT-AP provides only a partial mapping for data quality information, limited to the component "conformance result".
+
+#### GeoDCAT-AP core profile
+
+````xml
+  <dct:conformsTo>
+    ...
+  </dct:conformsTo>
+````
+
+#### GeoDCAT-AP extended profile
 
 ````xml
   <prov:wasUsedBy>
@@ -886,8 +921,9 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
   </prov:wasUsedBy>
 ````
 
-<h3><a name="mapping-responsible party">Responsible party</h3>
+<h3><a name="mapping-responsible-party">Responsible party</h3>
 
+#### GeoDCAT-AP core profile
 
 ````xml
   <dcat:contactPoint>
@@ -898,6 +934,9 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
   </dcat:contactPoint>
 ````
 
+#### GeoDCAT-AP extended profile
+
+In addition to the mapping supported in the core profile, the extended profile uses the following mapping. It makes use of the PROV ontology. The responsible organisation is specified with `prov:agent`, whereas the role is specified by using `dct:type`, with the relevant role from [the responsible party role code list](http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole) operated by the INSPIRE registry.
 
 ````xml
   <prov:qualifiedAttribution>
