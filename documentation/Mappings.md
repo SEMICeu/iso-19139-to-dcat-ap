@@ -1,8 +1,8 @@
 <h1>Mappings defined in GeoDCAT-AP</a></h1>
 
-<p>This documents illustrates the mappings defined in GeoDCAT-AP, as implemented in the [`iso-19139-to-dcat-ap.xsl`](../iso-19139-to-dcat-ap.xsl) XSLT.
+<p>This documents illustrates the mappings defined in GeoDCAT-AP, as implemented in the [`iso-19139-to-dcat-ap.xsl`](../iso-19139-to-dcat-ap.xsl) XSLT.</p>
 
-<p>This document is organised in the following sections:</p>
+<h2>Table of contents</h2>
 
 <ul>
   <li><a href="#used-namespaces">Used namespaces</a></li>
@@ -22,6 +22,7 @@
       <li><a href="#mapping-spatial-resolution">Spatial resolution</a></li>
       <li><a href="#mapping-conformance-result">Conformance result / Conformity (Data quality)</a></li>
       <li><a href="#mapping-responsible-party">Responsible party</a></li>
+      <li><a href="#mapping-format">Format / Encoding</a></li>
       <li><a href="#">...</a></li>
     </ul>
   </li>
@@ -722,7 +723,10 @@
     </tr>
     <tr>
       <td colspan="2">* Format / Encoding</td>
+<!--      
       <td><code>dcat:mediaType</code></td>
+-->      
+      <td><code>dct:format</code></td>
       <td><code>dct:MediaTypeOrExtent</code></td>
       <td><em>testing</em></td>
       <td>The domain is <code>dcat:Distribution</code></td>
@@ -820,7 +824,7 @@ This section illustrates with examples specific metadata elements whose mappings
 
 <h3><a name="mapping-geo-id">Geographic identifier</a></h3>
 
-If specified with an HTTP URI:
+If specified with an HTTP URI ([see how](./HTTP-URIs.md#uri-geo-id)):
 
 ````xml
   <dct:spatial rdf:resource="http://publications.europa.eu/resource/authority/continent/EUROPE"/>
@@ -925,7 +929,7 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
   </prov:wasUsedBy>
 ````
 
-<h3><a name="mapping-responsible-party">Responsible party</h3>
+<h3><a name="mapping-responsible-party">Responsible party</a></h3>
 
 #### GeoDCAT-AP core profile
 
@@ -955,6 +959,23 @@ In addition to the mapping supported in the core profile, the extended profile u
 <!-- Responsible party role -->
       <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
     </prov:Attribution>
-  </prov:qualifiedAttribution>
+  </prov:
+````
+  
+<h3><a name="mapping-format">Format / Encoding</a></h3>
+
+If specified with an HTTP URI ([see how](./HTTP-URIs.md#uri-format)):
+
+````xml
+  <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/TIFF"/>
+````
+
+If specified with a literal:
+
+````xml
+  <dct:format rdf:parseType="Resource">
+    <rdfs:label xml:lang="en">TIFF</rdfs:label>
+  </dct:format>
+
 ````
 

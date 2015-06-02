@@ -90,7 +90,7 @@ For GEMET concepts:
 </gmd:keyword>
 ````
 
-## Geographic identifier URI: Geographic identifier (ISO 19115)
+<h2><a name="uri-geo-id">Geographic identifier URI: Geographic identifier (ISO 19115)</a></h2>
 
 ### XPath
 
@@ -138,7 +138,7 @@ For GEMET concepts:
 </gmd:specification>
 ````
 
-## Use conditions / licence URI: Conditions for access and use (INSPIRE); Use limitations (ISO 19115)
+## Use conditions / licence URI: Conditions for access and use (INSPIRE); Use limitation (ISO 19115)
 
 ### XPath
 
@@ -156,7 +156,7 @@ For GEMET concepts:
 </gmd:useLimitation>
 ````
 
-## Access restrictions URI: Limitations of public access (INSPIRE); Other constraints (ISO 19115)
+## Access restrictions URI: Limitations of public access (INSPIRE); Access constratins, other constraints (ISO 19115)
 
 TBD
 
@@ -194,7 +194,7 @@ TBD
 
 TBD
 
-## Format URI: Encoding (INSPIRE / iso 19115)
+<h2><a name="uri-format">Format URI: Encoding (INSPIRE); Format (ISO 19115)</a></h2>
 
 ### XPath
 
