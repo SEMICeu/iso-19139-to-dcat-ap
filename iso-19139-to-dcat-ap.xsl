@@ -553,11 +553,14 @@
             <prov:hadPlan rdf:parseType="Resource">
               <xsl:choose>
                 <xsl:when test="../@xlink:href and ../@xlink:href != ''">
+                  <prov:wasDerivedFrom rdf:resource="{../@xlink:href}"/>
+<!--                  
                   <prov:wasDerivedFrom>
                     <rdf:Description rdf:about="{../@xlink:href}">
                       <xsl:copy-of select="$specinfo"/>
                     </rdf:Description>
                   </prov:wasDerivedFrom>
+-->                  
                 </xsl:when>
                 <xsl:otherwise>
                   <prov:wasDerivedFrom rdf:parseType="Resource">
@@ -1190,11 +1193,14 @@
     <xsl:if test="../../gmd:pass/gco:Boolean = 'true'">
       <xsl:choose>
         <xsl:when test="../@xlink:href and ../@xlink:href != ''">
+          <dct:conformsTo rdf:resource="{../@xlink:href}"/>
+<!--          
           <dct:conformsTo>
             <rdf:Description rdf:about="{../@xlink:href}">
               <xsl:copy-of select="$specinfo"/>
             </rdf:Description>
           </dct:conformsTo>
+-->          
         </xsl:when>
         <xsl:otherwise>
           <dct:conformsTo rdf:parseType="Resource">
