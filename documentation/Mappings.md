@@ -899,9 +899,16 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
 #### GeoDCAT-AP core profile
 
 ````xml
-  <dct:conformsTo>
-    ...
+  <dct:conformsTo rdf:parseType="Resource">
+    <dct:title xml:lang="en">COMMISSION REGULATION (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services</dct:title>
+    <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-12-08</dct:issued>
   </dct:conformsTo>
+````
+
+If the conformity specification is specified with an HTTP URI ([see how](./HTTP-URIs.md#uri-conformity-specification))
+
+````xml
+  <dct:conformsTo rdf:resource="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32010R1089:EN:NOT"/>
 ````
 
 #### GeoDCAT-AP extended profile
@@ -911,8 +918,8 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
     <prov:Activity>
       <prov:qualifiedAssociation rdf:parseType="Resource">
         <prov:hadPlan rdf:parseType="Resource">
-          <prov:wasDerivedFrom>
 <!-- Specification -->
+          <prov:wasDerivedFrom>
             <rdf:Description rdf:about="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32010R1089:EN:NOT">
               <dct:title xml:lang="en">COMMISSION REGULATION (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services</dct:title>
               <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-12-08</dct:issued>
@@ -922,7 +929,27 @@ GeoDCAT-AP provides only a partial mapping for data quality information, limited
       </prov:qualifiedAssociation>
 <!-- Conformance result / conformity degree -->      
       <prov:generated rdf:parseType="Resource">
-        <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/notEvaluated"/>
+        <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
+        <dct:description xml:lang="en">See the referenced specification</dct:description>
+      </prov:generated>
+    </prov:Activity>
+  </prov:wasUsedBy>
+````
+
+If the conformity specification is specified with an HTTP URI ([see how](./HTTP-URIs.md#uri-conformity-specification))
+
+````xml
+  <prov:wasUsedBy>
+    <prov:Activity>
+      <prov:qualifiedAssociation rdf:parseType="Resource">
+        <prov:hadPlan rdf:parseType="Resource">
+<!-- Specification -->
+          <prov:wasDerivedFrom rdf:resource="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32010R1089:EN:NOT"/>
+        </prov:hadPlan>
+      </prov:qualifiedAssociation>
+<!-- Conformance result / conformity degree -->      
+      <prov:generated rdf:parseType="Resource">
+        <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
         <dct:description xml:lang="en">See the referenced specification</dct:description>
       </prov:generated>
     </prov:Activity>

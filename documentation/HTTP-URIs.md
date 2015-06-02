@@ -1,6 +1,6 @@
 # Supported usage patterns for HTTP URIs
 
-This section illustrates "where", in ISO 19139 metadata records, the XSLT expects to find URIs (if available), and how they are interpreted.
+This section illustrates "where", in ISO 19139 metadata records, the XSLT expects to find HTTP URIs (if available), and how they are interpreted.
 
 ## Metadata URI: Metadata file identifier (ISO 19115)
 
@@ -114,7 +114,7 @@ For GEMET concepts:
 </gmd:geographicElement>
 ````
 
-## Conformity specification URI: Conformity specification (INSPIRE / ISO 19115)
+<h2><a name="uri-conformity-specification">Conformity specification URI: Conformity specification (INSPIRE / ISO 19115)</a></h2>
 
 ### XPath
 
