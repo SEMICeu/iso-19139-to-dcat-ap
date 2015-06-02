@@ -2,6 +2,12 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-06-03: Revised version (v0.6.2)
+* Minor fixes.
+* Format: name now omitted when the format is specified with an HTTP URI.
+* Metadata standard: name and version are now omitted when the standard is specified with an HTTP URI.
+* Conformity specification: when specified with an HTTP URI, title and date are now omitted.
+
 ## 2015-05-26: Revised version (v0.6.1)
 * Minor fixes and revisions.
 * Replaced `rdfs:label` with `dct:title` for the name of a controlled vocabulary (`skos:ConceptScheme`).
