@@ -14,7 +14,7 @@ Comments and inquiries should be sent to the GeoDCAT-AP WG mailing list: <dcat_a
 * [`documentation/`](./documentation/): Folder containing documentation on the XSLT:
     * [`HowTo.md`](./documentation/HowTo.md): Describes how to use the XSLT.
     * [`HTTP-URIs.md`](./documentation/HTTP-URIs.md): Provides the list of transformation rules currently implemented for identifying HTTP URIs embedded in ISO 19139 metadata records.
-    * [`Mappings.md`](./documentation/Mappings.md): Provides a summary of the mappings between ISO 19139 to GeoDCAT-AP.
+    * [`Mappings.md`](./documentation/Mappings.md): Provides a summary of the mappings from ISO 19139 to GeoDCAT-AP.
 * [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl): The code of the XSLT.
 * [`LICENCE.md`](./LICENCE.md): The XSLT's licence.
 * [`README.md`](./README.md): This document. 

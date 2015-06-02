@@ -1003,6 +1003,5 @@ If specified with a literal:
   <dct:format rdf:parseType="Resource">
     <rdfs:label xml:lang="en">TIFF</rdfs:label>
   </dct:format>
-
 ````
 

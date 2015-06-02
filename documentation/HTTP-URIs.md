@@ -106,7 +106,7 @@ For GEMET concepts:
     <gmd:geographicIdentifier>
       <gmd:MD_Identifier>
         <gmd:code>
-          <gco:CharacterString>http://publications.europa.eu/resource/authority/country/EUR</gco:CharacterString>
+          <gco:CharacterString>http://publications.europa.eu/resource/authority/continent/EUROPE</gco:CharacterString>
         </gmd:code>
       </gmd:MD_Identifier>
     </gmd:geographicIdentifier>
