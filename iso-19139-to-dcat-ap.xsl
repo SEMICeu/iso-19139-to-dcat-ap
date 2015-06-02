@@ -1804,11 +1804,14 @@
   <xsl:template name="Encoding" match="gmd:distributionFormat/gmd:MD_Format/gmd:name/*">
     <xsl:choose>
       <xsl:when test="@xlink:href and @xlink:href != ''">
+        <dct:format rdf:resource="{@xlink:href}"/>
+<!--        
         <dct:format>
-          <rdf:Description rdf:about="@xlink:href">
+          <rdf:Description rdf:about="{@xlink:href}">
             <rdfs:label><xsl:value-of select="."/></rdfs:label>
           </rdf:Description>
         </dct:format>
+-->        
       </xsl:when>
       <xsl:otherwise>
         <dct:format rdf:parseType="Resource">
