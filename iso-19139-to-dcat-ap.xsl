@@ -616,26 +616,55 @@
       </xsl:if>
 <!-- Metadata standard (tentative): only for the extended profile -->
       <xsl:if test="$profile = 'extended'">
+        <xsl:variable name="MetadataStandardURI" select="gmd:metadataStandardName/gmx:Anchor/@xlink:href"/>
+        <xsl:variable name="MetadataStandardName" select="gmd:metadataStandardName/*[self::gco:CharacterString|self::gmx:Anchor]"/>
+        <xsl:variable name="MetadataStandardVersion" select="gmd:metadataStandardVersion/gco:CharacterString"/>
+        <xsl:if test="$MetadataCharacterEncoding != '' or $MetadataStandardURI != '' or $MetadataStandardName != ''">
+          <dct:source rdf:parseType="Resource">
+            <xsl:if test="$MetadataCharacterEncoding != ''">
+<!-- Metadata character encoding (tentative): only for the extended profile -->
+              <xsl:copy-of select="$MetadataCharacterEncoding"/>
+            </xsl:if>
+            <xsl:choose>
+              <xsl:when test="$MetadataStandardURI != ''">
+<!-- Metadata standard, denoted by a URI -->              
+                <dct:conformsTo rdf:resource="{$MetadataStandardURI}"/>
+              </xsl:when>
+              <xsl:when test="$MetadataStandardName != ''">
+                <dct:conformsTo rdf:parseType="Resource">
+<!-- Metadata standard name -->              
+                  <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$MetadataStandardName"/></dct:title>
+                  <xsl:if test="$MetadataStandardVersion != ''">
+<!-- Metadata standard version -->              
+                    <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$MetadataStandardVersion"/></owl:versionInfo>
+                  </xsl:if>
+                </dct:conformsTo>    
+              </xsl:when>
+            </xsl:choose>
+          </dct:source>
+        </xsl:if>
+<!-- Old version:
         <xsl:for-each select="gmd:metadataStandardName/gco:CharacterString">
           <xsl:if test="text() != '' or ../../gmd:metadataStandardVersion/gco:CharacterString/text() != ''">
             <dct:source rdf:parseType="Resource">
-<!-- Metadata character encoding (tentative): only for the extended profile -->
+
               <xsl:if test="$MetadataCharacterEncoding != ''">
                 <xsl:copy-of select="$MetadataCharacterEncoding"/>
               </xsl:if>
               <dct:conformsTo rdf:parseType="Resource">
                 <xsl:if test="text() != ''">
-<!-- Metadata standard name -->              
+
                   <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
                 </xsl:if>
                 <xsl:if test="../../gmd:metadataStandardName/gco:CharacterString/text() != ''">
-<!-- Metadata standard version -->              
+
                   <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="../../gmd:metadataStandardVersion/gco:CharacterString"/></owl:versionInfo>
                 </xsl:if>
               </dct:conformsTo>    
             </dct:source>
           </xsl:if>
         </xsl:for-each>
+-->        
       </xsl:if>
     </xsl:param>  
     
