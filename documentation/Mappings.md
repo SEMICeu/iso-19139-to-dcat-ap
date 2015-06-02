@@ -211,19 +211,19 @@
     </tr>
     <tr>
       <td rowspan="2">Maintenance frequency (Maintenance information)</td>
-      <td><a href="http://purl.org/cld/freq/"><code>http://purl.org/cld/freq/</code></a></td>
+      <td><code><a href="http://purl.org/cld/freq/">http://purl.org/cld/freq/</a></code></td>
       <td>Dublin Core Collection Description Frequency Vocabulary [<a href="http://dublincore.org/groups/collections/frequency/">DC-CLD-FREQ</a>]</td>
       <td>stable</td>
     </tr>
     <tr>
       <td><code>http://inspire.ec.europa.eu/metadata-codelist/MaintenanceFrequencyCode</code></td>
-      <td>Register operated by the INSPIRE Registry for maintenance frequency codes defined in ISO 19115 (not yet available)</td>
+      <td>Register operated by the INSPIRE Registry for maintenance frequency codes defined in ISO 19115. The register is not yet available, and the code list URI is tentative.</td>
       <td><strong>unstable</strong></td>
     </tr>
     <tr>
       <td>Spatial representation type</td>
       <td><code>http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationTypeCode</code></td>
-      <td>Register operated by the INSPIRE Registry for spatial representation type codes defined in ISO 19115 (not yet available)</td>
+      <td>Register operated by the INSPIRE Registry for spatial representation type codes defined in ISO 19115. The register is not yet available, and the code list URI is tentative.</td>
       <td><strong>unstable</strong></td>
     </tr>
   </tbody>
