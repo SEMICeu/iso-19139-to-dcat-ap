@@ -168,6 +168,7 @@
   <xsl:param name="opcountry" select="concat($op,'country/')"/>
   <xsl:param name="oplang" select="concat($op,'language/')"/>
   <xsl:param name="opcb" select="concat($op,'corporate-body/')"/>
+  <xsl:param name="opfq" select="concat($op,'frequency/')"/>
   <xsl:param name="cldFrequency">http://purl.org/cld/freq/</xsl:param>
 <!-- This is used as the datatype for the GeoJSON-based encoding of the bounding box. -->
   <xsl:param name="geojsonMediaTypeUri">https://www.iana.org/assignments/media-types/application/vnd.geo+json</xsl:param>
@@ -1829,46 +1830,75 @@
       <xsl:if test="@codeListValue != ''">
         <xsl:choose>
           <xsl:when test="@codeListValue = 'continual'">
-            <xsl:value-of select="concat($cldFrequency,'continuous')"/>
-          </xsl:when>
-          <xsl:when test="@codeListValue = 'continual'">
-            <xsl:value-of select="concat($cldFrequency,'continuous')"/>
+<!--  DC Freq voc        
+             <xsl:value-of select="concat($cldFrequency,'continuous')"/>
+-->            
+            <xsl:value-of select="concat($opfq,'CONT')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'daily'">
+<!--  DC Freq voc        
             <xsl:value-of select="concat($cldFrequency,'daily')"/>
+-->            
+            <xsl:value-of select="concat($opfq,'DAILY')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'weekly'">
+<!--  DC Freq voc        
             <xsl:value-of select="concat($cldFrequency,'weekly')"/>
+-->            
+            <xsl:value-of select="concat($opfq,'WEEKLY')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'fortnightly'">
+<!--  DC Freq voc       
             <xsl:value-of select="concat($cldFrequency,'biweekly')"/>
+-->            
+            <xsl:value-of select="concat($opfq,'BIWEEKLY')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'monthly'">
+<!--  DC Freq voc        
             <xsl:value-of select="concat($cldFrequency,'monthly')"/>
+-->            
+            <xsl:value-of select="concat($opfq,'MONTHLY')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'quarterly'">
+<!--  DC Freq voc        
             <xsl:value-of select="concat($cldFrequency,'quarterly')"/>
+-->            
+            <xsl:value-of select="concat($opfq,'QUARTERLY')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'biannually'">
+<!--  DC Freq voc        
             <xsl:value-of select="concat($cldFrequency,'semiannual')"/>
+-->            
+            <xsl:value-of select="concat($opfq,'ANNUAL_2')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'annually'">
+<!--  DC Freq voc        
             <xsl:value-of select="concat($cldFrequency,'annual')"/>
+-->            
+            <xsl:value-of select="concat($opfq,'ANNUAL')"/>
           </xsl:when>
-<!-- A mapping is missing in Dublin Core -->          
           <xsl:when test="@codeListValue = 'asNeeded'">
+<!--  A mapping is missing in Dublin Core -->          
+<!--  A mapping is missing in MDR Freq NAL -->          
             <xsl:value-of select="concat($MaintenanceFrequencyCodelistUri,'/',@codeListValue)"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'irregular'">
+<!--  DC Freq voc        
             <xsl:value-of select="concat($cldFrequency,'irregular')"/>
+-->            
+            <xsl:value-of select="concat($opfq,'IRREG')"/>
           </xsl:when>
-<!-- A mapping is missing in Dublin Core -->          
           <xsl:when test="@codeListValue = 'notPlanned'">
+<!--  A mapping is missing in Dublin Core -->          
+<!--  A mapping is missing in MDR Freq NAL -->          
             <xsl:value-of select="concat($MaintenanceFrequencyCodelistUri,'/',@codeListValue)"/>
           </xsl:when>
-<!-- A mapping is missing in Dublin Core -->          
           <xsl:when test="@codeListValue = 'unknown'">
+<!--  A mapping is missing in Dublin Core -->          
+<!--  INSPIRE Freq code list (not yet available)
             <xsl:value-of select="concat($MaintenanceFrequencyCodelistUri,'/',@codeListValue)"/>
+-->            
+            <xsl:value-of select="concat($opfq,'UNKNOWN')"/>
           </xsl:when>
         </xsl:choose>
       </xsl:if>
