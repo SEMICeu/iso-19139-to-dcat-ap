@@ -211,8 +211,8 @@
     </tr>
     <tr>
       <td rowspan="2">Maintenance frequency (Maintenance information)</td>
-      <td><code><a href="http://purl.org/cld/freq/">http://purl.org/cld/freq/</a></code></td>
-      <td>Dublin Core Collection Description Frequency Vocabulary [<a href="http://dublincore.org/groups/collections/frequency/">DC-CLD-FREQ</a>]</td>
+      <td><code><a href="http://publications.europa.eu/resource/authority/frequency">http://publications.europa.eu/resource/authority/frequency</a></code></td>
+      <td>Frequency code register operated by the Metadata Registry of the Publications Office of the EU [<a href="http://publications.europa.eu/mdr/authority/frequency/">MDR-FR</a>]</td>
       <td>stable</td>
     </tr>
     <tr>
