@@ -98,7 +98,9 @@ xslURL = "./iso-19139-to-dcat-ap.xsl"
   
 xml = ET.parse(xmlURL)
 xsl = ET.parse(xslURL)
+
 transform = ET.XSLT(xsl)
+
 print(ET.tostring(transform(xml), pretty_print=True))
 ````
 
