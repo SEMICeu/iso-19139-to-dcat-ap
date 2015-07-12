@@ -36,10 +36,10 @@ The SRS URI's and URN's to be used are those operated by the OGC's registry:
 
 * URIs: `http://www.opengis.net/def/crs/<authority>/(<version>|0)/<code>`. Examples: 
     * [`http://www.opengis.net/def/crs/OGC/1.3/CRS84`](http://www.opengis.net/def/crs/OGC/1.3/CRS84) (CRS84: WGS84 lon/lat)
-    * [`http://www.opengis.net/def/crs/EPSG/0/4326`](http://www.opengis.net/def/crs/EPSG/0/4326) (EPSG:4326: WGS84 lat/lon).
+    * [`http://www.opengis.net/def/crs/EPSG/0/4326`](http://www.opengis.net/def/crs/EPSG/0/4326) (EPSG:4326: WGS84 lat/lon)
 * URNs: `urn:ogc:def:crs:<authority>:[<version>]:<code>`. Examples: 
     * `urn:ogc:def:crs:OGC:1.3:CRS84` (CRS84: WGS84 lon/lat)
-    * `urn:ogc:def:crs:EPSG::4326` (EPSG:4326: WGS84 lat/lon).
+    * `urn:ogc:def:crs:EPSG::4326` (EPSG:4326: WGS84 lat/lon)
 
 The default SRS is CRS84 (WGS84 lon/lat). If a different SRS is used, the axis order (lat/lon or lon/lat) must be explicitly specified in parameter `$SrsAxisOrder`.
 
