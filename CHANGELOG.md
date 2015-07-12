@@ -2,8 +2,11 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-07-13: First stable version (v1.0)
+* Version implementing the draft of the GeoDCAT-AP specification released for public review.
+
 ## 2015-07-08: Revised version (v0.6.3)
-* Update frequency: replaced mappings from ISO to Dublin Core frequency vocabulary with mappings to the MDR Frequency NAL, as per the current DCAT-AP specification.
+* Update frequency: replaced mappings from the relevant ISO code list to the Dublin Core frequency vocabulary with mappings to the [MDR Frequency NAL](http://publications.europa.eu/mdr/authority/frequency/), as per the current DCAT-AP specification.
 
 ## 2015-06-03: Revised version (v0.6.2)
 * Minor fixes.
