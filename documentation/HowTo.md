@@ -68,8 +68,8 @@ This section provides examples of code from popular programming languages that c
 // The URL of the XML document to be transformed. Here it corresponds to a "GetRecords" output of a fictitious CSW, with the "maxRecords" parameter set to 10.
   $xmlURL = "http://some.site/csw?request=GetRecords&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&typeNames=csw:Record&elementSetName=full&constraintLanguage=CQL_TEXT&constraint_language_version=1.1.0&maxRecords=10";
 
-// The URL of the XSLT. Here, the XSLT is in the same folder of the PHP script.
-  $xslURL = "./iso-19139-to-dcat-ap.xsl";
+// The URL pointing to the latest version of the XSLT.
+  $xslURL = "https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/iso-19139-to-dcat-ap.xsl?raw";
   
   $xml = new DOMDocument;
   $xml->load($xmlURL) or die();
@@ -93,8 +93,8 @@ import lxml.etree as ET
 # The URL of the XML document to be transformed. Here it corresponds to a "GetRecords" output of a fictitious CSW, with the "maxRecords" parameter set to 10.
 xmlURL = "http://some.site/csw?request=GetRecords&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&typeNames=csw:Record&elementSetName=full&constraintLanguage=CQL_TEXT&constraint_language_version=1.1.0&maxRecords=10"
 
-# The URL of the XSLT. Here, the XSLT is in the same folder of the Python script.
-xslURL = "./iso-19139-to-dcat-ap.xsl"
+# The URL pointing to the latest version of the XSLT.
+xslURL = "https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/iso-19139-to-dcat-ap.xsl?raw"
   
 xml = ET.parse(xmlURL)
 xsl = ET.parse(xslURL)

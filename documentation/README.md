@@ -1,4 +1,4 @@
-This folder includes documentation concerning the use of the `iso-19139-to-dcat-ap.xsl` XSLT.
+This folder includes documentation concerning the use of the [`iso-19139-to-dcat-ap.xsl`](../iso-19139-to-dcat-ap.xsl) XSLT.
 
 More precisely:
 
