@@ -546,6 +546,7 @@
         <xsl:variable name="explanation">
           <xsl:value-of select="../../gmd:explanation/gco:CharacterString"/>
         </xsl:variable>
+        <xsl:variable name="Activity">
         <prov:Activity>
           <xsl:if test="$ResourceUri != ''">
             <prov:used rdf:resource="{$ResourceUri}"/>
@@ -578,6 +579,17 @@
             </xsl:if>
           </prov:generated>
         </prov:Activity>
+        </xsl:variable>
+        <xsl:choose>
+          <xsl:when test="$ResourceUri != ''">
+            <xsl:copy-of select="$Activity"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <prov:wasUsedBy>
+              <xsl:copy-of select="$Activity"/>
+            </prov:wasUsedBy>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:for-each>
     </xsl:param>
 
@@ -1241,9 +1253,7 @@
     </xsl:if>
     <xsl:if test="$profile = 'extended'">
       <xsl:if test="$Conformity != '' and $ResourceUri = ''">
-        <prov:wasUsedBy>
-          <xsl:copy-of select="$Conformity"/>
-        </prov:wasUsedBy>
+        <xsl:copy-of select="$Conformity"/>
       </xsl:if>
 <!--    
       <xsl:choose>
