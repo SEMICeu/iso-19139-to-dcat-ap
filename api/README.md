@@ -67,7 +67,7 @@ The [EasyRDF](http://www.easyrdf.org/) and the [ML/JSON-LD](https://github.com/l
 
 ## Installation instructions
 
-GeoDCAT-API have been tested on both Linux and Windows, with Apache 2 and PHP 5.3.2 (or later) installed and running.
+GeoDCAT-API has been tested on both Linux and Windows, with Apache 2 and PHP 5.3.2 (or later) installed and running.
 
 **NB**: GeoDCAT-API makes use of the [PHP XSL extension](http://php.net/manual/en/xsl.installation.php).
 
