@@ -53,7 +53,7 @@ The current version of GeoDCAT-API supports only the HTTP `GET` method. As a con
       <td>The URL of the resource containing the ISO 19139 records to be tranformed</td>
       <td>A URL</td>
       <td>N/A</td>
-      <td><strong>NB</strong>: <em>This is an internal parameter of the GeoDCAT-API</em></td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -73,6 +73,7 @@ GeoDCAT-API have been tested on both Linux and Windows, with Apache 2 and PHP 5.
 The repository includes all what is necessary, with the exception of EasyRDF and ML/JSON-LD], that must be installed separately by using [Composer](https://getcomposer.org/).
 
 More precisely:
+
 * Go to folder [`./lib/composer/`](./lib/composer/).
 * [Download Composer](https://getcomposer.org/download/). E.g.: `curl -s https://getcomposer.org/installer | php`
 * Run `php composer.phar install`
