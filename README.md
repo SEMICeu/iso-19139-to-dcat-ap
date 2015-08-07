@@ -10,6 +10,7 @@ Comments and inquiries should be sent to the GeoDCAT-AP WG mailing list: <dcat_a
 
 # Content
 
+* [`api`](./api/): Proof-of-concept of the implementation of GeoDCAT-AP following the CSW interface.
 * [`CHANGELOG.md`](./CHANGELOG.md): Log of changes made to the XSLT.
 * [`documentation/`](./documentation/): Folder containing documentation on the XSLT:
     * [`HowTo.md`](./documentation/HowTo.md): Describes how to use the XSLT.
