@@ -39,6 +39,7 @@ The current version of GeoDCAT-API supports only the HTTP `GET` method. As a con
       <td>
         <p>If this parameter is omitted, the API uses the "core" profile as default.</p>
         <p>The "core" profile is labelled "DCAT-AP", since it returns just the metadata elements supported in DCAT-AP.</p>
+        <p><strong>NB</strong>: The current values of this parameter are provisional, and they are meant to be replaced by the official namespace URIs of DCAT-AP and GeoDCAT-AP, when available.</p>
       </td>
     </tr>
     <tr>
