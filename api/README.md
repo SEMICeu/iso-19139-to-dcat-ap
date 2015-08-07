@@ -17,7 +17,7 @@ http://geodcat-ap.semic.eu:8890/api/
 
 ## Supported HTTP methods
 
-The current version of GeoDCAT-API supports only the HTTP `GET` method. As a consequence, it can used only on CSWs supporting `GET` requests.
+The current version of GeoDCAT-API supports only the HTTP `GET` method. As a consequence, it can be used only on CSWs supporting `GET` requests.
 
 ## API parameters
 
