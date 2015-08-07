@@ -1,0 +1,6 @@
+{
+    "require": {
+        "easyrdf/easyrdf": "*",
+        "ml/json-ld": "~1.0"
+    }
+}
