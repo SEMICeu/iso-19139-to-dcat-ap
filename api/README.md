@@ -1,4 +1,5 @@
-﻿# The GeoDCAT-AP API
+﻿
+# The GeoDCAT-AP API (GeoDCAT-API)
 
 This API is a proof-of-concept of the implementation of GeoDCAT-AP in an [OGC CSW (Catalog Service for the Web)](http://www.opengeospatial.org/standards/cat), re-using the standard CSW interface, and supporting in addition [HTTP content negotiation](https://tools.ietf.org/html/rfc7231#section-3.4).
 
