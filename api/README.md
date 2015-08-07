@@ -1,4 +1,4 @@
-﻿# GeoDCAT-AP API (GeoDCAT-API)
+﻿# The GeoDCAT-AP API
 
 This API is a proof-of-concept of the implementation of GeoDCAT-AP in an [OGC CSW (Catalog Service for the Web)](http://www.opengeospatial.org/standards/cat), re-using the standard CSW interface, and supporting in addition [HTTP content negotiation](https://tools.ietf.org/html/rfc7231#section-3.4).
 
@@ -12,13 +12,13 @@ A working demo of GeoDCAT-API is available at:
 
 http://geodcat-ap.semic.eu:8890/api/
 
-## API specification
+# API specification
 
-### Supported HTTP methods
+## Supported HTTP methods
 
 The current version of GeoDCAT-API supports only the HTTP `GET` method. As a consequence, it can used only on CSWs supporting `GET` requests.
 
-### API parameters
+## API parameters
 
 <table>
   <thead>
@@ -59,13 +59,13 @@ The current version of GeoDCAT-API supports only the HTTP `GET` method. As a con
   </tbody>
 </table>
 
-## Implementation details
+# Implementation details
 
 GeoDCAT-API is implemented in [PHP5](http://php.net/), and run on top of an [Apache 2 HTTP server](http://httpd.apache.org/).
 
 The [EasyRDF](http://www.easyrdf.org/) and the [ML/JSON-LD](https://github.com/lanthaler/JsonLD) PHP libraries are used to generate the supported RDF serialisations.
 
-## Installation instructions
+# Installation instructions
 
 GeoDCAT-API has been tested on both Linux and Windows, with Apache 2 and PHP 5.3.2 (or later) installed and running.
 
