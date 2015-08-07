@@ -10,7 +10,7 @@ The API uses the GeoDCAT-AP XSLT to transform ISO 19139 records into GeoDCAT-AP.
 
 A working demo of GeoDCAT-API is available at: 
 
-http://geodcat-ap.semic.eu:8890/geodcat-api/
+http://geodcat-ap.semic.eu:8890/api/
 
 ## API specification
 
