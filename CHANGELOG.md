@@ -2,6 +2,9 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-08-24: Revised version (v1.2)
+* Fixed bug concerning constraints related to access and use, when a URI/URL is not provided. The XSLT wrongly selected the content of `gmx:Anchor` instead of `gco:CharacterString`.
+
 ## 2015-07-29: Revised version (v1.1)
 * Fixed bug concerning the mapping of "conformance results" (only for the extended profile). The bug caused the possible creation of multiple instance of class `prov:Activity` as objects of the same instance of property `prov:wasUsedBy`.
 
