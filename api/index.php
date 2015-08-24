@@ -2,7 +2,7 @@
 
 // The API
 
-  $apiSrcRep = "https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/api";
+  $apiSrcRep = "https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/api";
 
   require('./lib/composer/vendor/autoload.php');
 
