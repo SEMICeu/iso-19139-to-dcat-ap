@@ -1531,7 +1531,7 @@
         <xsl:when test="gco:CharacterString">
           <dct:license>
             <dct:LicenseDocument>
-              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gmx:Anchor)"/></rdfs:label>
+              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></rdfs:label>
             </dct:LicenseDocument>
           </dct:license>
 <!--                                                                               
