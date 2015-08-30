@@ -1,6 +1,6 @@
 <h1>Mappings defined in GeoDCAT-AP</a></h1>
 
-<p>This documents illustrates the mappings defined in GeoDCAT-AP, as implemented in the [`iso-19139-to-dcat-ap.xsl`](../iso-19139-to-dcat-ap.xsl) XSLT.</p>
+<p>This documents illustrates the mappings defined in GeoDCAT-AP, as implemented in the <a href="../iso-19139-to-dcat-ap.xsl"><code>iso-19139-to-dcat-ap.xsl</code></a> XSLT.</p>
 
 <h2>Table of contents</h2>
 
