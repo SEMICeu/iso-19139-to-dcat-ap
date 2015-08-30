@@ -2,6 +2,9 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-08-30: Revised version (v1.3)
+* Removed unused namespaces. 
+
 ## 2015-08-24: Revised version (v1.2)
 * Fixed bug concerning constraints related to access and use, when a URI/URL is not provided. The XSLT wrongly selected the content of `gmx:Anchor` instead of `gco:CharacterString`.
 
