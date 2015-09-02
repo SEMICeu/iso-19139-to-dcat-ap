@@ -2,6 +2,9 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-09-03: Revised version (v1.4)
+* Fixed bug concerning resource type. The XSLT wrongly fetched the scope code from the data quality element, instead of the one specified in the hierarchy level element. 
+
 ## 2015-08-30: Revised version (v1.3)
 * Removed unused namespaces. 
 
