@@ -406,7 +406,7 @@
     </xsl:param>
 
     <xsl:param name="ResourceType">
-      <xsl:value-of select="gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode/@codeListValue"/>
+      <xsl:value-of select="gmd:hierarchyLevel/gmd:MD_ScopeCode/@codeListValue"/>
     </xsl:param>
     
     <xsl:param name="ServiceType">
