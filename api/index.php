@@ -134,8 +134,10 @@
     EasyRdf_Namespace::set('adms', 'http://www.w3.org/ns/adms#');
     EasyRdf_Namespace::set('cnt', 'http://www.w3.org/2011/content#');
     EasyRdf_Namespace::set('dc', 'http://purl.org/dc/elements/1.1/');
+    EasyRdf_Namespace::set('dcat', 'http://www.w3.org/ns/dcat#');
     EasyRdf_Namespace::set('gsp', 'http://www.opengis.net/ont/geosparql#');
     EasyRdf_Namespace::set('locn', 'http://www.w3.org/ns/locn#');
+    EasyRdf_Namespace::set('prov', 'http://www.w3.org/ns/prov#');
     $graph = new EasyRdf_Graph;
     $graph->parse($rdf, "rdfxml", $rdfxmlURL);
 
