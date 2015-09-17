@@ -86,7 +86,7 @@ GeoDCAT-API has been tested on both Linux and Windows, with Apache 2 and PHP 5.3
 
 **NB**: GeoDCAT-API makes use of the [PHP XSL extension](http://php.net/manual/en/xsl.installation.php).
 
-The repository includes all what is necessary, with the exception of EasyRDF and ML/JSON-LD], that must be installed separately by using [Composer](https://getcomposer.org/).
+The repository includes all what is necessary, with the exception of EasyRDF and ML/JSON-LD, that must be installed separately by using [Composer](https://getcomposer.org/).
 
 More precisely:
 
