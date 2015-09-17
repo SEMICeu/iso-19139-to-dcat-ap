@@ -4,7 +4,18 @@
 
   $apiSrcRep = "https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/api";
 
+// Variables for API landing page.
+
+  $title = "GeoDCAT-AP API";
+  $head = '    <link rel="stylesheet" type="text/css" href="./css/style.css"/>' . "\n";
+  $footer = '<p>' . $title . ' @ Stash: <a href="' . $apiSrcRep . '">' . $apiSrcRep . '</a></p>';
+  $exampleSrcURL = "";
+
+// Loading the required libraries
+
   require('./lib/composer/vendor/autoload.php');
+
+// Output schemas
 
   $outputSchemas = array();
   $outputSchemas['core'] = array(
@@ -27,15 +38,22 @@
   );
   $defaultOutputSchema = 'core';
 
+// XSLT to generate the HTML+RDFa serialisation
+
+  $rdf2rdfa = "https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/dcat-ap-rdf2html/browse/dcat-ap-rdf2rdfa.xsl?raw";
+
+// Output formats
 
   $outputFormats = array();
-//  $outputFormats['text/html'] = array('HTML+RDFa','');
   $outputFormats['application/rdf+xml'] = array('RDF/XML','rdf');
   $outputFormats['text/turtle'] = array('Turtle','turtle');
   $outputFormats['text/n3'] = array('N3','n3');
   $outputFormats['application/n-triples'] = array('N-Triples','ntriples');
   $outputFormats['application/ld+json'] = array('JSON-LD','jsonld');
+  $outputFormats['text/html'] = array('HTML+RDFa','');
   $defaultOutputFormat = 'application/rdf+xml';
+
+// HTTP codes & corresponding pages
 
   function returnHttpError($code) {
     $title =  $_SERVER["SERVER_PROTOCOL"] . ' ' . $code;
@@ -140,18 +158,21 @@
     EasyRdf_Namespace::set('prov', 'http://www.w3.org/ns/prov#');
     $graph = new EasyRdf_Graph;
     $graph->parse($rdf, "rdfxml", $rdfxmlURL);
-
     header("Content-type: " . $outputFormat);
-    echo $graph->serialise($outputFormats[$outputFormat][1]);
-    exit;
-/*
+
     if ($outputFormat == 'text/html') {
       $xml = new DOMDocument;
-      $xml->loadXML($rdf) or die();
+      $xml->loadXML($graph->serialise("rdfxml")) or die();
       $xsl = new DOMDocument;
-      $xsl->load("");
+      $xsl->load($rdf2rdfa);
       $proc = new XSLTProcessor();
       $proc->importStyleSheet($xsl);
+// The title of the HTML+RDFa
+      $proc->setParameter('', 'title', $title);
+// The URL of the repository
+      $proc->setParameter('', 'home', $apiSrcRep);
+// All what needs to be added in the HEAD of the HTML+RDFa document
+      $proc->setParameter('', 'head', $head);
       echo $proc->transformToXML($xml);
       exit;
     }
@@ -159,22 +180,16 @@
       echo $graph->serialise($outputFormats[$outputFormat][1]);
       exit;
     }
-*/
+
   }
-
-// Variables for API landing page.
-
-  $title = "GeoDCAT-AP API";
-  $exampleSrcURL = "";
-  $footer = '<p>' . $title . ' @ Stash: <a href="' . $apiSrcRep . '">' . $apiSrcRep . '</a></p>';
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title><?php echo $title; ?></title>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<?php echo $head; ?>
   </head>
   <body>
     <header><h1><?php echo $title; ?></h1></header>
