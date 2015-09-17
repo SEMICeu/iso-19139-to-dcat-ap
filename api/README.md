@@ -53,12 +53,12 @@ The current version of GeoDCAT-API supports only the HTTP `GET` method. As a con
       <td>The RDF serialisation to be returned</td>
       <td>
         <ul>
-          <li><code>application/rdf+xml</code> ([RDF/XML](http://www.w3.org/TR/rdf-syntax-grammar/))</li>
-          <li><code>text/turtle</code> ([Turtle](http://www.w3.org/TR/turtle/))</li>
-          <li><code>text/n3</code> ([Notation 3](http://www.w3.org/TeamSubmission/n3/))</li>
-          <li><code>application/n-triples</code> ([N-Triples](http://www.w3.org/TR/n-triples/))</li>
-          <li><code>application/ld+json</code> ([JSON-LD](http://www.w3.org/TR/json-ld/))</li>
-          <li><code>text/html</code> ([HTML+RDFa](http://www.w3.org/TR/html-rdfa/))</li>
+          <li><code>application/rdf+xml</code> (<a href="http://www.w3.org/TR/rdf-syntax-grammar/">RDF/XML</a>)</li>
+          <li><code>text/turtle</code> (<a href="http://www.w3.org/TR/turtle/">Turtle</a>)</li>
+          <li><code>text/n3</code> (<a href="http://www.w3.org/TeamSubmission/n3/">Notation 3</a>)</li>
+          <li><code>application/n-triples</code> (<a href="http://www.w3.org/TR/n-triples/">N-Triples</a>)</li>
+          <li><code>application/ld+json</code> (<a href="http://www.w3.org/TR/json-ld/">JSON-LD</a>)</li>
+          <li><code>text/html</code> (<a href="http://www.w3.org/TR/html-rdfa/">HTML+RDFa</a>)</li>
        </ul>
       </td>
       <td>N/A</td>
