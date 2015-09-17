@@ -6,7 +6,9 @@ This XSLT is a proof of concept for the implementation of the specification conc
     
 As such, this XSLT must be considered as unstable, and can be updated any time based on the revisions to the GeoDCAT-AP specifications and related work in the framework of [INSPIRE](http://inspire.ec.europa.eu/) and the EU ISA Programme.
 
-<p>Comments and inquiries should be sent to the GeoDCAT-AP WG mailing list: <a href="mailto:dcat_application_profile-geo@joinup.ec.europa.eu">dcat_application_profile-geo@joinup.ec.europa.eu</a></p>
+Comments and inquiries should be sent to the GeoDCAT-AP WG mailing list: 
+
+    mailto:dcat_application_profile-geo@joinup.ec.europa.eu
 
 # Content
 
