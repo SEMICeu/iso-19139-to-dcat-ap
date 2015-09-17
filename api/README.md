@@ -35,7 +35,12 @@ The current version of GeoDCAT-API supports only the HTTP `GET` method. As a con
     <tr>
       <td><code>ouputSchema</code></td>
       <td>The GeoDCAT-AP profile to be used for the transformation</td>
-      <td><code>core</code> (DCAT-AP), <code>extended</code> (GeoDCAT-AP)</td>
+      <td>
+        <ul>
+          <li><code>core</code> (DCAT-AP)</li>
+          <li><code>extended</code> (GeoDCAT-AP)</li>
+       </ul>
+      </td>
       <td><code>core</code></td>
       <td>
         <p>If this parameter is omitted, the API uses the "core" profile as default.</p>
@@ -46,7 +51,16 @@ The current version of GeoDCAT-API supports only the HTTP `GET` method. As a con
     <tr>
       <td><code>outputFormat</code></td>
       <td>The RDF serialisation to be returned</td>
-      <td><code>application/rdf+xml</code>, <code>text/turtle</code>, <code>text/n3</code>, <code>application/n-triples</code>, <code>application/ld+json</code></td>
+      <td>
+        <ul>
+          <li><code>application/rdf+xml</code> ([RDF/XML](http://www.w3.org/TR/rdf-syntax-grammar/))</li>
+          <li><code>text/turtle</code> ([Turtle](http://www.w3.org/TR/turtle/))</li>
+          <li><code>text/n3</code> ([Notation 3](http://www.w3.org/TeamSubmission/n3/))</li>
+          <li><code>application/n-triples</code> ([N-Triples](http://www.w3.org/TR/n-triples/))</li>
+          <li><code>application/ld+json</code> ([JSON-LD](http://www.w3.org/TR/json-ld/))</li>
+          <li><code>text/html</code> ([HTML+RDFa](http://www.w3.org/TR/html-rdfa/))</li>
+       </ul>
+      </td>
       <td>N/A</td>
       <td>If this parameter is omitted, the returned RDF serialisation is determined via HTTP content negotiation</td>
     </tr>
