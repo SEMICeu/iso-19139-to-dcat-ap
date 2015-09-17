@@ -15,6 +15,10 @@ body header, body #header {
   padding: 1em .5em;
   text-align: center;
 }
+header h1, #header h1 {
+  font-size:1.5em;
+  margin:0px;
+}
 section {
   margin:40px;
 }
@@ -22,9 +26,8 @@ footer {
   border-top: dotted 1px #cccccc;
   margin:20px 40px;
 }
-header h1, #header h1 {
-  font-size:1.5em;
-  margin:0px;
+section h1, section h2, section h3, section h4, section h5, section h6, section a {
+  color: #084989;
 }
 #input-box a.info {
   background-color:#084989;
@@ -39,7 +42,7 @@ header h1, #header h1 {
   border-radius:10px;
   text-decoration:none;
 }
-h1,h2 {
+h1,h2,h3 {
   font-weight:normal;
 }
 input,textarea, select {
@@ -60,3 +63,13 @@ textarea {
 a {
   color: #444444;
 }
+dt, dt * {
+  color: #777777;
+}
+.record, .metadata {
+  border: solid 1px #cccccc;
+  box-shadow: 2px 2px 2px #cccccc;
+  margin: 0px 0px 10px 0px;
+  padding: 0px 30px 30px 30px;
+}
+
