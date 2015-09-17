@@ -8,7 +8,7 @@ As such, this XSLT must be considered as unstable, and can be updated any time b
 
 Comments and inquiries should be sent to the GeoDCAT-AP WG mailing list: 
 
-  dcat_application_profile-geo@joinup.ec.europa.eu
+    dcat_application_profile-geo@joinup.ec.europa.eu
 
 # Content
 
