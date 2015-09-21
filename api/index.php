@@ -177,7 +177,15 @@
       exit;
     }
     else {
-      echo $graph->serialise($outputFormats[$outputFormat][1]);
+// Block added to enable pretty-print output of the JSON-LD serialisation, not supported in the current version of EasyRdf
+      if ($outputFormat == 'application/ld+json') {
+        echo json_encode(json_decode($graph->serialise($outputFormats[$outputFormat][1])), JSON_PRETTY_PRINT);
+      }
+      else {
+        echo $graph->serialise($outputFormats[$outputFormat][1]);
+      }
+// To be used when JSON-LD pretty-print will be supported in EasyRdf (see previous comment)      
+//      echo $graph->serialise($outputFormats[$outputFormat][1]);
       exit;
     }
 
