@@ -178,8 +178,9 @@
     }
     else {
 // Block added to enable pretty-print output of the JSON-LD serialisation, not supported in the current version of EasyRdf
+// Predefined constants are as per ML/JsonLD - see: https://github.com/lanthaler/JsonLD/blob/master/JsonLD.php
       if ($outputFormat == 'application/ld+json') {
-        echo json_encode(json_decode($graph->serialise($outputFormats[$outputFormat][1])), JSON_PRETTY_PRINT);
+        echo json_encode(json_decode($graph->serialise($outputFormats[$outputFormat][1])), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
       }
       else {
         echo $graph->serialise($outputFormats[$outputFormat][1]);
