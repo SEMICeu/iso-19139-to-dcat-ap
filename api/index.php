@@ -7,7 +7,7 @@
 // Variables for API landing page.
 
   $title = "GeoDCAT-AP API";
-  $head = '    <link rel="stylesheet" type="text/css" href="./css/style.css"/>' . "\n";
+  $head = '<link rel="stylesheet" type="text/css" href="./css/style.css"/>' . "\n";
   $footer = '<p>' . $title . ' @ Stash: <a href="' . $apiSrcRep . '">' . $apiSrcRep . '</a></p>';
   $exampleSrcURL = "";
 
