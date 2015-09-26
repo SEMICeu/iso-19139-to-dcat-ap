@@ -56,6 +56,7 @@
 // HTTP codes & corresponding pages
 
   function returnHttpError($code) {
+    global $head;
     $title =  $_SERVER["SERVER_PROTOCOL"] . ' ' . $code;
     $content = '';
     switch ($code) {
@@ -73,7 +74,7 @@
         break;
     }
     http_response_code($code);
-    echo '<!DOCTYPE html><html><head><title>' . $title . '</title></head><body><h1>' . $title . '</h1><p>' . $content . '</p></body></html>';
+    echo '<!DOCTYPE html><html><head><title>' . $title . '</title>' . str_replace("\n", "", $head) . '</head><body><header><h1>' . $title . '</h1></header><section><p>' . $content . '</p></section></body></html>';
     exit;
   }
 
