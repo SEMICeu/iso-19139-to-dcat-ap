@@ -72,4 +72,6 @@ dt, dt * {
   margin: 0px 0px 10px 0px;
   padding: 0px 30px 30px 30px;
 }
-
+a, code, pre {
+  overflow-wrap: break-word;
+}
