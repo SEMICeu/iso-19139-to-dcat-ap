@@ -135,7 +135,7 @@
       else {
         $acceptedFormats = $matches[0];
         $supportedFormats = array_keys($outputFormats);
-        $candidateFormats = array_intersect($supportedFormats, $acceptedFormats);
+        $candidateFormats = array_values(array_intersect($supportedFormats, $acceptedFormats));
         switch (count($candidateFormats)) {
           case 0:
             returnHttpError(415);
