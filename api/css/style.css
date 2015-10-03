@@ -74,4 +74,6 @@ dt, dt * {
 }
 a, code, pre {
   overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
 }
