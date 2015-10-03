@@ -78,13 +78,14 @@
     exit;
   }
 
+// Setting the output schema
 
   if (isset($_GET['src'])) {
 
     $xmluri = $_GET['src'];
 
-    $outputSchema = $outputSchemas[$defaultOutputSchema];
-    $xsluri = $outputSchema['xslt'];
+    $outputSchema = $defaultOutputSchema;
+    $xsluri = $outputSchemas[$outputSchema]['xslt'];
     if (isset($_GET['outputSchema'])) {
       if (isset($outputSchemas[$_GET['outputSchema']])) {
         $outputSchema = $_GET['outputSchema'];
@@ -95,15 +96,21 @@
       }
     }
 
+// Loading the source document 
+
     $xml = new DOMDocument;
     if (!$xml->load($xmluri)) {
       returnHttpError(404);
     }
 
+// Loading the XSLT to transform the source document into RDF/XML
+
     $xsl = new DOMDocument;
     if (!$xsl->load($xsluri)) {
       returnHttpError(404);
     }
+
+// Transforming the source document into RDF/XML
 
     $proc = new XSLTProcessor();
     $proc->importStyleSheet($xsl);
@@ -116,7 +123,7 @@
       returnHttpError(404);
     }
 
-    $rdfxmlURL = 'http://' . $_SERVER["SERVER_NAME"] . str_replace($_SERVER["QUERY_STRING"], '', $_SERVER["REQUEST_URI"]) . 'outputSchema=' . rawurlencode($outputSchema) . '&outputFormat=' . rawurlencode("application/rdf+xml") . '&src=' . rawurlencode($_GET['src']);
+// Setting the output format
 
     $outputFormat = $defaultOutputFormat;
     if (isset($_GET['outputFormat'])) {
@@ -150,6 +157,49 @@
       }
     }
 
+// Related resources
+
+// The metadata profile of the output resource (output schema)
+    $link[] = array(
+      "href" => $outputSchema,
+      "rel" => "profile",
+      "type" => $outputFormat,
+      "title" => $outputSchemas[$outputSchema]["label"]
+    );
+// The input resource
+    $link[] = array(
+      "href" => $xmluri,
+      "rel" => "derivedfrom",
+      "type" => "application/xml",
+      "title" => "ISO 19139"
+    );
+// The available serialisations of the output resource (output format)
+    foreach ($outputFormats as $k => $v) {
+      $uri = str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']) . 'outputSchema=' . rawurlencode($outputSchema) . '&src=' . rawurlencode($xmluri) . '&outputFormat=' . rawurlencode($k);
+      $rel = 'alternate';
+      if ($k == $outputFormat) {
+        $rel = 'self';
+      }
+      $link[] = array(
+        "href" => $uri,
+        "rel" => $rel,
+        "type" => $k,
+        "title" => $v[0]
+      );
+      $outputFormats[$k][] = $uri;
+    }
+
+// Building HTTP "Link" headers and HTML "link" elements pointing to the related resources
+
+    $linkHTTP = array();
+    $linkHTML = array();
+    foreach ($link as $v) {
+      $linkHTTP[] = '<' . $v["href"] . '>; rel="' . $v["rel"] . '"; type="' . $v["type"] . '"; title="' . $v["title"] . '"';
+      $linkHTML[] = '<link href="' . $v["href"] . '" rel="' . $v["rel"] . '" type="' . $v["type"] . '" title="' . $v["title"] . '"/>';
+    }
+
+// Setting namespace prefixes
+
     EasyRdf_Namespace::set('adms', 'http://www.w3.org/ns/adms#');
     EasyRdf_Namespace::set('cnt', 'http://www.w3.org/2011/content#');
     EasyRdf_Namespace::set('dc', 'http://purl.org/dc/elements/1.1/');
@@ -157,9 +207,18 @@
     EasyRdf_Namespace::set('gsp', 'http://www.opengis.net/ont/geosparql#');
     EasyRdf_Namespace::set('locn', 'http://www.w3.org/ns/locn#');
     EasyRdf_Namespace::set('prov', 'http://www.w3.org/ns/prov#');
+
+// Creating the RDF graph from the RDF/XML serialisation
+
     $graph = new EasyRdf_Graph;
-    $graph->parse($rdf, "rdfxml", $rdfxmlURL);
+    $graph->parse($rdf);
+
+// Sending HTTP headers
+
     header("Content-type: " . $outputFormat);
+    header('Link: ' . join(', ', $linkHTTP));
+
+// Returning the resulting document
 
     if ($outputFormat == 'text/html') {
       $xml = new DOMDocument;
@@ -173,6 +232,7 @@
 // The URL of the repository
       $proc->setParameter('', 'home', $apiSrcRep);
 // All what needs to be added in the HEAD of the HTML+RDFa document
+      $head .= join("\n", $linkHTML) . "\n";
       $proc->setParameter('', 'head', $head);
       echo $proc->transformToXML($xml);
       exit;
