@@ -21,7 +21,9 @@ The current version of GeoDCAT-API supports only the HTTP `GET` method. As a con
 
 ## API parameters
 
-<table>
+### Request
+
+<tablei width="100%">
   <thead>
     <tr>
       <th>Parameter</th>
@@ -70,6 +72,51 @@ The current version of GeoDCAT-API supports only the HTTP `GET` method. As a con
       <td>A URL</td>
       <td>N/A</td>
       <td></td>
+    </tr>
+  </tbody>
+</table>
+
+### Response
+
+Besides the resulting RDF serialisation of the source ISO 19139 records, the API returns a set of HTTP [`Link`](https://tools.ietf.org/html/rfc5988) headers, and the corresponding HTML LINK elements in the HTML+RDFa serialisation.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th><a href="http://www.iana.org/assignments/link-relations/" title="IANA Link Relations">Relation type</a></th>
+      <th>Type</th>
+      <th>Title</th>
+      <th>Target URI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>derivedfrom</code></td>
+      <td><code>application/xml</code></td>
+      <td><code>ISO 19139</code></td>
+      <td>The URL of the source document, containing the ISO 19139 records.</td>
+    </tr>
+    <tr>
+      <td rowspan="2"><code>profile</code></td>
+      <td rowspan="2">The media type of the document returned by the API.</td>
+      <td><code>DCAT-AP</code></td>
+      <td><code>core</code></td>
+    </tr>
+    <tr>
+      <td><code>GeoDCAT-AP</code></td>
+      <td><code>extended</code></td>
+    </tr>
+    <tr>
+      <td><code>self</code></td>
+      <td>The media type of the document returned by the API.</td>
+      <td>The name of the returned RDF serialisation.</td>
+      <td>The URL of the document returned by the API.</td>
+    </tr>
+    <tr>
+      <td><code>alternate</code></td>
+      <td>The media types of the alternative RDF serialisations supported by the API.</td>
+      <td>The name of the relevant RDF serialisation.</td>
+      <td>The URL of the document, encoded with the relevant RDF serialisation, as would be returned by the API.</td>
     </tr>
   </tbody>
 </table>
