@@ -270,23 +270,14 @@
         <h1>
           <label for="outputSchema">Output Schema : </label>
           <select id="outputSchema" name="outputSchema">
-<?php
-
-  foreach ($outputSchemas as $k => $v) {
-    echo '            <option value="' . $k . '">' . $v['label'] . '</option>' . "\n";
-  }
-
-?>
+<?php foreach ($outputSchemas as $k => $v) { echo '            <option value="' . $k . '">' . $v['label'] . '</option>' . "\n"; } ?>
           </select>
-          <span style="float:right">
-            <input type="submit" id="transform" value="Transform"/>
-          </span>
+          <input style="float:right" type="submit" id="transform" value="Transform"/>
         </h1>
-        <textarea id="src" name="src" title="Copy &amp; paste the URL of ISO 19139 records" placeholder="Copy &amp; paste the URL of ISO 19139 records"><?php echo $exampleSrcURL?></textarea>
-        <div style="height:2em">
-          <span style="float:right;">
-            <label for="outputFormat">Output format : </label>
-            <select id="outputFormat" name="outputFormat">
+        <p><input type="url" required="required" id="src" name="src" title="Copy &amp; paste the URL of ISO 19139 records" placeholder="Copy &amp; paste the URL of ISO 19139 records" value="<?php echo $exampleSrcURL?>"/></p>
+        <p style="float:right;">
+          <label for="outputFormat">Output format : </label>
+          <select id="outputFormat" name="outputFormat">
 <?php
 
   foreach ($outputFormats as $k => $v) {
@@ -294,22 +285,21 @@
     if ($k == $defaultOutputFormat) {
       $selected = ' selected="selected"';
     }
-    echo '              <option value="' . $k . '"' . $selected . '>' . $v[0] . '</option>' . "\n";
+    echo '            <option value="' . $k . '"' . $selected . '>' . $v[0] . '</option>' . "\n";
   }
 
 ?>
-            </select>
-          </span>
-        </div>
+          </select>
+        </p>
       </form>
-      <section>
-        <h3>Usage notes</h3>
-        <p>Copy &amp; paste the URL of a file or of a CSW request returning ISO 19139 records.</p>
-        <p>Supported CSW request types: <code>GetRecords</code>, <code>GetRecordById</code>.</p>
-        <p>Supported CSW output schema: <code>http://www.isotc211.org/2005/gmd</code></p>
-        <p><strong>NB</strong>: The current version of the API supports only CSW calls using the <code>GET</code> HTTP method.</p>
-        <p><em>A description of the GeoDCAT-AP API is available on the <a href="<?php echo $apiSrcRep; ?>">API's Stash repository</a>.</em></p>
-      </section>
+    </section>
+    <section>
+      <h1>Usage notes</h1>
+      <p>Copy &amp; paste the URL of a file or of a CSW request returning ISO 19139 records.</p>
+      <p>Supported CSW request types: <code>GetRecords</code>, <code>GetRecordById</code>.</p>
+      <p>Supported CSW output schema: <code>http://www.isotc211.org/2005/gmd</code></p>
+      <p><strong>NB</strong>: The current version of the API supports only CSW calls using the <code>GET</code> HTTP method.</p>
+      <p><em>A description of the GeoDCAT-AP API is available on the <a href="<?php echo $apiSrcRep; ?>">API's Stash repository</a>.</em></p>
     </section>
     <aside>
     </aside>
