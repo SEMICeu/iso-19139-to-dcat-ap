@@ -7,7 +7,11 @@ body {
   box-shadow: 10px 10px 5px #cccccc;
   margin:30px auto;
 }
-body header, body #header {
+header, section, footer {
+  overflow: hidden;
+  clear: both;
+}
+body header {
   background-color: #084989; 
   color: #ffffff; 
   font-weight: normal; 
@@ -15,7 +19,7 @@ body header, body #header {
   padding: 1em .5em;
   text-align: center;
 }
-header h1, #header h1 {
+header h1 {
   font-size:1.5em;
   margin:0px;
 }
@@ -42,10 +46,10 @@ section h1, section h2, section h3, section h4, section h5, section h6, section 
   border-radius:10px;
   text-decoration:none;
 }
-h1,h2,h3 {
+h1, h2, h3 {
   font-weight:normal;
 }
-input,textarea, select {
+input, textarea, select {
   color: #444444;
 }
 input, select {
@@ -54,11 +58,9 @@ input, select {
 code, pre, textarea {
   font-family: Lucida Console, monospace;
 }
-textarea {
+#src {
   font-size:1.4em;
   width: 100%;
-  resize:vertical;
-  height:10em;
 }
 a {
   color: #444444;
