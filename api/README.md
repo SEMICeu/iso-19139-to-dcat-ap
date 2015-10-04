@@ -23,7 +23,7 @@ The current version of GeoDCAT-API supports only the HTTP `GET` method. As a con
 
 ### Request
 
-<table width="100%">
+<table style="width:100%;">
   <thead>
     <tr>
       <th>Parameter</th>
@@ -73,7 +73,7 @@ The current version of GeoDCAT-API supports only the HTTP `GET` method. As a con
     <tr>
       <td><code>src</code></td>
       <td>The URL of the resource containing the ISO 19139 records to be tranformed</td>
-      <tdi colspan="2">A URL</td>
+      <td colspan="2">A URL</td>
       <td>N/A</td>
       <td></td>
     </tr>
