@@ -2,6 +2,10 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-10-06: Revised version (v1.5)
+* Fixed bug concerning metadata on metadata. The corresponding RDF snippet was generated irrespective of whether this information was included or not in the original metadata record. 
+* Fixed bug concerning lineage. The corresponding RDF snippet was generated irrespective of whether this information was included or not in the original metadata record. 
+
 ## 2015-09-03: Revised version (v1.4)
 * Fixed bug concerning resource type. The XSLT wrongly fetched the scope code from the data quality element, instead of the one specified in the hierarchy level element. 
 
