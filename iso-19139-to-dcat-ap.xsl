@@ -778,7 +778,7 @@
 <!-- Creation date, publication date, date of last revision -->
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation"/>
 <!-- Lineage -->
-      <xsl:if test="$ResourceType != 'service'">
+      <xsl:if test="$ResourceType != 'service' and $Lineage != ''">
         <dct:provenance>
           <dct:ProvenanceStatement>
             <rdfs:label xml:lang="{$MetadataLanguage}">
