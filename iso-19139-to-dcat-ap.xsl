@@ -605,13 +605,16 @@
 <!-- Metadata description (metadata on metadata) -->    
     
     <xsl:param name="MetadataDescription">
-      <rdf:type rdf:resource="{$dcat}CatalogRecord"/>
 <!-- Metadata language -->
-      <dct:language rdf:resource="{concat($oplang,translate($ormlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
+      <xsl:if test="$ormlang != ''">
+        <dct:language rdf:resource="{concat($oplang,translate($ormlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
+      </xsl:if>
 <!-- Metadata date -->
-      <dct:modified rdf:datatype="{$xsd}date">
-        <xsl:value-of select="$MetadataDate"/>
-      </dct:modified>
+      <xsl:if test="$MetadataDate != ''">
+        <dct:modified rdf:datatype="{$xsd}date">
+          <xsl:value-of select="$MetadataDate"/>
+        </dct:modified>
+      </xsl:if>
 <!-- Metadata point of contact: only for the extended profile -->
       <xsl:if test="$profile = 'extended'">
         <xsl:apply-templates select="gmd:contact/gmd:CI_ResponsibleParty">
@@ -890,15 +893,19 @@
           <xsl:choose>
             <xsl:when test="$MetadataUri != ''">
               <rdf:Description rdf:about="{$MetadataUri}">
+                <rdf:type rdf:resource="{$dcat}CatalogRecord"/>
                 <foaf:primaryTopic rdf:resource="{$ResourceUri}"/>
                 <xsl:copy-of select="$MetadataDescription"/>
               </rdf:Description>
             </xsl:when>
             <xsl:otherwise>
-              <rdf:Description>
-                <foaf:primaryTopic rdf:resource="{$ResourceUri}"/>
-                <xsl:copy-of select="$MetadataDescription"/>
-              </rdf:Description>
+              <xsl:if test="normalize-space($MetadataDescription)">
+                <rdf:Description>
+                  <rdf:type rdf:resource="{$dcat}CatalogRecord"/>
+                  <foaf:primaryTopic rdf:resource="{$ResourceUri}"/>
+                  <xsl:copy-of select="$MetadataDescription"/>
+                </rdf:Description>
+              </xsl:if>
             </xsl:otherwise>
           </xsl:choose>
 <!--          
@@ -910,17 +917,14 @@
       </xsl:when>
       <xsl:otherwise>
         <rdf:Description>
-<!--        
-          <xsl:if test="$profile = 'extended'">
--->          
+          <xsl:if test="normalize-space($MetadataDescription)">
             <foaf:isPrimaryTopicOf>
               <rdf:Description>
+                <rdf:type rdf:resource="{$dcat}CatalogRecord"/>
                 <xsl:copy-of select="$MetadataDescription"/>
               </rdf:Description>
             </foaf:isPrimaryTopicOf>
-<!--            
           </xsl:if>
--->          
           <xsl:copy-of select="$ResourceDescription"/>
         </rdf:Description>
       </xsl:otherwise>
