@@ -2,6 +2,10 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-10-09: Revised version (v1.6)
+* Added missing mapping for language codes.
+* Created parameters for bounding box coordinates, to be used in the supported geometry encodings. 
+
 ## 2015-10-06: Revised version (v1.5)
 * Fixed bug concerning metadata on metadata. The corresponding RDF snippet was generated irrespective of whether this information was included or not in the original metadata record. 
 * Fixed bug concerning lineage. The corresponding RDF snippet was generated irrespective of whether this information was included or not in the original metadata record. 
