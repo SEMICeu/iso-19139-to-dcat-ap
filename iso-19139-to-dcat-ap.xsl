@@ -281,6 +281,9 @@
         <xsl:when test="$ormlang = 'gle'">
           <xsl:text>ga</xsl:text>
         </xsl:when>
+        <xsl:when test="$ormlang = 'hrv'">
+          <xsl:text>hr</xsl:text>
+        </xsl:when>
         <xsl:when test="$ormlang = 'ita'">
           <xsl:text>it</xsl:text>
         </xsl:when>
@@ -362,6 +365,9 @@
         </xsl:when>
         <xsl:when test="$orrlang = 'gle'">
           <xsl:text>ga</xsl:text>
+        </xsl:when>
+        <xsl:when test="$orrlang = 'hrv'">
+          <xsl:text>hr</xsl:text>
         </xsl:when>
         <xsl:when test="$orrlang = 'ita'">
           <xsl:text>it</xsl:text>
