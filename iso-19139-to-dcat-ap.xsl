@@ -114,7 +114,7 @@
   
 -->  
 
-<!-- Variables to be used to convert into lower/uppercase -->
+<!-- Variables to be used to convert strings into lower/uppercase by using the translate() function. -->
 
   <xsl:variable name="lowercase">abcdefghijklmnopqrstuvwxyz</xsl:variable>
   <xsl:variable name="uppercase">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
