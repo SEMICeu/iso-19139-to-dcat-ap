@@ -185,6 +185,10 @@
   <xsl:param name="SpatialRepresentationTypeCodelistUri" select="concat($INSPIRECodelistUri,'SpatialRepresentationTypeCode')"/>
   <xsl:param name="MaintenanceFrequencyCodelistUri" select="concat($INSPIRECodelistUri,'MaintenanceFrequencyCode')"/>
 
+<!-- INSPIRE glossary URI -->  
+  
+  <xsl:param name="INSPIREGlossaryUri">http://inspire.ec.europa.eu/glossary/</xsl:param>
+
 <!-- 
 
   Master template     
@@ -1938,10 +1942,15 @@
     <xsl:param name="version" select="gmd:version/gco:CharacterString"/>
     <xsl:choose>
       <xsl:when test="starts-with($code, 'http://') or starts-with($code, 'https://')">
-        <dct:conformsTo rdf:resource="{$code}"/>
+        <dct:conformsTo>
+          <rdf:Description rdf:about="{$code}">
+            <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
+          </rdf:Description>
+        </dct:conformsTo>
       </xsl:when>
       <xsl:when test="starts-with($code, 'urn:')">
         <dct:conformsTo rdf:parseType="Resource">
+          <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
           <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
           <xsl:if test="$codespace != ''">
             <skos:inScheme>
@@ -1957,6 +1966,7 @@
       </xsl:when>
       <xsl:otherwise>
         <dct:conformsTo rdf:parseType="Resource">
+          <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
           <skos:prefLabel xml:lang="{$MetadataLanguage}"><xsl:value-of select="$code"/></skos:prefLabel>
           <xsl:if test="$codespace != ''">
             <skos:inScheme>
