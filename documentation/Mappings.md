@@ -22,6 +22,7 @@
       <li><a href="#mapping-spatial-resolution">Spatial resolution</a></li>
       <li><a href="#mapping-conformance-result">Conformance result / Conformity (Data quality)</a></li>
       <li><a href="#mapping-responsible-party">Responsible party</a></li>
+      <li><a href="#mapping-crs">Coordinate reference system</a></li>
       <li><a href="#mapping-format">Format / Encoding</a></li>
       <li><a href="#">...</a></li>
     </ul>
@@ -987,6 +988,69 @@ In addition to the mapping supported in the core profile, the extended profile u
       <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
     </prov:Attribution>
   </prov:
+````
+
+<h3><a name="mapping-crs">Coordinate reference system</a></h3>
+
+A coordinate reference system is denoted with `dct:type`, with the HTTP URI from the INSPIRE Registry concerning the glossary term "Spatial Reference System".
+
+This mapping is unstable, and might be revised in future versions of GeoDCAT-AP.
+
+If specified with an HTTP URI ([see how](./HTTP-URIs.md#uri-crs)):
+
+````xml
+  <dct:conformsTo>
+    <rdf:Description rdf:about="http://www.opengis.net/def/crs/EPSG/0/32630">
+      <dct:type rdf:resource="http://inspire.ec.europa.eu/glossary/SpatialReferenceSystem"/>
+    </rdf:Description>
+  </dct:conformsTo>
+````
+
+If specified with a URN from the OGC registry:
+
+````xml
+  <dct:conformsTo>
+<!-- HTTP URI mapped from the URN -->  
+    <rdf:Description rdf:about="http://www.opengis.net/def/crs/EPSG/0/32632">
+      <dct:type rdf:resource="http://inspire.ec.europa.eu/glossary/SpatialReferenceSystem"/>
+<!-- Original URN -->      
+      <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">urn:ogc:def:crs:EPSG:7.1:32632</dct:identifier>
+    </rdf:Description>
+  </dct:conformsTo>
+````
+
+If specified with a URN not from the OGC registry:
+
+````xml
+  <dct:conformsTo rdf:parseType="Resource">
+    <dct:type rdf:resource="http://inspire.ec.europa.eu/glossary/SpatialReferenceSystem"/>
+    <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">urn:xxx:xxx:xxx:32632</dct:identifier>
+<!-- If the codespace is available -->    
+    <skos:inScheme>
+      <skos:ConceptScheme>
+        <dct:title xml:lang="en">EPSG</dct:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+<!-- If the version is available -->    
+    <owl:versionInfo xml:lang="en">7.1</owl:versionInfo>
+  </dct:conformsTo>
+````
+
+If specified with a literal:
+
+````xml
+  <dct:conformsTo rdf:parseType="Resource">
+    <dct:type rdf:resource="http://inspire.ec.europa.eu/glossary/SpatialReferenceSystem"/>
+    <skos:prefLabel xml:lang="en">32632</skos:prefLabel>
+<!-- If the codespace is available -->    
+    <skos:inScheme>
+      <skos:ConceptScheme>
+        <dct:title xml:lang="en">EPSG</dct:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+<!-- If the version is available -->    
+    <owl:versionInfo xml:lang="en">7.1</owl:versionInfo>
+  </dct:conformsTo>
 ````
   
 <h3><a name="mapping-format">Format / Encoding</a></h3>
