@@ -113,6 +113,11 @@
   =======================
   
 -->  
+
+<!-- Variables to be used to convert into lower/uppercase -->
+
+  <xsl:variable name="lowercase">abcdefghijklmnopqrstuvwxyz</xsl:variable>
+  <xsl:variable name="uppercase">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
   
 <!-- URI and URN of the spatial reference system (SRS) used in the bounding box.
      The default SRS is CRS84. If a different SRS is used, also parameter 
@@ -169,6 +174,8 @@
   <xsl:param name="cldFrequency">http://purl.org/cld/freq/</xsl:param>
 <!-- This is used as the datatype for the GeoJSON-based encoding of the bounding box. -->
   <xsl:param name="geojsonMediaTypeUri">https://www.iana.org/assignments/media-types/application/vnd.geo+json</xsl:param>
+
+  <xsl:param name="SrsBaseUri">http://www.opengis.net/def/crs/EPSG/0/</xsl:param>
 
 <!-- INSPIRE code list URIs -->  
   
@@ -617,7 +624,7 @@
     <xsl:param name="MetadataDescription">
 <!-- Metadata language -->
       <xsl:if test="$ormlang != ''">
-        <dct:language rdf:resource="{concat($oplang,translate($ormlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
+        <dct:language rdf:resource="{concat($oplang,translate($ormlang,$lowercase,$uppercase))}"/>
       </xsl:if>
 <!-- Metadata date -->
       <xsl:if test="$MetadataDate != ''">
@@ -757,13 +764,13 @@
       <xsl:if test="$ResourceType = 'dataset' or $ResourceType = 'series'">
         <xsl:choose>
           <xsl:when test="$orrlang != ''">
-            <dct:language rdf:resource="{concat($oplang,translate($orrlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
+            <dct:language rdf:resource="{concat($oplang,translate($orrlang,$lowercase,$uppercase))}"/>
           </xsl:when>
           <xsl:otherwise>
 <!-- To be decided (when the resource language is not specified, it defaults to the metadata language): -->
 <!-- 
              <xsl:if test="$ormlang != ''">
-               <dct:language rdf:resource="{concat($oplang,translate($ormlang,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'))}"/>
+               <dct:language rdf:resource="{concat($oplang,translate($ormlang,$lowercase,$uppercase))}"/>
              </xsl:if>
 -->            
           </xsl:otherwise>
@@ -1604,7 +1611,7 @@
       </xsl:for-each>
     </xsl:param>
     <xsl:for-each select="gmd:keyword">
-      <xsl:variable name="lckw" select="translate(gco:CharacterString,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+      <xsl:variable name="lckw" select="translate(gco:CharacterString,$uppercase,$lowercase)"/>
       <xsl:choose>
         <xsl:when test="$OriginatingControlledVocabulary = ''">
           <xsl:choose>
@@ -1949,20 +1956,33 @@
         </dct:conformsTo>
       </xsl:when>
       <xsl:when test="starts-with($code, 'urn:')">
-        <dct:conformsTo rdf:parseType="Resource">
-          <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
-          <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
-          <xsl:if test="$codespace != ''">
-            <skos:inScheme>
-              <skos:ConceptScheme>
-                <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></dct:title>
-              </skos:ConceptScheme>
-            </skos:inScheme>
-          </xsl:if>
-          <xsl:if test="$version != ''">
-            <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
-          </xsl:if>
-        </dct:conformsTo>
+        <xsl:choose>
+          <xsl:when test="starts-with(translate($code,$uppercase,$lowercase), 'urn:ogc:def:crs:epsg:')">
+            <xsl:variable name="srid" select="substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($code,':'),':'),':'),':'),':'),':')"/>
+            <dct:conformsTo>
+              <rdf:Description rdf:about="{$SrsBaseUri}{$srid}">
+                <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
+                <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
+              </rdf:Description>
+            </dct:conformsTo>
+          </xsl:when>
+          <xsl:otherwise>
+            <dct:conformsTo rdf:parseType="Resource">
+              <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
+              <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
+              <xsl:if test="$codespace != ''">
+                <skos:inScheme>
+                  <skos:ConceptScheme>
+                    <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></dct:title>
+                  </skos:ConceptScheme>
+                </skos:inScheme>
+              </xsl:if>
+              <xsl:if test="$version != ''">
+                <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
+              </xsl:if>
+            </dct:conformsTo>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
         <dct:conformsTo rdf:parseType="Resource">
