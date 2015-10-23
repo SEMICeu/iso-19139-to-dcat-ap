@@ -262,14 +262,14 @@
   <tbody>
     <tr>
       <td colspan="2" rowspan="2">Metadata point of contact</td>
-      <td><strong><code>prov:qualifiedAttribution</code><strong></td>
-      <td><strong><code>prov:Attribution</code><strong></td>
+      <td><strong><code>prov:qualifiedAttribution</code></strong></td>
+      <td><strong><code>prov:Attribution</code></strong></td>
       <td><em>testing</em></td>
       <td>Only for the extended profile</td>
     </tr>
     <tr>
-      <td><strong><code>dcat:contactPoint</code><strong></td>
-      <td><strong><code>vcard:Kind</code><strong></td>
+      <td><strong><code>dcat:contactPoint</code></strong></td>
+      <td><strong><code>vcard:Kind</code></strong></td>
       <td><em>testing</em></td>
       <td>Only for the extended profile</td>
     </tr>
