@@ -168,7 +168,8 @@ TBD
 
 TBD
 
-## Coordinate reference system URI: Coordinate reference system (INSPIRE); Reference system (ISO 19115)
+## 
+<h2><a name="uri-crs">Coordinate reference system URI: Coordinate reference system (INSPIRE); Reference system (ISO 19115)</a></h2>
 
 ### XPath
 
