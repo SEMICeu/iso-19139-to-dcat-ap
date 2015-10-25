@@ -2,6 +2,11 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-10-26: Revised version (v1.7)
+* Mapping of coupled resources tentatively revised, taking into account the use of the `@uriref` and `@xlink:href` attributes.
+* OGC's URNs for spatial reference systems are mapped to the corresponding HTTP URIs.
+* Added `dct:type` to denote a spatial reference system.
+
 ## 2015-10-09: Revised version (v1.6)
 * Added missing mapping for language codes.
 * Created parameters for bounding box coordinates, to be used in the supported geometry encodings. 
