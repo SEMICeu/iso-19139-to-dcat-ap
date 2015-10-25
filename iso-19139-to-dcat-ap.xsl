@@ -1208,7 +1208,18 @@
 <!--  
     <dcat:dataset rdf:resource="{@xlink:href}"/>
 -->    
-    <dct:hasPart rdf:resource="{@xlink:href}"/>
+    <xsl:choose>
+      <xsl:when test="@uriref">
+        <dct:hasPart rdf:resource="{@uriref}"/>
+      </xsl:when>
+      <xsl:when test="@xlink:href">
+        <dct:hasPart rdf:parseType="Resource">
+          <foaf:isPrimaryTopicOf>
+            <dcat:CatalogRecord rdf:about="{@xlink:href}"/>
+          </foaf:isPrimaryTopicOf>
+        </dct:hasPart>
+      </xsl:when>
+    </xsl:choose>
   </xsl:template>
   
 <!-- Spatial data service type -->  
