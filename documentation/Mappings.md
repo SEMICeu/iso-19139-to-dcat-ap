@@ -200,7 +200,7 @@
       <td>stable</td>
     </tr>
     <tr>
-      <td rowspan="2">Format / Encoding</td>
+      <td rowspan="2"><a href="#mapping-format">Format / Encoding</a></td>
       <td><code><a href="http://publications.europa.eu/resource/authority/file-type">http://publications.europa.eu/resource/authority/file-type</a></code></td>
       <td>File type register operated by the Metadata Registry of the Publications Office of the EU [<a href="http://publications.europa.eu/mdr/authority/file-type/">MDR-FT</a>]</td>
       <td>stable</td>
@@ -702,7 +702,7 @@
       <td></td>
     </tr>
     <tr>
-      <td colspan="2">Coordinate reference system</td>
+      <td colspan="2"><a href="#mapping-crs">Coordinate reference system</a></td>
       <td><strong><code>dct:conformsTo</code></strong></td>
       <td><strong><code>rdfs:Resource</code></strong></td>
       <td><strong>unstable</strong></td>
