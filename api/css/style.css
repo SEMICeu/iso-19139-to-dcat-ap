@@ -1,53 +1,50 @@
 body {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; 
+  font-family: sans-serif; 
   font-size: 10pt; 
   color: #444444;
   width:760px;
+  margin:auto;
+}
+header, section {
   border: solid 1px #cccccc;
-  box-shadow: 10px 10px 5px #cccccc;
-  margin:30px auto;
+  border-radius:10px;
+  box-shadow: 5px 5px 5px #cccccc;
 }
 header, section, footer {
   overflow: hidden;
   clear: both;
 }
-body header {
+header {
   background-color: #084989; 
   color: #ffffff; 
   font-weight: normal; 
-  margin: 0; 
+  margin:10px 0 20px 0;
   padding: 1em .5em;
   text-align: center;
 }
 header h1 {
-  font-size:1.5em;
+  font-size:2em;
   margin:0px;
 }
 section {
-  margin:40px;
+  margin: 0px 0px 10px 0px;
+  padding: 0px 30px 30px 30px;
+}
+section h1, section h1 *, section h2, section h3, section h4, section h5, section h6 {
+/*  color: #084989; */
+  color: #0F5494;
+/*  color: #000000; */
 }
 footer {
-  border-top: dotted 1px #cccccc;
-  margin:20px 40px;
-}
-section h1, section h2, section h3, section h4, section h5, section h6, section a {
-  color: #084989;
-}
-#input-box a.info {
-  background-color:#084989;
-  color:#ffffff;
-  display:inline-block;
-  padding:0 6px;
-  margin-right:5px;
-  vertical-align:middle;
-  font-size:12px;
-  font-family:serif;
-  border:2px solid #97cdf9;
-  border-radius:10px;
-  text-decoration:none;
+  margin: 40px 20px 60px 20px;
+  font-size: .8em;
+  text-align: center;
 }
 h1, h2, h3 {
   font-weight:normal;
+}
+dt, dt * {
+  color: #777777;
 }
 input, textarea, select {
   color: #444444;
@@ -55,27 +52,23 @@ input, textarea, select {
 input, select {
   font-size:1em;
 }
-code, pre, textarea {
-  font-family: Lucida Console, monospace;
-}
 #src {
   font-size:1.4em;
   width: 100%;
-}
-a {
-  color: #444444;
-}
-dt, dt * {
-  color: #777777;
-}
-.record, .metadata {
-  border: solid 1px #cccccc;
-  box-shadow: 2px 2px 2px #cccccc;
-  margin: 0px 0px 10px 0px;
-  padding: 0px 30px 30px 30px;
 }
 a, code, pre {
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-all;
 }
+a {
+  color: #0f5494;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+code, pre, textarea {
+  font-family: monospace;
+}
+
