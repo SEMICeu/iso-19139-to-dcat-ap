@@ -118,18 +118,32 @@
 
   <xsl:variable name="lowercase">abcdefghijklmnopqrstuvwxyz</xsl:variable>
   <xsl:variable name="uppercase">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
+
+<!-- URIs and URNs for spatial reference system registers. -->
   
+  <xsl:param name="EpsgSrsBaseUri">http://www.opengis.net/def/crs/EPSG/0/</xsl:param>
+  <xsl:param name="EpsgSrsBaseUrn">urn:ogc:def:crs:EPSG</xsl:param>
+  <xsl:param name="OgcSrsBaseUri">http://www.opengis.net/def/crs/OGC/</xsl:param>
+  <xsl:param name="OgcSrsBaseUrn">urn:ogc:def:crs:OGC</xsl:param>
+  
+<!-- URI and URN for CRS84. -->
+
+  <xsl:param name="Crs84Uri" select="concat($OgcSrsBaseUri,'1.3/CRS84')"/>
+  <xsl:param name="Crs84Urn" select="concat($OgcSrsBaseUrn,':1.3:CRS84')"/>
+
+<!-- URI and URN for ETRS89. -->
+
+  <xsl:param name="Etrs89Uri" select="concat($EpsgSrsBaseUri,'4258')"/>
+  <xsl:param name="Etrs89Urn" select="concat($EpsgSrsBaseUrn,'::4258')"/>
+
 <!-- URI and URN of the spatial reference system (SRS) used in the bounding box.
      The default SRS is CRS84. If a different SRS is used, also parameter 
      $SrsAxisOrder must be specified. -->
 
-<!-- Old param
-  <xsl:param name="srid">4326</xsl:param>
--->  
 <!-- The SRS URI is used in the WKT and GML encodings of the bounding box. -->
-  <xsl:param name="SrsUri">http://www.opengis.net/def/crs/OGC/1.3/CRS84</xsl:param>
+  <xsl:param name="SrsUri" select="$Crs84Uri"/>
 <!-- The SRS URN is used in the GeoJSON encoding of the bounding box. -->
-  <xsl:param name="SrsUrn">urn:ogc:def:crs:OGC:1.3:CRS84</xsl:param>
+  <xsl:param name="SrsUrn" select="$Crs84Urn"/>
 
 <!-- Axis order for the reference SRS: 
      - "LonLat": longitude / latitude
@@ -174,8 +188,6 @@
   <xsl:param name="cldFrequency">http://purl.org/cld/freq/</xsl:param>
 <!-- This is used as the datatype for the GeoJSON-based encoding of the bounding box. -->
   <xsl:param name="geojsonMediaTypeUri">https://www.iana.org/assignments/media-types/application/vnd.geo+json</xsl:param>
-
-  <xsl:param name="SrsBaseUri">http://www.opengis.net/def/crs/EPSG/0/</xsl:param>
 
 <!-- INSPIRE code list URIs -->  
   
@@ -1968,12 +1980,21 @@
       </xsl:when>
       <xsl:when test="starts-with($code, 'urn:')">
         <xsl:choose>
-          <xsl:when test="starts-with(translate($code,$uppercase,$lowercase), 'urn:ogc:def:crs:epsg:')">
+          <xsl:when test="starts-with(translate($code,$uppercase,$lowercase), translate($EpsgSrsBaseUrn,$uppercase,$lowercase))">
             <xsl:variable name="srid" select="substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($code,':'),':'),':'),':'),':'),':')"/>
+            <xsl:variable name="sridVersion" select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($code,':'),':'),':'),':'),':'),':')"/>
             <dct:conformsTo>
-              <rdf:Description rdf:about="{$SrsBaseUri}{$srid}">
+              <rdf:Description rdf:about="{$EpsgSrsBaseUri}{$srid}">
                 <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
                 <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
+                <skos:inScheme>
+                  <skos:ConceptScheme rdf:about="{$EpsgSrsBaseUri}">
+                    <dct:title xml:lang="en">EPSG</dct:title>
+                  </skos:ConceptScheme>
+                </skos:inScheme>
+                <xsl:if test="$sridVersion != ''">
+                  <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$sridVersion"/></owl:versionInfo>
+                </xsl:if>
               </rdf:Description>
             </dct:conformsTo>
           </xsl:when>
@@ -1996,20 +2017,74 @@
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
-        <dct:conformsTo rdf:parseType="Resource">
-          <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
-          <skos:prefLabel xml:lang="{$MetadataLanguage}"><xsl:value-of select="$code"/></skos:prefLabel>
-          <xsl:if test="$codespace != ''">
-            <skos:inScheme>
-              <skos:ConceptScheme>
-                <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></dct:title>
-              </skos:ConceptScheme>
-            </skos:inScheme>
-          </xsl:if>
-          <xsl:if test="$version != ''">
-            <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
-          </xsl:if>
-        </dct:conformsTo>
+        <xsl:choose>
+          <xsl:when test="$code = number($code) and (translate($codespace,$uppercase,$lowercase) = 'epsg' or starts-with(translate($codespace,$uppercase,$lowercase),translate($EpsgSrsBaseUrn,$uppercase,$lowercase)))">
+            <dct:conformsTo>
+              <rdf:Description rdf:about="{$EpsgSrsBaseUri}{$code}">
+                <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
+                <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="concat($EpsgSrsBaseUrn,':',$version,':',$code)"/></dct:identifier>
+                <skos:inScheme>
+                  <skos:ConceptScheme rdf:about="{$EpsgSrsBaseUri}">
+                    <dct:title xml:lang="en">EPSG</dct:title>
+                  </skos:ConceptScheme>
+                </skos:inScheme>
+                <xsl:if test="$version != ''">
+                  <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
+                </xsl:if>
+              </rdf:Description>
+            </dct:conformsTo>
+          </xsl:when>
+          <xsl:when test="translate(normalize-space(translate($code,$uppercase,$lowercase)),': ','') = 'etrs89'">
+            <dct:conformsTo>
+              <rdf:Description rdf:about="{$Etrs89Uri}">
+                <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
+                <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$Etrs89Urn"/></dct:identifier>
+                <skos:prefLabel xml:lang="en">ETRS89 - European Terrestrial Reference System 1989</skos:prefLabel>
+                <skos:inScheme>
+                  <skos:ConceptScheme rdf:about="{$EpsgSrsBaseUri}">
+                    <dct:title xml:lang="en">EPSG</dct:title>
+                  </skos:ConceptScheme>
+                </skos:inScheme>
+                <xsl:if test="$version != ''">
+                  <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
+                </xsl:if>
+              </rdf:Description>
+            </dct:conformsTo>
+          </xsl:when>
+          <xsl:when test="translate(normalize-space(translate($code,$uppercase,$lowercase)),': ','') = 'crs84'">
+            <dct:conformsTo>
+              <rdf:Description rdf:about="{$Crs84Uri}">
+                <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
+                <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$Crs84Urn"/></dct:identifier>
+                <skos:prefLabel xml:lang="en">CRS84</skos:prefLabel>
+                <skos:inScheme>
+                  <skos:ConceptScheme rdf:about="{$OgcSrsBaseUri}">
+                    <dct:title xml:lang="en">OGC</dct:title>
+                  </skos:ConceptScheme>
+                </skos:inScheme>
+                <xsl:if test="$version != ''">
+                  <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
+                </xsl:if>
+              </rdf:Description>
+            </dct:conformsTo>
+          </xsl:when>
+          <xsl:otherwise>
+            <dct:conformsTo rdf:parseType="Resource">
+              <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
+              <skos:prefLabel xml:lang="{$MetadataLanguage}"><xsl:value-of select="$code"/></skos:prefLabel>
+              <xsl:if test="$codespace != ''">
+                <skos:inScheme>
+                  <skos:ConceptScheme>
+                    <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$codespace"/></dct:title>
+                  </skos:ConceptScheme>
+                </skos:inScheme>
+              </xsl:if>
+              <xsl:if test="$version != ''">
+                <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$version"/></owl:versionInfo>
+              </xsl:if>
+            </dct:conformsTo>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
