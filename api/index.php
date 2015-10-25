@@ -274,7 +274,7 @@
           </select>
           <input style="float:right" type="submit" id="transform" value="Transform"/>
         </h1>
-        <p><input type="url" required="required" id="src" name="src" title="Copy &amp; paste the URL of ISO 19139 records" placeholder="Copy &amp; paste the URL of ISO 19139 records" value="<?php echo $exampleSrcURL?>"/></p>
+        <p><input type="url" required="required" autofocus="autofocus" id="src" name="src" title="Copy &amp; paste the URL of ISO 19139 records" placeholder="Copy &amp; paste the URL of ISO 19139 records" value="<?php echo $exampleSrcURL?>"/></p>
         <p style="float:right;">
           <label for="outputFormat">Output format : </label>
           <select id="outputFormat" name="outputFormat">
