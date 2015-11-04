@@ -222,7 +222,10 @@
 
     if ($outputFormat == 'text/html') {
       $xml = new DOMDocument;
-      $xml->loadXML($graph->serialise("rdfxml")) or die();
+// From the raw RDF/XML output of the XSLT
+      $xml->loadXML($rdf) or die();
+// From the re-serialised RDF/XML output of the XSLT
+//      $xml->loadXML($graph->serialise("rdfxml")) or die();
       $xsl = new DOMDocument;
       $xsl->load($rdf2rdfa);
       $proc = new XSLTProcessor();
