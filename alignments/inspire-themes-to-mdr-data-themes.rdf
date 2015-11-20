@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="./skos-matches-to-html.xsl"?>
+<rdf:RDF xmlns:align="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcat="http://www.w3.org/ns/dcat#"
+         xmlns:dct="http://purl.org/dc/terms/"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+  <rdf:Description rdf:about="">
+    <rdf:type rdf:resource="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#Alignment"/>
+    <align:onto1 rdf:resource="http://inspire.ec.europa.eu/theme"/>
+    <align:onto2 rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+    <rdfs:label xml:lang="en">Alignments between the INSPIRE spatial data themes and the MDR data themes</rdfs:label>    
+    <dcat:distribution>
+      <dcat:Distribution>
+        <dcat:accessURL rdf:resource="https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/alignments/inspire-themes-to-mdr-data-themes.rdf?raw"/>
+        <dct:format rdf:resource="http://www.w3.org/ns/formats/data/RDF_XML"/>
+      </dcat:Distribution>
+    </dcat:distribution>
+  </rdf:Description>
+
+<!-- Aligned thesauri -->  
+  
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme">
+    <align:location rdf:datatype="{$xsd}anyURI">http://inspire.ec.europa.eu/theme/theme.en.rdf</align:location>
+    <dcat:distribution>
+      <dcat:Distribution>
+        <dcat:accessURL rdf:resource="http://inspire.ec.europa.eu/theme/theme.en.rdf"/>
+        <dct:format rdf:resource="http://www.w3.org/ns/formats/data/RDF_XML"/>
+      </dcat:Distribution>
+    </dcat:distribution>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/data-theme">
+    <align:location rdf:datatype="{$xsd}anyURI">http://publications.europa.eu/mdr/resource/authority/data-theme/skos/data-theme-skos.rdf</align:location>
+    <dcat:distribution>
+      <dcat:Distribution>
+        <dcat:accessURL rdf:resource="http://publications.europa.eu/mdr/resource/authority/data-theme/skos/data-theme-skos.rdf"/>
+        <dct:format rdf:resource="http://www.w3.org/ns/formats/data/RDF_XML"/>
+      </dcat:Distribution>
+    </dcat:distribution>
+  </rdf:Description>
+
+<!-- Alignements -->  
+  
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/ad">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/au">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/rs">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/gg">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/cp">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/gn">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/hy">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/ps">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/tn">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TRAN"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/el">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/ge">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/lc">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/oi">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/af">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/AGRI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/am">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/ac">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/br">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/bu">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/er">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENER"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/ef">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/hb">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/hh">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/HEAL"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/lu">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/mr">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/nz">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/of">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/pd">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/pf">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/sr">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/so">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/sd">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/su">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/us">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/mf">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+  </rdf:Description>
+
+</rdf:RDF>
