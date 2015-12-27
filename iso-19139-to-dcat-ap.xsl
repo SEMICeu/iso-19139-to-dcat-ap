@@ -243,7 +243,7 @@
 -->  
 
   <xsl:param name="ResourceUri">
-    <xsl:variable name="rURI" select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString"/>
+    <xsl:variable name="rURI" select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gco:CharacterString"/>
     <xsl:if test="$rURI != '' and ( starts-with($rURI, 'http://') or starts-with($rURI, 'https://') )">
       <xsl:value-of select="$rURI"/>
     </xsl:if>
@@ -466,13 +466,13 @@
     </xsl:param>
 
     <xsl:param name="UniqueResourceIdentifier">
-      <xsl:for-each select="gmd:identificationInfo[1]/*/gmd:citation/*/gmd:identifier/gmd:RS_Identifier">
+      <xsl:for-each select="gmd:identificationInfo[1]/*/gmd:citation/*/gmd:identifier/*">
         <xsl:choose>
           <xsl:when test="gmd:codeSpace/gco:CharacterString/text() != ''">
-            <xsl:value-of select="concat(translate(gmd:codeSpace/gco:CharacterString/text(),' ','%20'),translate(gmd:code/gco:CharacterString/text(),' ','%20'))"/>
+            <xsl:value-of select="concat(gmd:codeSpace/gco:CharacterString/text(),gmd:code/gco:CharacterString/text())"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="translate(gmd:code/gco:CharacterString/text(),' ','%20')"/>
+            <xsl:value-of select="gmd:code/gco:CharacterString/text()"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
@@ -754,7 +754,7 @@
       </xsl:apply-templates>
 <!-- Identifier, 0..1 -->
 <!--        
-      <xsl:apply-templates select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:RS_Identifier">
+      <xsl:apply-templates select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
       </xsl:apply-templates>
 -->        
@@ -766,7 +766,7 @@
       </xsl:apply-templates>
 -->      
 <!-- Unique Resource Identifier -->
-      <xsl:apply-templates select="gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/gmd:RS_Identifier"/>
+      <xsl:apply-templates select="gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*"/>
 <!-- Coupled resources -->
       <xsl:apply-templates select="gmd:identificationInfo[1]/*/srv:operatesOn">
         <xsl:with-param name="ResourceType" select="$ResourceType"/>
@@ -820,9 +820,11 @@
         </dct:provenance>
       </xsl:if>
 <!-- Coordinate and temporal reference systems (tentative) -->      
-      <xsl:apply-templates select="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier">
-        <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
-      </xsl:apply-templates>
+      <xsl:if test="$profile = 'extended'">
+        <xsl:apply-templates select="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier">
+          <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
+        </xsl:apply-templates>
+      </xsl:if>
 <!-- Spatial resolution -->
       <xsl:if test="$profile = 'extended'">
         <xsl:apply-templates select="gmd:identificationInfo/*/gmd:spatialResolution/gmd:MD_Resolution"/>
@@ -975,7 +977,7 @@
   
 <!-- Unique Resource Identifier -->  
   
-  <xsl:template name="UniqueResourceIdentifier" match="gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/gmd:RS_Identifier">
+  <xsl:template name="UniqueResourceIdentifier" match="gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*">
     <xsl:param name="ns">
       <xsl:value-of select="gmd:codeSpace/gco:CharacterString"/>
     </xsl:param>
@@ -987,15 +989,15 @@
         <xsl:when test="$ns != ''">
           <xsl:choose>
             <xsl:when test="substring($ns,string-length($ns),1) = '/'">
-          <xsl:value-of select="concat(translate($ns,' ','%20'),translate($code,' ','%20'))"/>
+          <xsl:value-of select="concat($ns,$code)"/>
             </xsl:when>
             <xsl:otherwise>
-          <xsl:value-of select="concat(translate($ns,' ','%20'),'/',translate($code,' ','%20'))"/>
+          <xsl:value-of select="concat($ns,'/',$code)"/>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="translate($code,' ','%20')"/>
+          <xsl:value-of select="$code"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:param>
