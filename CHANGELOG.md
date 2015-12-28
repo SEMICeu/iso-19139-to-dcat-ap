@@ -2,6 +2,11 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2015-12-28: Revised version (v1.8)
+* Fixed bug concerning the mapping of white spaces in URLs into their %-escaped encoding.
+* Made the Unique Resource Identifier more generic, to match both `gmd:MD_Identifier` and `gmd:RS_identifier`.
+* Moved coordinate and reference systems mappings to the extended profile only.
+
 ## 2015-10-26: Revised version (v1.7)
 * Mapping of coupled resources tentatively revised, taking into account the use of the `@uriref` and `@xlink:href` attributes.
 * OGC's URNs for spatial reference systems are mapped to the corresponding HTTP URIs.
