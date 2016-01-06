@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:align="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcat="http://www.w3.org/ns/dcat#"
+         xmlns:dct="http://purl.org/dc/terms/"
+         xmlns:adms="http://www.w3.org/ns/adms#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+  <rdf:Description rdf:about="">
+    <rdf:type rdf:resource="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#Alignment"/>
+    <align:onto1 rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory"/>
+    <align:onto2 rdf:resource="http://inspire.ec.europa.eu/theme"/>
+    <rdfs:label xml:lang="en">Alignments between the ISO 19115 topic categories and the INSPIRE spatial data themes, as per the INSPIRE Metadata Regulation (OJ L 326, 4.12.2008, pp. 12-30)</rdfs:label>    
+    <rdfs:isDefinedBy rdf:resource="http://eur-lex.europa.eu/eli/reg/com/2008/1205#d1e1056-14-1"/>
+    <adms:status rdf:resource="http://purl.org/adms/status/UnderDevelopment"/>
+    <dcat:distribution>
+      <dcat:Distribution>
+        <dcat:accessURL rdf:resource="https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/alignments/iso-topic-categories-to-inspire-themes.rdf?raw"/>
+        <dct:format rdf:resource="http://www.w3.org/ns/formats/data/RDF_XML"/>
+      </dcat:Distribution>
+    </dcat:distribution>
+  </rdf:Description>
+
+<!-- Aligned thesauri -->  
+  
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory">
+    <align:location rdf:datatype="{$xsd}anyURI">http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/TopicCategory.en.rdf</align:location>
+    <dcat:distribution>
+      <dcat:Distribution>
+        <dcat:accessURL rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/TopicCategory.en.rdf"/>
+        <dct:format rdf:resource="http://www.w3.org/ns/formats/data/RDF_XML"/>
+      </dcat:Distribution>
+    </dcat:distribution>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme">
+    <align:location rdf:datatype="{$xsd}anyURI">http://inspire.ec.europa.eu/theme/theme.en.rdf</align:location>
+    <dcat:distribution>
+      <dcat:Distribution>
+        <dcat:accessURL rdf:resource="http://inspire.ec.europa.eu/theme/theme.en.rdf"/>
+        <dct:format rdf:resource="http://www.w3.org/ns/formats/data/RDF_XML"/>
+      </dcat:Distribution>
+    </dcat:distribution>
+  </rdf:Description>
+
+<!-- Alignements -->  
+  
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/biota">
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/br"/>
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/hb"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/sd"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/boundaries">
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/au"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/su"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/climatologyMeteorologyAtmosphere">
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/ac"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/mf"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/economy">
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/er"/>
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/mr"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/elevation">
+    <skos:exactMatch rdf:resource="http://inspire.ec.europa.eu/theme/el"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/environment">
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/ps"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/farming">
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/af"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/geoscientificInformation">
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/ge"/>
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/nz"/>
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/so"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/health">
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/hh"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/imageryBaseMapsEarthCover">
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/lc"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/oi"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/inlandWaters">
+    <skos:broadMatch rdf:resource="http://inspire.ec.europa.eu/theme/hy"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/location">
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/ad"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/gn"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/oceans">
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/of"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/sr"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/planningCadastre">
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/am"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/cp"/>
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/lu"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/society">
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/pd"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/structure">
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/bu"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/ef"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/pf"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/transportation">
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/tn"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/utilitiesCommunication">
+    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/us"/>
+  </rdf:Description>
+
+</rdf:RDF>
