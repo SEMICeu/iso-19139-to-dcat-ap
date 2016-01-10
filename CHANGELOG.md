@@ -2,6 +2,15 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2016-01-11: Revised version (v1.9)
+* Revised mapping of coupled resources, as per GeoDCAT-AP 1.0: 
+    * Coupled resources are referred to by using their resource identifier, retrieved at runtime from the metadata record linked from `srv:operatesOn/@xlink:href`. 
+    * When this attribute is not specified, the XSLT verifies is the relevant part of the `gmd:MD_Identification` section is specified as child of `srv:operatesOn`. 
+    * Otherwise, the value of attribute `srv:operatesOn/@uuidref` is used, if available. 
+    * The mapping takes also into account the coupled resource URI possibly specified with attribute `srv:operatesOn/@:uriref`. This option might be revised in the future, based on the new version of the INSPIRE Metadata Technical Guidelines.
+* Relaxed the identification of metadata and resource languages, by considering also when specified by using `gmd:language/gco:CharacterString`.
+* Revised mapping of responsible party roles 'author' and 'originator', as per GeoDCAT-AP 1.0. Role 'author' is now mapped to `dct:creator`; role 'originator', originally mapped to `dct:creator`, is modelled only by using the PROV-based mapping. 
+
 ## 2015-12-28: Revised version (v1.8)
 * Fixed bug concerning the mapping of white spaces in URLs into their %-escaped encoding.
 * Made the Unique Resource Identifier more generic, to match both `gmd:MD_Identifier` and `gmd:RS_identifier`.
