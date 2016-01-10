@@ -1094,11 +1094,13 @@
         </rdarole:distributor>
       </xsl:when>
 -->        
-      <xsl:when test="$role = 'originator' and $ResourceType != 'service'">
+<!--
+      <xsl:when test="$role = 'originator' and $profile = 'extended'">
         <dct:creator>
           <xsl:copy-of select="$ROInfo"/>
         </dct:creator>
       </xsl:when>
+-->      
       <xsl:when test="$role = 'pointOfContact' and $ResourceType != 'service'">
         <dcat:contactPoint>
           <xsl:copy-of select="$ResponsibleParty"/>
@@ -1131,13 +1133,11 @@
           <xsl:copy-of select="$ROInfo"/>
         </dct:publisher>
       </xsl:when>
-<!--      
-      <xsl:when test="$role = 'author'">
-        <rdarole:author>
+      <xsl:when test="$role = 'author' and $profile = 'extended'">
+        <dct:creator>
           <xsl:copy-of select="$ROInfo"/>
-        </rdarole:author>
+        </dct:creator>
       </xsl:when>
--->        
     </xsl:choose>
     <xsl:if test="$profile = 'extended'">
       <prov:qualifiedAttribution>
