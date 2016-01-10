@@ -1241,23 +1241,6 @@
 
   <xsl:template name="CoupledResource" match="gmd:identificationInfo[1]/*/srv:operatesOn">
     <xsl:param name="href" select="@xlink:href"/>
-<!--    
-    <xsl:param name="uuidref">
-      <xsl:choose>
-        <xsl:when test="$href != ''">
-          <xsl:variable name="code" select="document($href)//gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:code/gco:CharacterString"/>
-          <xsl:variable name="codeSpace" select="document($href)//gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:codeSpace/gco:CharacterString"/>
-          <xsl:value-of select="concat($codeSpace, $code)"/>
-        </xsl:when>
-        <xsl:when test="@uuidref != ''">
-          <xsl:value-of select="@uuidref"/>
-        </xsl:when>
-        <xsl:when test="*/gmd:code/gco:CharacterString != ''">
-          <xsl:value-of select="concat(*/gmd:codeSpace/gco:CharacterString, */gmd:code/gco:CharacterString)"/>
-        </xsl:when>
-      </xsl:choose>
-    </xsl:param>
--->    
     <xsl:param name="code">
       <xsl:choose>
         <xsl:when test="$href != ''">
