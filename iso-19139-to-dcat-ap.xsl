@@ -266,7 +266,17 @@
 <!-- Metadata language: corresponding Alpha-2 codes -->
   
     <xsl:param name="ormlang">
-      <xsl:value-of select="gmd:language/gmd:LanguageCode/@codeListValue"/>
+      <xsl:choose>
+        <xsl:when test="gmd:language/gmd:LanguageCode/@codeListValue != ''">
+          <xsl:value-of select="translate(gmd:language/gmd:LanguageCode/@codeListValue,$uppercase,$lowercase)"/>
+        </xsl:when>
+        <xsl:when test="gmd:language/gmd:LanguageCode != ''">
+          <xsl:value-of select="translate(gmd:language/gmd:LanguageCode,$uppercase,$lowercase)"/>
+        </xsl:when>
+        <xsl:when test="gmd:language/gco:CharacterString != ''">
+          <xsl:value-of select="translate(gmd:language/gco:CharacterString,$uppercase,$lowercase)"/>
+        </xsl:when>
+      </xsl:choose>
     </xsl:param>
     
     <xsl:param name="MetadataLanguage">
@@ -352,8 +362,19 @@
 <!-- Resource language: corresponding Alpha-2 codes -->
 
     <xsl:param name="orrlang">
-      <xsl:value-of select="gmd:identificationInfo/*/gmd:language/gmd:LanguageCode/@codeListValue"/>
+      <xsl:choose>
+        <xsl:when test="gmd:identificationInfo/*/gmd:language/gmd:LanguageCode/@codeListValue != ''">
+          <xsl:value-of select="translate(gmd:identificationInfo/*/gmd:language/gmd:LanguageCode/@codeListValue,$uppercase,$lowercase)"/>
+        </xsl:when>
+        <xsl:when test="gmd:identificationInfo/*/gmd:language/gmd:LanguageCode != ''">
+          <xsl:value-of select="translate(gmd:identificationInfo/*/gmd:language/gmd:LanguageCode,$uppercase,$lowercase)"/>
+        </xsl:when>
+        <xsl:when test="gmd:identificationInfo/*/gmd:language/gco:CharacterString != ''">
+          <xsl:value-of select="translate(gmd:identificationInfo/*/gmd:language/gco:CharacterString,$uppercase,$lowercase)"/>
+        </xsl:when>
+      </xsl:choose>
     </xsl:param>
+
     <xsl:param name="ResourceLanguage">
       <xsl:choose>
         <xsl:when test="$orrlang = 'bul'">
@@ -1219,19 +1240,77 @@
 <!-- Coupled resource -->
 
   <xsl:template name="CoupledResource" match="gmd:identificationInfo[1]/*/srv:operatesOn">
-<!--  
-    <dcat:dataset rdf:resource="{@xlink:href}"/>
+    <xsl:param name="href" select="@xlink:href"/>
+<!--    
+    <xsl:param name="uuidref">
+      <xsl:choose>
+        <xsl:when test="$href != ''">
+          <xsl:variable name="code" select="document($href)//gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:code/gco:CharacterString"/>
+          <xsl:variable name="codeSpace" select="document($href)//gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:codeSpace/gco:CharacterString"/>
+          <xsl:value-of select="concat($codeSpace, $code)"/>
+        </xsl:when>
+        <xsl:when test="@uuidref != ''">
+          <xsl:value-of select="@uuidref"/>
+        </xsl:when>
+        <xsl:when test="*/gmd:code/gco:CharacterString != ''">
+          <xsl:value-of select="concat(*/gmd:codeSpace/gco:CharacterString, */gmd:code/gco:CharacterString)"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:param>
 -->    
+    <xsl:param name="code">
+      <xsl:choose>
+        <xsl:when test="$href != ''">
+          <xsl:value-of select="document($href)//gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:code/gco:CharacterString"/>
+        </xsl:when>
+        <xsl:when test="*/gmd:citation/*/gmd:identifier/*/gmd:code/gco:CharacterString != ''">
+          <xsl:value-of select="*/gmd:citation/*/gmd:identifier/*/gmd:code/gco:CharacterString"/>
+        </xsl:when>
+        <xsl:when test="@uuidref != ''">
+          <xsl:value-of select="@uuidref"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:param>
+    <xsl:param name="codespace">
+      <xsl:choose>
+        <xsl:when test="$href != ''">
+          <xsl:value-of select="document($href)//gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:codeSpace/gco:CharacterString"/>
+        </xsl:when>
+        <xsl:when test="*/gmd:citation/*/gmd:identifier/*/gmd:codeSpace/gco:CharacterString != ''">
+          <xsl:value-of select="*/gmd:citation/*/gmd:identifier/*/gmd:codeSpace/gco:CharacterString"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:param>
+    <xsl:param name="resID" select="concat($codespace, $code)"/>
+    <xsl:param name="uriref" select="@uriref"/>
     <xsl:choose>
-      <xsl:when test="@uriref">
+<!-- The use of @uriref is still under discussion by the INSPIRE MIG. -->    
+      <xsl:when test="$uriref != ''">
         <dct:hasPart rdf:resource="{@uriref}"/>
       </xsl:when>
-      <xsl:when test="@xlink:href">
-        <dct:hasPart rdf:parseType="Resource">
-          <foaf:isPrimaryTopicOf>
-            <dcat:CatalogRecord rdf:about="{@xlink:href}"/>
-          </foaf:isPrimaryTopicOf>
-        </dct:hasPart>
+      <xsl:when test="$code != ''">
+        <xsl:choose>
+          <xsl:when test="starts-with($code, 'http://') or starts-with($code, 'https://')">
+            <dct:hasPart rdf:resource="{$code}"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <dct:hasPart rdf:parseType="Resource">
+              <xsl:choose>
+                <xsl:when test="starts-with($resID, 'http://') or starts-with($resID, 'https://')">
+                  <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$resID"/></dct:identifier>
+                </xsl:when>
+                <xsl:otherwise>
+                  <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$resID"/></dct:identifier>
+                </xsl:otherwise>
+              </xsl:choose>
+              <xsl:if test="$href != ''">
+                <foaf:isPrimaryTopicOf>
+                  <dcat:CatalogRecord rdf:about="{$href}"/>
+                </foaf:isPrimaryTopicOf>
+              </xsl:if>
+            </dct:hasPart>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:when>
     </xsl:choose>
   </xsl:template>
