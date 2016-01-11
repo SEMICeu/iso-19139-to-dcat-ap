@@ -883,7 +883,7 @@
                 </xsl:for-each>
               </xsl:variable>
               <xsl:choose>
-                <xsl:when test="$function = 'download'or $function = 'offlineAccess' or $function = 'order'"> 
+                <xsl:when test="$function = 'download' or $function = 'offlineAccess' or $function = 'order'"> 
                   <dcat:distribution>
                     <dcat:Distribution>
 <!-- Title and description -->
