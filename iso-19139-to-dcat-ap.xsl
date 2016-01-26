@@ -86,7 +86,7 @@
   Mapping parameters
   ==================
   
-  This section includes mapping parameters to be modified manually. 
+  This section includes mapping parameters by the XSLT processor used, or, possibly, manually. 
 
 -->
 
@@ -109,6 +109,31 @@
 -->
 <!-- Uncomment to use GeoDCAT-AP Extended -->
   <xsl:param name="profile">extended</xsl:param>
+
+
+<!-- Parameter $CoupledResourceLookUp -->
+<!--
+
+  This parameter specifies whether the coupled resource, referenced via @xlink:href, should be looked up to fetch the resource's  unique resource identifier (i.e., code and code space). More precisely:
+  - value "enabled": The coupled resource is looked up
+  - value "disabled": The coupled resource is not looked up
+
+  The default value is "enabled" for GeoDCAT-AP Extended, and "disabled" otherwise.
+
+  CAVEAT: Using this feature may cause the transformation to hang, in case the URL in @xlink:href is broken, the request hangs indefinitely, or does not return the expected resource (e.g., and HTML page, instead of an XML-encoded ISO 19139 record). It is strongly recommended that this issue is dealt with by using appropriate configuration parameters and error handling (e.g., by specifying a timeout on HTTP calls and by setting the HTTP Accept header to "application/xml").
+
+-->
+
+  <xsl:param name="CoupledResourceLookUp">
+    <xsl:choose>
+      <xsl:when test="$profile = 'extended'">
+        <xsl:text>enabled</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>disabled</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:param>
 
 <!--
 
@@ -1246,7 +1271,7 @@
     <xsl:param name="href" select="@xlink:href"/>
     <xsl:param name="code">
       <xsl:choose>
-        <xsl:when test="$href != ''">
+        <xsl:when test="$CoupledResourceLookUp = 'enabled' and $href != '' and (starts-with($href, 'http://') or starts-with($href, 'https://'))">
           <xsl:value-of select="document($href)//gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:code/gco:CharacterString"/>
         </xsl:when>
         <xsl:when test="*/gmd:citation/*/gmd:identifier/*/gmd:code/gco:CharacterString != ''">
@@ -1259,7 +1284,7 @@
     </xsl:param>
     <xsl:param name="codespace">
       <xsl:choose>
-        <xsl:when test="$href != ''">
+        <xsl:when test="$CoupledResourceLookUp = 'enabled' and $href != '' and (starts-with($href, 'http://') or starts-with($href, 'https://'))">
           <xsl:value-of select="document($href)//gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:codeSpace/gco:CharacterString"/>
         </xsl:when>
         <xsl:when test="*/gmd:citation/*/gmd:identifier/*/gmd:codeSpace/gco:CharacterString != ''">
@@ -1289,7 +1314,7 @@
                   <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$resID"/></dct:identifier>
                 </xsl:otherwise>
               </xsl:choose>
-              <xsl:if test="$href != ''">
+              <xsl:if test="$href != '' and $href != '' and (starts-with($href, 'http://') or starts-with($href, 'https://'))">
                 <foaf:isPrimaryTopicOf>
                   <dcat:CatalogRecord rdf:about="{$href}"/>
                 </foaf:isPrimaryTopicOf>
