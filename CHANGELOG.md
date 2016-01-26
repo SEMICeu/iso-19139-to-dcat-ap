@@ -2,7 +2,7 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
-## 2016-01-25: Revised version (v1.10)
+## 2016-01-26: Revised version (v1.10)
 * Added variables storing the IDs of the GeoDCAT-AP core and extended profiles. These variables are now used instead of the actual IDs in the XSLT, whenever checks are made to identify the selected profile.
 * Revised handling of coupled resources: 
     * Added global parameter `$CoupledResourceLookUp` to enable / disable coupled resources' lookup.
