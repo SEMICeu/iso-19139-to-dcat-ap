@@ -83,6 +83,23 @@
 
 <!--
 
+  Global variables
+  ================
+
+-->
+
+<!-- Variables $core and $extended. -->
+<!--
+
+  These variables are meant to be placeholders for the IDs used for the core and extended profiles of GeoDCAT-AP.
+  
+-->
+
+  <xsl:variable name="core">core</xsl:variable>
+  <xsl:variable name="extended">extended</xsl:variable>
+
+<!--
+
   Mapping parameters
   ==================
   
@@ -105,10 +122,10 @@
 
 <!-- Uncomment to use GeoDCAT-AP Core -->
 <!--
-  <xsl:param name="profile">core</xsl:param>
+  <xsl:param name="profile" select="$core"/>
 -->
 <!-- Uncomment to use GeoDCAT-AP Extended -->
-  <xsl:param name="profile">extended</xsl:param>
+  <xsl:param name="profile" select="$extended"/>
 
 
 <!-- Parameter $CoupledResourceLookUp -->
@@ -126,7 +143,7 @@
 
   <xsl:param name="CoupledResourceLookUp">
     <xsl:choose>
-      <xsl:when test="$profile = 'extended'">
+      <xsl:when test="$profile = $extended">
         <xsl:text>enabled</xsl:text>
       </xsl:when>
       <xsl:otherwise>
@@ -694,19 +711,19 @@
         </dct:modified>
       </xsl:if>
 <!-- Metadata point of contact: only for the extended profile -->
-      <xsl:if test="$profile = 'extended'">
+      <xsl:if test="$profile = $extended">
         <xsl:apply-templates select="gmd:contact/gmd:CI_ResponsibleParty">
           <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
         </xsl:apply-templates>
       </xsl:if>
 <!-- Metadata file identifier (tentative): only for the extended profile -->
-      <xsl:if test="$profile = 'extended'">
+      <xsl:if test="$profile = $extended">
         <xsl:for-each select="gmd:fileIdentifier/gco:CharacterString">
           <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="."/></dct:identifier>
         </xsl:for-each>  
       </xsl:if>
 <!-- Metadata standard (tentative): only for the extended profile -->
-      <xsl:if test="$profile = 'extended'">
+      <xsl:if test="$profile = $extended">
         <xsl:variable name="MetadataStandardURI" select="gmd:metadataStandardName/gmx:Anchor/@xlink:href"/>
         <xsl:variable name="MetadataStandardName" select="gmd:metadataStandardName/*[self::gco:CharacterString|self::gmx:Anchor]"/>
         <xsl:variable name="MetadataStandardVersion" select="gmd:metadataStandardVersion/gco:CharacterString"/>
@@ -770,7 +787,7 @@
           <rdf:type rdf:resource="{$dcat}Dataset"/>
         </xsl:when>
         <xsl:when test="$ResourceType = 'service'">
-          <xsl:if test="$profile = 'extended'">
+          <xsl:if test="$profile = $extended">
             <rdf:type rdf:resource="{$dctype}Service"/>
           </xsl:if>
           <xsl:if test="$ServiceType = 'discovery'">
@@ -778,7 +795,7 @@
           </xsl:if>
         </xsl:when>
       </xsl:choose>
-      <xsl:if test="$profile = 'extended'">
+      <xsl:if test="$profile = $extended">
         <dct:type rdf:resource="{$ResourceTypeCodelistUri}/{$ResourceType}"/>
       </xsl:if>
       <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$ResourceTitle"/></dct:title>
@@ -790,7 +807,7 @@
         <xsl:apply-templates select="gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode"/>      
       </xsl:for-each>
 <!-- Topic category -->
-      <xsl:if test="$profile = 'extended'">
+      <xsl:if test="$profile = $extended">
         <xsl:apply-templates select="gmd:identificationInfo/*/gmd:topicCategory">
           <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
         </xsl:apply-templates>
@@ -838,7 +855,7 @@
         </xsl:choose>
       </xsl:if>
 <!-- Spatial service type -->
-      <xsl:if test="$ResourceType = 'service' and $profile = 'extended'">
+      <xsl:if test="$ResourceType = 'service' and $profile = $extended">
 <!-- Replaced by param $ServiceType -->
 <!--      
         <xsl:apply-templates select="gmd:identificationInfo/*/srv:serviceType">
@@ -869,13 +886,13 @@
         </dct:provenance>
       </xsl:if>
 <!-- Coordinate and temporal reference systems (tentative) -->      
-      <xsl:if test="$profile = 'extended'">
+      <xsl:if test="$profile = $extended">
         <xsl:apply-templates select="gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier">
           <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
         </xsl:apply-templates>
       </xsl:if>
 <!-- Spatial resolution -->
-      <xsl:if test="$profile = 'extended'">
+      <xsl:if test="$profile = $extended">
         <xsl:apply-templates select="gmd:identificationInfo/*/gmd:spatialResolution/gmd:MD_Resolution"/>
       </xsl:if>
 <!-- Conformity -->
@@ -885,7 +902,7 @@
         <xsl:with-param name="Conformity" select="$Conformity"/>
       </xsl:apply-templates>
       <xsl:choose>
-        <xsl:when test="$ResourceType = 'service' and ($ServiceType = 'discovery' or $profile = 'extended')">
+        <xsl:when test="$ResourceType = 'service' and ($ServiceType = 'discovery' or $profile = $extended)">
           <xsl:copy-of select="$ConstraintsRelatedToAccessAndUse"/>
         </xsl:when>
 <!-- Distributions -->
@@ -927,7 +944,7 @@
 <!-- Encoding -->
                       <xsl:copy-of select="$Encoding"/>
 <!-- Resource character encoding -->
-                      <xsl:if test="$profile = 'extended'">
+                      <xsl:if test="$profile = $extended">
                         <xsl:copy-of select="$ResourceCharacterEncoding"/>
                       </xsl:if>
                     </dcat:Distribution>
@@ -968,7 +985,7 @@
     <xsl:choose>
       <xsl:when test="$ResourceUri != ''">
 <!--      
-        <xsl:if test="$profile = 'extended'"> 
+        <xsl:if test="$profile = $extended"> 
 -->        
           <xsl:choose>
             <xsl:when test="$MetadataUri != ''">
@@ -1010,7 +1027,7 @@
       </xsl:otherwise>
     </xsl:choose>
     
-    <xsl:if test="$profile = 'extended' and $ResourceUri != '' and $Conformity != ''">
+    <xsl:if test="$profile = $extended and $ResourceUri != '' and $Conformity != ''">
       <xsl:copy-of select="$Conformity"/>
     </xsl:if>
     
@@ -1120,7 +1137,7 @@
         </rdarole:custodian>
       </xsl:when>
 -->      
-      <xsl:when test="$role = 'owner' and $profile = 'extended'">
+      <xsl:when test="$role = 'owner' and $profile = $extended">
         <dct:rightsHolder>
           <xsl:copy-of select="$ROInfo"/>
         </dct:rightsHolder>
@@ -1144,7 +1161,7 @@
       </xsl:when>
 -->        
 <!--
-      <xsl:when test="$role = 'originator' and $profile = 'extended'">
+      <xsl:when test="$role = 'originator' and $profile = $extended">
         <dct:creator>
           <xsl:copy-of select="$ROInfo"/>
         </dct:creator>
@@ -1182,13 +1199,13 @@
           <xsl:copy-of select="$ROInfo"/>
         </dct:publisher>
       </xsl:when>
-      <xsl:when test="$role = 'author' and $profile = 'extended'">
+      <xsl:when test="$role = 'author' and $profile = $extended">
         <dct:creator>
           <xsl:copy-of select="$ROInfo"/>
         </dct:creator>
       </xsl:when>
     </xsl:choose>
-    <xsl:if test="$profile = 'extended'">
+    <xsl:if test="$profile = $extended">
       <prov:qualifiedAttribution>
         <prov:Attribution>
           <prov:agent>
@@ -1223,7 +1240,7 @@
     <dcat:contactPoint>
       <xsl:copy-of select="$ResponsibleParty"/>
     </dcat:contactPoint>
-    <xsl:if test="$profile = 'extended'">
+    <xsl:if test="$profile = $extended">
       <prov:qualifiedAttribution>
         <prov:Attribution>
           <prov:agent>
@@ -1384,7 +1401,7 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
-    <xsl:if test="$profile = 'extended'">
+    <xsl:if test="$profile = $extended">
       <xsl:if test="$Conformity != '' and $ResourceUri = ''">
         <xsl:copy-of select="$Conformity"/>
       </xsl:if>
@@ -1647,7 +1664,7 @@
           <xsl:value-of select="$date"/>
         </dct:modified>
       </xsl:when>
-      <xsl:when test="$type = 'creation' and $profile = 'extended'">
+      <xsl:when test="$type = 'creation' and $profile = $extended">
         <dct:created rdf:datatype="{$xsd}date">
           <xsl:value-of select="$date"/>
         </dct:created>
@@ -1693,7 +1710,7 @@
       </xsl:choose>
     </xsl:for-each>
     <xsl:for-each select="gmd:otherConstraints">
-      <xsl:if test="$profile = 'extended'">
+      <xsl:if test="$profile = $extended">
         <dct:accessRights>
           <dct:RightsStatement>
             <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></rdfs:label>
@@ -1731,7 +1748,7 @@
         <xsl:when test="$OriginatingControlledVocabulary = ''">
           <xsl:choose>
             <xsl:when test="$ResourceType = 'service'">
-              <xsl:if test="$profile = 'extended'">
+              <xsl:if test="$profile = $extended">
                 <dc:subject xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></dc:subject>
               </xsl:if>
             </xsl:when>
@@ -1758,7 +1775,7 @@
                   </dcat:theme>
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:if test="$profile = 'extended'">
+                  <xsl:if test="$profile = $extended">
                     <dct:subject rdf:parseType="Resource">
                       <skos:prefLabel xml:lang="{$MetadataLanguage}">
                         <xsl:value-of select="gco:CharacterString"/>
@@ -1792,7 +1809,7 @@
 -->                
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:if test="$profile = 'extended'">
+                  <xsl:if test="$profile = $extended">
                     <dct:subject rdf:resource="{gmx:Anchor/@xlink:href}"/>
                   </xsl:if>
                 </xsl:otherwise>
