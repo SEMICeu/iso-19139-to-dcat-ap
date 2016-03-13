@@ -2,21 +2,24 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2016-03-14: Revised version (v1.11)
+* Revised mapping of keywords: Even if the originating controlled vocabulary is not specified, keywords specified with HTTP URIs via `gmx:Anchor/@xlink:href`, are mapped to `dcat:theme`.
+
 ## 2016-01-26: Revised version (v1.10)
 * Added variables storing the IDs of the GeoDCAT-AP core and extended profiles. These variables are now used instead of the actual IDs in the XSLT, whenever checks are made to identify the selected profile.
-* Revised handling of coupled resources: 
+* Revised handling of coupled resources:
     * Added global parameter `$CoupledResourceLookUp` to enable / disable coupled resources' lookup.
-    * Coupled resources are looked up when (a) parameter `$CoupledResourceLookUp` is set to `enabled` and (b) the value of the `@xlink:href` attribute starts with `http://` or `https://`. 
+    * Coupled resources are looked up when (a) parameter `$CoupledResourceLookUp` is set to `enabled` and (b) the value of the `@xlink:href` attribute starts with `http://` or `https://`.
 * Updated copyright year, and added contributors.
 
 ## 2016-01-11: Revised version (v1.9)
-* Revised mapping of coupled resources, as per GeoDCAT-AP 1.0: 
-    * Coupled resources are referred to by using their resource identifier, retrieved at runtime from the metadata record linked from `srv:operatesOn/@xlink:href`. 
-    * When this attribute is not specified, the XSLT verifies is the relevant part of the `gmd:MD_Identification` section is specified as child of `srv:operatesOn`. 
-    * Otherwise, the value of attribute `srv:operatesOn/@uuidref` is used, if available. 
+* Revised mapping of coupled resources, as per GeoDCAT-AP 1.0:
+    * Coupled resources are referred to by using their resource identifier, retrieved at runtime from the metadata record linked from `srv:operatesOn/@xlink:href`.
+    * When this attribute is not specified, the XSLT verifies is the relevant part of the `gmd:MD_Identification` section is specified as child of `srv:operatesOn`.
+    * Otherwise, the value of attribute `srv:operatesOn/@uuidref` is used, if available.
     * The mapping takes also into account the coupled resource URI possibly specified with attribute `srv:operatesOn/@:uriref`. This option might be revised in the future, based on the new version of the INSPIRE Metadata Technical Guidelines.
 * Relaxed the identification of metadata and resource languages, by considering also when specified by using `gmd:language/gco:CharacterString`.
-* Revised mapping of responsible party roles 'author' and 'originator', as per GeoDCAT-AP 1.0. Role 'author' is now mapped to `dct:creator`; role 'originator', originally mapped to `dct:creator`, is modelled only by using the PROV-based mapping. 
+* Revised mapping of responsible party roles 'author' and 'originator', as per GeoDCAT-AP 1.0. Role 'author' is now mapped to `dct:creator`; role 'originator', originally mapped to `dct:creator`, is modelled only by using the PROV-based mapping.
 
 ## 2015-12-28: Revised version (v1.8)
 * Fixed bug concerning the mapping of white spaces in URLs into their %-escaped encoding.
@@ -30,17 +33,17 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 
 ## 2015-10-09: Revised version (v1.6)
 * Added missing mapping for language codes.
-* Created parameters for bounding box coordinates, to be used in the supported geometry encodings. 
+* Created parameters for bounding box coordinates, to be used in the supported geometry encodings.
 
 ## 2015-10-06: Revised version (v1.5)
-* Fixed bug concerning metadata on metadata. The corresponding RDF snippet was generated irrespective of whether this information was included or not in the original metadata record. 
-* Fixed bug concerning lineage. The corresponding RDF snippet was generated irrespective of whether this information was included or not in the original metadata record. 
+* Fixed bug concerning metadata on metadata. The corresponding RDF snippet was generated irrespective of whether this information was included or not in the original metadata record.
+* Fixed bug concerning lineage. The corresponding RDF snippet was generated irrespective of whether this information was included or not in the original metadata record.
 
 ## 2015-09-03: Revised version (v1.4)
-* Fixed bug concerning resource type. The XSLT wrongly fetched the scope code from the data quality element, instead of the one specified in the hierarchy level element. 
+* Fixed bug concerning resource type. The XSLT wrongly fetched the scope code from the data quality element, instead of the one specified in the hierarchy level element.
 
 ## 2015-08-30: Revised version (v1.3)
-* Removed unused namespaces. 
+* Removed unused namespaces.
 
 ## 2015-08-24: Revised version (v1.2)
 * Fixed bug concerning constraints related to access and use, when a URI/URL is not provided. The XSLT wrongly selected the content of `gmx:Anchor` instead of `gco:CharacterString`.
@@ -75,7 +78,7 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 * Added mapping for spatial resolution, by using `rdfs:comment` with a human-readable presentation of distance or equivalent scale. This includes mappings from EPSG codes / OGC URNs to UCUM codes (for units of measure).
 * Revised mapping of geographic identifier, based on whether the geographic identifier is or not an HTTP URI.
 * Revised mapping for conformance result, based on the W3C PROV ontology (only for the extended profile).
-* Added mapping for spatial and temporal reference systems, by using `dct:conformsTo` (only for the extended profile). The representation of the reference system varies depending on whether it is specified with an HTTP URI (`@rdf:resource`), a URN (`dct:identifier`), or as free text (`skos:prefLabel`). The code space is modelled as a `skos:ConceptScheme` and the version as `owl:versionInfo`. 
+* Added mapping for spatial and temporal reference systems, by using `dct:conformsTo` (only for the extended profile). The representation of the reference system varies depending on whether it is specified with an HTTP URI (`@rdf:resource`), a URN (`dct:identifier`), or as free text (`skos:prefLabel`). The code space is modelled as a `skos:ConceptScheme` and the version as `owl:versionInfo`.
 
 ## 2015-05-18: Revised version (v0.5)
 * Minor fixes.
@@ -87,7 +90,7 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 * Core and extended profiles revised to match with the current version of the DCAT-AP specification.
 * Metadata and resource character encodings: ISO 19115 character set codes have been mapped to the IANA character set names.
 * Added metadata character encoding (only for the extended profile).
-* Metadata description (metadata on metadata) typed as `dcat:CatalogRecord`, and partially moved to the core profile (as per the DCAT-AP specification). 
+* Metadata description (metadata on metadata) typed as `dcat:CatalogRecord`, and partially moved to the core profile (as per the DCAT-AP specification).
 * Added licence and access rights to services.
 * Revision to transformation rules for "service type".
 * Moved "creation date" to the extended profile (it is not supported in DCAT-AP).
@@ -98,7 +101,7 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 
 * Added tentative revision to mappings for services:
     * All services are typed (`rdf:type`) as `dctype:Service`'s (only for the extended profile).
-    * Discovery / catalogue services are typed (`rdf:type`) as `dcat:Catalog`'s (for both the core and extended profiles). 
+    * Discovery / catalogue services are typed (`rdf:type`) as `dcat:Catalog`'s (for both the core and extended profiles).
 * Revised mapping of element "Encoding", to use the value of attribute `@xlink:href`, if available, as the format URI.
 * Fix to mapping of conformity degree.
 * Included mapping for `gmd:explanation` (`earl:info`), concerning conformity test results.
@@ -106,19 +109,19 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 * Moved "Lineage" and responsible organisations with role "originator" to the core profile, according with the revision to DCAT-AP.
 * Fixed disalignment between the ISO 19115 maintenance frequency codes and the Dublin Core Collection Description Frequency Vocabulary.
 * Added tentative mapping for ISO 19139 element "Spatial representation type". For this, `adms:representationTechnique` has been used for `dcat:Distribution`, and the spatial representation type codes in the original ISO 19139 record have been mapped to the corresponding URIs that may be made available through the INSPIRE Registry.
-* Revised transformation of "Resource locator"'s based on the function code: 
+* Revised transformation of "Resource locator"'s based on the function code:
     * `download` / `offlineAccess` / `order` -> `dcat:distribution` + `dcat:accessURL`.
     * `information` / `search` -> `foaf:page`.
     * `dcat:landingPage` when the function code is missing.
 * Added URL for responsible organisations, when available. This has been modelled as follows:
     * with `foaf:workplaceHomepage`, when the responsible organisation has been modelled as a `foaf:Organization`.
-    * with `vcard:hasURL`, when the responsible organisation has been modelled as a `vcard:Kind`. 
+    * with `vcard:hasURL`, when the responsible organisation has been modelled as a `vcard:Kind`.
 * Minor fixes.
 
 ## 2015-04-13: Revised version (v0.2)
 
 * Fixed ambiguous rule in template "ResourceDates", causing processing warnings or errors.
-* Values for resource format (encoding) and character encoding are no longer hard-coded, but taken from the relevant ISO 19139 elements. 
+* Values for resource format (encoding) and character encoding are no longer hard-coded, but taken from the relevant ISO 19139 elements.
 * Revised creation of distributions:
     * Added character encoding for metadata record and resource distributions (only for the extended profile).
     * Added distribution title (`gmd:transferOptions/*/gmd:onLine/*/gmd:name`).
