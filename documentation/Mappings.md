@@ -796,13 +796,15 @@
       <td>Only for the extended profile</td>
     </tr>
     <tr>
-      <td colspan="2" rowspan="3">Keyword</td>
+      <td colspan="2" rowspan="2">Keyword</td>
+<!--	  
       <td><strong><code>dct:type</code></strong></td>
       <td><strong><code>skos:Concept</code></strong></td>
       <td><em>testing</em></td>
       <td>Only for the extended profile. For spatial data service categories defined in ISO 19119</td>
     </tr>
     <tr>
+-->	
       <td><strong><code>dct:subject</code></strong></td>
       <td><strong><code>skos:Concept</code></strong></td>
       <td><em>testing</em></td>
@@ -819,7 +821,7 @@
       <td><strong><code>dct:type</code></strong></td>
       <td><strong><code>skos:Concept</code></strong></td>
       <td><em>testing</em></td>
-      <td>Only for the extended profile</td>
+      <td>Only for the extended profile. For spatial data service categories defined in ISO 19119</td>
     </tr>
   </tbody>
 </table>
