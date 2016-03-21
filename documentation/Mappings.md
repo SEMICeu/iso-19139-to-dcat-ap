@@ -65,6 +65,11 @@
       <td><code><a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a></code></td>
       <td><a href="http://dublincore.org/documents/2012/06/14/dcmi-terms/">DCMI Metadata Terms</a></td>
     </tr>
+	<tr>
+	  <td><code>dctype</code></td>
+	  <td><code><a href="http://purl.org/dc/dcmitype/">http://purl.org/dc/dcmitype/</a></code></td>
+	  <td><a href="http://dublincore.org/documents/2012/06/14/dcmi-terms/#H7">DCMI Type Vocabulary</a></td>
+	</tr>
 <!--    
     <tr>
       <td><code>earl</code></td>
@@ -550,9 +555,9 @@
     </tr>
     <tr>
       <td>Originator</td>
-      <td><code>dct:creator</code></td>
-      <td><code>foaf:Agent</code></td>
-      <td><em>testing</em></td>
+      <td>-</td>
+      <td>-</td>
+      <td>&nbsp;</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
@@ -585,10 +590,10 @@
     </tr>
     <tr>
       <td>Author</td>
-      <td>-</td>
-      <td>-</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td><strong><code>dct:creator</code></strong></td>
+      <td><strong><code>foaf:Agent</code></strong></td>
+      <td><em>testing</em></td>
+      <td>Only for the extended profile.</td>
     </tr>
   </tbody>
 </table>
@@ -682,10 +687,10 @@
     </tr>
     <tr>
       <td colspan="2">Topic category</td>
-      <td><code>dct:subject</code></td>
-      <td><code>skos:Concept</code></td>
-      <td><strong>unstable</strong></td>
-      <td></td>
+      <td><strong><code>dct:subject</code></strong></td>
+      <td><strong><code>skos:Concept</code></strong></td>
+      <td><em>testing</testing></td>
+      <td>Only for the extended profile.</td>
     </tr>
     <tr>
       <td colspan="2">Maintenance frequency (Maintenance information)</td>
