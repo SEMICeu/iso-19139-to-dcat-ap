@@ -81,21 +81,21 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/farming">
-    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/af"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/af"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/geoscientificInformation">
     <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/ge"/>
     <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/nz"/>
-    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/so"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/so"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/health">
-    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/hh"/>
+    <skos:closeMatch rdf:resource="http://inspire.ec.europa.eu/theme/hh"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/imageryBaseMapsEarthCover">
-    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/lc"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/lc"/>
     <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/oi"/>
   </rdf:Description>
 
@@ -110,7 +110,7 @@
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/oceans">
     <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/of"/>
-    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/sr"/>
+    <skos:closeMatch rdf:resource="http://inspire.ec.europa.eu/theme/sr"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/planningCadastre">
@@ -120,7 +120,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/society">
-    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/pd"/>
+    <skos:narrowMatch rdf:resource="http://inspire.ec.europa.eu/theme/pd"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/structure">
@@ -134,7 +134,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/utilitiesCommunication">
-    <skos:relatedMatch rdf:resource="http://inspire.ec.europa.eu/theme/us"/>
+    <skos:broadMatch rdf:resource="http://inspire.ec.europa.eu/theme/us"/>
   </rdf:Description>
 
 </rdf:RDF>
