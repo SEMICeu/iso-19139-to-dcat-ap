@@ -9,7 +9,8 @@
   xmlns:rdf   = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:rdfs  = "http://www.w3.org/2000/01/rdf-schema#"
   xmlns:skos  = "http://www.w3.org/2004/02/skos/core#"
-  xmlns:xsd   = "http://www.w3.org/2001/XMLSchema#">
+  xmlns:xsd   = "http://www.w3.org/2001/XMLSchema#"
+>
 
   <rdf:Description rdf:about="">
     <rdf:type rdf:resource="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#Alignment"/>
@@ -70,7 +71,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/gn">
-    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/hy">
@@ -86,7 +87,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/el">
-    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/ge">
