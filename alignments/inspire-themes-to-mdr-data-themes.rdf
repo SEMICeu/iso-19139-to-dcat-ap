@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<rdf:RDF 
+<rdf:RDF
   xmlns:adms  = "http://www.w3.org/ns/adms#"
   xmlns:align = "http://knowledgeweb.semanticweb.org/heterogeneity/alignment#"
   xmlns:dc    = "http://purl.org/dc/elements/1.1/"
@@ -16,7 +16,7 @@
     <rdf:type rdf:resource="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#Alignment"/>
     <align:onto1 rdf:resource="http://inspire.ec.europa.eu/theme"/>
     <align:onto2 rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
-    <rdfs:label xml:lang="en">Alignments between the INSPIRE spatial data themes and the MDR data themes</rdfs:label>    
+    <rdfs:label xml:lang="en">Alignments between the INSPIRE spatial data themes and the MDR data themes</rdfs:label>
     <adms:status rdf:resource="http://purl.org/adms/status/UnderDevelopment"/>
     <dcat:distribution>
       <dcat:Distribution>
@@ -26,8 +26,8 @@
     </dcat:distribution>
   </rdf:Description>
 
-<!-- Aligned thesauri -->  
-  
+<!-- Aligned thesauri -->
+
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme">
     <align:location rdf:datatype="{$xsd}anyURI">http://inspire.ec.europa.eu/theme/theme.en.rdf</align:location>
     <dcat:distribution>
@@ -48,10 +48,10 @@
     </dcat:distribution>
   </rdf:Description>
 
-<!-- Alignements -->  
-  
+<!-- Alignments -->
+
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/ad">
-    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/au">
@@ -59,14 +59,15 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/rs">
-    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/gg">
-    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/cp">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
     <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
   </rdf:Description>
 
@@ -76,6 +77,7 @@
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/hy">
     <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/ps">
@@ -91,6 +93,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/ge">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
     <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
   </rdf:Description>
 
@@ -99,6 +102,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/oi">
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
     <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
   </rdf:Description>
 
@@ -119,7 +123,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/bu">
-    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/er">
@@ -139,11 +143,14 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/lu">
-    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/mr">
     <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENER"/>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/nz">
@@ -184,6 +191,7 @@
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme/mf">
     <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+    <skos:broadMatch rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
   </rdf:Description>
 
 </rdf:RDF>
