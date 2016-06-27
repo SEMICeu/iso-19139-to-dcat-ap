@@ -164,21 +164,23 @@
   <xsl:variable name="lowercase">abcdefghijklmnopqrstuvwxyz</xsl:variable>
   <xsl:variable name="uppercase">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
 
-<!-- URIs and URNs for spatial reference system registers. -->
+<!-- URIs, URNs and names for spatial reference system registers. -->
 
-  <xsl:param name="EpsgSrsBaseUri">http://www.opengis.net/def/crs/EPSG/0/</xsl:param>
+  <xsl:param name="EpsgSrsBaseUri">http://www.opengis.net/def/crs/EPSG/0</xsl:param>
   <xsl:param name="EpsgSrsBaseUrn">urn:ogc:def:crs:EPSG</xsl:param>
-  <xsl:param name="OgcSrsBaseUri">http://www.opengis.net/def/crs/OGC/</xsl:param>
+  <xsl:param name="EpsgSrsName">EPSG Coordinate Reference Systems</xsl:param>
+  <xsl:param name="OgcSrsBaseUri">http://www.opengis.net/def/crs/OGC</xsl:param>
   <xsl:param name="OgcSrsBaseUrn">urn:ogc:def:crs:OGC</xsl:param>
+  <xsl:param name="OgcSrsName">OGC Coordinate Reference Systems</xsl:param>
 
 <!-- URI and URN for CRS84. -->
 
-  <xsl:param name="Crs84Uri" select="concat($OgcSrsBaseUri,'1.3/CRS84')"/>
+  <xsl:param name="Crs84Uri" select="concat($OgcSrsBaseUri,'/1.3/CRS84')"/>
   <xsl:param name="Crs84Urn" select="concat($OgcSrsBaseUrn,':1.3:CRS84')"/>
 
 <!-- URI and URN for ETRS89. -->
 
-  <xsl:param name="Etrs89Uri" select="concat($EpsgSrsBaseUri,'4258')"/>
+  <xsl:param name="Etrs89Uri" select="concat($EpsgSrsBaseUri,'/4258')"/>
   <xsl:param name="Etrs89Urn" select="concat($EpsgSrsBaseUrn,'::4258')"/>
 
 <!-- URI and URN of the spatial reference system (SRS) used in the bounding box.
@@ -2088,17 +2090,21 @@
         </dct:conformsTo>
       </xsl:when>
       <xsl:when test="starts-with($code, 'urn:')">
+        <xsl:variable name="srid">
+          <xsl:if test="starts-with(translate($code,$uppercase,$lowercase), translate($EpsgSrsBaseUrn,$uppercase,$lowercase))">
+            <xsl:value-of select="substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($code,':'),':'),':'),':'),':'),':')"/>
+          </xsl:if>
+        </xsl:variable>
+        <xsl:variable name="sridVersion" select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($code,':'),':'),':'),':'),':'),':')"/>
         <xsl:choose>
-          <xsl:when test="starts-with(translate($code,$uppercase,$lowercase), translate($EpsgSrsBaseUrn,$uppercase,$lowercase))">
-            <xsl:variable name="srid" select="substring-after(substring-after(substring-after(substring-after(substring-after(substring-after($code,':'),':'),':'),':'),':'),':')"/>
-            <xsl:variable name="sridVersion" select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($code,':'),':'),':'),':'),':'),':')"/>
+          <xsl:when test="$srid != '' and string(number($srid)) != 'NaN'">
             <dct:conformsTo>
-              <rdf:Description rdf:about="{$EpsgSrsBaseUri}{$srid}">
+              <rdf:Description rdf:about="{$EpsgSrsBaseUri}/{$srid}">
                 <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
                 <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
                 <skos:inScheme>
                   <skos:ConceptScheme rdf:about="{$EpsgSrsBaseUri}">
-                    <dct:title xml:lang="en">EPSG</dct:title>
+                    <dct:title xml:lang="en"><xsl:value-of select="$EpsgSrsName"/></dct:title>
                   </skos:ConceptScheme>
                 </skos:inScheme>
                 <xsl:if test="$sridVersion != ''">
@@ -2129,12 +2135,12 @@
         <xsl:choose>
           <xsl:when test="$code = number($code) and (translate($codespace,$uppercase,$lowercase) = 'epsg' or starts-with(translate($codespace,$uppercase,$lowercase),translate($EpsgSrsBaseUrn,$uppercase,$lowercase)))">
             <dct:conformsTo>
-              <rdf:Description rdf:about="{$EpsgSrsBaseUri}{$code}">
+              <rdf:Description rdf:about="{$EpsgSrsBaseUri}/{$code}">
                 <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
                 <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="concat($EpsgSrsBaseUrn,':',$version,':',$code)"/></dct:identifier>
                 <skos:inScheme>
                   <skos:ConceptScheme rdf:about="{$EpsgSrsBaseUri}">
-                    <dct:title xml:lang="en">EPSG</dct:title>
+                    <dct:title xml:lang="en"><xsl:value-of select="$EpsgSrsName"/></dct:title>
                   </skos:ConceptScheme>
                 </skos:inScheme>
                 <xsl:if test="$version != ''">
@@ -2151,7 +2157,7 @@
                 <skos:prefLabel xml:lang="en">ETRS89 - European Terrestrial Reference System 1989</skos:prefLabel>
                 <skos:inScheme>
                   <skos:ConceptScheme rdf:about="{$EpsgSrsBaseUri}">
-                    <dct:title xml:lang="en">EPSG</dct:title>
+                    <dct:title xml:lang="en"><xsl:value-of select="$EpsgSrsName"/></dct:title>
                   </skos:ConceptScheme>
                 </skos:inScheme>
                 <xsl:if test="$version != ''">
@@ -2168,7 +2174,7 @@
                 <skos:prefLabel xml:lang="en">CRS84</skos:prefLabel>
                 <skos:inScheme>
                   <skos:ConceptScheme rdf:about="{$OgcSrsBaseUri}">
-                    <dct:title xml:lang="en">OGC</dct:title>
+                    <dct:title xml:lang="en"><xsl:value-of select="$OgcSrsName"/></dct:title>
                   </skos:ConceptScheme>
                 </skos:inScheme>
                 <xsl:if test="$version != ''">
