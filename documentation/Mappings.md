@@ -1047,6 +1047,7 @@ In addition to the mapping supported in the core profile, the extended profile u
             </vcard:Address>
           </vcard:hasAddress>
         </vcard:Organization>
+      </prov:agent>
 <!-- Responsible party role -->
       <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
     </prov:Attribution>
