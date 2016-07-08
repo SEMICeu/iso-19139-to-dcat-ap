@@ -98,6 +98,12 @@ For GEMET concepts:
 //gmd:geographicIdentifier/gmd:MD_Identifier/gmd:code/gco:CharacterString
 ````
 
+or
+
+````
+//gmd:geographicIdentifier/gmd:MD_Identifier/gmd:code/gmx:Anchor/@xlink:href
+````
+
 ### Examples 
 
 ````xml
@@ -107,6 +113,20 @@ For GEMET concepts:
       <gmd:MD_Identifier>
         <gmd:code>
           <gco:CharacterString>http://publications.europa.eu/resource/authority/continent/EUROPE</gco:CharacterString>
+        </gmd:code>
+      </gmd:MD_Identifier>
+    </gmd:geographicIdentifier>
+  </gmd:EX_GeographicDescription>
+</gmd:geographicElement>
+````
+
+````xml
+<gmd:geographicElement>
+  <gmd:EX_GeographicDescription>
+    <gmd:geographicIdentifier>
+      <gmd:MD_Identifier>
+        <gmd:code>
+          <gmx:Anchor xlink:href="http://publications.europa.eu/resource/authority/continent/EUROPE" title="Europe">Europe</gmx:Anchor>
         </gmd:code>
       </gmd:MD_Identifier>
     </gmd:geographicIdentifier>
@@ -156,17 +176,42 @@ For GEMET concepts:
 </gmd:useLimitation>
 ````
 
-## Access restrictions URI: Limitations of public access (INSPIRE); Access constratins, other constraints (ISO 19115)
+## Access restrictions URI: Limitations of public access (INSPIRE); Access constraints, other constraints (ISO 19115)
 
 TBD
 
-## Agent URI (metadata): Metadata point of contact (INSPIRE / ISO 19115);
+## Agent URI (metadata): Metadata point of contact (INSPIRE / ISO 19115); Agent URI (resource): Responsible organisation (INSPIRE); Responsible party (ISO 19115)
 
-TBD
+### XPath
 
-## Agent URI (resource): Responsible organisation (INSPIRE); Responsible party (ISO 19115)
+For individuals:
 
-TBD
+````
+//gmd:CI_ResponsibleParty/gmd:individualName/gmx:Anchor/@xlink:href
+````
+
+For organisations:
+
+````
+//gmd:CI_ResponsibleParty/gmd:organizationName/gmx:Anchor/@xlink:href
+````
+
+### Example 
+
+````xml
+<gmd:CI_ResponsibleParty>
+  <gmd:individualName>
+    <gmx:Anchor xlink:href="http://orcid.org/0000-0000-0000-0000">
+      Joe Smith
+    </gmx:Anchor>
+  </gmd:individualName>
+  <gmd:organisationName>
+    <gmx:Anchor xlink:href="http://some.company.com/">
+      SomeCompany Ltd.
+    </gmx:Anchor>
+  </gmd:organisationName>
+<gmd:CI_ResponsibleParty>
+````
 
 ## 
 <h2><a name="uri-crs">Coordinate reference system URI: Coordinate reference system (INSPIRE); Reference system (ISO 19115)</a></h2>
