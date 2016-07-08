@@ -968,6 +968,7 @@ If the conformity specification is specified with an HTTP URI ([see how](./HTTP-
 
 #### GeoDCAT-AP core profile
 
+<!--
 ````xml
   <dcat:contactPoint>
     <vcard:Kind>
@@ -975,6 +976,51 @@ If the conformity specification is specified with an HTTP URI ([see how](./HTTP-
       <vcard:hasEmail rdf:resource="mailto:efdac@jrc.ec.europa.eu"/>
     </vcard:Kind>
   </dcat:contactPoint>
+````
+-->
+
+When the role is "contact point":
+
+````xml
+  <dcat:contactPoint>
+    <vcard:Organization>
+      <vcard:fn xml:lang="en">European Environment Agency</vcard:fn>
+      <vcard:hasEmail rdf:resource="mailto:eea.enquiries@eea.europa.eu"/>
+      <vcard:hasURL rdf:resource="http://www.eea.europa.eu/"/>
+      <vcard:hasTelephone rdf:resource="tel:+4533367100"/>
+      <vcard:hasAddress>
+        <vcard:Address>
+          <vcard:street-address>Kongens Nytorv 6</vcard:street-address>
+          <vcard:locality>Copenhagen</vcard:locality>
+          <vcard:region>K</vcard:region>
+          <vcard:postal-code>1050</vcard:postal-code>
+          <vcard:country-name>Denmark</vcard:country-name>
+        </vcard:Address>
+      </vcard:hasAddress>
+    </vcard:Organization>
+  </dcat:contactPoint>
+````
+
+For all the other roles:
+
+````xml
+  <dct:publisher>
+    <foaf:Organization>
+      <foaf:name xml:lang="en">European Environment Agency</foaf:name>
+      <foaf:mbox rdf:resource="mailto:eea.enquiries@eea.europa.eu"/>
+      <foaf:workplaceHomepage rdf:resource="http://www.eea.europa.eu/"/>
+      <foaf:phone rdf:resource="tel:+4533367100"/>
+      <locn:address>
+        <locn:Address>
+          <locn:thoroughfare>Kongens Nytorv 6</locn:thoroughfare>
+          <locn:postName>Copenhagen</locn:postName>
+          <locn:adminUnitL2>K</locn:adminUnitL2>
+          <locn:postCode>1050</locn:postCode>
+          <locn:adminUnitL1>Denmark</locn:adminUnitL1>
+        </locn:Address>
+      </locn:address>
+    </foaf:Organization>
+  </dct:publisher>
 ````
 
 #### GeoDCAT-AP extended profile
@@ -986,15 +1032,25 @@ In addition to the mapping supported in the core profile, the extended profile u
     <prov:Attribution>
       <prov:agent>
 <!-- Responsible organisation -->
-        <vcard:Kind>
-          <vcard:organization-name xml:lang="en">European Commission, Joint Research Centre</vcard:organization-name>
-          <vcard:hasEmail rdf:resource="mailto:efdac@jrc.ec.europa.eu"/>
-        </vcard:Kind>
-      </prov:agent>
+        <vcard:Organization>
+          <vcard:fn xml:lang="en">European Environment Agency</vcard:fn>
+          <vcard:hasEmail rdf:resource="mailto:eea.enquiries@eea.europa.eu"/>
+          <vcard:hasURL rdf:resource="http://www.eea.europa.eu/"/>
+          <vcard:hasTelephone rdf:resource="tel:+4533367100"/>
+          <vcard:hasAddress>
+            <vcard:Address>
+              <vcard:street-address>Kongens Nytorv 6</vcard:street-address>
+              <vcard:locality>Copenhagen</vcard:locality>
+              <vcard:region>K</vcard:region>
+              <vcard:postal-code>1050</vcard:postal-code>
+              <vcard:country-name>Denmark</vcard:country-name>
+            </vcard:Address>
+          </vcard:hasAddress>
+        </vcard:Organization>
 <!-- Responsible party role -->
       <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
     </prov:Attribution>
-  </prov:
+  </prov:qualifiedAttribution>
 ````
 
 <h3><a name="mapping-crs">Coordinate reference system</a></h3>
