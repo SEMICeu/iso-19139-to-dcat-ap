@@ -23,7 +23,7 @@ The default value is: `extended`.
   
 The specifications for the core and extended GeoDCAT-AP profiles are available on the Joinup collaboration platform of the EU ISA Programme:
 
-    https://joinup.ec.europa.eu/node/139283/
+https://joinup.ec.europa.eu/node/139283/
 
 ### Parameter `$CoupledResourceLookup`
 
@@ -32,9 +32,9 @@ This parameter specifies whether the coupled resource, referenced via `@xlink:hr
 * value `enabled`: The coupled resource is looked up
 * value `disabled`: The coupled resource is not looked up
 
-  The default value is `enabled` for GeoDCAT-AP Extended, and `disabled` otherwise.
+The default value is `enabled` for GeoDCAT-AP Extended, and `disabled` otherwise.
 
-  CAVEAT: Using this feature may cause the transformation to hang, in case the URL in `@xlink:href` is broken, the request hangs indefinitely, or does not return the expected resource (e.g., and HTML page, instead of an XML-encoded ISO 19139 record). It is strongly recommended that this issue is dealt with by using appropriate configuration parameters and error handling (e.g., by specifying a timeout on HTTP calls and by setting the HTTP `Accept` header to `application/xml`).
+CAVEAT: Using this feature may cause the transformation to hang, in case the URL in `@xlink:href` is broken or does not return the expected resource (e.g., and HTML page, instead of an XML-encoded ISO 19139 record). It is strongly recommended that this issue is dealt with by using appropriate configuration parameters and error handling (e.g., by specifying a timeout on HTTP calls and by setting the HTTP `Accept` header to `application/xml`).
 
 ### Parameters for the spatial reference system of the bounding box
 
