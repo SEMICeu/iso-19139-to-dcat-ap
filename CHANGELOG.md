@@ -2,6 +2,11 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2016-07-09: Revised version (v1.12)
+* Extended mapping of responsible parties, to (a) detect URIs for individuals and organisations, specified by using `gmx:Anchor/@xlink:href`, and (b) include additional information present in the original record - in particular, individual name, telephone, and address.
+* Fixed bug concerning the mapping of malformed URNs for reference systems, returning an empty string for SRID. Dropped trailing slash in the URIs of the EPSG and OGC CRS registers, and added parameters for the names of these registers.
+* Editorial changes.
+
 ## 2016-03-14: Revised version (v1.11)
 * Revised mapping of keywords: Even if the originating controlled vocabulary is not specified, keywords specified with HTTP URIs via `gmx:Anchor/@xlink:href`, are mapped to `dcat:theme`.
 
