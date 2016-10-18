@@ -30,7 +30,7 @@
 <!-- Aligned thesauri -->  
   
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory">
-    <align:location rdf:datatype="{$xsd}anyURI">http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/TopicCategory.en.rdf</align:location>
+    <align:location rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/TopicCategory.en.rdf</align:location>
     <dcat:distribution>
       <dcat:Distribution>
         <dcat:accessURL rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/TopicCategory.en.rdf"/>
@@ -40,7 +40,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme">
-    <align:location rdf:datatype="{$xsd}anyURI">http://inspire.ec.europa.eu/theme/theme.en.rdf</align:location>
+    <align:location rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://inspire.ec.europa.eu/theme/theme.en.rdf</align:location>
     <dcat:distribution>
       <dcat:Distribution>
         <dcat:accessURL rdf:resource="http://inspire.ec.europa.eu/theme/theme.en.rdf"/>

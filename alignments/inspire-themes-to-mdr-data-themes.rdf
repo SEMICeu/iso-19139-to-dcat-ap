@@ -29,7 +29,7 @@
 <!-- Aligned thesauri -->
 
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/theme">
-    <align:location rdf:datatype="{$xsd}anyURI">http://inspire.ec.europa.eu/theme/theme.en.rdf</align:location>
+    <align:location rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://inspire.ec.europa.eu/theme/theme.en.rdf</align:location>
     <dcat:distribution>
       <dcat:Distribution>
         <dcat:accessURL rdf:resource="http://inspire.ec.europa.eu/theme/theme.en.rdf"/>
@@ -39,7 +39,7 @@
   </rdf:Description>
 
   <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/data-theme">
-    <align:location rdf:datatype="{$xsd}anyURI">http://publications.europa.eu/mdr/resource/authority/data-theme/skos/data-theme-skos.rdf</align:location>
+    <align:location rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://publications.europa.eu/mdr/resource/authority/data-theme/skos/data-theme-skos.rdf</align:location>
     <dcat:distribution>
       <dcat:Distribution>
         <dcat:accessURL rdf:resource="http://publications.europa.eu/mdr/resource/authority/data-theme/skos/data-theme-skos.rdf"/>
