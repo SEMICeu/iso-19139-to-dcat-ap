@@ -513,19 +513,50 @@
     <xsl:param name="ServiceType">
       <xsl:value-of select="gmd:identificationInfo/*/srv:serviceType/gco:LocalName"/>
     </xsl:param>
-
+<!--
     <xsl:param name="ResourceTitle">
       <xsl:value-of select="gmd:identificationInfo[1]/*/gmd:citation/*/gmd:title/gco:CharacterString"/>
     </xsl:param>
-
+-->
+    <xsl:param name="ResourceTitle">
+      <xsl:for-each select="gmd:identificationInfo[1]/*/gmd:citation/*/gmd:title">
+        <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:title>
+        <xsl:call-template name="LocalisedString">
+          <xsl:with-param name="term">dct:title</xsl:with-param>
+        </xsl:call-template>
+      </xsl:for-each>
+    </xsl:param>
+<!--
     <xsl:param name="ResourceAbstract">
       <xsl:value-of select="gmd:identificationInfo[1]/*/gmd:abstract/gco:CharacterString"/>
     </xsl:param>
-
+-->
+    <xsl:param name="ResourceAbstract">
+      <xsl:for-each select="gmd:identificationInfo[1]/*/gmd:abstract">
+        <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
+        <xsl:call-template name="LocalisedString">
+          <xsl:with-param name="term">dct:description</xsl:with-param>
+        </xsl:call-template>
+      </xsl:for-each>
+    </xsl:param>
+<!--    
     <xsl:param name="Lineage">
       <xsl:value-of select="gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString"/>
     </xsl:param>
-
+-->
+    <xsl:param name="Lineage">
+      <xsl:for-each select="gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement">
+        <dct:provenance>
+          <dct:ProvenanceStatement>
+            <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></rdfs:label>
+            <xsl:call-template name="LocalisedString">
+              <xsl:with-param name="term">rdfs:label</xsl:with-param>
+            </xsl:call-template>
+          </dct:ProvenanceStatement>
+        </dct:provenance>
+      </xsl:for-each>
+    </xsl:param>
+    
     <xsl:param name="MetadataDate">
       <xsl:choose>
         <xsl:when test="gmd:dateStamp/gco:Date">
@@ -616,10 +647,21 @@
 
     <xsl:param name="Conformity">
       <xsl:for-each select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
+        <xsl:variable name="specTitle">
+          <xsl:for-each select="gmd:title">
+            <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:title>
+            <xsl:call-template name="LocalisedString">
+              <xsl:with-param name="term">dct:title</xsl:with-param>
+            </xsl:call-template>
+          </xsl:for-each>
+        </xsl:variable>
         <xsl:variable name="specinfo">
+<!--        
           <dct:title xml:lang="{$MetadataLanguage}">
             <xsl:value-of select="gmd:title/gco:CharacterString"/>
           </dct:title>
+-->          
+          <xsl:copy-of select="$specTitle"/>
           <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
         </xsl:variable>
         <xsl:variable name="degree">
@@ -641,8 +683,18 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
+<!--        
         <xsl:variable name="explanation">
           <xsl:value-of select="../../gmd:explanation/gco:CharacterString"/>
+        </xsl:variable>
+-->        
+        <xsl:variable name="explanation">
+          <xsl:for-each select="../../gmd:explanation">
+            <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
+            <xsl:call-template name="LocalisedString">
+              <xsl:with-param name="term">dct:description</xsl:with-param>
+            </xsl:call-template>
+          </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="Activity">
         <prov:Activity>
@@ -672,9 +724,12 @@
           </prov:qualifiedAssociation>
           <prov:generated rdf:parseType="Resource">
             <dct:type rdf:resource="{$degree}"/>
+<!--            
             <xsl:if test="$explanation and $explanation != ''">
               <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$explanation"/></dct:description>
             </xsl:if>
+-->            
+            <xsl:copy-of select="$explanation"/>
           </prov:generated>
         </prov:Activity>
         </xsl:variable>
@@ -739,7 +794,17 @@
 <!-- Metadata standard (tentative): only for the extended profile -->
       <xsl:if test="$profile = $extended">
         <xsl:variable name="MetadataStandardURI" select="gmd:metadataStandardName/gmx:Anchor/@xlink:href"/>
+<!--        
         <xsl:variable name="MetadataStandardName" select="gmd:metadataStandardName/*[self::gco:CharacterString|self::gmx:Anchor]"/>
+-->        
+        <xsl:variable name="MetadataStandardName">
+          <xsl:for-each select="gmd:metadataStandardName">
+            <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dct:title>
+            <xsl:call-template name="LocalisedString">
+              <xsl:with-param name="term">dct:title</xsl:with-param>
+            </xsl:call-template>
+          </xsl:for-each>
+        </xsl:variable>
         <xsl:variable name="MetadataStandardVersion" select="gmd:metadataStandardVersion/gco:CharacterString"/>
         <xsl:if test="$MetadataCharacterEncoding != '' or $MetadataStandardURI != '' or $MetadataStandardName != ''">
           <dct:source rdf:parseType="Resource">
@@ -755,7 +820,10 @@
               <xsl:when test="$MetadataStandardName != ''">
                 <dct:conformsTo rdf:parseType="Resource">
 <!-- Metadata standard name -->
+<!--
                   <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$MetadataStandardName"/></dct:title>
+-->                  
+                  <xsl:copy-of select="$MetadataStandardName"/>
                   <xsl:if test="$MetadataStandardVersion != ''">
 <!-- Metadata standard version -->
                     <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="$MetadataStandardVersion"/></owl:versionInfo>
@@ -812,10 +880,16 @@
       <xsl:if test="$profile = $extended">
         <dct:type rdf:resource="{$ResourceTypeCodelistUri}/{$ResourceType}"/>
       </xsl:if>
+<!--
       <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$ResourceTitle"/></dct:title>
+-->
+      <xsl:copy-of select="$ResourceTitle"/>
+<!--      
       <dct:description xml:lang="{$MetadataLanguage}">
         <xsl:value-of select="normalize-space($ResourceAbstract)"/>
       </dct:description>
+-->      
+      <xsl:copy-of select="$ResourceAbstract"/>
 <!-- Maintenance information (tentative) -->
       <xsl:for-each select="gmd:identificationInfo/*/gmd:resourceMaintenance">
         <xsl:apply-templates select="gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode"/>
@@ -891,6 +965,7 @@
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation"/>
 <!-- Lineage -->
       <xsl:if test="$ResourceType != 'service' and $Lineage != ''">
+<!--      
         <dct:provenance>
           <dct:ProvenanceStatement>
             <rdfs:label xml:lang="{$MetadataLanguage}">
@@ -898,6 +973,8 @@
             </rdfs:label>
           </dct:ProvenanceStatement>
         </dct:provenance>
+-->        
+        <xsl:copy-of select="$Lineage"/>
       </xsl:if>
 <!-- Coordinate and temporal reference systems (tentative) -->
       <xsl:if test="$profile = $extended">
@@ -1110,7 +1187,6 @@
     <xsl:param name="MetadataLanguage"/>
     <xsl:param name="ResourceType"/>
     <xsl:param name="role">
-<!-- ISSUE The same problem we have for ResourceLocator function: the RDSI editor saves the relevant code as the text node of the relevant element, instead of using the correct attribute (@codeListValue) -->
       <xsl:value-of select="gmd:role/gmd:CI_RoleCode/@codeListValue"/>
     </xsl:param>
     <xsl:param name="ResponsiblePartyRole">
@@ -1121,6 +1197,22 @@
     </xsl:param>
     <xsl:param name="IndividualName">
       <xsl:value-of select="normalize-space(gmd:individualName/*)"/>
+    </xsl:param>
+    <xsl:param name="IndividualName-FOAF">
+      <xsl:for-each select="gmd:individualName">
+        <foaf:name xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|gmx:Anchor])"/></foaf:name>
+        <xsl:call-template name="LocalisedString">
+          <xsl:with-param name="term">foaf:name</xsl:with-param>
+        </xsl:call-template>
+      </xsl:for-each>
+    </xsl:param>
+    <xsl:param name="IndividualName-vCard">
+      <xsl:for-each select="gmd:individualName">
+        <vcard:fn xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|gmx:Anchor])"/></vcard:fn>
+        <xsl:call-template name="LocalisedString">
+          <xsl:with-param name="term">vcard:fn</xsl:with-param>
+        </xsl:call-template>
+      </xsl:for-each>
     </xsl:param>
     <xsl:param name="OrganisationURI">
       <xsl:value-of select="normalize-space(gmd:organisationName/*/@xlink:href)"/>
@@ -1137,6 +1229,30 @@
     </xsl:param>
     <xsl:param name="OrganisationName">
       <xsl:value-of select="normalize-space(gmd:organisationName/*)"/>
+    </xsl:param>
+    <xsl:param name="OrganisationName-FOAF">
+      <xsl:for-each select="gmd:organisationName">
+        <foaf:name xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|gmx:Anchor])"/></foaf:name>
+        <xsl:call-template name="LocalisedString">
+          <xsl:with-param name="term">foaf:name</xsl:with-param>
+        </xsl:call-template>
+      </xsl:for-each>
+    </xsl:param>
+    <xsl:param name="OrganisationName-vCard">
+      <xsl:for-each select="gmd:organisationName">
+        <vcard:organization-name xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|gmx:Anchor])"/></vcard:organization-name>
+        <xsl:call-template name="LocalisedString">
+          <xsl:with-param name="term">vcard:organization-name</xsl:with-param>
+        </xsl:call-template>
+      </xsl:for-each>
+    </xsl:param>
+    <xsl:param name="OrganisationNameAsIndividualName-vCard">
+      <xsl:for-each select="gmd:organisationName">
+        <vcard:fn xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|gmx:Anchor])"/></vcard:fn>
+        <xsl:call-template name="LocalisedString">
+          <xsl:with-param name="term">vcard:fn</xsl:with-param>
+        </xsl:call-template>
+      </xsl:for-each>
     </xsl:param>
     <xsl:param name="Email">
       <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/*">
@@ -1238,20 +1354,29 @@
           </xsl:otherwise>
         </xsl:choose>
         <xsl:if test="$IndividualName != ''">
+<!--        
           <foaf:name xml:lang="{$MetadataLanguage}">
             <xsl:value-of select="$IndividualName"/>
           </foaf:name>
+-->          
+          <xsl:copy-of select="$IndividualName-FOAF"/>
           <xsl:if test="$OrganisationName != ''">
             <org:memberOf>
               <xsl:choose>
                 <xsl:when test="$OrganisationURI != ''">
                   <foaf:Organization rdf:about="{$OrganisationURI}">
+<!--                  
                     <foaf:name xml:lang="{$MetadataLanguage}"><xsl:value-of select="$OrganisationName"/></foaf:name>
+-->                    
+                    <xsl:copy-of select="$OrganisationName-FOAF"/>
                   </foaf:Organization>
                 </xsl:when>
                 <xsl:otherwise>
                   <foaf:Organization>
+<!--                  
                     <foaf:name xml:lang="{$MetadataLanguage}"><xsl:value-of select="$OrganisationName"/></foaf:name>
+-->                    
+                    <xsl:copy-of select="$OrganisationName-FOAF"/>
                   </foaf:Organization>
                 </xsl:otherwise>
               </xsl:choose>
@@ -1259,9 +1384,12 @@
           </xsl:if>
         </xsl:if>
         <xsl:if test="$IndividualName != '' and $OrganisationName != ''">
+<!--        
           <foaf:name xml:lang="{$MetadataLanguage}">
             <xsl:value-of select="$OrganisationName"/>
           </foaf:name>
+-->          
+          <xsl:copy-of select="$OrganisationName-FOAF"/>
         </xsl:if>
         <xsl:copy-of select="$Telephone"/>
         <xsl:copy-of select="$Email"/>
@@ -1311,19 +1439,28 @@
           </xsl:otherwise>
         </xsl:choose>
         <xsl:if test="$IndividualName != ''">
+<!--        
           <vcard:fn xml:lang="{$MetadataLanguage}">
-            <xsl:value-of select="$OrganisationName"/>
+            <xsl:value-of select="$IndividualName"/>
           </vcard:fn>
+-->          
+          <xsl:copy-of select="$IndividualName-vCard"/>
         </xsl:if>
         <xsl:if test="$IndividualName != '' and $OrganisationName != ''">
+<!--                  
           <vcard:organization-name xml:lang="{$MetadataLanguage}">
             <xsl:value-of select="$OrganisationName"/>
           </vcard:organization-name>
+-->                    
+          <xsl:copy-of select="$OrganisationName-vCard"/>
         </xsl:if>
         <xsl:if test="$IndividualName = '' and $OrganisationName != ''">
+<!--        
           <vcard:fn xml:lang="{$MetadataLanguage}">
             <xsl:value-of select="$OrganisationName"/>
           </vcard:fn>
+-->          
+          <xsl:copy-of select="$OrganisationNameAsIndividualName-vCard"/>
         </xsl:if>
         <xsl:copy-of select="$Telephone-vCard"/>
         <xsl:copy-of select="$Email-vCard"/>
@@ -2058,8 +2195,10 @@
 <!-- Topic category -->
 
   <xsl:template name="TopicCategory" match="gmd:identificationInfo/*/gmd:topicCategory">
-    <xsl:param name="TopicCategory"><xsl:value-of select="gmd:MD_TopicCategoryCode"/></xsl:param>
-    <dct:subject rdf:resource="{$TopicCategoryCodelistUri}/{$TopicCategory}"/>
+    <xsl:param name="TopicCategory"><xsl:value-of select="normalize-space(gmd:MD_TopicCategoryCode)"/></xsl:param>
+    <xsl:if test="$TopicCategory != ''">
+      <dct:subject rdf:resource="{$TopicCategoryCodelistUri}/{$TopicCategory}"/>
+    </xsl:if>
   </xsl:template>
 
 <!-- Spatial resolution (unstable - to be replaced with a standard-based solution, when available) -->
@@ -2440,6 +2579,105 @@
 
   <xsl:template name="SpatialRepresentationType" match="gmd:identificationInfo/*/gmd:spatialRepresentationType/gmd:MD_SpatialRepresentationTypeCode">
     <adms:representationTechnique rdf:resource="{$SpatialRepresentationTypeCodelistUri}/{@codeListValue}"/>
+  </xsl:template>
+
+<!-- Multilingual text -->
+
+  <xsl:template name="LocalisedString">
+    <xsl:param name="term"/>
+    <xsl:for-each select="gmd:PT_FreeText/*/gmd:LocalisedCharacterString">
+      <xsl:variable name="value" select="normalize-space(.)"/>
+      <xsl:variable name="langs">
+        <xsl:call-template name="Alpha3-to-Alpha2">
+          <xsl:with-param name="lang" select="translate(translate(@locale, $uppercase, $lowercase), '#', '')"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:element name="{$term}">
+        <xsl:attribute name="xml:lang"><xsl:value-of select="$langs"/></xsl:attribute>
+        <xsl:value-of select="$value"/>
+      </xsl:element>
+    </xsl:for-each>
+  </xsl:template>
+  
+  <xsl:template name="Alpha3-to-Alpha2">
+    <xsl:param name="lang"/>
+    <xsl:choose>
+      <xsl:when test="$lang = 'bul'">
+        <xsl:text>bg</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'cze'">
+        <xsl:text>cs</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'dan'">
+        <xsl:text>da</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'ger'">
+        <xsl:text>de</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'gre'">
+        <xsl:text>el</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'eng'">
+        <xsl:text>en</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'spa'">
+        <xsl:text>es</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'est'">
+        <xsl:text>et</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'fin'">
+        <xsl:text>fi</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'fre'">
+        <xsl:text>fr</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'gle'">
+        <xsl:text>ga</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'hrv'">
+        <xsl:text>hr</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'ita'">
+        <xsl:text>it</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'lav'">
+        <xsl:text>lv</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'lit'">
+        <xsl:text>lt</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'hun'">
+        <xsl:text>hu</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'mlt'">
+        <xsl:text>mt</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'dut'">
+        <xsl:text>nl</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'pol'">
+        <xsl:text>pl</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'por'">
+        <xsl:text>pt</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'rum'">
+        <xsl:text>ru</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'slo'">
+        <xsl:text>sk</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'slv'">
+        <xsl:text>sl</xsl:text>
+      </xsl:when>
+      <xsl:when test="$lang = 'swe'">
+        <xsl:text>sv</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$lang"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 </xsl:transform>
