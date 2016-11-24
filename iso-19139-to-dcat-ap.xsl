@@ -1291,25 +1291,27 @@
         <xsl:variable name="administrativeArea" select="normalize-space(gmd:administrativeArea/*)"/>
         <xsl:variable name="postalCode" select="normalize-space(gmd:postalCode/*)"/>
         <xsl:variable name="country" select="normalize-space(gmd:country/*)"/>
-        <locn:address>
-          <locn:Address>
-            <xsl:if test="$deliveryPoint != ''">
-              <locn:thoroughfare><xsl:value-of select="$deliveryPoint"/></locn:thoroughfare>
-            </xsl:if>
-            <xsl:if test="$city != ''">
-              <locn:postName><xsl:value-of select="$city"/></locn:postName>
-            </xsl:if>
-            <xsl:if test="$administrativeArea != ''">
-              <locn:adminUnitL2><xsl:value-of select="$administrativeArea"/></locn:adminUnitL2>
-            </xsl:if>
-            <xsl:if test="$postalCode != ''">
-              <locn:postCode><xsl:value-of select="$postalCode"/></locn:postCode>
-            </xsl:if>
-            <xsl:if test="$country != ''">
-              <locn:adminUnitL1><xsl:value-of select="$country"/></locn:adminUnitL1>
-            </xsl:if>
-          </locn:Address>
-        </locn:address>
+        <xsl:if test="$deliveryPoint != '' or $city != '' or $administrativeArea != '' or $postalCode != '' or $country != ''">
+          <locn:address>
+            <locn:Address>
+              <xsl:if test="$deliveryPoint != ''">
+                <locn:thoroughfare><xsl:value-of select="$deliveryPoint"/></locn:thoroughfare>
+              </xsl:if>
+              <xsl:if test="$city != ''">
+                <locn:postName><xsl:value-of select="$city"/></locn:postName>
+              </xsl:if>
+              <xsl:if test="$administrativeArea != ''">
+                <locn:adminUnitL2><xsl:value-of select="$administrativeArea"/></locn:adminUnitL2>
+              </xsl:if>
+              <xsl:if test="$postalCode != ''">
+                <locn:postCode><xsl:value-of select="$postalCode"/></locn:postCode>
+              </xsl:if>
+              <xsl:if test="$country != ''">
+                <locn:adminUnitL1><xsl:value-of select="$country"/></locn:adminUnitL1>
+              </xsl:if>
+            </locn:Address>
+          </locn:address>
+        </xsl:if>
       </xsl:for-each>
     </xsl:param>
     <xsl:param name="Address-vCard">
@@ -1319,25 +1321,27 @@
         <xsl:variable name="administrativeArea" select="normalize-space(gmd:administrativeArea/*)"/>
         <xsl:variable name="postalCode" select="normalize-space(gmd:postalCode/*)"/>
         <xsl:variable name="country" select="normalize-space(gmd:country/*)"/>
-        <vcard:hasAddress>
-          <vcard:Address>
-            <xsl:if test="$deliveryPoint != ''">
-              <vcard:street-address><xsl:value-of select="$deliveryPoint"/></vcard:street-address>
-            </xsl:if>
-            <xsl:if test="$city != ''">
-              <vcard:locality><xsl:value-of select="$city"/></vcard:locality>
-            </xsl:if>
-            <xsl:if test="$administrativeArea != ''">
-              <vcard:region><xsl:value-of select="$administrativeArea"/></vcard:region>
-            </xsl:if>
-            <xsl:if test="$postalCode != ''">
-              <vcard:postal-code><xsl:value-of select="$postalCode"/></vcard:postal-code>
-            </xsl:if>
-            <xsl:if test="$country != ''">
-              <vcard:country-name><xsl:value-of select="$country"/></vcard:country-name>
-            </xsl:if>
-          </vcard:Address>
-        </vcard:hasAddress>
+        <xsl:if test="$deliveryPoint != '' or $city != '' or $administrativeArea != '' or $postalCode != '' or $country != ''">
+          <vcard:hasAddress>
+            <vcard:Address>
+              <xsl:if test="$deliveryPoint != ''">
+                <vcard:street-address><xsl:value-of select="$deliveryPoint"/></vcard:street-address>
+              </xsl:if>
+              <xsl:if test="$city != ''">
+                <vcard:locality><xsl:value-of select="$city"/></vcard:locality>
+              </xsl:if>
+              <xsl:if test="$administrativeArea != ''">
+                <vcard:region><xsl:value-of select="$administrativeArea"/></vcard:region>
+              </xsl:if>
+              <xsl:if test="$postalCode != ''">
+                <vcard:postal-code><xsl:value-of select="$postalCode"/></vcard:postal-code>
+              </xsl:if>
+              <xsl:if test="$country != ''">
+                <vcard:country-name><xsl:value-of select="$country"/></vcard:country-name>
+              </xsl:if>
+            </vcard:Address>
+          </vcard:hasAddress>
+        </xsl:if>
       </xsl:for-each>
     </xsl:param>
     <xsl:param name="ROInfo">
