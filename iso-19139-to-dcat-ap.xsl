@@ -1010,13 +1010,33 @@
 <!-- Resource locators (access / download URLs) -->
             <xsl:for-each select="gmd:transferOptions/*/gmd:onLine/*">
               <xsl:variable name="function" select="gmd:function/gmd:CI_OnLineFunctionCode/@codeListValue"/>
+              <xsl:variable name="Title">
+                <xsl:for-each select="gmd:name">
+                  <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:title>
+                  <xsl:call-template name="LocalisedString">
+                    <xsl:with-param name="term">dct:title</xsl:with-param>
+                  </xsl:call-template>
+                </xsl:for-each>
+              </xsl:variable>
+              <xsl:variable name="Description">
+                <xsl:for-each select="gmd:description">
+                  <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
+                  <xsl:call-template name="LocalisedString">
+                    <xsl:with-param name="term">dct:description</xsl:with-param>
+                  </xsl:call-template>
+                </xsl:for-each>
+              </xsl:variable>
               <xsl:variable name="TitleAndDescription">
+<!--              
                 <xsl:for-each select="gmd:name/gco:CharacterString">
                   <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
                 </xsl:for-each>
                 <xsl:for-each select="gmd:description/gco:CharacterString">
                   <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:description>
                 </xsl:for-each>
+-->
+                <xsl:copy-of select="$Title"/>
+                <xsl:copy-of select="$Description"/>
               </xsl:variable>
               <xsl:choose>
                 <xsl:when test="$function = 'download' or $function = 'offlineAccess' or $function = 'order'">
@@ -1387,7 +1407,7 @@
             </org:memberOf>
           </xsl:if>
         </xsl:if>
-        <xsl:if test="$IndividualName != '' and $OrganisationName != ''">
+        <xsl:if test="$IndividualName = '' and $OrganisationName != ''">
 <!--        
           <foaf:name xml:lang="{$MetadataLanguage}">
             <xsl:value-of select="$OrganisationName"/>
@@ -1584,7 +1604,10 @@
       <prov:qualifiedAttribution>
         <prov:Attribution>
           <prov:agent>
+<!--          
             <xsl:copy-of select="$ResponsibleParty"/>
+-->            
+            <xsl:copy-of select="$ROInfo"/>
           </prov:agent>
           <dct:type rdf:resource="{$ResponsiblePartyRole}"/>
         </prov:Attribution>
@@ -2061,6 +2084,9 @@
           <dct:license>
             <dct:LicenseDocument>
               <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></rdfs:label>
+              <xsl:call-template name="LocalisedString">
+                <xsl:with-param name="term">rdfs:label</xsl:with-param>
+              </xsl:call-template>
             </dct:LicenseDocument>
           </dct:license>
 <!--
@@ -2089,6 +2115,9 @@
         <dct:accessRights>
           <dct:RightsStatement>
             <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></rdfs:label>
+            <xsl:call-template name="LocalisedString">
+              <xsl:with-param name="term">rdfs:label</xsl:with-param>
+            </xsl:call-template>
           </dct:RightsStatement>
         </dct:accessRights>
       </xsl:if>
@@ -2110,25 +2139,44 @@
     <xsl:param name="ResourceType"/>
     <xsl:param name="ServiceType"/>
     <xsl:param name="OriginatingControlledVocabulary">
+<!--
       <xsl:for-each select="gmd:thesaurusName/gmd:CI_Citation">
         <dct:title xml:lang="{$MetadataLanguage}">
           <xsl:value-of select="gmd:title/gco:CharacterString"/>
         </dct:title>
         <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
       </xsl:for-each>
+-->
+      <xsl:for-each select="gmd:thesaurusName/gmd:CI_Citation">
+        <xsl:for-each select="gmd:title">
+          <dct:title xml:lang="{$MetadataLanguage}">
+            <xsl:value-of select="normalize-space(gco:CharacterString)"/>
+          </dct:title>
+          <xsl:call-template name="LocalisedString">
+            <xsl:with-param name="term">dct:title</xsl:with-param>
+          </xsl:call-template>
+        </xsl:for-each>
+        <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
+      </xsl:for-each>
     </xsl:param>
     <xsl:for-each select="gmd:keyword">
       <xsl:variable name="lckw" select="translate(gco:CharacterString,$uppercase,$lowercase)"/>
       <xsl:choose>
-        <xsl:when test="$OriginatingControlledVocabulary = '' and not( gmx:Anchor/@xlink:href ) and ( starts-with(gmx:Anchor/@xlink:href, 'http://') or starts-with(gmx:Anchor/@xlink:href, 'https://') )">
+        <xsl:when test="normalize-space($OriginatingControlledVocabulary) = '' and not( gmx:Anchor/@xlink:href and ( starts-with(gmx:Anchor/@xlink:href, 'http://') or starts-with(gmx:Anchor/@xlink:href, 'https://') ) )">
           <xsl:choose>
             <xsl:when test="$ResourceType = 'service'">
               <xsl:if test="$profile = $extended">
-                <dc:subject xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></dc:subject>
+                <dc:subject xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dc:subject>
+                <xsl:call-template name="LocalisedString">
+                  <xsl:with-param name="term">dc:subject</xsl:with-param>
+                </xsl:call-template>
               </xsl:if>
             </xsl:when>
             <xsl:otherwise>
-              <dcat:keyword xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></dcat:keyword>
+              <dcat:keyword xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dcat:keyword>
+              <xsl:call-template name="LocalisedString">
+                <xsl:with-param name="term">dcat:keyword</xsl:with-param>
+              </xsl:call-template>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
@@ -2140,8 +2188,11 @@
                 <xsl:when test="$ResourceType != 'service'">
                   <dcat:theme rdf:parseType="Resource">
                     <skos:prefLabel xml:lang="{$MetadataLanguage}">
-                      <xsl:value-of select="gco:CharacterString"/>
+                      <xsl:value-of select="normalize-space(gco:CharacterString)"/>
                     </skos:prefLabel>
+                    <xsl:call-template name="LocalisedString">
+                      <xsl:with-param name="term">skos:prefLabel</xsl:with-param>
+                    </xsl:call-template>
                     <skos:inScheme>
                       <skos:ConceptScheme>
                         <xsl:copy-of select="$OriginatingControlledVocabulary"/>
@@ -2153,8 +2204,11 @@
                   <xsl:if test="$profile = $extended">
                     <dct:subject rdf:parseType="Resource">
                       <skos:prefLabel xml:lang="{$MetadataLanguage}">
-                        <xsl:value-of select="gco:CharacterString"/>
+                        <xsl:value-of select="normalize-space(gco:CharacterString)"/>
                       </skos:prefLabel>
+                      <xsl:call-template name="LocalisedString">
+                        <xsl:with-param name="term">skos:prefLabel</xsl:with-param>
+                      </xsl:call-template>
                       <skos:inScheme>
                         <skos:ConceptScheme>
                           <xsl:copy-of select="$OriginatingControlledVocabulary"/>
