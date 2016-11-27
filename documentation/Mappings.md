@@ -139,7 +139,7 @@
 
 <p>For a number of INSPIRE metadata elements, this document proposes the use of URI code list registers. These registers include:</p>
 <ul>
-  <li>Code lists defined in the INSPIRE Metadata Regulation [<a href="http://eur-lex.europa.eu/eli/reg/com/2008/1205">INSPIRE-MD-REG</a>], and made available through the URI registers operated by the INSPIRE Registry [<a href="http://inspire.ec.europa.eu/registry/">INSPIRE-REGISTRY</a>].</li>
+  <li>Code lists defined in the INSPIRE Metadata Regulation [<a href="http://eur-lex.europa.eu/eli/reg/2008/1205/oj">INSPIRE-MD-REG</a>], and made available through the URI registers operated by the INSPIRE Registry [<a href="http://inspire.ec.europa.eu/registry/">INSPIRE-REGISTRY</a>].</li>
   <li>URI registers operated by the Publications Office of the EU, whose use is recommended in DCAT-AP.</li>
 </ul>
 
@@ -171,7 +171,7 @@
     <tr>
       <td>Service type</td>
       <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType">http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType</a></code></td>
-      <td>Register operated by the INSPIRE Registry for service types, as defined in [<a href="http://eur-lex.europa.eu/eli/reg/com/2008/1205">INSPIRE-MD-REG</a>]</td>
+      <td>Register operated by the INSPIRE Registry for service types, as defined in [<a href="http://eur-lex.europa.eu/eli/reg/2008/1205/oj">INSPIRE-MD-REG</a>]</td>
       <td>stable</td>
     </tr>
     <tr>
@@ -195,13 +195,13 @@
     <tr>
       <td>Degree of conformity</td>
       <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity</a></code></td>
-      <td>Register operated by the INSPIRE Registry for degrees of conformity, as defined in [<a href="http://eur-lex.europa.eu/eli/reg/com/2008/1205">INSPIRE-MD-REG</a>]</td>
+      <td>Register operated by the INSPIRE Registry for degrees of conformity, as defined in [<a href="http://eur-lex.europa.eu/eli/reg/2008/1205/oj">INSPIRE-MD-REG</a>]</td>
       <td>stable</td>
     </tr>
     <tr>
       <td>Responsible party role</td>
       <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole">http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole</a></code></td>
-      <td>Register operated by the INSPIRE Registry for responsible party roles, as defined in [<a href="http://eur-lex.europa.eu/eli/reg/com/2008/1205">INSPIRE-MD-REG</a>]</td>
+      <td>Register operated by the INSPIRE Registry for responsible party roles, as defined in [<a href="http://eur-lex.europa.eu/eli/reg/2008/1205/oj">INSPIRE-MD-REG</a>]</td>
       <td>stable</td>
     </tr>
     <tr>
