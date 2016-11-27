@@ -17,7 +17,7 @@
     <align:onto1 rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory"/>
     <align:onto2 rdf:resource="http://inspire.ec.europa.eu/theme"/>
     <rdfs:label xml:lang="en">Alignments between the ISO 19115 topic categories and the INSPIRE spatial data themes, as per the INSPIRE Metadata Regulation (OJ L 326, 4.12.2008, pp. 12-30)</rdfs:label>    
-    <rdfs:isDefinedBy rdf:resource="http://eur-lex.europa.eu/eli/reg/com/2008/1205#d1e1056-14-1"/>
+    <rdfs:isDefinedBy rdf:resource="http://eur-lex.europa.eu/eli/reg/2008/1205/oj"/>
     <adms:status rdf:resource="http://purl.org/adms/status/UnderDevelopment"/>
     <dcat:distribution>
       <dcat:Distribution>
