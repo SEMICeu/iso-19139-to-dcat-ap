@@ -506,8 +506,25 @@
       </xsl:choose>
     </xsl:param>
 
+    <xsl:param name="IsoScopeCode">
+      <xsl:value-of select="normalize-space(gmd:hierarchyLevel/gmd:MD_ScopeCode/@codeListValue)"/>
+    </xsl:param>
+
+    <xsl:param name="InspireResourceType">
+      <xsl:if test="$IsoScopeCode = 'dataset' or $IsoScopeCode = 'series' or $IsoScopeCode = 'service'">
+        <xsl:value-of select="$IsoScopeCode"/>
+      </xsl:if>
+    </xsl:param>
+
     <xsl:param name="ResourceType">
-      <xsl:value-of select="gmd:hierarchyLevel/gmd:MD_ScopeCode/@codeListValue"/>
+      <xsl:choose>
+        <xsl:when test="$IsoScopeCode = 'dataset' or $IsoScopeCode = 'nonGeographicDataset'">
+          <xsl:text>dataset</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$IsoScopeCode"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:param>
 
     <xsl:param name="ServiceType">
@@ -878,7 +895,9 @@
         </xsl:when>
       </xsl:choose>
       <xsl:if test="$profile = $extended">
-        <dct:type rdf:resource="{$ResourceTypeCodelistUri}/{$ResourceType}"/>
+        <xsl:if test="$InspireResourceType != ''">
+          <dct:type rdf:resource="{$ResourceTypeCodelistUri}/{$ResourceType}"/>
+        </xsl:if>
       </xsl:if>
 <!--
       <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="$ResourceTitle"/></dct:title>
@@ -2650,10 +2669,12 @@
           <xsl:with-param name="lang" select="translate(translate(@locale, $uppercase, $lowercase), '#', '')"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:element name="{$term}">
-        <xsl:attribute name="xml:lang"><xsl:value-of select="$langs"/></xsl:attribute>
-        <xsl:value-of select="$value"/>
-      </xsl:element>
+      <xsl:if test="$value != ''">
+        <xsl:element name="{$term}">
+          <xsl:attribute name="xml:lang"><xsl:value-of select="$langs"/></xsl:attribute>
+          <xsl:value-of select="$value"/>
+        </xsl:element>
+      </xsl:if>
     </xsl:for-each>
   </xsl:template>
   
