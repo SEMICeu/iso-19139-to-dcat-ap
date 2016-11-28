@@ -2,6 +2,20 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2016-11-28: Revised version (v1.13)
+* Added mappings for multilingual elements. More precisely, these mappings concern the following elements:
+    * Metadata standard name.
+    * Resource title, abstract, and lineage.
+    * Free-text keywords, keyword from controlled vocabularies, and name of originating controlled vocabularies.
+    * Constraints related to access and use.
+    * Individual / organisation name of responsible parties.
+    * Title and description of resource locators.
+    * Title of specifications referred to from conformity test results.
+    * Explanation of conformity test results.
+* Fixed bug concerning the mappings for resource types.
+* Fixed bugs concerning the mappings for responsible parties.
+* Fixed bug concerning the mappings for postal addresses.
+
 ## 2016-07-09: Revised version (v1.12)
 * Extended mapping of responsible parties, to (a) detect URIs for individuals and organisations, specified by using `gmx:Anchor/@xlink:href`, and (b) include additional information present in the original record - in particular, individual name, telephone, and address.
 * Fixed bug concerning the mapping of malformed URNs for reference systems, returning an empty string for SRID. Dropped trailing slash in the URIs of the EPSG and OGC CRS registers, and added parameters for the names of these registers.
