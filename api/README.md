@@ -102,7 +102,7 @@ Besides the resulting RDF serialisation of the source ISO 19139 records, the API
     </tr>
     <tr>
       <td rowspan="2"><code>profile</code></td>
-      <td rowspan="2">The media type of the document returned by the API.</td>
+      <td rowspan="2">The profile of the document returned by the API.</td>
       <td><code>DCAT-AP</code></td>
       <td><code>core</code></td>
     </tr>
