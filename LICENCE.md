@@ -1,6 +1,6 @@
 # Licence
 
-Copyright 2015-2016 EUROPEAN UNION
+Copyright 2015-2017 EUROPEAN UNION
   
 Licensed under the EUPL, Version 1.1 or - as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence"); You may not use this work except in compliance with the Licence. You may obtain a copy of the Licence at:
  
@@ -10,9 +10,9 @@ Unless required by applicable law or agreed to in writing, software distributed 
  
 # Authors
 
-European Commission - Joint Research Centre
+European Commission, Joint Research Centre (JRC)
 
-Andrea Perego <andrea.perego@jrc.ec.europa.eu>
+Andrea Perego <andrea.perego@ec.europa.eu>
 
 # Contributors
 
