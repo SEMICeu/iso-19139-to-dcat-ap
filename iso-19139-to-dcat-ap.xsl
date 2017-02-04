@@ -2,7 +2,7 @@
 
 <!--
 
-  Copyright 2015-2016 EUROPEAN UNION
+  Copyright 2015-2017 EUROPEAN UNION
   Licensed under the EUPL, Version 1.1 or - as soon they will be approved by
   the European Commission - subsequent versions of the EUPL (the "Licence");
   You may not use this work except in compliance with the Licence.
@@ -17,7 +17,7 @@
   limitations under the Licence.
 
   Authors:      European Commission - Joint Research Centre
-                Andrea Perego <andrea.perego@jrc.ec.europa.eu>
+                Andrea Perego <andrea.perego@ec.europa.eu>
 
   Contributors: ISA GeoDCAT-AP Working Group
                 <dcat_application_profile-geo@joinup.ec.europa.eu>
