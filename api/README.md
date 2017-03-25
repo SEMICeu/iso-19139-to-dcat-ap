@@ -11,7 +11,7 @@ The API uses the [GeoDCAT-AP XSLT](https://webgate.ec.europa.eu/CITnet/stash/pro
 
 A working demo of GeoDCAT-API is available at: 
 
-http://geodcat-ap.semic.eu:8890/api/
+http://geodcat-ap.semic.eu/api/
 
 # API specification
 
