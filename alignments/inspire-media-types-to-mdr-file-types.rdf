@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF
+  xmlns:adms  = "http://www.w3.org/ns/adms#"
+  xmlns:align = "http://knowledgeweb.semanticweb.org/heterogeneity/alignment#"
+  xmlns:dc    = "http://purl.org/dc/elements/1.1/"
+  xmlns:dcat  = "http://www.w3.org/ns/dcat#"
+  xmlns:dct   = "http://purl.org/dc/terms/"
+  xmlns:owl   = "http://www.w3.org/2002/07/owl#"
+  xmlns:rdf   = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs  = "http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:skos  = "http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd   = "http://www.w3.org/2001/XMLSchema#"
+>
+
+  <rdf:Description rdf:about="">
+    <rdf:type rdf:resource="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#Alignment"/>
+    <align:onto1 rdf:resource="http://inspire.ec.europa.eu/media-types"/>
+    <align:onto2 rdf:resource="http://publications.europa.eu/resource/authority/file-type"/>
+    <rdfs:label xml:lang="en">Alignments between the INSPIRE media types and the MDR file types</rdfs:label>
+    <adms:status rdf:resource="http://purl.org/adms/status/UnderDevelopment"/>
+    <dcat:distribution>
+      <dcat:Distribution>
+        <dcat:accessURL rdf:resource="https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/alignments/inspire-media-types-to-mdr-file-types.rdf?raw"/>
+        <dct:format rdf:resource="http://www.w3.org/ns/formats/data/RDF_XML"/>
+      </dcat:Distribution>
+    </dcat:distribution>
+  </rdf:Description>
+
+<!-- Aligned thesauri -->
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types">
+    <align:location rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://inspire.ec.europa.eu/media-types/media-types.en.rdf</align:location>
+<!--  
+    <align:location rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://inspire.ec.europa.eu/media-types/application/application.en.rdf</align:location>
+    <align:location rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://inspire.ec.europa.eu/media-types/image/image.en.rdf</align:location>
+    <align:location rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://inspire.ec.europa.eu/media-types/text/text.en.rdf</align:location>
+-->    
+    <dcat:distribution>
+      <dcat:Distribution>
+        <dcat:accessURL rdf:resource="http://inspire.ec.europa.eu/media-types/media-types.en.rdf"/>
+<!--        
+        <dcat:accessURL rdf:resource="http://inspire.ec.europa.eu/media-types/application/application.en.rdf"/>
+        <dcat:accessURL rdf:resource="http://inspire.ec.europa.eu/media-types/image/image.en.rdf"/>
+        <dcat:accessURL rdf:resource="http://inspire.ec.europa.eu/media-types/text/text.en.rdf"/>
+-->        
+        <dct:format rdf:resource="http://www.w3.org/ns/formats/data/RDF_XML"/>
+      </dcat:Distribution>
+    </dcat:distribution>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type">
+    <align:location rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://publications.europa.eu/mdr/resource/authority/file-type/skos/filetypes-skos.rdf</align:location>
+    <dcat:distribution>
+      <dcat:Distribution>
+        <dcat:accessURL rdf:resource="http://publications.europa.eu/mdr/resource/authority/file-type/skos/filetypes-skos.rdf"/>
+        <dct:format rdf:resource="http://www.w3.org/ns/formats/data/RDF_XML"/>
+      </dcat:Distribution>
+    </dcat:distribution>
+  </rdf:Description>
+
+<!-- Alignments -->
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/gml+xml">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GML"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/vnd.google-earth.kml+xml">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/KML"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/vnd.google-earth.kmz">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/KMZ"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-ascii-grid">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GRID_ASCII"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-ecw">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/ECW"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-filegdb">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GDB"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-gmz">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GMZ"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-las">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/LAS"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-laz">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/LAZ"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-oracledump">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/DMP"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-shapefile">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/SHP"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-tab">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/TAB"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-tab-raster">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/TAB_RSTR"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-worldfile">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/WORLD"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/image/jp2">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/JPEG2000"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/image/tiff">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/TIFF"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/text/csv">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+  </rdf:Description>
+  
+</rdf:RDF>
