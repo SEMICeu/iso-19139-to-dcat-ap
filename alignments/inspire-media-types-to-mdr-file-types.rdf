@@ -64,11 +64,23 @@
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GML"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/application/gml+xml">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GML"/>
+  </rdf:Description>
+
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/vnd.google-earth.kml+xml">
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/KML"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/application/vnd.google-earth.kml+xml">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/KML"/>
+  </rdf:Description>
+
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/vnd.google-earth.kmz">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/KMZ"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/application/vnd.google-earth.kmz">
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/KMZ"/>
   </rdf:Description>
 
@@ -120,11 +132,23 @@
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/JPEG2000"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/image/jp2">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/JPEG2000"/>
+  </rdf:Description>
+
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/image/tiff">
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/TIFF"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/image/tiff">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/TIFF"/>
+  </rdf:Description>
+
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/text/csv">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/text/csv">
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
   </rdf:Description>
   
