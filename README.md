@@ -12,6 +12,7 @@ Comments and inquiries should be sent to the GeoDCAT-AP WG mailing list:
 
 # Content
 
+* [`alignments/`](./alignments/): Folder including alignments between the controlled vocabularies used in ISO 19115 / INSPIRE metadata and those used in DCAT-AP.
 * [`api/`](./api/): Proof-of-concept of the implementation of GeoDCAT-AP following the CSW interface.
 * [`documentation/`](./documentation/): Folder containing documentation on the XSLT:
     * [`HowTo.md`](./documentation/HowTo.md): Describes how to use the XSLT.
