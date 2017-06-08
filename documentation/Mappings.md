@@ -57,7 +57,7 @@
     </tr>
     <tr>
       <td><code>dcat</code></td>
-      <td><code><a href="http://www.w3.org/ns/dcat#">http://www.w3.org/ns/dcat</a></code></td>
+      <td><code><a href="http://www.w3.org/ns/dcat#">http://www.w3.org/ns/dcat#</a></code></td>
       <td><a href="http://www.w3.org/TR/2014/REC-vocab-dcat-20140116/" title="DCAT">Data Catalog Vocabulary</a></td>
     </tr>
     <tr>
