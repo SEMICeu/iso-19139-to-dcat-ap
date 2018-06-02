@@ -2,13 +2,13 @@
 
 // The API
 
-  $apiSrcRep = "https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/api";
+  $apiSrcRep = "https://github.com/SEMICeu/iso-19139-to-dcat-ap/tree/master/api";
 
 // Variables for API landing page.
 
   $title = "GeoDCAT-AP API";
   $head = '<link rel="stylesheet" type="text/css" href="./css/style.css"/>' . "\n";
-  $footer = '<p>' . $title . ' @ Stash: <a href="' . $apiSrcRep . '">' . $apiSrcRep . '</a></p>';
+  $footer = '<p>' . $title . ' @ GitHub: <a href="' . $apiSrcRep . '">' . $apiSrcRep . '</a></p>';
   $exampleSrcURL = "";
 
 // Loading the required libraries
@@ -22,7 +22,7 @@
     'label' => 'DCAT-AP',
     'description' => 'TBD',
     'url' => 'TBD',
-    'xslt' => 'https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/iso-19139-to-dcat-ap.xsl?raw',
+    'xslt' => 'https://raw.githubusercontent.com/SEMICeu/iso-19139-to-dcat-ap/master/iso-19139-to-dcat-ap.xsl',
     'params' => array(
       'profile' => 'core'
     )
@@ -31,7 +31,7 @@
     'label' => 'GeoDCAT-AP',
     'description' => 'TBD',
     'url' => 'TBD',
-    'xslt' => 'https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/iso-19139-to-dcat-ap.xsl?raw',
+    'xslt' => 'https://raw.githubusercontent.com/SEMICeu/iso-19139-to-dcat-ap/master/iso-19139-to-dcat-ap.xsl',
     'params' => array(
       'profile' => 'extended'
     )
@@ -40,7 +40,7 @@
 
 // XSLT to generate the HTML+RDFa serialisation
 
-  $rdf2rdfa = "https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/dcat-ap-rdf2html/browse/dcat-ap-rdf2rdfa.xsl?raw";
+  $rdf2rdfa = "https://raw.githubusercontent.com/SEMICeu/dcat-ap-rdf2html/master/dcat-ap-rdf2rdfa.xsl";
 
 // Output formats
 
@@ -302,7 +302,7 @@
       <p>Supported CSW request types: <code>GetRecords</code>, <code>GetRecordById</code>.</p>
       <p>Supported CSW output schema: <code>http://www.isotc211.org/2005/gmd</code></p>
       <p><strong>NB</strong>: The current version of the API supports only CSW calls using the <code>GET</code> HTTP method.</p>
-      <p><em>A description of the GeoDCAT-AP API is available on the <a href="<?php echo $apiSrcRep; ?>">API's Stash repository</a>.</em></p>
+      <p><em>A description of the GeoDCAT-AP API is available on the <a href="<?php echo $apiSrcRep; ?>">API's GitHub repository</a>.</em></p>
     </section>
     <aside>
     </aside>

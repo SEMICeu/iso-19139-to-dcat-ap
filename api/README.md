@@ -7,7 +7,7 @@ More precisely, GeoDCAT-API uses the standard CSW parameters `outputSchema` and 
 
 The document containing the ISO 19139 records to be transformed is specified by a GeoDCAT-API-specific parameter `src`, which is not part of the CSW interface. 
 
-The API uses the [GeoDCAT-AP XSLT](https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap) to transform ISO 19139 records into GeoDCAT-AP. As such, the API works both on static files including the records, and on the CSW output of a `GetRecords` or `GetRecordById` request.
+The API uses the [GeoDCAT-AP XSLT](https://github.com/SEMICeu/iso-19139-to-dcat-ap/) to transform ISO 19139 records into GeoDCAT-AP. As such, the API works both on static files including the records, and on the CSW output of a `GetRecords` or `GetRecordById` request.
 
 A working demo of GeoDCAT-API is available at: 
 

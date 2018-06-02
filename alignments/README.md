@@ -13,17 +13,17 @@
 <tbody>
 <tr>
 <td><a href="./inspire-themes-to-mdr-data-themes.rdf"><code>inspire-themes-to-mdr-data-themes.rdf</code></a></td>
-<td><a title="HTML preview" href="http://geodcat-ap.semic.eu/skos-match-viewer/?alignments=https%3A%2F%2Fwebgate.ec.europa.eu%2FCITnet%2Fstash%2Fprojects%2FODCKAN%2Frepos%2Fiso-19139-to-dcat-ap%2Fbrowse%2Falignments%2Finspire-themes-to-mdr-data-themes.rdf%3Fraw">Alignments between the INSPIRE spatial data themes and the MDR data themes</a></td>
+<td><a title="HTML preview" href="http://geodcat-ap.semic.eu/skos-match-viewer/?alignments=https%3A%2F%2Fraw.githubusercontent.com%2FSEMICeu%2Fiso-19139-to-dcat-ap%2Fmaster%2Falignments%2Finspire-themes-to-mdr-data-themes.rdf">Alignments between the INSPIRE spatial data themes and the MDR data themes</a></td>
 <td>Under development</td>
 </tr>
 <tr>
 <td><a href="./iso-topic-categories-to-inspire-themes.rdf"><code>iso-topic-categories-to-inspire-themes.rdf</code></a></td>
-<td><a title="HTML preview" href="http://geodcat-ap.semic.eu/skos-match-viewer/?alignments=https%3A%2F%2Fwebgate.ec.europa.eu%2FCITnet%2Fstash%2Fprojects%2FODCKAN%2Frepos%2Fiso-19139-to-dcat-ap%2Fbrowse%2Falignments%2Fiso-topic-categories-to-inspire-themes.rdf%3Fraw">Alignments between the ISO 19115 topic categories and the INSPIRE spatial data themes, as per the INSPIRE Metadata Regulation (OJ L 326, 4.12.2008, pp. 12-30)</a></td>
+<td><a title="HTML preview" href="http://geodcat-ap.semic.eu/skos-match-viewer/?alignments=https%3A%2F%2Fraw.githubusercontent.com%2FSEMICeu%2Fiso-19139-to-dcat-ap%2Fmaster%2Falignments%2Fiso-topic-categories-to-inspire-themes.rdf">Alignments between the ISO 19115 topic categories and the INSPIRE spatial data themes, as per the INSPIRE Metadata Regulation (OJ L 326, 4.12.2008, pp. 12-30)</a></td>
 <td>Under development</td>
 </tr>
 <tr>
 <td><a href="./inspire-media-types-to-mdr-file-types.rdf"><code>inspire-media-types-to-mdr-file-types.rdf</code></a></td>
-<td><a title="HTML preview" href="http://geodcat-ap.semic.eu/skos-match-viewer/?alignments=https%3A%2F%2Fwebgate.ec.europa.eu%2FCITnet%2Fstash%2Fprojects%2FODCKAN%2Frepos%2Fiso-19139-to-dcat-ap%2Fbrowse%2Falignments%2Finspire-media-types-to-mdr-file-types.rdf%3Fraw">Alignments between the INSPIRE media types and the MDR file types</a></td>
+<td><a title="HTML preview" href="https://raw.githubusercontent.com/SEMICeu/iso-19139-to-dcat-ap/master/alignments/inspire-media-types-to-mdr-file-types.rdf">Alignments between the INSPIRE media types and the MDR file types</a></td>
 <td>Under development</td>
 </tr>
 </table>
