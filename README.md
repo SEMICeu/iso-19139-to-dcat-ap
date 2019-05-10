@@ -2,7 +2,7 @@
 
 This XSLT is a proof of concept for the implementation of the specification concerning the geospatial profile of [DCAT-AP](https://joinup.ec.europa.eu/node/63567/) (GeoDCAT-AP), available on Joinup, the collaboration platform of the [EU ISA Programme](http://ec.europa.eu/isa):
   
-<https://joinup.ec.europa.eu/node/139283/>
+<https://joinup.ec.europa.eu/solution/geodcat-ap>
     
 As such, this XSLT must be considered as unstable, and can be updated any time based on the revisions to the GeoDCAT-AP specifications and related work in the framework of [INSPIRE](http://inspire.ec.europa.eu/) and the EU ISA Programme.
 
