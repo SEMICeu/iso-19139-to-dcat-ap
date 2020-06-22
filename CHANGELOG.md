@@ -2,7 +2,7 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
-## 2020-05-23: New version (v2.0)
+## 2020-06-22: New version (v2.0)
 
 This version includes revisions needed to ensure compliance with DCAT-AP 2. Such revisions are implemented in a conservative way - i.e., by adding new mappings without removing the original ones, but flagging them as deprecated, thus ensuring backward compatibility. 
 
