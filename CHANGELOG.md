@@ -6,9 +6,9 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 
 This version includes revisions needed to ensure compliance with DCAT-AP 2. Such revisions are implemented in a conservative way - i.e., by adding new mappings without removing the original ones, but flagging them as deprecated, thus ensuring backward compatibility. 
 
-Another main change concerns having moved to the core profile mappings which were originally part of the extended profile only.
+Another main change concerns having moved to the core profile some mappings which were originally part of the extended profile only, and concerning metadata elements supported in DCAT-AP 2.
 
-Finally, this new version includes revision to ensure compliance with the 2017 edition of the INSPIRE Metadata Implementation Guidelines. Also in this case, revisions have been implemented in a conservative way, to ensure backward compatibility with metadata records following previous versions of the INSPIRE Metadata Technical Guidelines.
+Finally, this new version includes revisions to ensure compliance with the 2017 edition of the INSPIRE Metadata Implementation Guidelines. Also in this case, revisions have been implemented in a conservative way, to ensure backward compatibility with metadata records following previous versions of the INSPIRE Metadata Technical Guidelines.
 
 More precisely:
 
