@@ -2,6 +2,54 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2020-06-22: New version (v2.0)
+
+This version includes revisions needed to ensure compliance with DCAT-AP 2. Such revisions are implemented in a conservative way - i.e., by adding new mappings without removing the original ones, but flagging them as deprecated, thus ensuring backward compatibility. 
+
+Another main change concerns having moved to the core profile some mappings which were originally part of the extended profile only, and concerning metadata elements supported in DCAT-AP 2.
+
+Finally, this new version includes revisions to ensure compliance with the 2017 edition of the INSPIRE Metadata Implementation Guidelines. Also in this case, revisions have been implemented in a conservative way, to ensure backward compatibility with metadata records following previous versions of the INSPIRE Metadata Technical Guidelines.
+
+More precisely:
+
+* Updated licence version, attribution, and links.
+* Switched to DCAT-AP and GeoDCAT-AP namespace URIs to denote, respectively, the core and extended GeoDCAT-AP profile. Backward compatibility with the previous versions is ensured, where codes "core" and "extended" were used instead.
+* Added mappings for new classes and properties included in DCAT-AP 2:
+    * `dcat:DataService`.
+    * `dcat:endpointURL`.
+    * `dcat:endpointDescription`.
+    * `dcat:accessService`.
+    * `dcat:servesDataset`.
+    * `dcat:bbox`.
+    * `dcat:startDate`.
+    * `dcat:endDate`.
+    * `dcat:spatialResolutionInMeters`
+    * `dcat:hadRole`.
+* Added mappings for properties with a broader domain in DCAT-AP 2:
+    * `dcat:theme`.
+    * `dcat:keyword`.
+    * `dcat:contactPoint`.
+* Moved to core profile mappings originally supported only in the extended profile:
+    * Resource type "service".
+    * Resource types.
+    * Service types.
+    * Constraints related to access and use for services.
+    * Conformity (only in case the resource is conformant).
+    * Metadata standard.
+    * Responsible party role "author".
+    * Spatial resolution.
+    * Spatial reference system.
+* Mappings revised and added to ensure compliance with the 2017 edition of the INSPIRE Metadata Technical Guidelines:
+    * Revised and added mappings for conditions for limitations on public access and conditions for access and use. In particular, element `gmd:useConstraints` is now used to map use conditions. The previous versions of the mappings used instead element `gmd:useLimitation`, which has been kept for backward compatibility, but flagged as deprecated.
+* Enhancements:
+    * Added checks for empty elements.
+    * Revised mapping for reference systems, to include also values specified via `gmx:Anchor`.
+    * Revised mapping for spatial resolution, to extend detection of unit of measurements.
+    * Revised mapping for constraints on access and use, to include also values specified via `gmd:MD_RestrictionCode` and `gmx:Anchor`.
+    * Revised mapping for distributions, to include reference to the relevant service / API via `dcat:accessService`. One major difference with respect to the previous versions of the mapping is that resource locators are considered as distributions of datasets and series whenever they point to a service / API.
+    * Revised mapping for time literals, to detect their data type.
+    * Revised mapping for temporal extent, to core with the use of versioned `gml:` namespaces.
+
 ## 2016-11-28: Revised version (v1.13)
 * Added mappings for multilingual elements. More precisely, these mappings concern the following elements:
     * Metadata standard name.
