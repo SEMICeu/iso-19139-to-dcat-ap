@@ -4,7 +4,11 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 
 ## 2020-06-22: New version (v2.0)
 
-This version includes revisions needed to ensure compliance with DCAT-AP 2. Such revisions are implemented in a conservative way - i.e., by adding new mappings without removing the original ones, but flagging them as deprecated, thus ensuring backward compatibility. 
+This version includes revisions needed to ensure compliance with DCAT 2 and DCAT-AP 2.0, and reflecting the first working draft of GeoDCAT-AP 2.0.0:
+
+https://semiceu.github.io/GeoDCAT-AP/drafts/2.0.0-draft-0.1/
+
+Such revisions are implemented in a conservative way - i.e., by adding new mappings without removing the original ones, but flagging them as deprecated, thus ensuring backward compatibility. 
 
 Another main change concerns having moved to the core profile some mappings which were originally part of the extended profile only, and concerning metadata elements supported in DCAT-AP 2.
 
