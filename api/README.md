@@ -146,3 +146,20 @@ More precisely:
 * Run `php composer.phar install`
 
 You will now be able to run the API from a Web folder.
+
+## Docker setup
+
+### Prerequisite
+  - [Docker](https://www.docker.com/get-started) (Or Docker Desktop for `docker-compose`)
+
+### Setup - docker-compose (Requires Docker Desktop)
+  1. Navigate into `api` folder in your terminal.
+  2. Run `docker-compose up`.
+  3. Open the browser and navigate to `http://localhost`.
+
+### Setup - dockerfile
+  1. Navigate into `api` folder in your terminal.
+  2. Build a docker image with the following command `docker build .`.
+  3. Start a container with the built image with the following command `docker run -p 80:80 IMAGE_ID`
+    - You can find the `IMAGE_ID` by running `docker images`.
+  4. Open the browser and navigate to `http://localhost`.
