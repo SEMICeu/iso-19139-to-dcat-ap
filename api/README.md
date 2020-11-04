@@ -161,5 +161,5 @@ You will now be able to run the API from a Web folder.
   1. Navigate into `api` folder in your terminal.
   2. Build a docker image with the following command `docker build .`.
   3. Start a container with the built image with the following command `docker run -p 80:80 IMAGE_ID`
-    - You can find the `IMAGE_ID` by running `docker images`.
+      - You can find the `IMAGE_ID` by running `docker images`.
   4. Open the browser and navigate to `http://localhost`.
