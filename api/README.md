@@ -147,17 +147,17 @@ More precisely:
 
 You will now be able to run the API from a Web folder.
 
-## Docker setup
+# Docker setup
 
-### Prerequisite
+## Prerequisite
   - [Docker](https://www.docker.com/get-started) (Or Docker Desktop for `docker-compose`)
 
-### Setup - docker-compose (Requires Docker Desktop)
+## Setup - docker-compose (Requires Docker Desktop)
   1. Navigate into `api` folder in your terminal.
   2. Run `docker-compose up`.
   3. Open the browser and navigate to `http://localhost`.
 
-### Setup - dockerfile
+## Setup - dockerfile
   1. Navigate into `api` folder in your terminal.
   2. Build a docker image with the following command `docker build .`.
   3. Start a container with the built image with the following command `docker run -p 80:80 IMAGE_ID`
