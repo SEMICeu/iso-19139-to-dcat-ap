@@ -714,9 +714,13 @@
 
     <xsl:param name="Conformity">
       <xsl:for-each select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
+        <xsl:variable name="specUri" select="normalize-space(gmd:title/gmx:Anchor/@xlink:href)"/>
         <xsl:variable name="specTitle">
           <xsl:for-each select="gmd:title">
+<!--
             <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:title>
+-->
+	    <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dct:title>
             <xsl:call-template name="LocalisedString">
               <xsl:with-param name="term">dct:title</xsl:with-param>
             </xsl:call-template>
@@ -771,6 +775,16 @@
           <prov:qualifiedAssociation rdf:parseType="Resource">
             <prov:hadPlan rdf:parseType="Resource">
               <xsl:choose>
+                <xsl:when test="$specUri != ''">
+                  <prov:wasDerivedFrom rdf:resource="{$specUri}"/>
+<!--
+                  <prov:wasDerivedFrom>
+                    <rdf:Description rdf:about="{$specUri}">
+                      <xsl:copy-of select="$specinfo"/>
+                    </rdf:Description>
+                  </prov:wasDerivedFrom>
+-->
+                </xsl:when>
                 <xsl:when test="../@xlink:href and ../@xlink:href != ''">
                   <prov:wasDerivedFrom rdf:resource="{../@xlink:href}"/>
 <!--
@@ -1991,12 +2005,36 @@
     <xsl:param name="ResourceUri"/>
     <xsl:param name="MetadataLanguage"/>
     <xsl:param name="Conformity"/>
+
+    <xsl:variable name="specUri" select="normalize-space(gmd:title/gmx:Anchor/@xlink:href)"/>
+    <xsl:variable name="specTitle">
+      <xsl:for-each select="gmd:title">
+<!--
+        <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:title>
+-->
+        <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dct:title>
+        <xsl:call-template name="LocalisedString">
+          <xsl:with-param name="term">dct:title</xsl:with-param>
+        </xsl:call-template>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:variable name="specinfo">
+<!--        
+      <dct:title xml:lang="{$MetadataLanguage}">
+        <xsl:value-of select="gmd:title/gco:CharacterString"/>
+      </dct:title>
+-->        
+      <xsl:copy-of select="$specTitle"/>
+      <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
+    </xsl:variable>
+<!--
     <xsl:variable name="specinfo">
       <dct:title xml:lang="{$MetadataLanguage}">
         <xsl:value-of select="gmd:title/gco:CharacterString"/>
       </dct:title>
       <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
     </xsl:variable>
+-->
 <!--
     <xsl:variable name="degree">
       <xsl:choose>
@@ -2020,6 +2058,16 @@
 -->
     <xsl:if test="../../gmd:pass/gco:Boolean = 'true'">
       <xsl:choose>
+        <xsl:when test="$specUri != ''">
+          <dct:conformsTo rdf:resource="{$specUri}"/>
+<!--
+          <dct:conformsTo>
+            <rdf:Description rdf:about="{$specUri}">
+              <xsl:copy-of select="$specinfo"/>
+            </rdf:Description>
+          </dct:conformsTo>
+-->
+        </xsl:when>
         <xsl:when test="../@xlink:href and ../@xlink:href != ''">
           <dct:conformsTo rdf:resource="{../@xlink:href}"/>
 <!--
