@@ -814,16 +814,20 @@
           </prov:generated>
         </prov:Activity>
         </xsl:variable>
+<!--            
         <xsl:choose>
           <xsl:when test="$ResourceUri != ''">
             <xsl:copy-of select="$Activity"/>
           </xsl:when>
           <xsl:otherwise>
+-->            
             <prov:wasUsedBy>
               <xsl:copy-of select="$Activity"/>
             </prov:wasUsedBy>
+<!--            
           </xsl:otherwise>
         </xsl:choose>
+-->            
       </xsl:for-each>
     </xsl:param>
 
@@ -1343,9 +1347,11 @@
 <!--
     <xsl:if test="$profile = $extended and $ResourceUri != '' and $Conformity != ''">
 -->
+<!--
     <xsl:if test="$ResourceUri != '' and $Conformity != ''">
       <xsl:copy-of select="$Conformity"/>
     </xsl:if>
+-->
 
 
   </xsl:template>
@@ -2089,9 +2095,13 @@
 <!--
     <xsl:if test="$profile = $extended">
 -->
+<!--
       <xsl:if test="$Conformity != '' and $ResourceUri = ''">
+-->
         <xsl:copy-of select="$Conformity"/>
+<!--
       </xsl:if>
+-->
 <!--
       <xsl:choose>
         <xsl:when test="../@xlink:href and ../@xlink:href != ''">
