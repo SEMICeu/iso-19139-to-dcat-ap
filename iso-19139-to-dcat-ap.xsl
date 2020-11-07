@@ -714,9 +714,13 @@
 
     <xsl:param name="Conformity">
       <xsl:for-each select="gmd:dataQualityInfo/*/gmd:report/*/gmd:result/*/gmd:specification/gmd:CI_Citation">
+        <xsl:variable name="specUri" select="normalize-space(gmd:title/gmx:Anchor/@xlink:href)"/>
         <xsl:variable name="specTitle">
           <xsl:for-each select="gmd:title">
+<!--
             <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:title>
+-->
+	    <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dct:title>
             <xsl:call-template name="LocalisedString">
               <xsl:with-param name="term">dct:title</xsl:with-param>
             </xsl:call-template>
@@ -771,6 +775,16 @@
           <prov:qualifiedAssociation rdf:parseType="Resource">
             <prov:hadPlan rdf:parseType="Resource">
               <xsl:choose>
+                <xsl:when test="$specUri != ''">
+                  <prov:wasDerivedFrom rdf:resource="{$specUri}"/>
+<!--
+                  <prov:wasDerivedFrom>
+                    <rdf:Description rdf:about="{$specUri}">
+                      <xsl:copy-of select="$specinfo"/>
+                    </rdf:Description>
+                  </prov:wasDerivedFrom>
+-->
+                </xsl:when>
                 <xsl:when test="../@xlink:href and ../@xlink:href != ''">
                   <prov:wasDerivedFrom rdf:resource="{../@xlink:href}"/>
 <!--
@@ -800,16 +814,20 @@
           </prov:generated>
         </prov:Activity>
         </xsl:variable>
+<!--            
         <xsl:choose>
           <xsl:when test="$ResourceUri != ''">
             <xsl:copy-of select="$Activity"/>
           </xsl:when>
           <xsl:otherwise>
+-->            
             <prov:wasUsedBy>
               <xsl:copy-of select="$Activity"/>
             </prov:wasUsedBy>
+<!--            
           </xsl:otherwise>
         </xsl:choose>
+-->            
       </xsl:for-each>
     </xsl:param>
 
@@ -1329,9 +1347,11 @@
 <!--
     <xsl:if test="$profile = $extended and $ResourceUri != '' and $Conformity != ''">
 -->
+<!--
     <xsl:if test="$ResourceUri != '' and $Conformity != ''">
       <xsl:copy-of select="$Conformity"/>
     </xsl:if>
+-->
 
 
   </xsl:template>
@@ -1991,12 +2011,36 @@
     <xsl:param name="ResourceUri"/>
     <xsl:param name="MetadataLanguage"/>
     <xsl:param name="Conformity"/>
+
+    <xsl:variable name="specUri" select="normalize-space(gmd:title/gmx:Anchor/@xlink:href)"/>
+    <xsl:variable name="specTitle">
+      <xsl:for-each select="gmd:title">
+<!--
+        <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:title>
+-->
+        <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dct:title>
+        <xsl:call-template name="LocalisedString">
+          <xsl:with-param name="term">dct:title</xsl:with-param>
+        </xsl:call-template>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:variable name="specinfo">
+<!--        
+      <dct:title xml:lang="{$MetadataLanguage}">
+        <xsl:value-of select="gmd:title/gco:CharacterString"/>
+      </dct:title>
+-->        
+      <xsl:copy-of select="$specTitle"/>
+      <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
+    </xsl:variable>
+<!--
     <xsl:variable name="specinfo">
       <dct:title xml:lang="{$MetadataLanguage}">
         <xsl:value-of select="gmd:title/gco:CharacterString"/>
       </dct:title>
       <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
     </xsl:variable>
+-->
 <!--
     <xsl:variable name="degree">
       <xsl:choose>
@@ -2020,6 +2064,16 @@
 -->
     <xsl:if test="../../gmd:pass/gco:Boolean = 'true'">
       <xsl:choose>
+        <xsl:when test="$specUri != ''">
+          <dct:conformsTo rdf:resource="{$specUri}"/>
+<!--
+          <dct:conformsTo>
+            <rdf:Description rdf:about="{$specUri}">
+              <xsl:copy-of select="$specinfo"/>
+            </rdf:Description>
+          </dct:conformsTo>
+-->
+        </xsl:when>
         <xsl:when test="../@xlink:href and ../@xlink:href != ''">
           <dct:conformsTo rdf:resource="{../@xlink:href}"/>
 <!--
@@ -2041,9 +2095,13 @@
 <!--
     <xsl:if test="$profile = $extended">
 -->
+<!--
       <xsl:if test="$Conformity != '' and $ResourceUri = ''">
+-->
         <xsl:copy-of select="$Conformity"/>
+<!--
       </xsl:if>
+-->
 <!--
       <xsl:choose>
         <xsl:when test="../@xlink:href and ../@xlink:href != ''">
@@ -2178,7 +2236,7 @@
             <skos:inScheme>
               <skos:ConceptScheme>
                 <dct:title xml:lang="{$MetadataLanguage}">
-                  <xsl:value-of select="gmd:title/gco:CharacterString"/>
+                  <xsl:value-of select="gmd:title/*[self::gco:CharacterString|self::gmx:Anchor]"/>
                 </dct:title>
                 <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
               </skos:ConceptScheme>
@@ -2581,6 +2639,7 @@
     <xsl:param name="MetadataLanguage"/>
     <xsl:param name="ResourceType"/>
     <xsl:param name="ServiceType"/>
+    <xsl:param name="OriginatingControlledVocabularyURI" select="normalize-space(gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href)"/>
     <xsl:param name="OriginatingControlledVocabulary">
 <!--
       <xsl:for-each select="gmd:thesaurusName/gmd:CI_Citation">
@@ -2593,39 +2652,65 @@
       <xsl:for-each select="gmd:thesaurusName/gmd:CI_Citation">
         <xsl:for-each select="gmd:title">
           <dct:title xml:lang="{$MetadataLanguage}">
-            <xsl:value-of select="normalize-space(gco:CharacterString)"/>
+            <xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/>
           </dct:title>
           <xsl:call-template name="LocalisedString">
             <xsl:with-param name="term">dct:title</xsl:with-param>
           </xsl:call-template>
         </xsl:for-each>
-	<xsl:if test="$profile = $extended">
+        <xsl:if test="$profile = $extended">
           <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
         </xsl:if>
       </xsl:for-each>
     </xsl:param>
+    <xsl:param name="ConceptScheme">
+      <xsl:choose>
+        <xsl:when test="$OriginatingControlledVocabularyURI != ''">
+          <skos:ConceptScheme rdf:about="{$OriginatingControlledVocabularyURI}">
+            <xsl:copy-of select="$OriginatingControlledVocabulary"/>
+          </skos:ConceptScheme>
+        </xsl:when>
+        <xsl:otherwise>
+          <skos:ConceptScheme>
+            <xsl:copy-of select="$OriginatingControlledVocabulary"/>
+          </skos:ConceptScheme>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:param>
+    <xsl:param name="inScheme">
+      <xsl:choose>
+        <xsl:when test="$OriginatingControlledVocabularyURI != ''">
+          <skos:inScheme rdf:resource="{$OriginatingControlledVocabularyURI}"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <skos:inScheme>
+            <xsl:copy-of select="$ConceptScheme"/>
+          </skos:inScheme>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:param>
     <xsl:for-each select="gmd:keyword[normalize-space(gco:CharacterString) != '' or normalize-space(gmx:Anchor/@xlink:href) != '']">
-      <xsl:variable name="lckw" select="translate(gco:CharacterString,$uppercase,$lowercase)"/>
+      <xsl:variable name="lckw" select="translate(*[self::gco:CharacterString|self::gmx:Anchor],$uppercase,$lowercase)"/>
       <xsl:choose>
         <xsl:when test="normalize-space($OriginatingControlledVocabulary) = '' and not( gmx:Anchor/@xlink:href and ( starts-with(gmx:Anchor/@xlink:href, 'http://') or starts-with(gmx:Anchor/@xlink:href, 'https://') ) )">
           <xsl:choose>
             <xsl:when test="$ResourceType = 'service'">
 <!-- Mapping moved to core profile for compliance with DCAT-AP 2 -->
 <!-- Mapping added for compliance with DCAT-AP 2 -->      
-              <dcat:keyword xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dcat:keyword>
+              <dcat:keyword xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dcat:keyword>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dcat:keyword</xsl:with-param>
               </xsl:call-template>
               <xsl:if test="$profile = $extended">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->      
-                <dc:subject xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dc:subject>
+                <dc:subject xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dc:subject>
                 <xsl:call-template name="LocalisedString">
                   <xsl:with-param name="term">dc:subject</xsl:with-param>
                 </xsl:call-template>
               </xsl:if>
             </xsl:when>
             <xsl:otherwise>
-              <dcat:keyword xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dcat:keyword>
+              <dcat:keyword xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dcat:keyword>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dcat:keyword</xsl:with-param>
               </xsl:call-template>
@@ -2645,11 +2730,14 @@
                     <xsl:call-template name="LocalisedString">
                       <xsl:with-param name="term">skos:prefLabel</xsl:with-param>
                     </xsl:call-template>
+                    <xsl:copy-of select="$inScheme"/>
+<!--
                     <skos:inScheme>
                       <skos:ConceptScheme>
                         <xsl:copy-of select="$OriginatingControlledVocabulary"/>
                       </skos:ConceptScheme>
                     </skos:inScheme>
+-->
                   </dcat:theme>
                 </xsl:when>
                 <xsl:otherwise>
@@ -2662,11 +2750,14 @@
                     <xsl:call-template name="LocalisedString">
                       <xsl:with-param name="term">skos:prefLabel</xsl:with-param>
                     </xsl:call-template>
+                    <xsl:copy-of select="$inScheme"/>
+<!--
                     <skos:inScheme>
                       <skos:ConceptScheme>
                         <xsl:copy-of select="$OriginatingControlledVocabulary"/>
                       </skos:ConceptScheme>
                     </skos:inScheme>
+-->
                   </dcat:theme>
                   <xsl:if test="$profile = $extended">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->      
@@ -2677,11 +2768,14 @@
                       <xsl:call-template name="LocalisedString">
                         <xsl:with-param name="term">skos:prefLabel</xsl:with-param>
                       </xsl:call-template>
+                      <xsl:copy-of select="$inScheme"/>
+<!--
                       <skos:inScheme>
                         <skos:ConceptScheme>
                           <xsl:copy-of select="$OriginatingControlledVocabulary"/>
                         </skos:ConceptScheme>
                       </skos:inScheme>
+-->
                     </dct:subject>
                   </xsl:if>
                 </xsl:otherwise>
