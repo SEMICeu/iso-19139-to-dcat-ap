@@ -2658,7 +2658,7 @@
             <xsl:with-param name="term">dct:title</xsl:with-param>
           </xsl:call-template>
         </xsl:for-each>
-	<xsl:if test="$profile = $extended">
+        <xsl:if test="$profile = $extended">
           <xsl:apply-templates select="gmd:date/gmd:CI_Date"/>
         </xsl:if>
       </xsl:for-each>
@@ -2680,7 +2680,7 @@
     <xsl:param name="inScheme">
       <xsl:choose>
         <xsl:when test="$OriginatingControlledVocabularyURI != ''">
-          <skos:inScheme rdf:about="{$OriginatingControlledVocabularyURI}"/>
+          <skos:inScheme rdf:resource="{$OriginatingControlledVocabularyURI}"/>
         </xsl:when>
         <xsl:otherwise>
           <skos:inScheme>
