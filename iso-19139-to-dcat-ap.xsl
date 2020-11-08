@@ -1029,6 +1029,137 @@
         <xsl:with-param name="ResourceType" select="$ResourceType"/>
         <xsl:with-param name="ServiceType" select="$ServiceType"/>
       </xsl:apply-templates>
+
+<!-- Mapping from INSPIRE Themes to Data Themes -->
+<!-- The mappings used are those defined in 
+
+     https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/inspire-themes-to-mdr-data-themes.rdf
+
+-->
+
+  <xsl:for-each select="gmd:identificationInfo/*/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword">
+    <xsl:variable name="uri">
+      <xsl:value-of select="normalize-space(gmx:Anchor/@xlink:href)"/>
+    </xsl:variable>
+    <xsl:choose>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/ac'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/ad'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/af'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/AGRI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/am'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/au'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/br'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/bu'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/cp'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/ef'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/el'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/er'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENER"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/ge'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/gg'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/gn'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/hb'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/hh'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/HEAL"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/hy'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/lc'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/lu'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/mf'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/mr'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENER"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/nz'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/of'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/oi'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/pd'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/pf'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/ps'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/rs'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/sr'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/so'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/sd'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/su'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/tn'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TRAN"/>
+      </xsl:when>
+      <xsl:when test="$uri = 'http://inspire.ec.europa.eu/theme/us'">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+      </xsl:when>
+    <!--
+      <xsl:when test="$uri = ''">
+        <dcat:theme rdf:resource=""/>
+      </xsl:when>
+    -->
+    </xsl:choose>
+  </xsl:for-each>
+
 <!-- Identifier, 0..1 -->
 <!--
       <xsl:apply-templates select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*">
