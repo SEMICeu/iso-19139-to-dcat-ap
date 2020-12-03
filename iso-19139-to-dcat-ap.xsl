@@ -2441,7 +2441,7 @@
 
 <!-- Constraints related to access and use -->
 
-  <xsl:template name="ConstraintsRelatedToAccesAndUse" match="gmd:identificationInfo[1]/*/gmd:resourceConstraints/*">
+  <xsl:template name="ConstraintsRelatedToAccessAndUse" match="gmd:identificationInfo[1]/*/gmd:resourceConstraints/*">
     <xsl:param name="MetadataLanguage"/>
     <xsl:param name="LimitationsOnPublicAccess">
       <xsl:value-of select="gmd:MD_LegalConstraints/gmd:otherConstraints/*"/>
