@@ -2,6 +2,9 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2020-12-08: Revised version (v2.2)
+
+* Fixed typo in variable reference.
 
 ## 2020-11-05: Revised version (v2.1)
 
