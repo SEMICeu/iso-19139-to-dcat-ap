@@ -2911,6 +2911,9 @@
     </xsl:for-each>
     <xsl:if test="$profile = $extended">
       <xsl:for-each select="gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator">
+<!--
+        <rdfs:comment xml:lang="en">Spatial resolution (equivalent scale): 1:<xsl:value-of select="gco:Integer"/></rdfs:comment>
+-->
         <xsl:choose>
           <xsl:when test="number(gco:Integer) = number(gco:Integer)">
             <dqv:hasQualityMeasurement>
@@ -2921,7 +2924,7 @@
             </dqv:hasQualityMeasurement>
           </xsl:when>
           <xsl:otherwise>
-            <rdfs:comment xml:lang="en">Spatial resolution (equivalent scale): 1:<xsl:value-of select="gco:Integer"/></rdfs:comment>
+            <rdfs:comment xml:lang="en">Spatial resolution (equivalent scale): <xsl:value-of select="gco:Integer"/></rdfs:comment>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
