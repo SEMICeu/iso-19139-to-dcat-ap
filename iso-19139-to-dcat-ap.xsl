@@ -48,9 +48,11 @@
     xmlns:dcat   = "http://www.w3.org/ns/dcat#"
     xmlns:dct    = "http://purl.org/dc/terms/"
     xmlns:dctype = "http://purl.org/dc/dcmitype/"
+    xmlns:dqv    = "http://www.w3.org/ns/dqv#"
     xmlns:earl   = "http://www.w3.org/ns/earl#"
     xmlns:foaf   = "http://xmlns.com/foaf/0.1/"
     xmlns:gco    = "http://www.isotc211.org/2005/gco"
+    xmlns:geodcatap = "http://data.europa.eu/930/"
     xmlns:gmd    = "http://www.isotc211.org/2005/gmd"
     xmlns:gml    = "http://www.opengis.net/gml"
     xmlns:gmx    = "http://www.isotc211.org/2005/gmx"
@@ -64,6 +66,7 @@
     xmlns:rdf    = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs   = "http://www.w3.org/2000/01/rdf-schema#"
     xmlns:schema = "http://schema.org/"
+    xmlns:sdmx-attribute = "http://purl.org/linked-data/sdmx/2009/attribute#"
     xmlns:skos   = "http://www.w3.org/2004/02/skos/core#"
     xmlns:srv    = "http://www.isotc211.org/2005/srv"
     xmlns:vcard  = "http://www.w3.org/2006/vcard/ns#"
@@ -2855,26 +2858,72 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
+<!--
       <xsl:if test="$profile = $extended">
         <rdfs:comment xml:lang="en">Spatial resolution (distance): <xsl:value-of select="."/>&#160;<xsl:value-of select="$UoM"/></rdfs:comment>
       </xsl:if>
+-->
 <!-- Mapping moved to core profile for compliance with DCAT-AP 2 -->     
 <!-- Mapping added for compliance with DCAT-AP 2 -->     
       <xsl:choose>
-	<xsl:when test="($UoM = 'm' or starts-with($UoM, 'm ')) and number(.) = number(.)">
+        <xsl:when test="($UoM = 'm' or starts-with($UoM, 'm ')) and number(.) = number(.)">
           <dcat:spatialResolutionInMeters rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dcat:spatialResolutionInMeters>
-	</xsl:when>
-	<xsl:when test="($UoM = 'km' or starts-with($UoM, 'km ')) and number(.) = number(.)">
+          <xsl:if test="$profile = 'extended'">
+            <dqv:hasQualityMeasurement>
+             <dqv:QualityMeasurement>
+                <dqv:isMeasurementOf rdf:resource="http://data.europa.eu/930/spatialResolutionAsDistance"/>
+                <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
+                <sdmx-attribute:unitMeasure rdf:resource="http://www.wurvoc.org/vocabularies/om-1.8/metre"/>
+             </dqv:QualityMeasurement>
+            </dqv:hasQualityMeasurement>
+          </xsl:if>
+        </xsl:when>
+        <xsl:when test="($UoM = 'km' or starts-with($UoM, 'km ')) and number(.) = number(.)">
           <dcat:spatialResolutionInMeters rdf:datatype="{$xsd}decimal"><xsl:value-of select="(. * 1000)"/></dcat:spatialResolutionInMeters>
-	</xsl:when>
-	<xsl:when test="($UoM = 'ft' or starts-with($UoM, 'ft ')) and number(.) = number(.)">
+          <xsl:if test="$profile = 'extended'">
+            <dqv:hasQualityMeasurement>
+             <dqv:QualityMeasurement>
+                <dqv:isMeasurementOf rdf:resource="http://data.europa.eu/930/spatialResolutionAsDistance"/>
+                <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
+                <sdmx-attribute:unitMeasure rdf:resource="http://www.wurvoc.org/vocabularies/om-1.8/kilometre"/>
+             </dqv:QualityMeasurement>
+            </dqv:hasQualityMeasurement>
+          </xsl:if>
+        </xsl:when>
+        <xsl:when test="($UoM = 'ft' or starts-with($UoM, 'ft ')) and number(.) = number(.)">
           <dcat:spatialResolutionInMeters rdf:datatype="{$xsd}decimal"><xsl:value-of select="(. * 0.3048)"/></dcat:spatialResolutionInMeters>
-	</xsl:when>
+          <xsl:if test="$profile = 'extended'">
+            <dqv:hasQualityMeasurement>
+             <dqv:QualityMeasurement>
+                <dqv:isMeasurementOf rdf:resource="http://data.europa.eu/930/spatialResolutionAsDistance"/>
+                <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
+                <sdmx-attribute:unitMeasure rdf:resource="http://www.wurvoc.org/vocabularies/om-1.8/foot-international"/>
+             </dqv:QualityMeasurement>
+            </dqv:hasQualityMeasurement>
+          </xsl:if>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:if test="$profile = $extended">
+            <rdfs:comment xml:lang="en">Spatial resolution (distance): <xsl:value-of select="."/>&#160;<xsl:value-of select="$UoM"/></rdfs:comment>
+          </xsl:if>
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:for-each>
     <xsl:if test="$profile = $extended">
       <xsl:for-each select="gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator">
-        <rdfs:comment xml:lang="en">Spatial resolution (equivalent scale): 1:<xsl:value-of select="gco:Integer"/></rdfs:comment>
+        <xsl:choose>
+          <xsl:when test="number(gco:Integer) = number(gco:Integer)">
+            <dqv:hasQualityMeasurement>
+              <dqv:QualityMeasurement>
+                <dqv:isMeasurementOf rdf:resource="http://data.europa.eu/930/spatialResolutionAsScale"/>
+                <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="format-number((1 div gco:Integer), '0.########################')"/></dqv:value>
+              </dqv:QualityMeasurement>
+            </dqv:hasQualityMeasurement>
+          </xsl:when>
+          <xsl:otherwise>
+            <rdfs:comment xml:lang="en">Spatial resolution (equivalent scale): 1:<xsl:value-of select="gco:Integer"/></rdfs:comment>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:for-each>
     </xsl:if>
   </xsl:template>
