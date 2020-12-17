@@ -4,7 +4,7 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 
 ## 2020-12-17: Revised version (v2.4)
 
-* Revised mappings of responsible party roles to align them with the current draft of GeoDCAT-AP 2.0.0 (see issue [#32](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/32)). In particular, the mapping now includes the use of the relevant properties defined in GeoDCAT-AP 2 - namely, `geodcatap:custodian`, `geodcatap:distributor`, `geodcatap:originator`, `geodcatap:principalInvestigator`, `geodcatap:processor`, `geodcatap:resourceProvider`, `geodcatap:user`.
+* Revised mappings of responsible party roles to align them with the current draft of GeoDCAT-AP 2.0.0 (see issue [#16](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/16)). In particular, the mapping now includes the use of the relevant properties defined in GeoDCAT-AP 2 - namely, `geodcatap:custodian`, `geodcatap:distributor`, `geodcatap:originator`, `geodcatap:principalInvestigator`, `geodcatap:processor`, `geodcatap:resourceProvider`, `geodcatap:user`.
 
 ## 2020-12-12: Revised version (v2.3)
 
