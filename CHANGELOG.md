@@ -2,11 +2,22 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2020-12-17: Revised version (v2.4)
+
+* Revised mappings of responsible party roles to align them with the current draft of GeoDCAT-AP 2.0.0 (see issue [#16](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/16)). In particular, the mapping now includes the use of the relevant properties defined in GeoDCAT-AP 2 - namely, `geodcatap:custodian`, `geodcatap:distributor`, `geodcatap:originator`, `geodcatap:principalInvestigator`, `geodcatap:processor`, `geodcatap:resourceProvider`, `geodcatap:user`.
+
+## 2020-12-12: Revised version (v2.3)
+
+* Revised mapping of spatial resolution to align it with the current draft of GeoDCAT-AP 2.0.0 (see issue [#14](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/14)). In particular, the mapping now supports the use of `dqv:hasQualityMeasurement` to complement `dcat:spatialResolutionInMeters` for the different types of spatial resolution (equivalent scale, distance, angular distance, and vertical distance).
+
+## 2020-12-08: Revised version (v2.2)
+
+* Fixed typo in variable reference (see issue [#11](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/11)).
 
 ## 2020-11-05: Revised version (v2.1)
 
-* Revised mapping for conformance test results, to include also values specified via `gmx:Anchor`.
-* Revised mapping for originating controlled vocabularies, to include also values specified via `gmx:Anchor`.
+* Revised mapping for conformance test results, to include also values specified via `gmx:Anchor` (see issue [#4](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/4)).
+* Revised mapping for originating controlled vocabularies, to include also values specified via `gmx:Anchor` (see issue [#4](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/4)).
 * Editorial revisions.
 
 ## 2020-06-22: New version (v2.0)

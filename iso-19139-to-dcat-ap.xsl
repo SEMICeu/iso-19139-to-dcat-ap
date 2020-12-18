@@ -48,9 +48,11 @@
     xmlns:dcat   = "http://www.w3.org/ns/dcat#"
     xmlns:dct    = "http://purl.org/dc/terms/"
     xmlns:dctype = "http://purl.org/dc/dcmitype/"
+    xmlns:dqv    = "http://www.w3.org/ns/dqv#"
     xmlns:earl   = "http://www.w3.org/ns/earl#"
     xmlns:foaf   = "http://xmlns.com/foaf/0.1/"
     xmlns:gco    = "http://www.isotc211.org/2005/gco"
+    xmlns:geodcatap = "http://data.europa.eu/930/"
     xmlns:gmd    = "http://www.isotc211.org/2005/gmd"
     xmlns:gml    = "http://www.opengis.net/gml"
     xmlns:gmx    = "http://www.isotc211.org/2005/gmx"
@@ -64,6 +66,7 @@
     xmlns:rdf    = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs   = "http://www.w3.org/2000/01/rdf-schema#"
     xmlns:schema = "http://schema.org/"
+    xmlns:sdmx-attribute = "http://purl.org/linked-data/sdmx/2009/attribute#"
     xmlns:skos   = "http://www.w3.org/2004/02/skos/core#"
     xmlns:srv    = "http://www.isotc211.org/2005/srv"
     xmlns:vcard  = "http://www.w3.org/2006/vcard/ns#"
@@ -854,12 +857,12 @@
       </xsl:if>
 <!-- Metadata date -->
       <xsl:if test="$MetadataDate != ''">
-         <xsl:variable name="data-type">
-            <xsl:call-template name="DateDataType">
-              <xsl:with-param name="date" select="$MetadataDate"/>
-            </xsl:call-template>
-	</xsl:variable>
-	<dct:modified rdf:datatype="{$xsd}{$data-type}">
+        <xsl:variable name="data-type">
+          <xsl:call-template name="DateDataType">
+            <xsl:with-param name="date" select="$MetadataDate"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <dct:modified rdf:datatype="{$xsd}{$data-type}">
           <xsl:value-of select="$MetadataDate"/>
         </dct:modified>
       </xsl:if>
@@ -1275,34 +1278,34 @@
         <xsl:apply-templates select="gmd:identificationInfo/*/gmd:spatialRepresentationType/gmd:MD_SpatialRepresentationTypeCode"/>
       </xsl:variable>
 
-          <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution">
+      <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution">
 <!-- Encoding -->
-            <xsl:variable name="Encoding">
-               <xsl:apply-templates select="gmd:distributionFormat/gmd:MD_Format/gmd:name/*"/>
-            </xsl:variable>
+        <xsl:variable name="Encoding">
+          <xsl:apply-templates select="gmd:distributionFormat/gmd:MD_Format/gmd:name/*"/>
+        </xsl:variable>
 <!-- Resource locators (access / download URLs) -->
-            <xsl:for-each select="gmd:transferOptions/*/gmd:onLine/*">
-              <xsl:variable name="url" select="gmd:linkage/gmd:URL"/>
-              <xsl:variable name="protocol" select="gmd:protocol/*"/>
-	      <xsl:variable name="protocol-url" select="gmd:protocol/gmx:Anchor/@xlink:href"/>
-              <xsl:variable name="function" select="gmd:function/gmd:CI_OnLineFunctionCode/@codeListValue"/>
-              <xsl:variable name="Title">
-                <xsl:for-each select="gmd:name">
-                  <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:title>
-                  <xsl:call-template name="LocalisedString">
-                    <xsl:with-param name="term">dct:title</xsl:with-param>
-                  </xsl:call-template>
-                </xsl:for-each>
-              </xsl:variable>
-              <xsl:variable name="Description">
-                <xsl:for-each select="gmd:description">
-                  <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
-                  <xsl:call-template name="LocalisedString">
-                    <xsl:with-param name="term">dct:description</xsl:with-param>
-                  </xsl:call-template>
-                </xsl:for-each>
-              </xsl:variable>
-              <xsl:variable name="TitleAndDescription">
+        <xsl:for-each select="gmd:transferOptions/*/gmd:onLine/*">
+          <xsl:variable name="url" select="gmd:linkage/gmd:URL"/>
+          <xsl:variable name="protocol" select="gmd:protocol/*"/>
+          <xsl:variable name="protocol-url" select="gmd:protocol/gmx:Anchor/@xlink:href"/>
+          <xsl:variable name="function" select="gmd:function/gmd:CI_OnLineFunctionCode/@codeListValue"/>
+          <xsl:variable name="Title">
+            <xsl:for-each select="gmd:name">
+              <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:title>
+              <xsl:call-template name="LocalisedString">
+                <xsl:with-param name="term">dct:title</xsl:with-param>
+              </xsl:call-template>
+            </xsl:for-each>
+          </xsl:variable>
+          <xsl:variable name="Description">
+            <xsl:for-each select="gmd:description">
+              <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
+              <xsl:call-template name="LocalisedString">
+                <xsl:with-param name="term">dct:description</xsl:with-param>
+              </xsl:call-template>
+            </xsl:for-each>
+          </xsl:variable>
+          <xsl:variable name="TitleAndDescription">
 <!--              
                 <xsl:for-each select="gmd:name/gco:CharacterString">
                   <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
@@ -1311,13 +1314,13 @@
                   <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:description>
                 </xsl:for-each>
 -->
-                <xsl:copy-of select="$Title"/>
-                <xsl:copy-of select="$Description"/>
-              </xsl:variable>
+            <xsl:copy-of select="$Title"/>
+            <xsl:copy-of select="$Description"/>
+          </xsl:variable>
 
       <xsl:choose>
 <!-- Mapping added to the core profile for compliance with DCAT-AP 2 -->	      
-	<xsl:when test="$ResourceType = 'service'">
+        <xsl:when test="$ResourceType = 'service'">
           <xsl:call-template name="service-endpoint">
             <xsl:with-param name="function" select="$function"/>
             <xsl:with-param name="protocol" select="$protocol"/>
@@ -1852,24 +1855,25 @@
       </xsl:choose>
     </xsl:param>
     <xsl:choose>
-<!--
-      <xsl:when test="$role = 'resourceProvider'">
-        <schema:provider>
+      <xsl:when test="$role = 'resourceProvider' and $profile = $extended">
+        <geodcatap:resourceProvider>
           <xsl:copy-of select="$ROInfo"/>
-        </schema:provider>
+        </geodcatap:resourceProvider>
       </xsl:when>
--->
-<!--
-      <xsl:when test="$role = 'custodian'">
-        <rdarole:custodian>
+      <xsl:when test="$role = 'custodian' and $profile = $extended">
+        <geodcatap:custodian>
           <xsl:copy-of select="$ROInfo"/>
-        </rdarole:custodian>
+        </geodcatap:custodian>
       </xsl:when>
--->
       <xsl:when test="$role = 'owner' and $profile = $extended">
         <dct:rightsHolder>
           <xsl:copy-of select="$ROInfo"/>
         </dct:rightsHolder>
+      </xsl:when>
+      <xsl:when test="$role = 'user' and $profile = $extended">
+        <geodcatap:user>
+          <xsl:copy-of select="$ROInfo"/>
+        </geodcatap:user>
       </xsl:when>
 <!--
       <xsl:when test="$role = 'user'">
@@ -1882,22 +1886,18 @@
         </prov:wasUsedBy>
       </xsl:when>
 -->
-<!--
-      <xsl:when test="$role = 'distributor'">
-        <rdarole:distributor>
+      <xsl:when test="$role = 'distributor' and $profile = $extended">
+        <geodcatap:distributor>
           <xsl:copy-of select="$ROInfo"/>
-        </rdarole:distributor>
+        </geodcatap:distributor>
       </xsl:when>
--->
-<!--
       <xsl:when test="$role = 'originator' and $profile = $extended">
-        <dct:creator>
+        <geodcatap:originator>
           <xsl:copy-of select="$ROInfo"/>
-        </dct:creator>
+        </geodcatap:originator>
       </xsl:when>
--->
 <!-- Mapping applied also to services for compliance with DCAT-AP 2 -->
-      <xsl:when test="$role = 'pointOfContact'">
+      <xsl:when test="$role = 'pointOfContact' and ($ResourceType != 'service' or $profile = $extended)">
         <dcat:contactPoint>
           <xsl:copy-of select="$ResponsibleParty"/>
         </dcat:contactPoint>
@@ -1909,13 +1909,16 @@
         </dcat:contactPoint>
       </xsl:when>
 -->
-<!--
-      <xsl:when test="$role = 'principalInvestigator'">
-        <dct:contributor>
+      <xsl:when test="$role = 'principalInvestigator' and $profile = $extended">
+        <geodcatap:principalInvestigator>
           <xsl:copy-of select="$ROInfo"/>
-        </dct:contributor>
+        </geodcatap:principalInvestigator>
       </xsl:when>
--->
+      <xsl:when test="$role = 'processor' and $profile = $extended">
+        <geodcatap:processor>
+          <xsl:copy-of select="$ROInfo"/>
+        </geodcatap:processor>
+      </xsl:when>
 <!--
       <xsl:when test="$role = 'processor'">
         <prov:entityOfInfluence>
@@ -1931,13 +1934,13 @@
         </prov:entityOfInfluence>
       </xsl:when>
 -->
-      <xsl:when test="$role = 'publisher'">
+      <xsl:when test="$role = 'publisher' and ($ResourceType != 'service' or $profile = $extended)">
         <dct:publisher>
           <xsl:copy-of select="$ROInfo"/>
         </dct:publisher>
       </xsl:when>
 <!-- Mapping moved to core profile for compliance with DCAT-AP 2 -->
-      <xsl:when test="$role = 'author'">
+      <xsl:when test="$role = 'author' and ($ResourceType != 'service' or $profile = $extended)">
         <dct:creator>
           <xsl:copy-of select="$ROInfo"/>
         </dct:creator>
@@ -1951,9 +1954,7 @@
 -->
     </xsl:choose>
 <!-- Mapping moved to core profile for compliance with DCAT-AP 2 -->
-<!--
-    <xsl:if test="$profile = $extended">
--->
+    <xsl:if test="($ResourceType != 'service' and $role != 'pointOfContact' and $role != 'publisher' and $role != 'author') or $profile = $extended">
       <prov:qualifiedAttribution>
         <prov:Attribution>
           <prov:agent>
@@ -1965,14 +1966,12 @@
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->      
           <xsl:if test="$profile = $extended">
             <dct:type rdf:resource="{$ResponsiblePartyRole}"/>
-	  </xsl:if>
+          </xsl:if>
 <!-- Mapping added for compliance with DCAT-AP 2 -->      
           <dcat:hadRole rdf:resource="{$ResponsiblePartyRole}"/>
         </prov:Attribution>
       </prov:qualifiedAttribution>
-<!--          
     </xsl:if>
--->            
   </xsl:template>
 
 <!-- Metadata point of contact -->
@@ -2572,7 +2571,7 @@
 
 <!-- Constraints related to access and use -->
 
-  <xsl:template name="ConstraintsRelatedToAccesAndUse" match="gmd:identificationInfo[1]/*/gmd:resourceConstraints/*">
+  <xsl:template name="ConstraintsRelatedToAccessAndUse" match="gmd:identificationInfo[1]/*/gmd:resourceConstraints/*">
     <xsl:param name="MetadataLanguage"/>
     <xsl:param name="LimitationsOnPublicAccess">
       <xsl:value-of select="gmd:MD_LegalConstraints/gmd:otherConstraints/*"/>
@@ -2986,26 +2985,75 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
+<!--
       <xsl:if test="$profile = $extended">
         <rdfs:comment xml:lang="en">Spatial resolution (distance): <xsl:value-of select="."/>&#160;<xsl:value-of select="$UoM"/></rdfs:comment>
       </xsl:if>
+-->
 <!-- Mapping moved to core profile for compliance with DCAT-AP 2 -->     
 <!-- Mapping added for compliance with DCAT-AP 2 -->     
       <xsl:choose>
-	<xsl:when test="($UoM = 'm' or starts-with($UoM, 'm ')) and number(.) = number(.)">
+        <xsl:when test="($UoM = 'm' or starts-with($UoM, 'm ')) and number(.) = number(.)">
           <dcat:spatialResolutionInMeters rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dcat:spatialResolutionInMeters>
-	</xsl:when>
-	<xsl:when test="($UoM = 'km' or starts-with($UoM, 'km ')) and number(.) = number(.)">
+          <xsl:if test="$profile = 'extended'">
+            <dqv:hasQualityMeasurement>
+             <dqv:QualityMeasurement>
+                <dqv:isMeasurementOf rdf:resource="http://data.europa.eu/930/spatialResolutionAsDistance"/>
+                <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
+                <sdmx-attribute:unitMeasure rdf:resource="http://www.wurvoc.org/vocabularies/om-1.8/metre"/>
+             </dqv:QualityMeasurement>
+            </dqv:hasQualityMeasurement>
+          </xsl:if>
+        </xsl:when>
+        <xsl:when test="($UoM = 'km' or starts-with($UoM, 'km ')) and number(.) = number(.)">
           <dcat:spatialResolutionInMeters rdf:datatype="{$xsd}decimal"><xsl:value-of select="(. * 1000)"/></dcat:spatialResolutionInMeters>
-	</xsl:when>
-	<xsl:when test="($UoM = 'ft' or starts-with($UoM, 'ft ')) and number(.) = number(.)">
+          <xsl:if test="$profile = 'extended'">
+            <dqv:hasQualityMeasurement>
+             <dqv:QualityMeasurement>
+                <dqv:isMeasurementOf rdf:resource="http://data.europa.eu/930/spatialResolutionAsDistance"/>
+                <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
+                <sdmx-attribute:unitMeasure rdf:resource="http://www.wurvoc.org/vocabularies/om-1.8/kilometre"/>
+             </dqv:QualityMeasurement>
+            </dqv:hasQualityMeasurement>
+          </xsl:if>
+        </xsl:when>
+        <xsl:when test="($UoM = 'ft' or starts-with($UoM, 'ft ')) and number(.) = number(.)">
           <dcat:spatialResolutionInMeters rdf:datatype="{$xsd}decimal"><xsl:value-of select="(. * 0.3048)"/></dcat:spatialResolutionInMeters>
-	</xsl:when>
+          <xsl:if test="$profile = 'extended'">
+            <dqv:hasQualityMeasurement>
+             <dqv:QualityMeasurement>
+                <dqv:isMeasurementOf rdf:resource="http://data.europa.eu/930/spatialResolutionAsDistance"/>
+                <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
+                <sdmx-attribute:unitMeasure rdf:resource="http://www.wurvoc.org/vocabularies/om-1.8/foot-international"/>
+             </dqv:QualityMeasurement>
+            </dqv:hasQualityMeasurement>
+          </xsl:if>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:if test="$profile = $extended">
+            <rdfs:comment xml:lang="en">Spatial resolution (distance): <xsl:value-of select="."/>&#160;<xsl:value-of select="$UoM"/></rdfs:comment>
+          </xsl:if>
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:for-each>
     <xsl:if test="$profile = $extended">
       <xsl:for-each select="gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator">
+<!--
         <rdfs:comment xml:lang="en">Spatial resolution (equivalent scale): 1:<xsl:value-of select="gco:Integer"/></rdfs:comment>
+-->
+        <xsl:choose>
+          <xsl:when test="number(gco:Integer) = number(gco:Integer)">
+            <dqv:hasQualityMeasurement>
+              <dqv:QualityMeasurement>
+                <dqv:isMeasurementOf rdf:resource="http://data.europa.eu/930/spatialResolutionAsScale"/>
+                <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="format-number((1 div gco:Integer), '0.########################')"/></dqv:value>
+              </dqv:QualityMeasurement>
+            </dqv:hasQualityMeasurement>
+          </xsl:when>
+          <xsl:otherwise>
+            <rdfs:comment xml:lang="en">Spatial resolution (equivalent scale): <xsl:value-of select="gco:Integer"/></rdfs:comment>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:for-each>
     </xsl:if>
   </xsl:template>
