@@ -1724,11 +1724,13 @@
       </xsl:choose>
     </xsl:param>
     <xsl:choose>
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'resourceProvider' and $profile = $extended">
         <geodcatap:resourceProvider>
           <xsl:copy-of select="$ROInfo"/>
         </geodcatap:resourceProvider>
       </xsl:when>
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'custodian' and $profile = $extended">
         <geodcatap:custodian>
           <xsl:copy-of select="$ROInfo"/>
@@ -1739,6 +1741,7 @@
           <xsl:copy-of select="$ROInfo"/>
         </dct:rightsHolder>
       </xsl:when>
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'user' and $profile = $extended">
         <geodcatap:user>
           <xsl:copy-of select="$ROInfo"/>
@@ -1755,11 +1758,13 @@
         </prov:wasUsedBy>
       </xsl:when>
 -->
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'distributor' and $profile = $extended">
         <geodcatap:distributor>
           <xsl:copy-of select="$ROInfo"/>
         </geodcatap:distributor>
       </xsl:when>
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'originator' and $profile = $extended">
         <geodcatap:originator>
           <xsl:copy-of select="$ROInfo"/>
@@ -1778,11 +1783,13 @@
         </dcat:contactPoint>
       </xsl:when>
 -->
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'principalInvestigator' and $profile = $extended">
         <geodcatap:principalInvestigator>
           <xsl:copy-of select="$ROInfo"/>
         </geodcatap:principalInvestigator>
       </xsl:when>
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'processor' and $profile = $extended">
         <geodcatap:processor>
           <xsl:copy-of select="$ROInfo"/>
@@ -2880,6 +2887,7 @@
       <xsl:choose>
         <xsl:when test="($UoM = 'm' or starts-with($UoM, 'm ')) and number(.) = number(.)">
           <dcat:spatialResolutionInMeters rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dcat:spatialResolutionInMeters>
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
           <xsl:if test="$profile = 'extended'">
             <dqv:hasQualityMeasurement>
              <dqv:QualityMeasurement>
@@ -2892,6 +2900,7 @@
         </xsl:when>
         <xsl:when test="($UoM = 'km' or starts-with($UoM, 'km ')) and number(.) = number(.)">
           <dcat:spatialResolutionInMeters rdf:datatype="{$xsd}decimal"><xsl:value-of select="(. * 1000)"/></dcat:spatialResolutionInMeters>
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
           <xsl:if test="$profile = 'extended'">
             <dqv:hasQualityMeasurement>
              <dqv:QualityMeasurement>
@@ -2904,6 +2913,7 @@
         </xsl:when>
         <xsl:when test="($UoM = 'ft' or starts-with($UoM, 'ft ')) and number(.) = number(.)">
           <dcat:spatialResolutionInMeters rdf:datatype="{$xsd}decimal"><xsl:value-of select="(. * 0.3048)"/></dcat:spatialResolutionInMeters>
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
           <xsl:if test="$profile = 'extended'">
             <dqv:hasQualityMeasurement>
              <dqv:QualityMeasurement>
@@ -2927,6 +2937,7 @@
         <rdfs:comment xml:lang="en">Spatial resolution (equivalent scale): 1:<xsl:value-of select="gco:Integer"/></rdfs:comment>
 -->
         <xsl:choose>
+<!-- Mapping added for compliance with GeoDCAT-AP 2 -->
           <xsl:when test="number(gco:Integer) = number(gco:Integer)">
             <dqv:hasQualityMeasurement>
               <dqv:QualityMeasurement>
