@@ -2,7 +2,16 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
-## 2020-12-012: Revised version (v2.3)
+## 2020-12-22: Revised version (v2.5)
+
+* Revised mapping of spatial coverage to align it with the current draft of GeoDCAT-AP 2.0.0 (see issue [#18](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/18)). In particular, the mapping now includes the use of datatype `gsp:geoJSONLiteral`, defined in the current draft of the new version of GeoSPARQL. The use of the old GeoJSON IANA media type URI has been kept to ensure backward compatibility.
+* Revised mapping of GeoJSON literals by removing the `crs` field when the CRS is CRS84 - making them compliant with RFC 7946, where the only supported CRS is CRS84.
+
+## 2020-12-17: Revised version (v2.4)
+
+* Revised mappings of responsible party roles to align them with the current draft of GeoDCAT-AP 2.0.0 (see issue [#16](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/16)). In particular, the mapping now includes the use of the relevant properties defined in GeoDCAT-AP 2 - namely, `geodcatap:custodian`, `geodcatap:distributor`, `geodcatap:originator`, `geodcatap:principalInvestigator`, `geodcatap:processor`, `geodcatap:resourceProvider`, `geodcatap:user`.
+
+## 2020-12-12: Revised version (v2.3)
 
 * Revised mapping of spatial resolution to align it with the current draft of GeoDCAT-AP 2.0.0 (see issue [#14](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/14)). In particular, the mapping now supports the use of `dqv:hasQualityMeasurement` to complement `dcat:spatialResolutionInMeters` for the different types of spatial resolution (equivalent scale, distance, angular distance, and vertical distance).
 
