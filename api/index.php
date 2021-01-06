@@ -200,15 +200,15 @@
 
 // Setting namespace prefixes
 
-    \EasyRdf\Namespace::set('adms', 'http://www.w3.org/ns/adms#');
-    \EasyRdf\Namespace::set('cnt', 'http://www.w3.org/2011/content#');
-    \EasyRdf\Namespace::set('dc', 'http://purl.org/dc/elements/1.1/');
-    \EasyRdf\Namespace::set('dcat', 'http://www.w3.org/ns/dcat#');
-    \EasyRdf\Namespace::set('dqv', 'http://www.w3.org/ns/dqv#');
-    \EasyRdf\Namespace::set('geodcatap', 'http://data.europa.eu/930/');
-    \EasyRdf\Namespace::set('gsp', 'http://www.opengis.net/ont/geosparql#');
-    \EasyRdf\Namespace::set('locn', 'http://www.w3.org/ns/locn#');
-    \EasyRdf\Namespace::set('prov', 'http://www.w3.org/ns/prov#');
+    \EasyRdf\RdfNamespace::set('adms', 'http://www.w3.org/ns/adms#');
+    \EasyRdf\RdfNamespace::set('cnt', 'http://www.w3.org/2011/content#');
+    \EasyRdf\RdfNamespace::set('dc', 'http://purl.org/dc/elements/1.1/');
+    \EasyRdf\RdfNamespace::set('dcat', 'http://www.w3.org/ns/dcat#');
+    \EasyRdf\RdfNamespace::set('dqv', 'http://www.w3.org/ns/dqv#');
+    \EasyRdf\RdfNamespace::set('geodcatap', 'http://data.europa.eu/930/');
+    \EasyRdf\RdfNamespace::set('gsp', 'http://www.opengis.net/ont/geosparql#');
+    \EasyRdf\RdfNamespace::set('locn', 'http://www.w3.org/ns/locn#');
+    \EasyRdf\RdfNamespace::set('prov', 'http://www.w3.org/ns/prov#');
 //** EasyRdf requires prefixes to contain only alpha-numeric chars - see https://github.com/easyrdf/easyrdf/issues/265
 //    \EasyRdf\RdfNamespace::set('sdmx-attribute', 'http://purl.org/linked-data/sdmx/2009/attribute#');
 
