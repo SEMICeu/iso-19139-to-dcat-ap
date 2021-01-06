@@ -215,6 +215,7 @@
 // Creating the RDF graph from the RDF/XML serialisation
 
     $graph = new \EasyRdf\Graph;
+
     $graph->parse($rdf);
 
 // Sending HTTP headers
