@@ -13,7 +13,7 @@
 
 // Loading the required libraries
 
-  require('/vendor/autoload.php');
+  require('./lib/composer/vendor/autoload.php');
 
 // Output schemas
 

@@ -8,7 +8,7 @@ RUN composer install -d /build/lib/composer
 FROM php:7.4-apache
 WORKDIR /app
 COPY . .
-COPY --from=build /build/lib/composer/vendor /vendor
+COPY --from=build /build/lib/composer/vendor /app/lib/composer/vendor
 RUN apt-get update && apt-get install -y \
     libxslt-dev \
     && docker-php-ext-configure xsl --with-xsl \
