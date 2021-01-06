@@ -199,18 +199,17 @@
     }
 
 // Setting namespace prefixes
-
-    EasyRdf_Namespace::set('adms', 'http://www.w3.org/ns/adms#');
-    EasyRdf_Namespace::set('cnt', 'http://www.w3.org/2011/content#');
-    EasyRdf_Namespace::set('dc', 'http://purl.org/dc/elements/1.1/');
-    EasyRdf_Namespace::set('dcat', 'http://www.w3.org/ns/dcat#');
-    EasyRdf_Namespace::set('gsp', 'http://www.opengis.net/ont/geosparql#');
-    EasyRdf_Namespace::set('locn', 'http://www.w3.org/ns/locn#');
-    EasyRdf_Namespace::set('prov', 'http://www.w3.org/ns/prov#');
+    \EasyRdf\RdfNamespace::set('adms', 'http://www.w3.org/ns/adms#');
+    \EasyRdf\RdfNamespace::set('cnt', 'http://www.w3.org/2011/content#');
+    \EasyRdf\RdfNamespace::set('dc', 'http://purl.org/dc/elements/1.1/');
+    \EasyRdf\RdfNamespace::set('dcat', 'http://www.w3.org/ns/dcat#');
+    \EasyRdf\RdfNamespace::set('gsp', 'http://www.opengis.net/ont/geosparql#');
+    \EasyRdf\RdfNamespace::set('locn', 'http://www.w3.org/ns/locn#');
+    \EasyRdf\RdfNamespace::set('prov', 'http://www.w3.org/ns/prov#');
 
 // Creating the RDF graph from the RDF/XML serialisation
 
-    $graph = new EasyRdf_Graph;
+    $graph = new \EasyRdf\Graph();
     $graph->parse($rdf);
 
 // Sending HTTP headers
