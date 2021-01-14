@@ -2,7 +2,7 @@
 
 <!--
 
-  Copyright 2015-2020 EUROPEAN UNION
+  Copyright 2015-2021 EUROPEAN UNION
   Licensed under the EUPL, Version 1.2 or - as soon they will be approved by
   the European Commission - subsequent versions of the EUPL (the "Licence");
   You may not use this work except in compliance with the Licence.
@@ -314,7 +314,7 @@
   Master template
   ===============
 
- -->
+-->
 
   <xsl:template match="/">
     <rdf:RDF>
@@ -327,7 +327,7 @@
   Metadata template
   =================
 
- -->
+-->
 
   <xsl:template match="gmd:MD_Metadata|//gmd:MD_Metadata">
 
@@ -629,9 +629,9 @@
         <xsl:when test="gmd:dateStamp/gco:Date">
           <xsl:value-of select="gmd:dateStamp/gco:Date"/>
         </xsl:when>
-	<xsl:when test="gmd:dateStamp/gco:DateTime">
+        <xsl:when test="gmd:dateStamp/gco:DateTime">
 <!--
-	  <xsl:value-of select="substring(gmd:dateStamp/gco:DateTime/text(),1,10)"/>
+          <xsl:value-of select="substring(gmd:dateStamp/gco:DateTime/text(),1,10)"/>
 -->
           <xsl:value-of select="normalize-space(gmd:dateStamp/gco:DateTime/text())"/>
         </xsl:when>
@@ -723,7 +723,7 @@
 <!--
             <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:title>
 -->
-	    <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dct:title>
+      <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dct:title>
             <xsl:call-template name="LocalisedString">
               <xsl:with-param name="term">dct:title</xsl:with-param>
             </xsl:call-template>
@@ -771,51 +771,51 @@
           </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="Activity">
-        <prov:Activity>
-          <xsl:if test="$ResourceUri != ''">
-            <prov:used rdf:resource="{$ResourceUri}"/>
-          </xsl:if>
-          <prov:qualifiedAssociation rdf:parseType="Resource">
-            <prov:hadPlan rdf:parseType="Resource">
-              <xsl:choose>
-                <xsl:when test="$specUri != ''">
-                  <prov:wasDerivedFrom rdf:resource="{$specUri}"/>
-<!--
-                  <prov:wasDerivedFrom>
-                    <rdf:Description rdf:about="{$specUri}">
-                      <xsl:copy-of select="$specinfo"/>
-                    </rdf:Description>
-                  </prov:wasDerivedFrom>
--->
-                </xsl:when>
-                <xsl:when test="../@xlink:href and ../@xlink:href != ''">
-                  <prov:wasDerivedFrom rdf:resource="{../@xlink:href}"/>
-<!--
-                  <prov:wasDerivedFrom>
-                    <rdf:Description rdf:about="{../@xlink:href}">
-                      <xsl:copy-of select="$specinfo"/>
-                    </rdf:Description>
-                  </prov:wasDerivedFrom>
--->
-                </xsl:when>
-                <xsl:otherwise>
-                  <prov:wasDerivedFrom rdf:parseType="Resource">
-                    <xsl:copy-of select="$specinfo"/>
-                  </prov:wasDerivedFrom>
-                </xsl:otherwise>
-              </xsl:choose>
-            </prov:hadPlan>
-          </prov:qualifiedAssociation>
-          <prov:generated rdf:parseType="Resource">
-            <dct:type rdf:resource="{$degree}"/>
-<!--
-            <xsl:if test="$explanation and $explanation != ''">
-              <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$explanation"/></dct:description>
+          <prov:Activity>
+            <xsl:if test="$ResourceUri != ''">
+              <prov:used rdf:resource="{$ResourceUri}"/>
             </xsl:if>
+            <prov:qualifiedAssociation rdf:parseType="Resource">
+              <prov:hadPlan rdf:parseType="Resource">
+                <xsl:choose>
+                  <xsl:when test="$specUri != ''">
+                    <prov:wasDerivedFrom rdf:resource="{$specUri}"/>
+<!--
+                    <prov:wasDerivedFrom>
+                      <rdf:Description rdf:about="{$specUri}">
+                        <xsl:copy-of select="$specinfo"/>
+                      </rdf:Description>
+                    </prov:wasDerivedFrom>
 -->
-            <xsl:copy-of select="$explanation"/>
-          </prov:generated>
-        </prov:Activity>
+                  </xsl:when>
+                  <xsl:when test="../@xlink:href and ../@xlink:href != ''">
+                    <prov:wasDerivedFrom rdf:resource="{../@xlink:href}"/>
+<!--
+                    <prov:wasDerivedFrom>
+                      <rdf:Description rdf:about="{../@xlink:href}">
+                        <xsl:copy-of select="$specinfo"/>
+                      </rdf:Description>
+                    </prov:wasDerivedFrom>
+-->
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <prov:wasDerivedFrom rdf:parseType="Resource">
+                      <xsl:copy-of select="$specinfo"/>
+                    </prov:wasDerivedFrom>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </prov:hadPlan>
+            </prov:qualifiedAssociation>
+            <prov:generated rdf:parseType="Resource">
+              <dct:type rdf:resource="{$degree}"/>
+<!--
+              <xsl:if test="$explanation and $explanation != ''">
+                <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$explanation"/></dct:description>
+              </xsl:if>
+-->
+              <xsl:copy-of select="$explanation"/>
+            </prov:generated>
+          </prov:Activity>
         </xsl:variable>
 <!--
         <xsl:choose>
@@ -891,19 +891,19 @@
 <!--
       <xsl:if test="$profile = $extended">
 -->
-	<xsl:variable name="MetadataStandardURI" select="gmd:metadataStandardName/gmx:Anchor/@xlink:href"/>
+      <xsl:variable name="MetadataStandardURI" select="gmd:metadataStandardName/gmx:Anchor/@xlink:href"/>
 <!--
-        <xsl:variable name="MetadataStandardName" select="gmd:metadataStandardName/*[self::gco:CharacterString|self::gmx:Anchor]"/>
+      <xsl:variable name="MetadataStandardName" select="gmd:metadataStandardName/*[self::gco:CharacterString|self::gmx:Anchor]"/>
 -->
-        <xsl:variable name="MetadataStandardName">
-          <xsl:for-each select="gmd:metadataStandardName">
-            <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dct:title>
-            <xsl:call-template name="LocalisedString">
-              <xsl:with-param name="term">dct:title</xsl:with-param>
-            </xsl:call-template>
-          </xsl:for-each>
-        </xsl:variable>
-        <xsl:variable name="MetadataStandardVersion" select="gmd:metadataStandardVersion/gco:CharacterString"/>
+      <xsl:variable name="MetadataStandardName">
+        <xsl:for-each select="gmd:metadataStandardName">
+          <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/></dct:title>
+          <xsl:call-template name="LocalisedString">
+            <xsl:with-param name="term">dct:title</xsl:with-param>
+          </xsl:call-template>
+        </xsl:for-each>
+      </xsl:variable>
+      <xsl:variable name="MetadataStandardVersion" select="gmd:metadataStandardVersion/gco:CharacterString"/>
         <xsl:if test="$MetadataCharacterEncoding != '' or $MetadataStandardURI != '' or $MetadataStandardName != ''">
           <dct:source rdf:parseType="Resource">
 <!-- Metadata date -->
@@ -941,17 +941,14 @@
         <xsl:for-each select="gmd:metadataStandardName/gco:CharacterString">
           <xsl:if test="text() != '' or ../../gmd:metadataStandardVersion/gco:CharacterString/text() != ''">
             <dct:source rdf:parseType="Resource">
-
               <xsl:if test="$MetadataCharacterEncoding != ''">
                 <xsl:copy-of select="$MetadataCharacterEncoding"/>
               </xsl:if>
               <dct:conformsTo rdf:parseType="Resource">
                 <xsl:if test="text() != ''">
-
                   <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
                 </xsl:if>
                 <xsl:if test="../../gmd:metadataStandardName/gco:CharacterString/text() != ''">
-
                   <owl:versionInfo xml:lang="{$MetadataLanguage}"><xsl:value-of select="../../gmd:metadataStandardVersion/gco:CharacterString"/></owl:versionInfo>
                 </xsl:if>
               </dct:conformsTo>
@@ -1176,43 +1173,43 @@
           </xsl:variable>
           <xsl:variable name="TitleAndDescription">
 <!--
-                <xsl:for-each select="gmd:name/gco:CharacterString">
-                  <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
-                </xsl:for-each>
-                <xsl:for-each select="gmd:description/gco:CharacterString">
-                  <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:description>
-                </xsl:for-each>
+            <xsl:for-each select="gmd:name/gco:CharacterString">
+              <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
+            </xsl:for-each>
+            <xsl:for-each select="gmd:description/gco:CharacterString">
+              <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:description>
+             </xsl:for-each>
 -->
             <xsl:copy-of select="$Title"/>
             <xsl:copy-of select="$Description"/>
           </xsl:variable>
 
-      <xsl:choose>
+          <xsl:choose>
 <!-- Mapping added to the core profile for compliance with DCAT-AP 2 -->
-        <xsl:when test="$ResourceType = 'service'">
-          <xsl:call-template name="service-endpoint">
-            <xsl:with-param name="function" select="$function"/>
-            <xsl:with-param name="protocol" select="$protocol"/>
-            <xsl:with-param name="url" select="$url"/>
-          </xsl:call-template>
-          <xsl:if test="$profile = $extended">
-            <xsl:call-template name="service-protocol">
-              <xsl:with-param name="function" select="$function"/>
-              <xsl:with-param name="protocol" select="$protocol"/>
-              <xsl:with-param name="url" select="$url"/>
-            </xsl:call-template>
-          </xsl:if>
-        </xsl:when>
+            <xsl:when test="$ResourceType = 'service'">
+              <xsl:call-template name="service-endpoint">
+                <xsl:with-param name="function" select="$function"/>
+                <xsl:with-param name="protocol" select="$protocol"/>
+                <xsl:with-param name="url" select="$url"/>
+              </xsl:call-template>
+              <xsl:if test="$profile = $extended">
+                <xsl:call-template name="service-protocol">
+                  <xsl:with-param name="function" select="$function"/>
+                  <xsl:with-param name="protocol" select="$protocol"/>
+                  <xsl:with-param name="url" select="$url"/>
+                </xsl:call-template>
+              </xsl:if>
+            </xsl:when>
 <!-- Distributions -->
-        <xsl:when test="$ResourceType = 'dataset' or $ResourceType = 'series'">
-          <xsl:variable name="points-to-service">
-            <xsl:call-template name="detect-service">
-              <xsl:with-param name="function" select="$function"/>
-              <xsl:with-param name="protocol" select="$protocol"/>
-              <xsl:with-param name="url" select="$url"/>
-            </xsl:call-template>
-          </xsl:variable>
-	      <xsl:choose>
+            <xsl:when test="$ResourceType = 'dataset' or $ResourceType = 'series'">
+              <xsl:variable name="points-to-service">
+                <xsl:call-template name="detect-service">
+                  <xsl:with-param name="function" select="$function"/>
+                  <xsl:with-param name="protocol" select="$protocol"/>
+                  <xsl:with-param name="url" select="$url"/>
+                </xsl:call-template>
+              </xsl:variable>
+              <xsl:choose>
                 <xsl:when test="$points-to-service = 'yes' or $function = 'download' or $function = 'offlineAccess' or $function = 'order'">
                   <dcat:distribution>
                     <dcat:Distribution>
@@ -1224,7 +1221,7 @@
                         <dcat:accessURL rdf:resource="{.}"/>
                       </xsl:for-each>
 -->
-		      <xsl:choose>
+                      <xsl:choose>
                         <xsl:when test="$points-to-service = 'yes'">
                           <dcat:accessService rdf:parseType="Resource">
                             <xsl:call-template name="service-endpoint">
@@ -1232,20 +1229,19 @@
                               <xsl:with-param name="protocol" select="$protocol"/>
                               <xsl:with-param name="url" select="$url"/>
                             </xsl:call-template>
-		            <xsl:if test="$profile = $extended">
+                            <xsl:if test="$profile = $extended">
                               <xsl:call-template name="service-protocol">
                                 <xsl:with-param name="function" select="$function"/>
                                 <xsl:with-param name="protocol" select="$protocol"/>
                                 <xsl:with-param name="url" select="$url"/>
                               </xsl:call-template>
-		            </xsl:if>
+                            </xsl:if>
                           </dcat:accessService>
-			</xsl:when>
-			<xsl:otherwise>
-			</xsl:otherwise>
-		      </xsl:choose>
+                        </xsl:when>
+                        <xsl:otherwise>
+                        </xsl:otherwise>
+                      </xsl:choose>
                       <dcat:accessURL rdf:resource="{$url}"/>
-
 <!-- Constraints related to access and use -->
                       <xsl:copy-of select="$ConstraintsRelatedToAccessAndUse"/>
 <!-- Spatial representation type (tentative) -->
@@ -1282,10 +1278,10 @@
                   </xsl:for-each>
                 </xsl:otherwise>
               </xsl:choose>
-        </xsl:when>
-      </xsl:choose>
-            </xsl:for-each>
-          </xsl:for-each>
+            </xsl:when>
+          </xsl:choose>
+        </xsl:for-each>
+      </xsl:for-each>
 <!-- Responsible organisation -->
       <xsl:for-each select="gmd:identificationInfo/*/gmd:pointOfContact">
         <xsl:apply-templates select="gmd:CI_ResponsibleParty">
@@ -1346,7 +1342,7 @@
       </xsl:otherwise>
     </xsl:choose>
 
- <!-- Mapping added to core profile for compliance with DCAT-AP 2 -->
+<!-- Mapping added to core profile for compliance with DCAT-AP 2 -->
 <!--
     <xsl:if test="$profile = $extended and $ResourceUri != '' and $Conformity != ''">
 -->
@@ -1770,7 +1766,6 @@
           <xsl:copy-of select="$ROInfo"/>
         </geodcatap:originator>
       </xsl:when>
-<!-- Mapping applied also to services for compliance with DCAT-AP 2 -->
       <xsl:when test="$role = 'pointOfContact' and ($ResourceType != 'service' or $profile = $extended)">
         <dcat:contactPoint>
           <xsl:copy-of select="$ResponsibleParty"/>
@@ -1949,7 +1944,7 @@
       <xsl:when test="$uriref != ''">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
         <xsl:if test="$profile = $extended">
-	  <dct:hasPart rdf:resource="{@uriref}"/>
+    <dct:hasPart rdf:resource="{@uriref}"/>
         </xsl:if>
 <!-- Mapping added for compliance with DCAT-AP 2 -->
         <dcat:servesDataset rdf:resource="{@uriref}"/>
@@ -1998,7 +1993,7 @@
                   <dcat:CatalogRecord rdf:about="{$href}"/>
                 </foaf:isPrimaryTopicOf>
               </xsl:if>
-	    </dcat:servesDataset>
+      </dcat:servesDataset>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
@@ -2370,7 +2365,7 @@
             <xsl:otherwise><xsl:value-of select="gml:endPosition"/></xsl:otherwise>
 -->
             <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="normalize-space(*[local-name() = 'timePosition'])"/></xsl:when>
-	    <xsl:otherwise><xsl:value-of select="normalize-space(*[local-name() = 'endPosition'])"/></xsl:otherwise>
+      <xsl:otherwise><xsl:value-of select="normalize-space(*[local-name() = 'endPosition'])"/></xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
         <xsl:variable name="dateEnd-data-type">
@@ -2383,7 +2378,7 @@
             <dct:PeriodOfTime>
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
               <xsl:if test="$dateStart != ''">
-		      <schema:startDate rdf:datatype="{$xsd}{$dateStart-data-type}"><xsl:value-of select="$dateStart"/></schema:startDate>
+          <schema:startDate rdf:datatype="{$xsd}{$dateStart-data-type}"><xsl:value-of select="$dateStart"/></schema:startDate>
               </xsl:if>
               <xsl:if test="$dateEnd != ''">
                 <schema:endDate rdf:datatype="{$xsd}{$dateStart-data-type}"><xsl:value-of select="$dateEnd"/></schema:endDate>
@@ -2480,7 +2475,7 @@
                  gmd:useConstraints (the use of gmd:useLimitation for this purpose has been
                  recognised as an error, as this element is rather about "fit for purpose").
 
-		 The mapping has been however kept active for backward compatibility, waiting
+     The mapping has been however kept active for backward compatibility, waiting
                  for being revised (e.g., mapped to a usage note) or dropped.
 -->
 
@@ -2504,14 +2499,14 @@
           </dct:rights>
 -->
         </xsl:when>
-	<xsl:when test="gmd:MD_RestrictionCode">
-	  <xsl:variable name="use-limitation-code" select="normalize-space(@codeListValue)"/>
-	  <xsl:variable name="use-limitation-text">
+  <xsl:when test="gmd:MD_RestrictionCode">
+    <xsl:variable name="use-limitation-code" select="normalize-space(@codeListValue)"/>
+    <xsl:variable name="use-limitation-text">
             <xsl:choose>
               <xsl:when test="normalize-space(.) != ''">
                 <xsl:value-of select="normalize-space(.)"/>
-	      </xsl:when>
-	      <xsl:when test="$use-limitation-code != ''">
+        </xsl:when>
+        <xsl:when test="$use-limitation-code != ''">
                 <xsl:value-of select="$use-limitation-code"/>
               </xsl:when>
             </xsl:choose>
@@ -2520,7 +2515,7 @@
             <dct:LicenseDocument>
               <xsl:if test="$use-limitation-code != ''">
                 <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$use-limitation-code"/></dct:identifier>
-	      </xsl:if>
+        </xsl:if>
               <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$use-limitation-text"/></rdfs:label>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">rdfs:label</xsl:with-param>
@@ -2563,14 +2558,14 @@
             </dct:LicenseDocument>
           </dct:license>
         </xsl:when>
-	<xsl:when test="gmd:MD_RestrictionCode">
-	  <xsl:variable name="use-constraints-code" select="normalize-space(@codeListValue)"/>
-	  <xsl:variable name="use-constraints-text">
+  <xsl:when test="gmd:MD_RestrictionCode">
+    <xsl:variable name="use-constraints-code" select="normalize-space(@codeListValue)"/>
+    <xsl:variable name="use-constraints-text">
             <xsl:choose>
               <xsl:when test="normalize-space(.) != ''">
                 <xsl:value-of select="normalize-space(.)"/>
-	      </xsl:when>
-	      <xsl:when test="$use-constraints-code != ''">
+        </xsl:when>
+        <xsl:when test="$use-constraints-code != ''">
                 <xsl:value-of select="$use-constraints-code"/>
               </xsl:when>
             </xsl:choose>
@@ -2579,7 +2574,7 @@
             <dct:LicenseDocument>
               <xsl:if test="$use-constraints-code != ''">
                 <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$use-constraints-code"/></dct:identifier>
-	      </xsl:if>
+        </xsl:if>
               <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$use-constraints-text"/></rdfs:label>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">rdfs:label</xsl:with-param>
@@ -2612,14 +2607,14 @@
             </dct:RightsStatement>
           </dct:accessRights>
         </xsl:when>
-	<xsl:when test="gmd:MD_RestrictionCode">
-	  <xsl:variable name="access-constraints-code" select="normalize-space(@codeListValue)"/>
-	  <xsl:variable name="access-constraints-text">
+  <xsl:when test="gmd:MD_RestrictionCode">
+    <xsl:variable name="access-constraints-code" select="normalize-space(@codeListValue)"/>
+    <xsl:variable name="access-constraints-text">
             <xsl:choose>
               <xsl:when test="normalize-space(.) != ''">
                 <xsl:value-of select="normalize-space(.)"/>
-	      </xsl:when>
-	      <xsl:when test="$access-constraints-code != ''">
+        </xsl:when>
+        <xsl:when test="$access-constraints-code != ''">
                 <xsl:value-of select="$access-constraints-code"/>
               </xsl:when>
             </xsl:choose>
@@ -2628,7 +2623,7 @@
             <dct:RightsStatement>
               <xsl:if test="$access-constraints-code != ''">
                 <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$access-constraints-code"/></dct:identifier>
-	      </xsl:if>
+        </xsl:if>
               <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$access-constraints-text"/></rdfs:label>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">rdfs:label</xsl:with-param>
@@ -3216,7 +3211,7 @@
                     <dct:title xml:lang="en"><xsl:value-of select="$EpsgSrsName"/></dct:title>
                   </skos:ConceptScheme>
                 </skos:inScheme>
-		<xsl:copy-of select="$version-statement"/>
+    <xsl:copy-of select="$version-statement"/>
               </rdf:Description>
             </dct:conformsTo>
           </xsl:when>
