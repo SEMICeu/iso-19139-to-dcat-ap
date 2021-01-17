@@ -4,7 +4,7 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 
 ## 2021-01-17: Revised version (v2.6)
 
-* Revised to make the output compliant with the DCAT-AP 2.0.1 and GeoDCAT-AP 2.0.0 SHACL definitions. More precisely:
+* Revised to make the output compliant with the DCAT-AP 2.0.1 and GeoDCAT-AP 2.0.0 SHACL definitions (see[issue #22](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/22)). More precisely:
     * Made explicit the classes of all subjects and objects in the output RDF statements.
 * Fixed syntax errors, concerning the use of `@rdf:resource` instead of `@rdf:about` for responsible parties.
 * Optimised and cleaned code.
