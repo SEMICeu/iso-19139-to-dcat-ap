@@ -2,6 +2,14 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2021-01-17: Revised version (v2.6)
+
+* Revised to make the output compliant with the DCAT-AP 2.0.1 and GeoDCAT-AP 2.0.0 SHACL definitions. More precisely:
+    * Made explicit the classes of all subjects and objects in the output RDF statements.
+* Fixed syntax errors, concerning the use of `@rdf:resource` instead of `@rdf:about` for responsible parties.
+* Optimised and cleaned code.
+* Editorial revisions.
+
 ## 2020-12-22: Revised version (v2.5)
 
 * Revised mapping of spatial coverage to align it with the current draft of GeoDCAT-AP 2.0.0 (see issue [#18](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/18)). In particular, the mapping now includes the use of datatype `gsp:geoJSONLiteral`, defined in the current draft of the new version of GeoSPARQL. The use of the old GeoJSON IANA media type URI has been kept to ensure backward compatibility.
