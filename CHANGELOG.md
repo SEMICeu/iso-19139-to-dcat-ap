@@ -2,9 +2,15 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2021-01-23: Revised version (v2.7)
+
+* Removed explicit class specifications (`skos:Concept`) from code list values, as it is not necessary for validation via SHACL (see [issue #22](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/22#issuecomment-765743742)).
+* Revised to map textual descriptions of distribution encodings to URIs (see [issue #24](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/24)). 
+* Added global configuration parameter (`$include-deprecated`) to specify whether the output must or must not include deprecated mappings (see [issue #25](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/25)).
+
 ## 2021-01-17: Revised version (v2.6)
 
-* Revised to make the output compliant with the DCAT-AP 2.0.1 and GeoDCAT-AP 2.0.0 SHACL definitions (see[issue #22](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/22)). More precisely:
+* Revised to make the output compliant with the DCAT-AP 2.0.1 and GeoDCAT-AP 2.0.0 SHACL definitions (see [issue #22](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/22)). More precisely:
     * Made explicit the classes of all subjects and objects in the output RDF statements.
 * Fixed syntax errors, concerning the use of `@rdf:resource` instead of `@rdf:about` for responsible parties.
 * Optimised and cleaned code.
