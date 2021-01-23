@@ -16,7 +16,7 @@
   See the Licence for the specific language governing permissions and
   limitations under the Licence.
 
-  Contributors: ISA GeoDCAT-AP Working Group <https://github.com/SEMICeu/geodcat-ap>
+  Contributors: ISA GeoDCAT-AP Working Group (https://github.com/SEMICeu/geodcat-ap)
 
   This work was originally supported by the EU Interoperability Solutions for
   European Public Administrations Programme (http://ec.europa.eu/isa)
@@ -179,6 +179,21 @@
     </xsl:choose>
   </xsl:variable>
 
+<!-- Parameter $include-deprecated -->
+<!--
+  This parameter specifies whether deprecated mappings must ("yes") or must not
+  ("no") be included in the output.
+-->
+
+<!-- Uncomment to include deprecated mappings from the output -->
+
+  <xsl:param name="include-deprecated">yes</xsl:param>
+
+<!-- Uncomment to exclude deprecated mappings from the output -->
+<!--
+  <xsl:param name="include-deprecated">no</xsl:param>
+-->
+
 <!-- Parameter $CoupledResourceLookUp -->
 <!--
 
@@ -294,24 +309,47 @@
   <xsl:param name="koslic" select="concat($kos,'licence/EuropeanCommission')"/>
 -->
 
+<!-- OP's NALs base URI -->
+
   <xsl:param name="op">http://publications.europa.eu/resource/authority/</xsl:param>
-  <xsl:param name="opcountry" select="concat($op,'country/')"/>
-  <xsl:param name="oplang" select="concat($op,'language/')"/>
+
+<!-- OP's NALs URIs -->
+
   <xsl:param name="opcb" select="concat($op,'corporate-body/')"/>
+  <xsl:param name="opcountry" select="concat($op,'country/')"/>
   <xsl:param name="opfq" select="concat($op,'frequency/')"/>
+  <xsl:param name="opft" select="concat($op,'file-type/')"/>
+  <xsl:param name="oplang" select="concat($op,'language/')"/>
+  
+<!-- Currently not used.
   <xsl:param name="cldFrequency">http://purl.org/cld/freq/</xsl:param>
+-->
+
+<!-- IANA base URI -->
+
+  <xsl:param name="iana">https://www.iana.org/assignments/</xsl:param>
+
+<!-- IANA registers URIs -->
+
+  <xsl:param name="iana-mt" select="concat($iana,'media-types/')"/>
+
+<!-- DEPRECATED: Parameter kept for backward compatibility with GeoDCAT-AP v1.* -->
+<!-- This is used as the datatype for the GeoJSON-based encoding of the bounding box. -->
+  <xsl:param name="geojsonMediaTypeUri" select="concat($iana-mt,'application/vnd.geo+json')"/>
+  <xsl:param name="geojsonMediaTypeUri">https://www.iana.org/assignments/media-types/application/vnd.geo+json</xsl:param>
+
 <!-- Ontology for units of measure (OM) -->
   <xsl:param name="om18">http://www.wurvoc.org/vocabularies/om-1.8/</xsl:param>
   <xsl:param name="om2">http://www.ontology-of-units-of-measure.org/resource/om-2/</xsl:param>
   <xsl:param name="om" select="$om18"/>
 
-<!-- DEPRECATED: Parameter kept for backward compatibility with GeoDCAT-AP v1.* -->
-<!-- This is used as the datatype for the GeoJSON-based encoding of the bounding box. -->
-  <xsl:param name="geojsonMediaTypeUri">https://www.iana.org/assignments/media-types/application/vnd.geo+json</xsl:param>
+<!-- INSPIRE base URI -->
 
-<!-- INSPIRE code list URIs -->
+  <xsl:param name="inspire">http://inspire.ec.europa.eu/</xsl:param>
 
-  <xsl:param name="INSPIRECodelistUri">http://inspire.ec.europa.eu/metadata-codelist/</xsl:param>
+<!-- INSPIRE metadata code list URIs -->
+
+  <xsl:param name="INSPIRECodelistUri" select="concat($inspire,'metadata-codelist/')"/>
   <xsl:param name="SpatialDataServiceCategoryCodelistUri" select="concat($INSPIRECodelistUri,'SpatialDataServiceCategory')"/>
   <xsl:param name="DegreeOfConformityCodelistUri" select="concat($INSPIRECodelistUri,'DegreeOfConformity')"/>
   <xsl:param name="ResourceTypeCodelistUri" select="concat($INSPIRECodelistUri,'ResourceType')"/>
@@ -326,7 +364,11 @@
 
 <!-- INSPIRE glossary URI -->
 
-  <xsl:param name="INSPIREGlossaryUri">http://inspire.ec.europa.eu/glossary/</xsl:param>
+  <xsl:param name="INSPIREGlossaryUri" select="concat($inspire,'glossary/')"/>
+
+<!-- INSPIRE glossary URI -->
+
+  <xsl:param name="inspire-mt" select="concat($inspire,'media-types/')"/>
 
 <!--
 
@@ -844,9 +886,7 @@
             </prov:qualifiedAssociation>
             <prov:generated rdf:parseType="Resource">
               <rdf:type rdf:resource="{$prov}Entity"/>
-              <dct:type>
-                <skos:Concept rdf:about="{$degree}"/>
-              </dct:type>
+              <dct:type rdf:resource="{$degree}"/>
 <!--
               <xsl:if test="$explanation and $explanation != ''">
                 <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$explanation"/></dct:description>
@@ -1030,7 +1070,9 @@
           <xsl:if test="$profile = $extended">
 -->
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
-            <rdf:type rdf:resource="{$dctype}Service"/>
+            <xsl:if test="$include-deprecated = 'yes'">
+              <rdf:type rdf:resource="{$dctype}Service"/>
+            </xsl:if>
 <!-- Mapping added for compliance with DCAT-AP 2 -->
             <rdf:type rdf:resource="{$dcat}DataService"/>
 <!--
@@ -1038,7 +1080,9 @@
 -->
           <xsl:if test="$ServiceType = 'discovery'">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
-            <rdf:type rdf:resource="{$dcat}Catalog"/>
+            <xsl:if test="$include-deprecated = 'yes'">
+              <rdf:type rdf:resource="{$dcat}Catalog"/>
+            </xsl:if>
 <!-- Mapping added for compliance with DCAT-AP 2 -->
 <!--
             <rdf:type rdf:resource="{$dcat}DataService"/>
@@ -1051,9 +1095,7 @@
       <xsl:if test="$profile = $extended">
 -->
         <xsl:if test="$InspireResourceType != ''">
-          <dct:type>
-            <skos:Concept rdf:about="{$ResourceTypeCodelistUri}/{$ResourceType}"/>
-          </dct:type>
+          <dct:type rdf:resource="{$ResourceTypeCodelistUri}/{$ResourceType}"/>
         </xsl:if>
 <!--
       </xsl:if>
@@ -1134,9 +1176,7 @@
           <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
         </xsl:apply-templates>
 -->
-        <dct:type>
-          <skos:Concept rdf:about="{$SpatialDataServiceTypeCodelistUri}/{$ServiceType}"/>
-        </dct:type>
+        <dct:type rdf:resource="{$SpatialDataServiceTypeCodelistUri}/{$ServiceType}"/>
       </xsl:if>
 <!-- Spatial extent -->
 <!--
@@ -1210,30 +1250,37 @@
         </xsl:variable>
 <!-- Resource locators (access / download URLs) -->
         <xsl:for-each select="gmd:transferOptions/*/gmd:onLine/*">
+
           <xsl:variable name="url" select="gmd:linkage/gmd:URL"/>
+
           <xsl:variable name="protocol" select="gmd:protocol/*"/>
+
           <xsl:variable name="protocol-url" select="gmd:protocol/gmx:Anchor/@xlink:href"/>
+
           <xsl:variable name="function" select="gmd:function/gmd:CI_OnLineFunctionCode/@codeListValue"/>
+
           <xsl:variable name="Title">
             <xsl:for-each select="gmd:name">
               <dct:title xml:lang="{$MetadataLanguage}">
-                <xsl:value-of select="normalize-space(gco:CharacterString)"/>
+                <xsl:value-of select="normalize-space(*)"/>
               </dct:title>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dct:title</xsl:with-param>
               </xsl:call-template>
             </xsl:for-each>
           </xsl:variable>
+
           <xsl:variable name="Description">
             <xsl:for-each select="gmd:description">
               <dct:description xml:lang="{$MetadataLanguage}">
-                <xsl:value-of select="normalize-space(gco:CharacterString)"/>
+                <xsl:value-of select="normalize-space(*)"/>
               </dct:description>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
             </xsl:for-each>
           </xsl:variable>
+
           <xsl:variable name="TitleAndDescription">
 <!--
             <xsl:for-each select="gmd:name/gco:CharacterString">
@@ -1245,6 +1292,20 @@
 -->
             <xsl:copy-of select="$Title"/>
             <xsl:copy-of select="$Description"/>
+          </xsl:variable>
+
+          <xsl:variable name="TitleOrDescriptionOrPlaceholder">
+            <xsl:choose>
+              <xsl:when test="normalize-space(gmd:name/*) != ''">
+                <xsl:value-of select="normalize-space(gmd:name/*)"/>
+              </xsl:when>
+              <xsl:when test="normalize-space(gmd:description/*) != ''">
+                <xsl:value-of select="normalize-space(gmd:description)"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>N/A</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
           </xsl:variable>
 
           <xsl:choose>
@@ -1288,6 +1349,9 @@
                         <xsl:when test="$points-to-service = 'yes'">
                           <dcat:accessService rdf:parseType="Resource">
                             <rdf:type rdf:resource="{$dcat}DataService"/>
+                            <dct:title xml:lang="{$MetadataLanguage}">
+                              <xsl:value-of select="$TitleOrDescriptionOrPlaceholder"/>
+                            </dct:title>
                             <xsl:call-template name="service-endpoint">
                               <xsl:with-param name="function" select="$function"/>
                               <xsl:with-param name="protocol" select="$protocol"/>
@@ -1921,9 +1985,9 @@
           </prov:agent>
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
           <xsl:if test="$profile = $extended">
-            <dct:type>
-              <skos:Concept rdf:about="{$ResponsiblePartyRole}"/>
-            </dct:type>
+            <xsl:if test="$include-deprecated = 'yes'">
+              <dct:type rdf:resource="{$ResponsiblePartyRole}"/>
+            </xsl:if>
           </xsl:if>
 <!-- Mapping added for compliance with DCAT-AP 2 -->
           <dcat:hadRole>
@@ -2036,9 +2100,11 @@
       <xsl:when test="$uriref != ''">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
         <xsl:if test="$profile = $extended">
-          <dct:hasPart>
-            <dcat:Dataset rdf:about="{@uriref}"/>
-          </dct:hasPart>
+          <xsl:if test="$include-deprecated = 'yes'">
+            <dct:hasPart>
+              <dcat:Dataset rdf:about="{@uriref}"/>
+            </dct:hasPart>
+          </xsl:if>
         </xsl:if>
 <!-- Mapping added for compliance with DCAT-AP 2 -->
         <dcat:servesDataset>
@@ -2050,9 +2116,11 @@
           <xsl:when test="starts-with($code, 'http://') or starts-with($code, 'https://')">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
             <xsl:if test="$profile = $extended">
-              <dct:hasPart>
-                <dcat:Dataset rdf:about="{$code}"/>
-              </dct:hasPart>
+              <xsl:if test="$include-deprecated = 'yes'">
+                <dct:hasPart>
+                  <dcat:Dataset rdf:about="{$code}"/>
+                </dct:hasPart>
+              </xsl:if>
             </xsl:if>
 <!-- Mapping added for compliance with DCAT-AP 2 -->
             <dcat:servesDataset>
@@ -2062,22 +2130,24 @@
           <xsl:otherwise>
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
             <xsl:if test="$profile = $extended">
-              <dct:hasPart rdf:parseType="Resource">
-                <rdf:type rdf:resource="{$dcat}Dataset"/>
-                <xsl:choose>
-                  <xsl:when test="starts-with($resID, 'http://') or starts-with($resID, 'https://')">
-                    <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$resID"/></dct:identifier>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$resID"/></dct:identifier>
-                  </xsl:otherwise>
-                </xsl:choose>
-                <xsl:if test="$href != '' and $href != '' and (starts-with($href, 'http://') or starts-with($href, 'https://'))">
-                  <foaf:isPrimaryTopicOf>
-                    <dcat:CatalogRecord rdf:about="{$href}"/>
-                  </foaf:isPrimaryTopicOf>
-                </xsl:if>
-              </dct:hasPart>
+              <xsl:if test="$include-deprecated = 'yes'">
+                <dct:hasPart rdf:parseType="Resource">
+                  <rdf:type rdf:resource="{$dcat}Dataset"/>
+                  <xsl:choose>
+                    <xsl:when test="starts-with($resID, 'http://') or starts-with($resID, 'https://')">
+                      <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$resID"/></dct:identifier>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$resID"/></dct:identifier>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                  <xsl:if test="$href != '' and $href != '' and (starts-with($href, 'http://') or starts-with($href, 'https://'))">
+                    <foaf:isPrimaryTopicOf>
+                      <dcat:CatalogRecord rdf:about="{$href}"/>
+                    </foaf:isPrimaryTopicOf>
+                  </xsl:if>
+                </dct:hasPart>
+              </xsl:if>
             </xsl:if>
 <!-- Mapping added for compliance with DCAT-AP 2 -->
             <dcat:servesDataset rdf:parseType="Resource">
@@ -2416,24 +2486,28 @@
     <dct:spatial rdf:parseType="Resource">
       <rdf:type rdf:resource="{$dct}Location"/>
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
+      <xsl:if test="$include-deprecated = 'yes'">
 <!-- Recommended geometry encodings -->
-      <locn:geometry rdf:datatype="{$gsp}wktLiteral"><xsl:value-of select="$WKTLiteral"/></locn:geometry>
-      <locn:geometry rdf:datatype="{$gsp}gmlLiteral"><xsl:value-of select="$GMLLiteral"/></locn:geometry>
+        <locn:geometry rdf:datatype="{$gsp}wktLiteral"><xsl:value-of select="$WKTLiteral"/></locn:geometry>
+        <locn:geometry rdf:datatype="{$gsp}gmlLiteral"><xsl:value-of select="$GMLLiteral"/></locn:geometry>
 <!-- Additional geometry encodings -->
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
-      <locn:geometry rdf:datatype="{$geojsonMediaTypeUri}"><xsl:value-of select="$GeoJSONLiteral"/></locn:geometry>
+        <locn:geometry rdf:datatype="{$geojsonMediaTypeUri}"><xsl:value-of select="$GeoJSONLiteral"/></locn:geometry>
 <!-- Mapping added for compliance with GeoDCAT-AP 2 -->
-      <locn:geometry rdf:datatype="{$gsp}geoJSONLiteral"><xsl:value-of select="$GeoJSONLiteral"/></locn:geometry>
+        <locn:geometry rdf:datatype="{$gsp}geoJSONLiteral"><xsl:value-of select="$GeoJSONLiteral"/></locn:geometry>
 <!--
-      <locn:geometry rdf:datatype="{$dct}Box"><xsl:value-of select="$DCTBox"/></locn:geometry>
+        <locn:geometry rdf:datatype="{$dct}Box"><xsl:value-of select="$DCTBox"/></locn:geometry>
 -->
+      </xsl:if>
 <!-- Mapping added for compliance with DCAT-AP 2 -->
 <!-- Recommended geometry encodings -->
       <dcat:bbox rdf:datatype="{$gsp}wktLiteral"><xsl:value-of select="$WKTLiteral"/></dcat:bbox>
       <dcat:bbox rdf:datatype="{$gsp}gmlLiteral"><xsl:value-of select="$GMLLiteral"/></dcat:bbox>
 <!-- Additional geometry encodings -->
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
-      <dcat:bbox rdf:datatype="{$geojsonMediaTypeUri}"><xsl:value-of select="$GeoJSONLiteral"/></dcat:bbox>
+      <xsl:if test="$include-deprecated = 'yes'">
+        <dcat:bbox rdf:datatype="{$geojsonMediaTypeUri}"><xsl:value-of select="$GeoJSONLiteral"/></dcat:bbox>
+      </xsl:if>
 <!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <dcat:bbox rdf:datatype="{$gsp}geoJSONLiteral"><xsl:value-of select="$GeoJSONLiteral"/></dcat:bbox>
     </dct:spatial>
@@ -2491,11 +2565,13 @@
           <dct:temporal>
             <dct:PeriodOfTime>
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
-              <xsl:if test="$dateStart != ''">
-          <schema:startDate rdf:datatype="{$xsd}{$dateStart-data-type}"><xsl:value-of select="$dateStart"/></schema:startDate>
-              </xsl:if>
-              <xsl:if test="$dateEnd != ''">
-                <schema:endDate rdf:datatype="{$xsd}{$dateStart-data-type}"><xsl:value-of select="$dateEnd"/></schema:endDate>
+              <xsl:if test="$include-deprecated = 'yes'">
+                <xsl:if test="$dateStart != ''">
+                  <schema:startDate rdf:datatype="{$xsd}{$dateStart-data-type}"><xsl:value-of select="$dateStart"/></schema:startDate>
+                </xsl:if>
+                <xsl:if test="$dateEnd != ''">
+                  <schema:endDate rdf:datatype="{$xsd}{$dateStart-data-type}"><xsl:value-of select="$dateEnd"/></schema:endDate>
+                </xsl:if>
               </xsl:if>
 <!-- Mapping added for compliance with DCAT-AP 2 -->
               <xsl:if test="$dateStart != ''">
@@ -2589,9 +2665,11 @@
                  gmd:useConstraints (the use of gmd:useLimitation for this purpose has been
                  recognised as an error, as this element is rather about "fit for purpose").
 
-     The mapping has been however kept active for backward compatibility, waiting
+                 The mapping has been however kept active for backward compatibility, waiting
                  for being revised (e.g., mapped to a usage note) or dropped.
 -->
+
+    <xsl:if test="$include-deprecated = 'yes'">
 
     <xsl:for-each select="gmd:useLimitation">
       <xsl:choose>
@@ -2659,6 +2737,8 @@
         </xsl:when>
       </xsl:choose>
     </xsl:for-each>
+
+    </xsl:if>
 
 <!-- Mapping added for compliance with the 2017 edition of the INSPIRE Metadata Technical Guidelines -->
     <xsl:for-each select="gmd:otherConstraints[../gmd:useConstraints]">
@@ -2817,9 +2897,7 @@
     <xsl:param name="inScheme">
       <xsl:choose>
         <xsl:when test="$OriginatingControlledVocabularyURI != ''">
-          <skos:inScheme>
-            <skos:ConceptScheme rdf:about="{$OriginatingControlledVocabularyURI}"/>
-          </skos:inScheme>
+          <skos:inScheme rdf:resource="{$OriginatingControlledVocabularyURI}"/>
         </xsl:when>
         <xsl:otherwise>
           <skos:inScheme>
@@ -2844,12 +2922,14 @@
               </xsl:call-template>
               <xsl:if test="$profile = $extended">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
-                <dc:subject xml:lang="{$MetadataLanguage}">
-                  <xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/>
-                </dc:subject>
-                <xsl:call-template name="LocalisedString">
-                  <xsl:with-param name="term">dc:subject</xsl:with-param>
-                </xsl:call-template>
+                <xsl:if test="$include-deprecated = 'yes'">
+                  <dc:subject xml:lang="{$MetadataLanguage}">
+                    <xsl:value-of select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/>
+                  </dc:subject>
+                  <xsl:call-template name="LocalisedString">
+                    <xsl:with-param name="term">dc:subject</xsl:with-param>
+                  </xsl:call-template>
+                </xsl:if>
               </xsl:if>
             </xsl:when>
             <xsl:otherwise>
@@ -2908,23 +2988,25 @@
                   </dcat:theme>
                   <xsl:if test="$profile = $extended">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
-                    <dct:subject rdf:parseType="Resource">
-                      <rdf:type rdf:resource="{$skos}Concept"/>
-                      <skos:prefLabel xml:lang="{$MetadataLanguage}">
-                        <xsl:value-of select="normalize-space(gco:CharacterString)"/>
-                      </skos:prefLabel>
-                      <xsl:call-template name="LocalisedString">
-                        <xsl:with-param name="term">skos:prefLabel</xsl:with-param>
-                      </xsl:call-template>
-                      <xsl:copy-of select="$inScheme"/>
+                    <xsl:if test="$include-deprecated = 'yes'">
+                      <dct:subject rdf:parseType="Resource">
+                        <rdf:type rdf:resource="{$skos}Concept"/>
+                        <skos:prefLabel xml:lang="{$MetadataLanguage}">
+                          <xsl:value-of select="normalize-space(gco:CharacterString)"/>
+                        </skos:prefLabel>
+                        <xsl:call-template name="LocalisedString">
+                          <xsl:with-param name="term">skos:prefLabel</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:copy-of select="$inScheme"/>
 <!--
-                      <skos:inScheme>
-                        <skos:ConceptScheme>
-                          <xsl:copy-of select="$OriginatingControlledVocabulary"/>
-                        </skos:ConceptScheme>
-                      </skos:inScheme>
+                        <skos:inScheme>
+                          <skos:ConceptScheme>
+                            <xsl:copy-of select="$OriginatingControlledVocabulary"/>
+                          </skos:ConceptScheme>
+                        </skos:inScheme>
 -->
-                    </dct:subject>
+                      </dct:subject>
+                    </xsl:if>
                   </xsl:if>
                 </xsl:otherwise>
               </xsl:choose>
@@ -2933,9 +3015,7 @@
             <xsl:when test="gmx:Anchor/@xlink:href">
               <xsl:choose>
                 <xsl:when test="$ResourceType != 'service'">
-                  <dcat:theme>
-                    <skos:Concept rdf:about="{gmx:Anchor/@xlink:href}"/>
-                  </dcat:theme>
+                  <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
 <!--
                   <skos:Concept rdf:about="{gmx:Anchor/@xlink:href}">
                     <skos:prefLabel xml:lang="{$MetadataLanguage}">
@@ -2952,14 +3032,12 @@
                 <xsl:otherwise>
 <!-- Mapping moved to core profile for compliance with DCAT-AP 2 -->
 <!-- Mapping added for compliance with DCAT-AP 2 -->
-                  <dcat:theme>
-                    <skos:Concept rdf:about="{gmx:Anchor/@xlink:href}"/>
-                  </dcat:theme>
+                  <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
                   <xsl:if test="$profile = $extended">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
-                    <dct:subject>
-                      <skos:Concept rdf:about="{gmx:Anchor/@xlink:href}"/>
-                    </dct:subject>
+                    <xsl:if test="$include-deprecated = 'yes'">
+                      <dct:subject rdf:resource="{gmx:Anchor/@xlink:href}"/>
+                    </xsl:if>
                   </xsl:if>
                 </xsl:otherwise>
               </xsl:choose>
@@ -2975,9 +3053,7 @@
   <xsl:template name="TopicCategory" match="gmd:identificationInfo/*/gmd:topicCategory">
     <xsl:param name="TopicCategory"><xsl:value-of select="normalize-space(gmd:MD_TopicCategoryCode)"/></xsl:param>
     <xsl:if test="$TopicCategory != ''">
-      <dct:subject>
-        <skos:Concept rdf:about="{$TopicCategoryCodelistUri}/{$TopicCategory}"/>
-      </dct:subject>
+      <dct:subject rdf:resource="{$TopicCategoryCodelistUri}/{$TopicCategory}"/>
     </xsl:if>
   </xsl:template>
 
@@ -3031,9 +3107,7 @@
                   <dqv:Metric rdf:about="{$geodcatap}spatialResolutionAsDistance"/>
                 </dqv:isMeasurementOf>
                 <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
-                <sdmx-attribute:unitMeasure>
-                  <skos:Concept rdf:about="{$om}metre"/>
-                </sdmx-attribute:unitMeasure>
+                <sdmx-attribute:unitMeasure rdf:resource="{$om}metre"/>
               </dqv:QualityMeasurement>
             </dqv:hasQualityMeasurement>
           </xsl:if>
@@ -3050,9 +3124,7 @@
                   <dqv:Metric rdf:about="{$geodcatap}spatialResolutionAsDistance"/>
                 </dqv:isMeasurementOf>
                 <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
-                <sdmx-attribute:unitMeasure>
-                  <skos:Concept rdf:about="{$om}kilometre"/>
-                </sdmx-attribute:unitMeasure>
+                <sdmx-attribute:unitMeasure rdf:resource="{$om}kilometre"/>
               </dqv:QualityMeasurement>
             </dqv:hasQualityMeasurement>
           </xsl:if>
@@ -3069,9 +3141,14 @@
                   <dqv:Metric rdf:about="{$geodcatap}spatialResolutionAsDistance"/>
                 </dqv:isMeasurementOf>
                 <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
-                <sdmx-attribute:unitMeasure>
-                  <skos:Concept rdf:about="{$om}foot-international"/>
-                </sdmx-attribute:unitMeasure>
+                <xsl:choose>
+                  <xsl:when test="$om = $om18">
+                    <sdmx-attribute:unitMeasure rdf:resource="{$om}foot-international"/>
+                  </xsl:when>
+                  <xsl:when test="$om = $om2">
+                    <sdmx-attribute:unitMeasure rdf:resource="{$om}foot-International"/>
+                  </xsl:when>
+                </xsl:choose>
               </dqv:QualityMeasurement>
             </dqv:hasQualityMeasurement>
           </xsl:if>
@@ -3215,24 +3292,441 @@
 <!-- Encoding -->
 
   <xsl:template name="Encoding" match="gmd:distributionFormat/gmd:MD_Format/gmd:name/*">
+    <xsl:param name="format-label">
+      <xsl:value-of select="normalize-space(.)"/>
+    </xsl:param>
+    <xsl:param name="format-uri">
+      <xsl:choose>
+        <xsl:when test="@xlink:href and @xlink:href != ''">
+          <xsl:value-of select="@xlink:href"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="EncodingLabelToUri">
+            <xsl:with-param name="label" select="normalize-space(.)"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:param>
+    <xsl:param name="media-type">
+      <xsl:choose>
+        <xsl:when test="$format-uri != ''">
+          <dct:MediaType rdf:about="{$format-uri}"/>
+        </xsl:when>
+        <xsl:when test="$format-label != ''">
+          <dct:MediaType>
+            <rdfs:label><xsl:value-of select="$format-label"/></rdfs:label>
+          </dct:MediaType>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:param>
+    <xsl:choose>
+      <xsl:when test="starts-with($format-uri,$iana-mt)">
+        <dcat:mediaType>
+          <xsl:copy-of select="$media-type"/>
+        </dcat:mediaType>
+      </xsl:when>
+      <xsl:otherwise>
+        <dct:format>
+          <xsl:copy-of select="$media-type"/>
+        </dct:format>
+      </xsl:otherwise>
+    </xsl:choose>
+<!--
+    <dct:format>
+      <rdf:Description rdf:about="{$format-uri}">
+        <rdf:type rdf:resource="{$dct}MediaType"/>
+        <xsl:if test="$format-uri = concat($opft,'OP_DATPRO') and $format-label != ''">
+          <rdfs:label><xsl:value-of select="."/></rdfs:label>
+        </xsl:if>
+      </rdf:Description>
+    </dct:format>
+-->
+<!--
     <xsl:choose>
       <xsl:when test="@xlink:href and @xlink:href != ''">
         <dct:format>
           <dct:MediaType rdf:about="{@xlink:href}"/>
         </dct:format>
-<!--
-        <dct:format>
-          <rdf:Description rdf:about="{@xlink:href}">
-            <rdfs:label><xsl:value-of select="."/></rdfs:label>
-          </rdf:Description>
-        </dct:format>
--->
       </xsl:when>
       <xsl:otherwise>
         <dct:format rdf:parseType="Resource">
           <rdf:type rdf:resource="{$dct}MediaType"/>
           <rdfs:label><xsl:value-of select="."/></rdfs:label>
         </dct:format>
+      </xsl:otherwise>
+    </xsl:choose>
+-->
+  </xsl:template>
+
+<!-- Encoding: Label to URI -->
+
+<!-- CAVEAT: This template attempts to map textual description
+     of a distribution encoding, based on the most frequently
+     used labels from the European Data Portal. -->
+
+  <xsl:template name="EncodingLabelToUri">
+    <xsl:param name="label"/>
+    <xsl:param name="norm-label">
+      <xsl:choose>
+        <xsl:when test="starts-with(normalize-space($label),$opft)">
+          <xsl:value-of select="translate(substring-after(normalize-space($label),$opft),$uppercase,$lowercase)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="translate(normalize-space($label),$uppercase,$lowercase)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:param>
+    <xsl:choose>
+      <xsl:when test="$norm-label = 'aaigrid'">
+        <xsl:value-of select="concat($opft,'GRID_ASCII')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'aig'">
+        <xsl:value-of select="concat($opft,'GRID')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'atom'">
+        <xsl:value-of select="concat($opft,'ATOM')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'csv'">
+        <xsl:value-of select="concat($opft,'CSV')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'csw'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'dbf'">
+        <xsl:value-of select="concat($opft,'DBF')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'dgn'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'BIN')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'djvu'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($iana-mt,'image/vn.djvu')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'doc'">
+        <xsl:value-of select="concat($opft,'DOC')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'docx'">
+        <xsl:value-of select="concat($opft,'DOCX')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'dxf'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($iana-mt,'image/vn.dxf')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'dwg'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($iana-mt,'image/vn.dwg')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ecw'">
+        <xsl:value-of select="concat($opft,'ECW')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ecwp'">
+        <xsl:value-of select="concat($opft,'ECW')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'elp'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'EXE')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'epub'">
+        <xsl:value-of select="concat($opft,'EPUB')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'fgeo'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'GDB')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'gdb'">
+        <xsl:value-of select="concat($opft,'GDB')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'geojson'">
+        <xsl:value-of select="concat($opft,'GEOJSON')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'geopackage'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($iana-mt,'application/geopackage+sqlite3')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'georss'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'RSS')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'geotiff'">
+        <xsl:value-of select="concat($opft,'TIFF')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'gif'">
+        <xsl:value-of select="concat($opft,'GIF')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'gml'">
+        <xsl:value-of select="concat($opft,'GML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'gmz'">
+        <xsl:value-of select="concat($opft,'GMZ')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'gpkg'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($iana-mt,'application/geopackage+sqlite3')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'gpx'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'grid'">
+        <xsl:value-of select="concat($opft,'GRID')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'grid_ascii'">
+        <xsl:value-of select="concat($opft,'GRID_ASCII')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'gtfs'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'CSV')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'gtiff'">
+        <xsl:value-of select="concat($opft,'TIFF')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'gzip'">
+        <xsl:value-of select="concat($opft,'GZIP')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'html'">
+        <xsl:value-of select="concat($opft,'HTML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'jpeg'">
+        <xsl:value-of select="concat($opft,'JPEG')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'jpg'">
+        <xsl:value-of select="concat($opft,'JPEG')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'json'">
+        <xsl:value-of select="concat($opft,'JSON')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'json-ld'">
+        <xsl:value-of select="concat($opft,'JSON_LD')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'json_ld'">
+        <xsl:value-of select="concat($opft,'JSON_LD')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'jsonld'">
+        <xsl:value-of select="concat($opft,'JSON_LD')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'kml'">
+        <xsl:value-of select="concat($opft,'KML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'kmz'">
+        <xsl:value-of select="concat($opft,'KMZ')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'las'">
+        <xsl:value-of select="concat($opft,'LAS')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'laz'">
+        <xsl:value-of select="concat($opft,'LAZ')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'marc'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($iana-mt,'application/marc')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'mdb'">
+        <xsl:value-of select="concat($opft,'MDB')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'mxd'">
+        <xsl:value-of select="concat($opft,'MXD')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'n-triples'">
+        <xsl:value-of select="concat($opft,'RDF_N_TRIPLES')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'n3'">
+        <xsl:value-of select="concat($opft,'N3')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'netcdf'">
+        <xsl:value-of select="concat($opft,'NETCDF')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ods'">
+        <xsl:value-of select="concat($opft,'ODS')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'odt'">
+        <xsl:value-of select="concat($opft,'ODT')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ogc:csw'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ogc:sos'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ogc:wcs'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'TIFF')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ogc:wfs'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'GML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ogc:wfs-g'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'GML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ogc:wmc'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ogc:wms'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'PNG')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ogc:wmts'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'PNG')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ogc:wps'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'GML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'oracledump'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($inspire-mt,'application/x-oracledump')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'pc-axis'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'TXT')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'pdf'">
+        <xsl:value-of select="concat($opft,'PDF')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'pgeo'">
+        <xsl:value-of select="concat($opft,'MDB')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'png'">
+        <xsl:value-of select="concat($opft,'PNG')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rar'">
+        <xsl:value-of select="concat($opft,'RAR')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rdf/xml'">
+        <xsl:value-of select="concat($opft,'RDF_XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rdf-n3'">
+        <xsl:value-of select="concat($opft,'N3')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rdf-turtle'">
+        <xsl:value-of select="concat($opft,'RDF_TURTLE')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rdf-xml'">
+        <xsl:value-of select="concat($opft,'RDF_XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rdf_n_triples'">
+        <xsl:value-of select="concat($opft,'RDF_N_TRIPLES')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rdf_n3'">
+        <xsl:value-of select="concat($opft,'N3')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rdf_turtle'">
+        <xsl:value-of select="concat($opft,'RDF_TURTLE')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rdf_xml'">
+        <xsl:value-of select="concat($opft,'RDF_XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rss'">
+        <xsl:value-of select="concat($opft,'RSS')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'rtf'">
+        <xsl:value-of select="concat($opft,'RTF')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'scorm'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'ZIP')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'shp'">
+        <xsl:value-of select="concat($opft,'SHP')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'sos'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'spatialite'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($iana-mt,'application/vnd.sqlite3')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'sqlite'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($iana-mt,'application/vnd.sqlite3')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'sqlite3'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($iana-mt,'application/vnd.sqlite3')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'svg'">
+        <xsl:value-of select="concat($opft,'SVG')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'text'">
+        <xsl:value-of select="concat($opft,'TXT')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'tiff'">
+        <xsl:value-of select="concat($opft,'TIFF')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'tmx'">
+        <xsl:value-of select="concat($opft,'TMX')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'tsv'">
+        <xsl:value-of select="concat($opft,'TSV')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'ttl'">
+        <xsl:value-of select="concat($opft,'RDF_TURTLE')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'turtle'">
+        <xsl:value-of select="concat($opft,'RDF_TURTLE')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'txt'">
+        <xsl:value-of select="concat($opft,'TXT')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'xbrl'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'xhtml'">
+        <xsl:value-of select="concat($opft,'XHTML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'xls'">
+        <xsl:value-of select="concat($opft,'XLS')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'xlsx'">
+        <xsl:value-of select="concat($opft,'XLSX')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'xml'">
+        <xsl:value-of select="concat($opft,'XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'wcs'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'TIFF')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'wfs'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'GML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'wfs-g'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'GML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'wmc'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'XML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'wms'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'PNG')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'wmts'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'PNG')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'wps'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'GML')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'zip'">
+        <xsl:value-of select="concat($opft,'ZIP')"/>
+      </xsl:when>
+      <xsl:otherwise>
+<!--
+        <xsl:value-of select="concat($opft,'OP_DATPRO')"/>
+-->
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -3346,9 +3840,7 @@
         <dct:conformsTo>
           <rdf:Description rdf:about="{$link}">
             <rdf:type rdf:resource="{$dct}Standard"/>
-            <dct:type>
-              <skos:Concept rdf:about="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
-            </dct:type>
+            <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
           </rdf:Description>
         </dct:conformsTo>
       </xsl:when>
@@ -3356,9 +3848,7 @@
         <dct:conformsTo>
           <rdf:Description rdf:about="{$code}">
             <rdf:type rdf:resource="{$dct}Standard"/>
-            <dct:type>
-              <skos:Concept rdf:about="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
-            </dct:type>
+            <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
           </rdf:Description>
         </dct:conformsTo>
       </xsl:when>
@@ -3375,9 +3865,7 @@
               <rdf:Description rdf:about="{$EpsgSrsBaseUri}/{$srid}">
                 <rdf:type rdf:resource="{$dct}Standard"/>
                 <rdf:type rdf:resource="{$skos}Concept"/>
-                <dct:type>
-                  <skos:Concept rdf:about="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
-                </dct:type>
+                <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
                 <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
                 <skos:notation rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></skos:notation>
                 <skos:inScheme>
@@ -3394,9 +3882,7 @@
           <xsl:otherwise>
             <dct:conformsTo rdf:parseType="Resource">
               <rdf:type rdf:resource="{$dct}Standard"/>
-              <dct:type>
-                <skos:Concept rdf:about="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
-              </dct:type>
+              <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
               <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
               <xsl:if test="$codespace != ''">
                 <rdf:type rdf:resource="{$skos}Concept"/>
@@ -3421,9 +3907,7 @@
               <rdf:Description rdf:about="{$EpsgSrsBaseUri}/{$code}">
                 <rdf:type rdf:resource="{$dct}Standard"/>
                 <rdf:type rdf:resource="{$skos}Concept"/>
-                <dct:type>
-                  <skos:Concept rdf:about="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
-                </dct:type>
+                <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
                 <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="concat($EpsgSrsBaseUrn,':',$version,':',$code)"/></dct:identifier>
                 <skos:notation rdf:datatype="{$xsd}anyURI"><xsl:value-of select="concat($EpsgSrsBaseUrn,':',$version,':',$code)"/></skos:notation>
                 <skos:inScheme>
@@ -3442,9 +3926,7 @@
               <rdf:Description rdf:about="{$Etrs89Uri}">
                 <rdf:type rdf:resource="{$dct}Standard"/>
                 <rdf:type rdf:resource="{$skos}Concept"/>
-                <dct:type>
-                  <skos:Concept rdf:about="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
-                </dct:type>
+                <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
                 <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$Etrs89Urn"/></dct:identifier>
                 <skos:notation rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$Etrs89Urn"/></skos:notation>
                 <dct:title xml:lang="en">ETRS89 - European Terrestrial Reference System 1989</dct:title>
@@ -3465,9 +3947,7 @@
               <rdf:Description rdf:about="{$Crs84Uri}">
                 <rdf:type rdf:resource="{$dct}Standard"/>
                 <rdf:type rdf:resource="{$skos}Concept"/>
-                <dct:type>
-                  <skos:Concept rdf:about="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
-                </dct:type>
+                <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
                 <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$Crs84Urn"/></dct:identifier>
                 <skos:notation rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$Crs84Urn"/></skos:notation>
                 <dct:title xml:lang="en">CRS84</dct:title>
@@ -3487,9 +3967,7 @@
             <dct:conformsTo rdf:parseType="Resource">
               <rdf:type rdf:resource="{$dct}Standard"/>
               <rdf:type rdf:resource="{$skos}Concept"/>
-              <dct:type>
-                <skos:Concept rdf:about="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
-              </dct:type>
+              <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
               <dct:title xml:lang="{$MetadataLanguage}">
                 <xsl:value-of select="$code"/>
               </dct:title>
@@ -3516,9 +3994,7 @@
 <!-- Spatial representation type (tentative) -->
 
   <xsl:template name="SpatialRepresentationType" match="gmd:identificationInfo/*/gmd:spatialRepresentationType/gmd:MD_SpatialRepresentationTypeCode">
-    <adms:representationTechnique>
-      <skos:Concept rdf:about="{$SpatialRepresentationTypeCodelistUri}/{@codeListValue}"/>
-    </adms:representationTechnique>
+    <adms:representationTechnique rdf:resource="{$SpatialRepresentationTypeCodelistUri}/{@codeListValue}"/>
   </xsl:template>
 
 <!-- Multilingual text -->
