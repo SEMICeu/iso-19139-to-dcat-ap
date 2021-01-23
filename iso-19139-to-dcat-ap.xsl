@@ -3676,6 +3676,14 @@
       <xsl:when test="$norm-label = 'txt'">
         <xsl:value-of select="concat($opft,'TXT')"/>
       </xsl:when>
+      <xsl:when test="$norm-label = 'vcard-json'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'JSON')"/>
+      </xsl:when>
+      <xsl:when test="$norm-label = 'vcard-xml'">
+<!-- PROVISIONAL -->
+        <xsl:value-of select="concat($opft,'XML')"/>
+      </xsl:when>
       <xsl:when test="$norm-label = 'xbrl'">
 <!-- PROVISIONAL -->
         <xsl:value-of select="concat($opft,'XML')"/>
