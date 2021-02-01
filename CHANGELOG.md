@@ -2,11 +2,12 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
-## 2021-01-23: Revised version (v2.7)
+## 2021-02-01: Revised version (v2.7)
 
 * Removed explicit class specifications (`skos:Concept`) from code list values, as it is not necessary for validation via SHACL (see [issue #22](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/22#issuecomment-765743742)).
 * Revised to map textual descriptions of distribution encodings to URIs (see [issue #24](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/24)). 
 * Added global configuration parameter (`$include-deprecated`) to specify whether the output must or must not include deprecated mappings (see [issue #25](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/25)).
+* Changed reference vocabulary for units of measure from OM (Ontology of Units of Measure) to QUDT (Quantity, Units, Dimensions, and Types Ontology). The reason is twofold: differently from OM, QUDT uses a version-less URI prefix, and a standard UoM code as suffix (which is therefore not supposed to change across versions). Because of this, future versions of QUDT are unlikely to require updates to legacy metadata records, thus ensuring backward compatibility and limiting unnecessary metadata maintenance.
 
 ## 2021-01-17: Revised version (v2.6)
 
