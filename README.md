@@ -8,6 +8,10 @@ As such, this XSLT must be considered as unstable, and can be updated any time b
 
 Comments and inquiries should be sent via the [issue tracker](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/).
 
+## How to use the XSLT
+
+Instructions on how to use the XSLT are available [in a separate page](./documentation/HowTo.md).
+
 # Content
 
 * [`alignments/`](./alignments/): Folder including alignments between the controlled vocabularies used in ISO 19115 / INSPIRE metadata and those used in DCAT-AP.
