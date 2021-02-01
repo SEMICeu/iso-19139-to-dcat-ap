@@ -338,10 +338,34 @@
   <xsl:param name="geojsonMediaTypeUri" select="concat($iana-mt,'application/vnd.geo+json')"/>
   <xsl:param name="geojsonMediaTypeUri">https://www.iana.org/assignments/media-types/application/vnd.geo+json</xsl:param>
 
+<!-- QUDT Units Vocabulary -->
+  <xsl:param name="qudt-unit">http://www.qudt.org/vocab/unit</xsl:param>
+
 <!-- Ontology for units of measure (OM) -->
-  <xsl:param name="om18">http://www.wurvoc.org/vocabularies/om-1.8/</xsl:param>
-  <xsl:param name="om2">http://www.ontology-of-units-of-measure.org/resource/om-2/</xsl:param>
+  <xsl:param name="om18">http://www.wurvoc.org/vocabularies/om-1.8</xsl:param>
+  <xsl:param name="om2">http://www.ontology-of-units-of-measure.org/resource/om-2</xsl:param>
   <xsl:param name="om" select="$om18"/>
+
+<!-- Units of measure -->
+  <xsl:param name="uom-m" select="concat($qudt-unit, '/', 'M')"/>
+  <xsl:param name="uom-km" select="concat($qudt-unit, '/', 'KiloM')"/>
+  <xsl:param name="uom-ft" select="concat($qudt-unit, '/', 'FT')"/>
+  <xsl:param name="uom-deg" select="concat($qudt-unit, '/', 'DEG')"/>
+<!--
+  <xsl:param name="uom-m" select="concat($om, '/', 'metre')"/>
+  <xsl:param name="uom-km" select="concat($om, '/', 'kilometre')"/>
+  <xsl:param name="uom-ft">
+    <xsl:choose>
+      <xsl:when test="$om = $om18">
+        <xsl:value-of select="concat($om, '/', 'foot-international')"/>
+      </xsl:when>
+      <xsl:when test="$om = $om2">
+        <xsl:value-of select="concat($om, '/', 'foot-International')"/>
+      </xsl:when>
+    </xsl:choose>
+  </xsl:param>
+  <xsl:param name="uom-deg" select="concat($om, '/', 'degree')"/>
+-->
 
 <!-- INSPIRE base URI -->
 
@@ -3083,7 +3107,7 @@
           </xsl:when>
 <!-- To be completed -->
           <xsl:otherwise>
-            <xsl:value-of select="@uom"/>
+            <xsl:value-of select="normalize-space(@uom)"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
@@ -3107,7 +3131,7 @@
                   <dqv:Metric rdf:about="{$geodcatap}spatialResolutionAsDistance"/>
                 </dqv:isMeasurementOf>
                 <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
-                <sdmx-attribute:unitMeasure rdf:resource="{$om}metre"/>
+                <sdmx-attribute:unitMeasure rdf:resource="{$uom-m}"/>
               </dqv:QualityMeasurement>
             </dqv:hasQualityMeasurement>
           </xsl:if>
@@ -3124,7 +3148,7 @@
                   <dqv:Metric rdf:about="{$geodcatap}spatialResolutionAsDistance"/>
                 </dqv:isMeasurementOf>
                 <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
-                <sdmx-attribute:unitMeasure rdf:resource="{$om}kilometre"/>
+                <sdmx-attribute:unitMeasure rdf:resource="{$uom-km}"/>
               </dqv:QualityMeasurement>
             </dqv:hasQualityMeasurement>
           </xsl:if>
@@ -3141,21 +3165,16 @@
                   <dqv:Metric rdf:about="{$geodcatap}spatialResolutionAsDistance"/>
                 </dqv:isMeasurementOf>
                 <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
-                <xsl:choose>
-                  <xsl:when test="$om = $om18">
-                    <sdmx-attribute:unitMeasure rdf:resource="{$om}foot-international"/>
-                  </xsl:when>
-                  <xsl:when test="$om = $om2">
-                    <sdmx-attribute:unitMeasure rdf:resource="{$om}foot-International"/>
-                  </xsl:when>
-                </xsl:choose>
+                <sdmx-attribute:unitMeasure rdf:resource="{$uom-ft}"/>
               </dqv:QualityMeasurement>
             </dqv:hasQualityMeasurement>
           </xsl:if>
         </xsl:when>
         <xsl:otherwise>
           <xsl:if test="$profile = $extended">
-            <rdfs:comment xml:lang="en">Spatial resolution (distance): <xsl:value-of select="."/>&#160;<xsl:value-of select="$UoM"/></rdfs:comment>
+            <rdfs:comment xml:lang="en">
+              Spatial resolution (distance): <xsl:value-of select="."/>&#160;<xsl:value-of select="$UoM"/>
+            </rdfs:comment>
           </xsl:if>
         </xsl:otherwise>
       </xsl:choose>
@@ -3180,7 +3199,9 @@
             </dqv:hasQualityMeasurement>
           </xsl:when>
           <xsl:otherwise>
-            <rdfs:comment xml:lang="en">Spatial resolution (equivalent scale): <xsl:value-of select="gco:Integer"/></rdfs:comment>
+            <rdfs:comment xml:lang="en">
+              Spatial resolution (equivalent scale): <xsl:value-of select="gco:Integer"/>
+            </rdfs:comment>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
