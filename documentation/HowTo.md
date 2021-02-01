@@ -5,6 +5,8 @@ The XSLT can be run directly on the ouput of a CSW or on single metadata records
 The actual output of the XSLT depends on configuration parameters that specify:
 
 * whether to use the _core_ or _extended_ GeoDCAT-AP profile;
+* whether coupled resources should be looked up
+* whether deprecated mappings must or much not be included 
 * which spatial reference system to use for the geometry encoding of the bounding box (when available).
 * The HTTP URIs to be used for the metadata record and/or the described resource.
 
@@ -23,11 +25,11 @@ The default value is: `extended`.
   
 The specifications for the core and extended GeoDCAT-AP profiles are available on the Joinup collaboration platform of the EU ISA Programme:
 
-https://joinup.ec.europa.eu/node/139283/
+https://joinup.ec.europa.eu/solution/geodcat-ap
 
 ### Parameter `$CoupledResourceLookup`
 
-This parameter specifies whether the coupled resource, referenced via `@xlink:href`, should be looked up to fetch the resource's (i.e., code and the optional code space). More precisely:
+This parameter specifies whether the coupled resource, referenced via `@xlink:href`, should be looked up to fetch the resource's ID (i.e., code and the optional code space). More precisely:
 
 * value `enabled`: The coupled resource is looked up
 * value `disabled`: The coupled resource is not looked up
