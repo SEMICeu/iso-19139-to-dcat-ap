@@ -8,6 +8,20 @@ As such, this XSLT must be considered as unstable, and can be updated any time b
 
 Comments and inquiries should be sent via the [issue tracker](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/).
 
+## How to use the XSLT
+
+Instructions on how to use the XSLT are available [in a separate page](./documentation/HowTo.md).
+
+## Testing the XSLT with the GeoDCAT-AP API
+
+A proof-of-concept API has been developed to facilitate the testing of the XSLT on single metadata records or on top of a CSW endpoint.
+
+A working demo of GeoDCAT-API is available at: 
+
+http://geodcat-ap.semic.eu/api/
+
+The code of the API is available [in a separate folder](./api/), along with the relevant documentation.
+ 
 # Content
 
 * [`alignments/`](./alignments/): Folder including alignments between the controlled vocabularies used in ISO 19115 / INSPIRE metadata and those used in DCAT-AP.

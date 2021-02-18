@@ -139,19 +139,19 @@ or
 ### XPath
 
 ````
-//gmd:specification/@xlink:href
+//gmd:specification/gmd:CI_Citation/gmd:title/gmx:Anchor/P@xlink:href
 ````
 
 ### Example 
 
 ````xml
-<gmd:specification xlink:href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32010R1089:EN:NOT">
+<gmd:specification>
   <gmd:CI_Citation>
     <gmd:title>
-      <gco:CharacterString>
+      <gmx:Anchor xlink:href="http://data.europa.eu/eli/reg/2010/1089/oj">
         COMMISSION REGULATION (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the 
         European Parliament and of the Council as regards interoperability of spatial data sets and services
-      </gco:CharacterString>
+      </gmx:Anchor>
     </gmd:title>
       ...
   </gmd:CI_Citation>
@@ -163,22 +163,40 @@ or
 ### XPath
 
 ````
-//gmd:useLimitation/gmx:Anchor/@xlink:href
+//gmd:useConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href
 ````
 
 ### Example 
 
 ````xml
-<gmd:useLimitation>
-  <gmx:Anchor xlink:href="https://creativecommons.org/licenses/by/4.0/">
-    Creative Commons - Attribution 4.0 International - CC BY
-  </gmx:Anchor>
-</gmd:useLimitation>
+<gmd:useConstraints>
+  <gmd:otherConstraints>
+    <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1a">
+      Creative Commons - Attribution 4.0 International - CC BY
+    </gmx:Anchor>
+  </gmd:otherConstraints>
+</gmd:useConstraints>
 ````
 
 ## Access restrictions URI: Limitations of public access (INSPIRE); Access constraints, other constraints (ISO 19115)
 
-TBD
+### XPath
+
+````
+//gmd:accessConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href
+````
+
+### Example 
+
+````xml
+<gmd:accessConstraints>
+  <gmd:otherConstraints>
+    <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1a">
+      Public access limited according to Article 13(1)(a) of the INSPIRE Directive
+    </gmx:Anchor>
+  </gmd:otherConstraints>
+</gmd:accessConstraints>
+````
 
 ## Agent URI (metadata): Metadata point of contact (INSPIRE / ISO 19115); Agent URI (resource): Responsible organisation (INSPIRE); Responsible party (ISO 19115)
 
