@@ -2,6 +2,10 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2021-04-11: Revised version (v2.8)
+
+* Revised mappings of code list values for spatial representation type and maintenance frequency (see [issue #28](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/28)).
+
 ## 2021-02-01: Revised version (v2.7)
 
 * Removed explicit class specifications (`skos:Concept`) from code list values, as it is not necessary for validation via SHACL (see [issue #22](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/22#issuecomment-765743742)).
