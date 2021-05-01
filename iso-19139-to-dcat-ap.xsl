@@ -23,6 +23,8 @@
   through Action 1.17: Re-usable INSPIRE Reference Platform
   (http://ec.europa.eu/isa/actions/01-trusted-information-exchange/1-17action_en.htm).
 
+  Source code:  https://github.com/SEMICeu/iso-19139-to-dcat-ap
+
 -->
 
 <!--
