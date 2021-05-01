@@ -41,6 +41,15 @@
   time based on the revisions to the GeoDCAT-AP specifications and
   related work in the framework of INSPIRE and the EU ISA² Programme.
 
+  The official distributions of this XSLT are published in the dedicated GitHub
+  repository:
+  
+    https://github.com/SEMICeu/iso-19139-to-dcat-ap
+
+  Comments and inquiries should be sent via the corresponding issue tracker: 
+
+    https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues
+
 -->
 
 <xsl:transform
