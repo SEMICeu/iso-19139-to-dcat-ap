@@ -2,6 +2,9 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2021-06-20: Revised version (v2.9)
+
+* Revised mapping for the GeoPackage format, to use the URI from the EU Vocabularies File Types NAL instead of the IANA Media Types URL (see [issue #32](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/32)).
 ## 2021-04-11: Revised version (v2.8)
 
 * Revised mappings of code list values for spatial representation type and maintenance frequency (see [issue #28](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/28)).
