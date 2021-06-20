@@ -3477,8 +3477,7 @@
         <xsl:value-of select="concat($opft,'GEOJSON')"/>
       </xsl:when>
       <xsl:when test="$norm-label = 'geopackage'">
-<!-- PROVISIONAL -->
-        <xsl:value-of select="concat($iana-mt,'application/geopackage+sqlite3')"/>
+        <xsl:value-of select="concat($opft,'GPKG')"/>
       </xsl:when>
       <xsl:when test="$norm-label = 'georss'">
 <!-- PROVISIONAL -->
@@ -3497,8 +3496,7 @@
         <xsl:value-of select="concat($opft,'GMZ')"/>
       </xsl:when>
       <xsl:when test="$norm-label = 'gpkg'">
-<!-- PROVISIONAL -->
-        <xsl:value-of select="concat($iana-mt,'application/geopackage+sqlite3')"/>
+        <xsl:value-of select="concat($opft,'GPKG')"/>
       </xsl:when>
       <xsl:when test="$norm-label = 'gpx'">
 <!-- PROVISIONAL -->
