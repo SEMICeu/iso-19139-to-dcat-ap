@@ -12,6 +12,12 @@ Comments and inquiries should be sent via the [issue tracker](https://github.com
 
 Instructions on how to use the XSLT are available [in a separate page](./documentation/HowTo.md).
 
+The XSLT in the `master` branch always corresponds to the latest version of GeoDCAT-AP, and it can be directly used via the following URL:
+
+https://raw.githubusercontent.com/SEMICeu/iso-19139-to-dcat-ap/master/iso-19139-to-dcat-ap.xsl
+
+Previous releases are available from [the release page](https://github.com/SEMICeu/iso-19139-to-dcat-ap/releases).
+
 ## Testing the XSLT with the GeoDCAT-AP API
 
 A proof-of-concept API has been developed to facilitate the testing of the XSLT on single metadata records or on top of a CSW endpoint.
