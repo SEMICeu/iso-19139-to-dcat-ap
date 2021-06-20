@@ -12,7 +12,7 @@ Comments and inquiries should be sent via the [issue tracker](https://github.com
 
 Instructions on how to use the XSLT are available [in a separate page](./documentation/HowTo.md).
 
-The XSLT in the `master` branch always corresponds to the latest version of GeoDCAT-AP, and it can be directly used via the following URL:
+The XSLT in the `master` branch always corresponds to [the latest version of GeoDCAT-AP](https://semiceu.github.io/GeoDCAT-AP/releases/), and it can be directly used via the following URL:
 
 https://raw.githubusercontent.com/SEMICeu/iso-19139-to-dcat-ap/master/iso-19139-to-dcat-ap.xsl
 
