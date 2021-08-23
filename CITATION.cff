@@ -1,8 +1,4 @@
 cff-version: 1.2.0
-editors:
-- family-names: "Perego"
-  given-names: "Andrea"
-  orcid: "https://orcid.org/0000-0001-9300-2694"
 title: "Reference XSLT-based implementation of GeoDCAT-AP"
 version: 2.9
 date-released: 2021-06-20
