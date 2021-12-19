@@ -124,7 +124,7 @@
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/SHP"/>
   </rdf:Description>
   
-<!-- File type not available in the MDR file type code list
+<!-- Media type not available in the MDR file type code list
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/vnd.sqlite3">
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/??"/>
   </rdf:Description>
