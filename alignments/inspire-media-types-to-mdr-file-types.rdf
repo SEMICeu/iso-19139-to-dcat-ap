@@ -60,6 +60,30 @@
 
 <!-- Alignments -->
 
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/atom+xml">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/ATOM"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/application/atom+xml">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/ATOM"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/geo+json">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GEOJSON"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/application/geo+json">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GEOJSON"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/geopackage+sqlite3">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GPKG"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/application/geopackage+sqlite3">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GPKG"/>
+  </rdf:Description>
+
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/gml+xml">
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GML"/>
   </rdf:Description>
@@ -84,6 +108,32 @@
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/KMZ"/>
   </rdf:Description>
 
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/vnd.las">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/LAS"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/application/vnd.las">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/LAS"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/vnd.shp">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/SHP"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/application/vnd.shp">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/SHP"/>
+  </rdf:Description>
+  
+<!-- Media type not available in the MDR file type code list
+  <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/vnd.sqlite3">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/??"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.iana.org/assignments/media-types/application/vnd.sqlite3">
+    <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/??"/>
+  </rdf:Description>
+-->
+  
   <rdf:Description rdf:about="http://inspire.ec.europa.eu/media-types/application/x-ascii-grid">
     <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/file-type/GRID_ASCII"/>
   </rdf:Description>
