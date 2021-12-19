@@ -24,7 +24,7 @@
 </tr>
 <tr>
 <td><a href="./inspire-media-types-to-mdr-file-types.rdf"><code>inspire-media-types-to-mdr-file-types.rdf</code></a></td>
-<td><a title="HTML preview" href="http://geodcat-ap.semic.eu/skos-match-viewer/?alignments=https%3A%2F%2Fraw.githubusercontent.com%2FSEMICeu%2Fiso-19139-to-dcat-ap%2Ffile-type-align%2Falignments%2Finspire-media-types-to-mdr-file-types.rdf">Alignments between the INSPIRE media types and the MDR file types</a></td>
+<td><a title="HTML preview" href="http://geodcat-ap.semic.eu:8890/skos-match-viewer/?alignments=https%3A%2F%2Fraw.githubusercontent.com%2FSEMICeu%2Fiso-19139-to-dcat-ap%2Fmaster%2Falignments%2Finspire-media-types-to-mdr-file-types.rdf">Alignments between the INSPIRE media types and the MDR file types</a></td>
 <td>Under development</td>
 </tr>
 </table>
