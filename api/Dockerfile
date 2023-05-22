@@ -5,12 +5,15 @@ COPY . .
 RUN composer install -d /build/lib/composer
 
 # # Serve index.php file with apache
-FROM php:7.4-apache
+# FROM php:7.4-apache
+# FROM php:8.2-apache
+FROM php:8.0-apache
 WORKDIR /app
 COPY . .
 COPY --from=build /build/lib/composer/vendor /app/lib/composer/vendor
 RUN apt-get update && apt-get install -y \
     libxslt-dev \
+#   && docker-php-ext-configure mbstring --enable-mbstring \
     && docker-php-ext-configure xsl --with-xsl \
     && docker-php-ext-install -j$(nproc) xsl
 

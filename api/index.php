@@ -220,8 +220,8 @@
 
 // Sending HTTP headers
 
-    header("Content-type: " . $outputFormat);
-    header('Link: ' . join(', ', $linkHTTP));
+//    header("Content-type: " . $outputFormat);
+//    header('Link: ' . join(', ', $linkHTTP));
 
 // Returning the resulting document
 
