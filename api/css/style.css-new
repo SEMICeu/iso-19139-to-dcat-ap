@@ -1,9 +1,8 @@
-header, section, footer {
-  overflow: hidden;
-}
-#src {
+textarea {
   font-size: 1.4em;
   width: 100%;
+  resize: vertical;
+  height: 10em;
 }
 .metadata dt {
   display: block;
@@ -13,10 +12,5 @@ header, section, footer {
 }
 .metadata dd {
   margin-left: 40px;
-}
-a, code, pre {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-all;
 }
 

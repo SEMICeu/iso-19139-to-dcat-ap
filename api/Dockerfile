@@ -2,12 +2,13 @@
 FROM composer as build
 WORKDIR /build
 COPY . .
-RUN composer install -d /build/lib/composer
+# use the version from existing build
+#RUN composer install -d /build/lib/composer
 
 # # Serve index.php file with apache
-# FROM php:7.4-apache
+ FROM php:7.4-apache
 # FROM php:8.2-apache
-FROM php:8.0-apache
+#FROM php:8.0-apache
 WORKDIR /app
 COPY . .
 COPY --from=build /build/lib/composer/vendor /app/lib/composer/vendor

@@ -1,0 +1,174 @@
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  background: #eeeeec;
+  box-shadow: inset 0 3px 100px rgba(0,0,0,.3);
+  min-height: 100%;
+}
+
+header, section, footer {
+  max-width: 978px;
+  margin: 30px auto;
+  display: block;
+  clear: both;
+  padding: 30px 40px;
+}
+
+header, section {
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.1);
+}
+
+/* Header */
+
+header {
+  background: #0f5494;
+  color: white;
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+header .logo {
+  float: left;
+  margin-right: 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+header .subtitle {
+  color: white;
+  font-size: 28px;
+  margin: 0;
+  margin-top: 5px;
+}
+
+/* Sections */
+
+section {
+  background: white;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 300;
+  color: #0f5494;
+}
+
+section > h2:first-child {
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: normal;
+  color: #0f9492;
+}
+
+/* Footer */
+
+footer {
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 80%;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+/* Inline elements */
+
+a {
+  text-decoration: none;
+  color: #0f5494;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  font-weight: 600;
+  color: black;
+}
+
+figure {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: .5em 0;
+  border: 1px solid #0F5494;
+}
+
+tr {
+  vertical-align: top;
+}
+tr:nth-child(odd) {
+  background-color: #eeeeec;
+}
+
+th, td {
+  padding: 2px 1em;
+}
+
+th {
+  text-align: left;
+  white-space: nowrap;
+  font-weight: 600;
+  background-color: #0F5494;
+  color: white;
+}
+
+table ol,
+table ul {
+  margin: 0;
+  padding-left: 1em;
+}
+
+
+dt {
+  float: left;
+  clear: left;
+  width: 100px;
+  text-align: right;
+  font-weight: 300;
+}
+dt:after {
+  content: ":";
+}
+
+dd {
+  margin: 0 0 0 110px;
+  padding: 0 0 0.5em 0;
+}
+
+/* Specific elements */
+
+#query {
+  width: 80%;
+}
+
+.error {
+  color: #a40000;
+  font-weight: 600;
+}
+
+/* vim:set ts=2 sw=2 et: */
