@@ -85,7 +85,7 @@
     xmlns:xsi    = "http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xsl    = "http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="earl gco gmd gml gmx i i-gp srv xlink xsi xsl wdrs"
-    version="1.0">
+    version="2.0">
 
   <xsl:output method="xml"
               indent="yes"
@@ -1680,7 +1680,7 @@
 
     <xsl:param name="Address">
       <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address">
-        <xsl:variable name="deliveryPoint" select="normalize-space(gmd:deliveryPoint/*)"/>
+        <xsl:variable name="deliveryPoint" select="normalize-space(string-join(gmd:deliveryPoint/*, ' '))"/>
         <xsl:variable name="city" select="normalize-space(gmd:city/*)"/>
         <xsl:variable name="administrativeArea" select="normalize-space(gmd:administrativeArea/*)"/>
         <xsl:variable name="postalCode" select="normalize-space(gmd:postalCode/*)"/>
@@ -1711,7 +1711,7 @@
 
     <xsl:param name="Address-vCard">
       <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address">
-        <xsl:variable name="deliveryPoint" select="normalize-space(gmd:deliveryPoint/*)"/>
+        <xsl:variable name="deliveryPoint" select="normalize-space(string-join(gmd:deliveryPoint/*, ' '))"/>
         <xsl:variable name="city" select="normalize-space(gmd:city/*)"/>
         <xsl:variable name="administrativeArea" select="normalize-space(gmd:administrativeArea/*)"/>
         <xsl:variable name="postalCode" select="normalize-space(gmd:postalCode/*)"/>
