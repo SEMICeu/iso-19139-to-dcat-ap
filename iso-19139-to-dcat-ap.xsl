@@ -2,7 +2,7 @@
 
 <!--
 
-  Copyright 2015-2021 EUROPEAN UNION
+  Copyright 2015-2023 EUROPEAN UNION
   Licensed under the EUPL, Version 1.2 or - as soon they will be approved by
   the European Commission - subsequent versions of the EUPL (the "Licence");
   You may not use this work except in compliance with the Licence.
@@ -16,7 +16,7 @@
   See the Licence for the specific language governing permissions and
   limitations under the Licence.
 
-  Contributors: ISA GeoDCAT-AP Working Group (https://github.com/SEMICeu/geodcat-ap)
+  Contributors: GeoDCAT-AP Working Group (https://github.com/SEMICeu/geodcat-ap)
 
   This work was originally supported by the EU Interoperability Solutions for
   European Public Administrations Programme (http://ec.europa.eu/isa)
@@ -1098,7 +1098,12 @@
           <rdf:type rdf:resource="{$dcat}Dataset"/>
         </xsl:when>
         <xsl:when test="$ResourceType = 'series'">
-          <rdf:type rdf:resource="{$dcat}Dataset"/>
+<!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v2.* and earlier versions -->
+          <xsl:if test="$include-deprecated = 'yes'">
+            <rdf:type rdf:resource="{$dcat}Dataset"/>
+          </xsl:if>
+<!-- Mapping added for compliance with DCAT-AP 3 -->
+          <rdf:type rdf:resource="{$dcat}DatasetSeries"/>
         </xsl:when>
         <xsl:when test="$ResourceType = 'service'">
 <!-- Mapping moved to core profile for compliance with DCAT-AP 2 -->
