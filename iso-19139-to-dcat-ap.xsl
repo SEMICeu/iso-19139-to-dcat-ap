@@ -62,7 +62,7 @@
     xmlns:earl   = "http://www.w3.org/ns/earl#"
     xmlns:foaf   = "http://xmlns.com/foaf/0.1/"
     xmlns:gco    = "http://www.isotc211.org/2005/gco"
-    xmlns:geodcatap = "http://data.europa.eu/930/"
+    xmlns:geodcat = "http://data.europa.eu/930/"
     xmlns:gmd    = "http://www.isotc211.org/2005/gmd"
     xmlns:gml    = "http://www.opengis.net/gml"
     xmlns:gmx    = "http://www.isotc211.org/2005/gmx"
