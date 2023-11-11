@@ -294,7 +294,7 @@
   <xsl:param name="dct">http://purl.org/dc/terms/</xsl:param>
   <xsl:param name="dctype">http://purl.org/dc/dcmitype/</xsl:param>
   <xsl:param name="foaf">http://xmlns.com/foaf/0.1/</xsl:param>
-  <xsl:param name="geodcatap">http://data.europa.eu/930/</xsl:param>
+  <xsl:param name="geodcat">http://data.europa.eu/930/</xsl:param>
   <xsl:param name="gsp">http://www.opengis.net/ont/geosparql#</xsl:param>
   <xsl:param name="prov">http://www.w3.org/ns/prov#</xsl:param>
   <xsl:param name="skos">http://www.w3.org/2004/02/skos/core#</xsl:param>
@@ -1912,15 +1912,15 @@
     <xsl:choose>
 <!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'resourceProvider' and $profile = $extended">
-        <geodcatap:resourceProvider>
+        <geodcat:resourceProvider>
           <xsl:copy-of select="$ROInfo"/>
-        </geodcatap:resourceProvider>
+        </geodcat:resourceProvider>
       </xsl:when>
 <!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'custodian' and $profile = $extended">
-        <geodcatap:custodian>
+        <geodcat:custodian>
           <xsl:copy-of select="$ROInfo"/>
-        </geodcatap:custodian>
+        </geodcat:custodian>
       </xsl:when>
       <xsl:when test="$role = 'owner' and $profile = $extended">
         <dct:rightsHolder>
@@ -1929,9 +1929,9 @@
       </xsl:when>
 <!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'user' and $profile = $extended">
-        <geodcatap:user>
+        <geodcat:user>
           <xsl:copy-of select="$ROInfo"/>
-        </geodcatap:user>
+        </geodcat:user>
       </xsl:when>
 <!--
       <xsl:when test="$role = 'user'">
@@ -1946,15 +1946,15 @@
 -->
 <!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'distributor' and $profile = $extended">
-        <geodcatap:distributor>
+        <geodcat:distributor>
           <xsl:copy-of select="$ROInfo"/>
-        </geodcatap:distributor>
+        </geodcat:distributor>
       </xsl:when>
 <!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'originator' and $profile = $extended">
-        <geodcatap:originator>
+        <geodcat:originator>
           <xsl:copy-of select="$ROInfo"/>
-        </geodcatap:originator>
+        </geodcat:originator>
       </xsl:when>
       <xsl:when test="$role = 'pointOfContact' and ($ResourceType != 'service' or $profile = $extended)">
         <dcat:contactPoint>
@@ -1970,15 +1970,15 @@
 -->
 <!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'principalInvestigator' and $profile = $extended">
-        <geodcatap:principalInvestigator>
+        <geodcat:principalInvestigator>
           <xsl:copy-of select="$ROInfo"/>
-        </geodcatap:principalInvestigator>
+        </geodcat:principalInvestigator>
       </xsl:when>
 <!-- Mapping added for compliance with GeoDCAT-AP 2 -->
       <xsl:when test="$role = 'processor' and $profile = $extended">
-        <geodcatap:processor>
+        <geodcat:processor>
           <xsl:copy-of select="$ROInfo"/>
-        </geodcatap:processor>
+        </geodcat:processor>
       </xsl:when>
 <!--
       <xsl:when test="$role = 'processor'">
@@ -2648,23 +2648,25 @@
         <xsl:with-param name="date" select="$date"/>
       </xsl:call-template>
     </xsl:param>
-    <xsl:choose>
-      <xsl:when test="$type = 'publication'">
-        <dct:issued rdf:datatype="{$xsd}{$data-type}">
-          <xsl:value-of select="$date"/>
-        </dct:issued>
-      </xsl:when>
-      <xsl:when test="$type = 'revision'">
-        <dct:modified rdf:datatype="{$xsd}{$data-type}">
-          <xsl:value-of select="$date"/>
-        </dct:modified>
-      </xsl:when>
-      <xsl:when test="$type = 'creation' and $profile = $extended">
-        <dct:created rdf:datatype="{$xsd}{$data-type}">
-          <xsl:value-of select="$date"/>
-        </dct:created>
-      </xsl:when>
-    </xsl:choose>
+    <xsl:if test="$date != ''">
+      <xsl:choose>
+        <xsl:when test="$type = 'publication'">
+          <dct:issued rdf:datatype="{$xsd}{$data-type}">
+            <xsl:value-of select="$date"/>
+          </dct:issued>
+        </xsl:when>
+        <xsl:when test="$type = 'revision'">
+          <dct:modified rdf:datatype="{$xsd}{$data-type}">
+            <xsl:value-of select="$date"/>
+          </dct:modified>
+        </xsl:when>
+        <xsl:when test="$type = 'creation' and $profile = $extended">
+          <dct:created rdf:datatype="{$xsd}{$data-type}">
+            <xsl:value-of select="$date"/>
+          </dct:created>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:if>
   </xsl:template>
 
 <!-- Generic date data type template -->
@@ -3145,7 +3147,7 @@
             <dqv:hasQualityMeasurement>
               <dqv:QualityMeasurement>
                 <dqv:isMeasurementOf>
-                  <dqv:Metric rdf:about="{$geodcatap}spatialResolutionAsDistance"/>
+                  <dqv:Metric rdf:about="{$geodcat}spatialResolutionAsDistance"/>
                 </dqv:isMeasurementOf>
                 <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
                 <sdmx-attribute:unitMeasure rdf:resource="{$uom-m}"/>
@@ -3162,7 +3164,7 @@
             <dqv:hasQualityMeasurement>
               <dqv:QualityMeasurement>
                 <dqv:isMeasurementOf>
-                  <dqv:Metric rdf:about="{$geodcatap}spatialResolutionAsDistance"/>
+                  <dqv:Metric rdf:about="{$geodcat}spatialResolutionAsDistance"/>
                 </dqv:isMeasurementOf>
                 <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
                 <sdmx-attribute:unitMeasure rdf:resource="{$uom-km}"/>
@@ -3179,7 +3181,7 @@
             <dqv:hasQualityMeasurement>
               <dqv:QualityMeasurement>
                 <dqv:isMeasurementOf>
-                  <dqv:Metric rdf:about="{$geodcatap}spatialResolutionAsDistance"/>
+                  <dqv:Metric rdf:about="{$geodcat}spatialResolutionAsDistance"/>
                 </dqv:isMeasurementOf>
                 <dqv:value rdf:datatype="{$xsd}decimal"><xsl:value-of select="."/></dqv:value>
                 <sdmx-attribute:unitMeasure rdf:resource="{$uom-ft}"/>
@@ -3207,7 +3209,7 @@
             <dqv:hasQualityMeasurement>
               <dqv:QualityMeasurement>
                 <dqv:isMeasurementOf>
-                  <dqv:Metric rdf:about="{$geodcatap}spatialResolutionAsScale"/>
+                  <dqv:Metric rdf:about="{$geodcat}spatialResolutionAsScale"/>
                 </dqv:isMeasurementOf>
                 <dqv:value rdf:datatype="{$xsd}decimal">
                   <xsl:value-of select="format-number((1 div gco:Integer), '0.########################')"/>
