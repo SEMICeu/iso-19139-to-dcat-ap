@@ -1647,7 +1647,7 @@
     </xsl:param>
 
     <xsl:param name="OrganisationName">
-      <xsl:value-of select="normalize-space(gmd:organisationName/*)"/>
+      <xsl:value-of select="string-join(gmd:organisationName/*[self::gco:CharacterString|gmx:Anchor], '')"/>
     </xsl:param>
     <xsl:param name="OrganisationName-FOAF">
       <xsl:for-each select="gmd:organisationName">
