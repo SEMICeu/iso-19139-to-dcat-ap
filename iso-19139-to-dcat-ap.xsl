@@ -1164,7 +1164,7 @@
       <xsl:if test="$profile = $extended">
 -->
         <xsl:if test="$InspireResourceType != ''">
-          <dct:type rdf:resource="{$ResourceTypeCodelistUri}/{$ResourceType}"/>
+          <geodcatap:resourceType rdf:resource="{$ResourceTypeCodelistUri}/{$ResourceType}"/>
         </xsl:if>
 <!--
       </xsl:if>
@@ -1245,7 +1245,7 @@
           <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
         </xsl:apply-templates>
 -->
-        <dct:type rdf:resource="{$SpatialDataServiceTypeCodelistUri}/{$ServiceType}"/>
+        <geodcatap:serviceType rdf:resource="{$SpatialDataServiceTypeCodelistUri}/{$ServiceType}"/>
       </xsl:if>
 <!-- Spatial extent -->
 <!--
@@ -3124,7 +3124,7 @@
   <xsl:template name="TopicCategory" match="gmd:identificationInfo/*/gmd:topicCategory">
     <xsl:param name="TopicCategory"><xsl:value-of select="normalize-space(gmd:MD_TopicCategoryCode)"/></xsl:param>
     <xsl:if test="$TopicCategory != ''">
-      <dct:subject rdf:resource="{$TopicCategoryCodelistUri}/{$TopicCategory}"/>
+      <geodcatap:topicCategory rdf:resource="{$TopicCategoryCodelistUri}/{$TopicCategory}"/>
     </xsl:if>
   </xsl:template>
 
@@ -3911,20 +3911,20 @@
 
     <xsl:choose>
       <xsl:when test="starts-with($link, 'http://') or starts-with($link, 'https://')">
-        <dct:conformsTo>
+        <geodcatap:referenceSystem>
           <rdf:Description rdf:about="{$link}">
             <rdf:type rdf:resource="{$dct}Standard"/>
             <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
           </rdf:Description>
-        </dct:conformsTo>
+        </geodcatap:referenceSystem>
       </xsl:when>
       <xsl:when test="starts-with($code, 'http://') or starts-with($code, 'https://')">
-        <dct:conformsTo>
+        <geodcatap:referenceSystem>
           <rdf:Description rdf:about="{$code}">
             <rdf:type rdf:resource="{$dct}Standard"/>
             <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
           </rdf:Description>
-        </dct:conformsTo>
+        </geodcatap:referenceSystem>
       </xsl:when>
       <xsl:when test="starts-with($code, 'urn:')">
         <xsl:variable name="srid">
@@ -3935,7 +3935,7 @@
         <xsl:variable name="sridVersion" select="substring-before(substring-after(substring-after(substring-after(substring-after(substring-after($code,':'),':'),':'),':'),':'),':')"/>
         <xsl:choose>
           <xsl:when test="$srid != '' and string(number($srid)) != 'NaN'">
-            <dct:conformsTo>
+            <geodcatap:referenceSystem>
               <rdf:Description rdf:about="{$EpsgSrsBaseUri}/{$srid}">
                 <rdf:type rdf:resource="{$dct}Standard"/>
                 <rdf:type rdf:resource="{$skos}Concept"/>
@@ -3951,10 +3951,10 @@
                 </skos:inScheme>
     <xsl:copy-of select="$version-statement"/>
               </rdf:Description>
-            </dct:conformsTo>
+            </geodcatap:referenceSystem>
           </xsl:when>
           <xsl:otherwise>
-            <dct:conformsTo rdf:parseType="Resource">
+            <geodcatap:referenceSystem rdf:parseType="Resource">
               <rdf:type rdf:resource="{$dct}Standard"/>
               <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
               <dct:identifier rdf:datatype="{$xsd}anyURI"><xsl:value-of select="$code"/></dct:identifier>
@@ -3970,14 +3970,14 @@
                 </skos:inScheme>
               </xsl:if>
               <xsl:copy-of select="$version-statement"/>
-            </dct:conformsTo>
+            </geodcatap:referenceSystem>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
         <xsl:choose>
           <xsl:when test="$code = number($code) and (translate($codespace,$uppercase,$lowercase) = 'epsg' or starts-with(translate($codespace,$uppercase,$lowercase),translate($EpsgSrsBaseUrn,$uppercase,$lowercase)))">
-            <dct:conformsTo>
+            <geodcatap:referenceSystem>
               <rdf:Description rdf:about="{$EpsgSrsBaseUri}/{$code}">
                 <rdf:type rdf:resource="{$dct}Standard"/>
                 <rdf:type rdf:resource="{$skos}Concept"/>
@@ -3993,10 +3993,10 @@
                 </skos:inScheme>
                 <xsl:copy-of select="$version-statement"/>
               </rdf:Description>
-            </dct:conformsTo>
+            </geodcatap:referenceSystem>
           </xsl:when>
           <xsl:when test="translate(normalize-space(translate($code,$uppercase,$lowercase)),': ','') = 'etrs89'">
-            <dct:conformsTo>
+            <geodcatap:referenceSystem>
               <rdf:Description rdf:about="{$Etrs89Uri}">
                 <rdf:type rdf:resource="{$dct}Standard"/>
                 <rdf:type rdf:resource="{$skos}Concept"/>
@@ -4014,10 +4014,10 @@
                 </skos:inScheme>
                 <xsl:copy-of select="$version-statement"/>
               </rdf:Description>
-            </dct:conformsTo>
+            </geodcatap:referenceSystem>
           </xsl:when>
           <xsl:when test="translate(normalize-space(translate($code,$uppercase,$lowercase)),': ','') = 'crs84'">
-            <dct:conformsTo>
+            <geodcatap:referenceSystem>
               <rdf:Description rdf:about="{$Crs84Uri}">
                 <rdf:type rdf:resource="{$dct}Standard"/>
                 <rdf:type rdf:resource="{$skos}Concept"/>
@@ -4035,10 +4035,10 @@
                 </skos:inScheme>
                 <xsl:copy-of select="$version-statement"/>
               </rdf:Description>
-            </dct:conformsTo>
+            </geodcatap:referenceSystem>
           </xsl:when>
           <xsl:otherwise>
-            <dct:conformsTo rdf:parseType="Resource">
+            <geodcatap:referenceSystem rdf:parseType="Resource">
               <rdf:type rdf:resource="{$dct}Standard"/>
               <rdf:type rdf:resource="{$skos}Concept"/>
               <dct:type rdf:resource="{$INSPIREGlossaryUri}SpatialReferenceSystem"/>
@@ -4058,7 +4058,7 @@
                 </skos:inScheme>
               </xsl:if>
               <xsl:copy-of select="$version-statement"/>
-            </dct:conformsTo>
+            </geodcatap:referenceSystem>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
@@ -4290,9 +4290,9 @@
       </xsl:call-template>
     </xsl:param>
     <xsl:if test="$protocol-url != ''">
-      <dct:conformsTo>
+      <geodcatap:serviceProtocol>
         <dct:Standard rdf:about="{$protocol-url}"/>
-      </dct:conformsTo>
+      </geodcatap:serviceProtocol>
     </xsl:if>
   </xsl:template>
 
