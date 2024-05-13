@@ -744,9 +744,9 @@
       <xsl:for-each select="gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement">
         <dct:provenance>
           <dct:ProvenanceStatement>
-            <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></rdfs:label>
+            <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
             <xsl:call-template name="LocalisedString">
-              <xsl:with-param name="term">rdfs:label</xsl:with-param>
+              <xsl:with-param name="term">dct:description</xsl:with-param>
             </xsl:call-template>
           </dct:ProvenanceStatement>
         </dct:provenance>
@@ -2748,9 +2748,9 @@
         <xsl:when test="normalize-space(gco:CharacterString) != ''">
           <dct:license>
             <dct:LicenseDocument>
-              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></rdfs:label>
+              <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
               <xsl:call-template name="LocalisedString">
-                <xsl:with-param name="term">rdfs:label</xsl:with-param>
+                <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
             </dct:LicenseDocument>
           </dct:license>
@@ -2779,9 +2779,9 @@
               <xsl:if test="$use-limitation-code != ''">
                 <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$use-limitation-code"/></dct:identifier>
               </xsl:if>
-              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$use-limitation-text"/></rdfs:label>
+              <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$use-limitation-text"/></dct:description>
               <xsl:call-template name="LocalisedString">
-                <xsl:with-param name="term">rdfs:label</xsl:with-param>
+                <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
             </dct:LicenseDocument>
           </dct:license>
@@ -2818,9 +2818,9 @@
         <xsl:when test="normalize-space(gco:CharacterString) != ''">
           <dct:license>
             <dct:LicenseDocument>
-              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></rdfs:label>
+              <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
               <xsl:call-template name="LocalisedString">
-                <xsl:with-param name="term">rdfs:label</xsl:with-param>
+                <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
             </dct:LicenseDocument>
           </dct:license>
@@ -2842,9 +2842,9 @@
               <xsl:if test="$use-constraints-code != ''">
                 <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$use-constraints-code"/></dct:identifier>
               </xsl:if>
-              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$use-constraints-text"/></rdfs:label>
+              <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$use-constraints-text"/></dct:description>
               <xsl:call-template name="LocalisedString">
-                <xsl:with-param name="term">rdfs:label</xsl:with-param>
+                <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
             </dct:LicenseDocument>
           </dct:license>
@@ -2869,9 +2869,9 @@
         <xsl:when test="normalize-space(gco:CharacterString) != ''">
           <dct:accessRights>
             <dct:RightsStatement>
-              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></rdfs:label>
+              <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
               <xsl:call-template name="LocalisedString">
-                <xsl:with-param name="term">rdfs:label</xsl:with-param>
+                <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
             </dct:RightsStatement>
           </dct:accessRights>
@@ -2893,9 +2893,9 @@
               <xsl:if test="$access-constraints-code != ''">
                 <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$access-constraints-code"/></dct:identifier>
               </xsl:if>
-              <rdfs:label xml:lang="{$MetadataLanguage}"><xsl:value-of select="$access-constraints-text"/></rdfs:label>
+              <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="$access-constraints-text"/></dct:description>
               <xsl:call-template name="LocalisedString">
-                <xsl:with-param name="term">rdfs:label</xsl:with-param>
+                <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
             </dct:RightsStatement>
           </dct:accessRights>
