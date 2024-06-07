@@ -2666,7 +2666,14 @@
 
   <xsl:template name="Dates" match="gmd:date/gmd:CI_Date">
     <xsl:param name="date">
-      <xsl:value-of select="normalize-space(gmd:date/gco:Date)"/>
+      <xsl:choose>
+        <xsl:when test="gmd:date/gco:Date">
+          <xsl:value-of select="normalize-space(gmd:date/gco:Date)"/>
+        </xsl:when>
+        <xsl:when test="gmd:date/gco:DateTime">
+          <xsl:value-of select="normalize-space(gmd:date/gco:DateTime)"/>
+        </xsl:when>
+      </xsl:choose>
     </xsl:param>
     <xsl:param name="type">
       <xsl:value-of select="gmd:dateType/gmd:CI_DateTypeCode/@codeListValue"/>
