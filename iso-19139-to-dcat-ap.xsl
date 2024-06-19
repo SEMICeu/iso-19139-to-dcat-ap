@@ -3862,8 +3862,7 @@
           </xsl:when>
           <xsl:when test="@codeListValue = 'asNeeded'">
 <!--  A mapping is missing in Dublin Core -->
-<!--  A mapping is missing in MDR Freq NAL -->
-            <xsl:value-of select="concat($MaintenanceFrequencyCodelistUri,'/',@codeListValue)"/>
+            <xsl:value-of select="concat($opfq,'AS_NEEDED')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'irregular'">
 <!--  DC Freq voc
@@ -3873,8 +3872,7 @@
           </xsl:when>
           <xsl:when test="@codeListValue = 'notPlanned'">
 <!--  A mapping is missing in Dublin Core -->
-<!--  A mapping is missing in MDR Freq NAL -->
-            <xsl:value-of select="concat($MaintenanceFrequencyCodelistUri,'/',@codeListValue)"/>
+            <xsl:value-of select="concat($opfq,'NOT_PLANNED')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'unknown'">
 <!--  A mapping is missing in Dublin Core -->
