@@ -2746,14 +2746,14 @@
       <xsl:choose>
 <!-- In case the rights/licence URL IS NOT provided -->
         <xsl:when test="normalize-space(gco:CharacterString) != ''">
-          <dct:license>
-            <dct:LicenseDocument>
+          <dct:rights>
+            <dct:RightsStatement>
               <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
-            </dct:LicenseDocument>
-          </dct:license>
+            </dct:RightsStatement>
+          </dct:rights>
 <!--
           <dct:rights>
             <dct:RightsStatement>
@@ -2774,8 +2774,8 @@
               </xsl:when>
             </xsl:choose>
           </xsl:variable>
-          <dct:license>
-            <dct:LicenseDocument>
+          <dct:rights>
+            <dct:RightsStatement>
               <xsl:if test="$use-limitation-code != ''">
                 <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$use-limitation-code"/></dct:identifier>
               </xsl:if>
@@ -2783,8 +2783,8 @@
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
-            </dct:LicenseDocument>
-          </dct:license>
+            </dct:RightsStatement>
+          </dct:rights>
 <!--
           <dct:rights>
             <dct:RightsStatement>
@@ -2816,14 +2816,14 @@
       <xsl:choose>
 <!-- In case the rights/licence URL IS NOT provided -->
         <xsl:when test="normalize-space(gco:CharacterString) != ''">
-          <dct:license>
-            <dct:LicenseDocument>
+          <dct:rights>
+            <dct:RightsStatement>
               <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
-            </dct:LicenseDocument>
-          </dct:license>
+            </dct:RightsStatement>
+          </dct:rights>
         </xsl:when>
         <xsl:when test="gmd:MD_RestrictionCode">
           <xsl:variable name="use-constraints-code" select="normalize-space(@codeListValue)"/>
@@ -2837,8 +2837,8 @@
               </xsl:when>
             </xsl:choose>
           </xsl:variable>
-          <dct:license>
-            <dct:LicenseDocument>
+          <dct:rights>
+            <dct:RightsStatement>
               <xsl:if test="$use-constraints-code != ''">
                 <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$use-constraints-code"/></dct:identifier>
               </xsl:if>
@@ -2846,8 +2846,8 @@
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
-            </dct:LicenseDocument>
-          </dct:license>
+            </dct:RightsStatement>
+          </dct:rights>
         </xsl:when>
 <!-- In case the rights/licence URL IS provided -->
         <xsl:when test="gmx:Anchor/@xlink:href">
@@ -2867,14 +2867,14 @@
       <xsl:choose>
 <!-- In case the rights/licence URL IS NOT provided -->
         <xsl:when test="normalize-space(gco:CharacterString) != ''">
-          <dct:accessRights>
+          <dct:rights>
             <dct:RightsStatement>
               <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
             </dct:RightsStatement>
-          </dct:accessRights>
+          </dct:rights>
         </xsl:when>
         <xsl:when test="gmd:MD_RestrictionCode">
           <xsl:variable name="access-constraints-code" select="normalize-space(@codeListValue)"/>
@@ -2888,7 +2888,7 @@
               </xsl:when>
             </xsl:choose>
           </xsl:variable>
-          <dct:accessRights>
+          <dct:rights>
             <dct:RightsStatement>
               <xsl:if test="$access-constraints-code != ''">
                 <dct:identifier rdf:datatype="{$xsd}string"><xsl:value-of select="$access-constraints-code"/></dct:identifier>
@@ -2898,7 +2898,7 @@
                 <xsl:with-param name="term">dct:description</xsl:with-param>
               </xsl:call-template>
             </dct:RightsStatement>
-          </dct:accessRights>
+          </dct:rights>
         </xsl:when>
 <!-- In case the rights/licence URL IS provided -->
         <xsl:when test="gmx:Anchor/@xlink:href">
