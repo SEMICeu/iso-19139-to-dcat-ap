@@ -2,6 +2,24 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2020-06-26: New version (v3.0)
+
+This version includes revisions from the community, and revisions needed to ensure compliance with DCAT 3 and DCAT-AP 3.0, and reflecting the public review version of GeoDCAT-AP 3.0.0:
+
+https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/
+
+More precisely:
+* Spatial resolution as text mapped to `geodcatap:spatialResolutionAsText` instead of `rdfs:comment` (https://github.com/SEMICeu/GeoDCAT-AP/issues/95)
+* Add mapping of the missing 2 frequencies to the newly updated European NAL (https://github.com/SEMICeu/GeoDCAT-AP/issues/56)
+* Change handling of free-text access rights and license information - use `dct:rights` (https://github.com/SEMICeu/GeoDCAT-AP/issues/113)
+* Change `rdfs:label` to `dct:description` for describing RightsStatements (https://github.com/SEMICeu/GeoDCAT-AP/issues/108)
+* Introduce specific subproperties of `dct:conformsTo`, `dct:subject` and `dct:type` (https://github.com/SEMICeu/GeoDCAT-AP/issues/77, https://github.com/SEMICeu/GeoDCAT-AP/issues/78, https://github.com/SEMICeu/GeoDCAT-AP/issues/94, https://github.com/SEMICeu/GeoDCAT-AP/issues/114)
+* Avoid error on multilingual organisation name [#41](https://github.com/SEMICeu/iso-19139-to-dcat-ap/pull/41)
+* Add support for multiple resource identifiers, concatenate codespace with code if codespace is set, update to XSLT v2 [#42](https://github.com/SEMICeu/iso-19139-to-dcat-ap/pull/42)
+* Change output prefix from `geodcat` to `geodcatap` to avoid confusion with the upcoming [OGC GeoDCAT](https://www.ogc.org/press-release/ogc-forms-new-geodcat-standards-working-group/)
+* Add support for multiple deliveryPoint [#43](https://github.com/SEMICeu/iso-19139-to-dcat-ap/pull/43)
+* Update mapping of dataset series to DCAT DatasetSeries
+
 ## 2021-06-20: Revised version (v2.9)
 
 * Revised mapping for the GeoPackage format, to use the URI from the EU Vocabularies File Types NAL instead of the IANA Media Types URL (see [issue #32](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/32)).
