@@ -2,7 +2,7 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
-## 2020-06-26: New version (v3.0)
+## 2024-06-26: New version (v3.0)
 
 This version includes revisions from the community, and revisions needed to ensure compliance with DCAT 3 and DCAT-AP 3.0, and reflecting the public review version of GeoDCAT-AP 3.0.0:
 
