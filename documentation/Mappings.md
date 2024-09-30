@@ -216,7 +216,7 @@
     </tr>
     <tr>
       <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/MaintenanceFrequency">http://inspire.ec.europa.eu/metadata-codelist/MaintenanceFrequency</a></code></td>
-      <td>Register operated by the INSPIRE Registry for maintenance frequency codes defined in ISO 19115. The register is not yet available, and the code list URI is tentative.</td>
+      <td>Register operated by the INSPIRE Registry for maintenance frequency codes defined in ISO 19115.</td>
     </tr>
     <tr>
       <td>Spatial representation type</td>
