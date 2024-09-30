@@ -1,10 +1,8 @@
 # Purpose and usage
 
-This XSLT is a proof of concept for the implementation of the specification concerning the geospatial profile of [DCAT-AP](https://joinup.ec.europa.eu/node/63567/) (GeoDCAT-AP), available on Joinup, the collaboration platform of the [EU ISA Programme](http://ec.europa.eu/isa):
-  
-<https://joinup.ec.europa.eu/solution/geodcat-ap>
+This XSLT is a proof of concept for the implementation of the specification concerning GeoDCAT-AP, the geospatial profile of [DCAT-AP](https://joinup.ec.europa.eu/node/63567/), available on the [Interoperable Europe Portal](https://joinup.ec.europa.eu/collection/semic-support-centre/solution/geodcat-application-profile-data-portals-europe).
     
-As such, this XSLT must be considered as unstable, and can be updated any time based on the revisions to the GeoDCAT-AP specifications and related work in the framework of [INSPIRE](http://inspire.ec.europa.eu/) and the EU ISA Programme.
+As such, this XSLT must be considered as unstable, and can be updated any time based on the revisions to the GeoDCAT-AP specifications and related work in the framework of [INSPIRE](http://inspire.ec.europa.eu/) and the [Interoperable Europe initiative](https://joinup.ec.europa.eu/interoperable-europe).
 
 Comments and inquiries should be sent via the [issue tracker](https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/).
 
@@ -12,7 +10,7 @@ Comments and inquiries should be sent via the [issue tracker](https://github.com
 
 Note that this XSLT, or its output, needs to be adjusted by each data publisher to produce HVD compliant metadata records.
 Especially the areas of Data Service identification, License information and Persistent Identifiers are not covered by this proof-of-concept.
-See [DCAT-AP HVD](https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/) for the HVD technical requirements.
+See [DCAT-AP HVD](https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/) for the HVD technical requirements.
 
 ## How to use the XSLT
 
