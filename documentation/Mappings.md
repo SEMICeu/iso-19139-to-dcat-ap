@@ -154,7 +154,6 @@
       <th>Metadata elements (ISO 19115 / INSPIRE)</th>
       <th>Code list URI</th>
       <th>Code lists</th>
-      <th>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -162,7 +161,6 @@
       <td>Metadata language</td>
       <td rowspan="2"><code><a href="http://publications.europa.eu/resource/authority/language">http://publications.europa.eu/resource/authority/language</a></code></td>
       <td rowspan="2">Language register operated by the Metadata Registry of the Publications Office of the EU [<a href="http://publications.europa.eu/mdr/authority/language/">MDR-LANG</a>]</td>
-      <td rowspan="2">stable</td>
     </tr>
     <tr>
       <td>Resource language</td>
@@ -171,71 +169,59 @@
       <td>Resource type</td>
       <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/ResourceType">http://inspire.ec.europa.eu/metadata-codelist/ResourceType</a></code></td>
       <td>Register operated by the INSPIRE Registry for resource types defined in ISO 19115</td>
-      <td>stable</td>
     </tr>
     <tr>
       <td>Service type</td>
       <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType">http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType</a></code></td>
       <td>Register operated by the INSPIRE Registry for service types, as defined in [<a href="http://eur-lex.europa.eu/eli/reg/2008/1205/oj">INSPIRE-MD-REG</a>]</td>
-      <td>stable</td>
     </tr>
     <tr>
       <td>Topic category</td>
       <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory">http://inspire.ec.europa.eu/metadata-codelist/TopicCategory</a></code></td>
       <td>Register operated by the INSPIRE Registry for topic categories defined in ISO 19115</td>
-      <td>stable</td>
     </tr>
     <tr>
       <td>Keyword denoting one of the INSPIRE spatial data themes</td>
       <td><code><a href="http://inspire.ec.europa.eu/theme">http://inspire.ec.europa.eu/theme</a></code></td>
       <td>INSPIRE spatial data theme register operated by the INSPIRE Registry</td>
-      <td>stable</td>
     </tr>
     <tr>
       <td>Keyword denoting one of the spatial data service categories</td>
       <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory">http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory</a></code></td>
       <td>Register operated by the INSPIRE Registry for spatial data service categories defined in ISO 19119</td>
-      <td>stable</td>
     </tr>
     <tr>
       <td>Degree of conformity</td>
       <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity</a></code></td>
       <td>Register operated by the INSPIRE Registry for degrees of conformity, as defined in [<a href="http://eur-lex.europa.eu/eli/reg/2008/1205/oj">INSPIRE-MD-REG</a>]</td>
-      <td>stable</td>
     </tr>
     <tr>
       <td>Responsible party role</td>
       <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole">http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole</a></code></td>
       <td>Register operated by the INSPIRE Registry for responsible party roles, as defined in [<a href="http://eur-lex.europa.eu/eli/reg/2008/1205/oj">INSPIRE-MD-REG</a>]</td>
-      <td>stable</td>
     </tr>
     <tr>
       <td rowspan="2"><a href="#mapping-format">Format / Encoding</a></td>
       <td><code><a href="http://publications.europa.eu/resource/authority/file-type">http://publications.europa.eu/resource/authority/file-type</a></code></td>
       <td>File type register operated by the Metadata Registry of the Publications Office of the EU [<a href="http://publications.europa.eu/mdr/authority/file-type/">MDR-FT</a>]</td>
-      <td>stable</td>
     </tr>
     <tr>
       <td><code><a href="http://inspire.ec.europa.eu/media-types">http://inspire.ec.europa.eu/media-types</a></code></td>
       <td>Register of media types used for datasets in INSPIRE download services</td>
-      <td><em>testing</em></td>
     </tr>
     <tr>
       <td rowspan="2">Maintenance frequency (Maintenance information)</td>
       <td><code><a href="http://publications.europa.eu/resource/authority/frequency">http://publications.europa.eu/resource/authority/frequency</a></code></td>
       <td>Frequency code register operated by the Metadata Registry of the Publications Office of the EU [<a href="http://publications.europa.eu/mdr/authority/frequency/">MDR-FR</a>]</td>
-      <td>stable</td>
     </tr>
     <tr>
-      <td><code>http://inspire.ec.europa.eu/metadata-codelist/MaintenanceFrequencyCode</code></td>
+      <td><code><a href="http://inspire.ec.europa.eu/metadata-codelist/MaintenanceFrequency">http://inspire.ec.europa.eu/metadata-codelist/MaintenanceFrequency</a></code></td>
       <td>Register operated by the INSPIRE Registry for maintenance frequency codes defined in ISO 19115. The register is not yet available, and the code list URI is tentative.</td>
-      <td><strong>unstable</strong></td>
     </tr>
     <tr>
       <td>Spatial representation type</td>
-      <td><code>http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationTypeCode</code></td>
-      <td>Register operated by the INSPIRE Registry for spatial representation type codes defined in ISO 19115. The register is not yet available, and the code list URI is tentative.</td>
-      <td><strong>unstable</strong></td>
+      <td><code><a href="https://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType">http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType</a></code></td>
+      <td>Register operated by the INSPIRE Registry for spatial representation type codes defined in ISO 19115.</td>
     </tr>
   </tbody>
 </table>
