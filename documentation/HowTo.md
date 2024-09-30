@@ -1,6 +1,6 @@
 # How to use the XSLT
 
-The XSLT can be run directly on the ouput of a CSW or on single metadata records, by using any of the programming languages supporting XSLT conversion.
+The XSLT can be run directly on the output of a CSW or on single metadata records, by using any of the programming languages supporting XSLT conversion.
 
 The actual output of the XSLT depends on configuration parameters that specify:
 
@@ -23,9 +23,9 @@ This parameter specifies the GeoDCAT-AP profile to be used:
 
 The default value is: `extended`.
   
-The specifications for the core and extended GeoDCAT-AP profiles are available on the Joinup collaboration platform of the EU ISA Programme:
+The specifications for the core and extended GeoDCAT-AP profiles are available on the Interoperable Europe Portal collaboration platform:
 
-https://joinup.ec.europa.eu/solution/geodcat-ap
+https://joinup.ec.europa.eu/collection/semic-support-centre/solution/geodcat-application-profile-data-portals-europe
 
 ### Parameter `$CoupledResourceLookup`
 
@@ -47,7 +47,7 @@ This parameter specifies whether deprecated mappings (following the release of G
 
 The default value is `yes`.
 
-CAVEAT: The reason of supporting the possibility of including deprecated mappings is to ensure backward compatibility with legacy systems not yet migrated to GeoDCAT-AP 2.0.0.
+CAVEAT: The reason of supporting the possibility of including deprecated mappings is to ensure backward compatibility with legacy systems not yet migrated to GeoDCAT-AP 2.0.0. As there were some incompatible changes in GeoDCAT-AP 3.0.0 we strongly recommend migrating.
 
 ### Parameters for the spatial reference system of the bounding box
 
@@ -83,6 +83,8 @@ The default rule implies that HTTP URIs are specified for the metadata file iden
 ## Running the XSLT
 
 This section provides examples of code from popular programming languages that can be used to run the XSLT.
+
+NOTE: After update to XSLT 2.0 with GeoDCAT-AP 3.0.0, the examples may be outdated, as the used libraries might not support XSLT 2.0.
 
 ### PHP
 
