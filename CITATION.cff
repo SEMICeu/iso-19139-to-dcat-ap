@@ -3,5 +3,5 @@ authors:
 - name: "European Commission"
 title: "Reference XSLT-based implementation of GeoDCAT-AP"
 version: 3.0
-date-released: 2024-06-26
+date-released: 2024-09-30
 url: "https://github.com/SEMICeu/iso-19139-to-dcat-ap"

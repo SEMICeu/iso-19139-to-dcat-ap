@@ -18,26 +18,19 @@ See [DCAT-AP HVD](https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/) for the
 
 Instructions on how to use the XSLT are available [in a separate page](./documentation/HowTo.md).
 
-The XSLT in the `master` branch always corresponds to [the latest version of GeoDCAT-AP](https://semiceu.github.io/GeoDCAT-AP/releases/), and it can be directly used via the following URL:
+The XSLT in the `main` branch always corresponds to [the latest version of GeoDCAT-AP](https://semiceu.github.io/GeoDCAT-AP/releases/), and it can be directly used via the following URL:
 
-https://raw.githubusercontent.com/SEMICeu/iso-19139-to-dcat-ap/master/iso-19139-to-dcat-ap.xsl
+https://raw.githubusercontent.com/SEMICeu/iso-19139-to-dcat-ap/main/iso-19139-to-dcat-ap.xsl
 
 Previous releases are available from [the release page](https://github.com/SEMICeu/iso-19139-to-dcat-ap/releases).
 
 ## Testing the XSLT with the GeoDCAT-AP API
 
-A proof-of-concept API has been developed to facilitate the testing of the XSLT on single metadata records or on top of a CSW endpoint.
+The API is no longer supported from version 3.0. The XSLT can be tested with any CSW endpoint and an XSLT 2.0 compliant processor.
 
-A working demo of GeoDCAT-API is available at: 
-
-http://geodcat-ap.semic.eu/api/
-
-The code of the API is available [in a separate folder](./api/), along with the relevant documentation.
- 
 # Content
 
 * [`alignments/`](./alignments/): Folder including alignments between the controlled vocabularies used in ISO 19115 / INSPIRE metadata and those used in DCAT-AP.
-* [`api/`](./api/): Proof-of-concept of the implementation of GeoDCAT-AP following the CSW interface.
 * [`documentation/`](./documentation/): Folder containing documentation on the XSLT:
     * [`HowTo.md`](./documentation/HowTo.md): Describes how to use the XSLT.
     * [`HTTP-URIs.md`](./documentation/HTTP-URIs.md): Provides the list of transformation rules currently implemented for identifying HTTP URIs embedded in ISO 19139 metadata records.
@@ -45,8 +38,4 @@ The code of the API is available [in a separate folder](./api/), along with the 
 * [`CHANGELOG.md`](./CHANGELOG.md): Log of changes made to the XSLT.
 * [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl): The code of the XSLT.
 * [`LICENCE.md`](./LICENCE.md): The XSLT's licence.
-* [`README.md`](./README.md): This document. 
-  
-#  Credits
-  
-This work is supported by the [EU Interoperability Solutions for European Public Administrations Programme (ISA)](http://ec.europa.eu/isa) through [Action 1.17: Re-usable INSPIRE Reference Platform (ARe3NA)](http://ec.europa.eu/isa/actions/01-trusted-information-exchange/1-17action_en.htm).
+* [`README.md`](./README.md): This document.

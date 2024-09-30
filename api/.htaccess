@@ -1,6 +1,0 @@
-DirectoryIndex index.php
-AddType application/rdf+xml .rdf
-AddType text/turtle .ttl
-AddType text/n3 .n3
-AddType application/n-triples .nt
-AddType application/ld+json .jsonld

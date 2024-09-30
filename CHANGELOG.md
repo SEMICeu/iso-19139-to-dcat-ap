@@ -2,9 +2,15 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## 2024-09-30: Revised version (v3.1)
+This version includes additional revisions from the community.
+
+* Fixed number type checks, includes update to XSLT 2.0 (https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/47)
+* Fixed handling of dateTime format (https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/50)
+
 ## 2024-06-26: New version (v3.0)
 
-This version includes revisions from the community, and revisions needed to ensure compliance with DCAT 3 and DCAT-AP 3.0, and reflecting the public review version of GeoDCAT-AP 3.0.0:
+This version includes revisions from the community, and revisions needed to ensure compliance with DCAT 3 and DCAT-AP 3.0, and reflecting the public review version of GeoDCAT-AP 3.0.0. In addition, the API was removed, as it is no longer supported.
 
 https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0/
 
