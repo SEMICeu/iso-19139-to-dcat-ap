@@ -112,30 +112,9 @@ NOTE: After update to XSLT 2.0 with GeoDCAT-AP 3.0.0, the examples may be outdat
 ````
 
 ### Python
-
-````python
-import lxml.etree as ET
-from urllib2 import urlopen
-
-# The URL of the XML document to be transformed. Here it corresponds to a "GetRecords" output of a fictitious CSW, with the "maxRecords" parameter set to 10.
-xmlURL = "http://some.site/csw?request=GetRecords&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&typeNames=csw:Record&elementSetName=full&constraintLanguage=CQL_TEXT&constraint_language_version=1.1.0&maxRecords=10"
-
-# The URL pointing to the latest version of the XSLT.
-xslURL = "https://raw.githubusercontent.com/SEMICeu/iso-19139-to-dcat-ap/master/iso-19139-to-dcat-ap.xsl"
-  
-xml = ET.parse(urlopen(xmlURL))
-xsl = ET.parse(urlopen(xslURL))
-
-transform = ET.XSLT(xsl)
-
-print(ET.tostring(transform(xml), pretty_print=True))
-````
-
-### Python: command line tool
-
-A Python script that can be used as a command line tool has been contributed by [@arbakker](https://github.com/arbakker):
-
-https://gist.github.com/arbakker/42f73421654b4d5f29211ead2ae0ab25/
+Examples: 
+* [Python](./examples/py/iso-19139-to-dcat-ap.py): A Python script that demonstrates how to use the `iso-19139-to-dcat-ap.xsl` XSLT transformation to convert ISO 19139 metadata records to DCAT-AP format.
+* [Python: command line tool](https://gist.github.com/arbakker/42f73421654b4d5f29211ead2ae0ab25/) [**`obsolete`**]: A Python script that can be used as a command line tool has been contributed by [@arbakker](https://github.com/arbakker):
 
 ### Java
 
