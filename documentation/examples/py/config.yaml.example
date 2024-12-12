@@ -1,0 +1,5 @@
+# XML URL to the CSW endpoint
+xml_url: http://some.site/csw?request=GetRecords&service=CSW&version=2.0.2&namespace=xmlns%28csw=http://www.opengis.net/cat/csw%29&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/xml&typeNames=csw:Record&elementSetName=full&constraintLanguage=CQL_TEXT&constraint_language_version=1.1.0&maxRecords=10
+
+# XSL URL to the XSLT transformation or the XLST local file, example: /tmp/xslt/my-mappings/iso-19139-to-dcat-ap.xsl
+xsl_url: https://raw.githubusercontent.com/mjanez/iso-19139-to-dcat-ap/refs/heads/develop/iso-19139-to-dcat-ap.xsl
