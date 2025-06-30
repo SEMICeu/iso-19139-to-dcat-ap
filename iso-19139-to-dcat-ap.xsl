@@ -728,7 +728,7 @@
     <xsl:param name="ResourceAbstract">
       <xsl:for-each select="gmd:identificationInfo[1]/*/gmd:abstract">
         <dct:description xml:lang="{$MetadataLanguage}">
-          <xsl:value-of select="normalize-space(gco:CharacterString)"/>
+          <xsl:value-of select="gco:CharacterString"/>
         </dct:description>
         <xsl:call-template name="LocalisedString">
           <xsl:with-param name="term">dct:description</xsl:with-param>
@@ -744,7 +744,7 @@
       <xsl:for-each select="gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement">
         <dct:provenance>
           <dct:ProvenanceStatement>
-            <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="normalize-space(gco:CharacterString)"/></dct:description>
+            <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="gco:CharacterString"/></dct:description>
             <xsl:call-template name="LocalisedString">
               <xsl:with-param name="term">dct:description</xsl:with-param>
             </xsl:call-template>
@@ -896,7 +896,7 @@
         <xsl:variable name="explanation">
           <xsl:for-each select="../../gmd:explanation">
             <dct:description xml:lang="{$MetadataLanguage}">
-              <xsl:value-of select="normalize-space(gco:CharacterString)"/>
+              <xsl:value-of select="gco:CharacterString"/>
             </dct:description>
             <xsl:call-template name="LocalisedString">
               <xsl:with-param name="term">dct:description</xsl:with-param>
@@ -1175,7 +1175,7 @@
       <xsl:copy-of select="$ResourceTitle"/>
 <!--
       <dct:description xml:lang="{$MetadataLanguage}">
-        <xsl:value-of select="normalize-space($ResourceAbstract)"/>
+        <xsl:value-of select="$ResourceAbstract"/>
       </dct:description>
 -->
       <xsl:copy-of select="$ResourceAbstract"/>
@@ -1264,7 +1264,7 @@
         <dct:provenance>
           <dct:ProvenanceStatement>
             <rdfs:label xml:lang="{$MetadataLanguage}">
-              <xsl:value-of select="normalize-space($Lineage)"/>
+              <xsl:value-of select="$Lineage"/>
             </rdfs:label>
           </dct:ProvenanceStatement>
         </dct:provenance>
@@ -1342,7 +1342,7 @@
           <xsl:variable name="Description">
             <xsl:for-each select="gmd:description">
               <dct:description xml:lang="{$MetadataLanguage}">
-                <xsl:value-of select="normalize-space(*)"/>
+                <xsl:value-of select="*"/>
               </dct:description>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dct:description</xsl:with-param>
