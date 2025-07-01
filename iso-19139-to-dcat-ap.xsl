@@ -3843,6 +3843,10 @@
 -->
             <xsl:value-of select="concat($opfq,'BIWEEKLY')"/>
           </xsl:when>
+          <xsl:when test="@codeListValue = 'semimonthly'">
+<!--  A mapping is missing in Dublin Core -->
+            <xsl:value-of select="concat($opfq,'MONTHLY_2')"/>
+          </xsl:when>
           <xsl:when test="@codeListValue = 'monthly'">
 <!--  DC Freq voc
             <xsl:value-of select="concat($cldFrequency,'monthly')"/>
@@ -3866,6 +3870,14 @@
             <xsl:value-of select="concat($cldFrequency,'annual')"/>
 -->
             <xsl:value-of select="concat($opfq,'ANNUAL')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'biennially'">
+<!--  A mapping is missing in Dublin Core -->
+            <xsl:value-of select="concat($opfq,'BIENNIAL')"/>
+          </xsl:when>
+          <xsl:when test="@codeListValue = 'periodic'">
+<!--  A mapping is missing in Dublin Core -->
+            <xsl:value-of select="concat($opfq,'OTHER')"/>
           </xsl:when>
           <xsl:when test="@codeListValue = 'asNeeded'">
 <!--  A mapping is missing in Dublin Core -->
