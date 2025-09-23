@@ -1,0 +1,68 @@
+@prefix cnt: <http://www.w3.org/2011/content#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix geodcatap: <http://data.europa.eu/930/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+geodcatap: a dcterms:Standard .
+
+<http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact> a dcat:Role .
+
+<http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/publisher> a dcat:Role .
+
+<http://publications.europa.eu/resource/authority/language/ENG> a dcterms:LinguisticSystem .
+
+<http://www.opengeospatial.org/standards/wms> a dcterms:Standard .
+
+[] a dcat:DataService ;
+    geodcatap:resourceType <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service> ;
+    geodcatap:serviceProtocol <http://www.opengeospatial.org/standards/wms> ;
+    geodcatap:serviceType <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/WMS> ;
+    geodcatap:topicCategory <http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/environment> ;
+    dcterms:created "2023-01-01"^^xsd:date ;
+    dcterms:description "This is a sample Web Map Service for testing the ISO 19139 to DCAT-AP transformation."@en ;
+    dcterms:identifier "sample-wms-service-001"^^xsd:string ;
+    dcterms:publisher [ a prov:Agent,
+                foaf:Organization ;
+            foaf:name "Service Provider Organization"@en ] ;
+    dcterms:spatial [ a dcterms:Location ;
+            dcat:bbox "{\"type\":\"Polygon\",\"coordinates\":[[[-5.0,55.0],[15.0,55.0],[15.0,45.0],[-5.0,45.0],[-5.0,55.0]]]}"^^geo:geoJSONLiteral,
+                "<gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"><gml:lowerCorner>-5.0 45.0</gml:lowerCorner><gml:upperCorner>15.0 55.0</gml:upperCorner></gml:Envelope>"^^geo:gmlLiteral,
+                "POLYGON((-5.0 55.0,15.0 55.0,15.0 45.0,-5.0 45.0,-5.0 55.0))"^^geo:wktLiteral ] ;
+    dcterms:title "Sample WMS Service"@en ;
+    dcat:endpointDescription <https://example.com/wms> ;
+    dcat:endpointURL <https://example.com/wms> ;
+    dcat:keyword "WMS"@en,
+        "mapping"@en,
+        "web service"@en ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/publisher> ;
+            prov:agent [ a prov:Agent,
+                        foaf:Organization ;
+                    foaf:name "Service Provider Organization"@en ] ] ;
+    foaf:isPrimaryTopicOf [ a dcat:CatalogRecord ;
+            dcterms:conformsTo geodcatap: ;
+            dcterms:identifier "service-metadata-001"^^xsd:string ;
+            dcterms:language <http://publications.europa.eu/resource/authority/language/ENG> ;
+            dcterms:modified "2023-01-01"^^xsd:date ;
+            dcterms:source [ a dcat:CatalogRecord ;
+                    dcterms:conformsTo [ a dcterms:Standard ;
+                            dcterms:title "ISO 19115:2003/19139"@en ;
+                            owl:versionInfo "1.0"@en ] ;
+                    dcterms:modified "2023-01-01"^^xsd:date ;
+                    cnt:characterEncoding "UTF-8"^^xsd:string ] ;
+            dcat:contactPoint [ a vcard:Organization ;
+                    vcard:fn "Service Provider Organization"@en ;
+                    vcard:hasEmail <mailto:service@test.org> ] ;
+            prov:qualifiedAttribution [ a prov:Attribution ;
+                    dcat:hadRole <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact> ;
+                    prov:agent [ a prov:Agent,
+                                foaf:Organization ;
+                            foaf:mbox <mailto:service@test.org> ;
+                            foaf:name "Service Provider Organization"@en ] ] ] .
+

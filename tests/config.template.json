@@ -1,0 +1,17 @@
+{
+    "description": "Description of what this test case validates",
+    "parameters": {
+        "profile": "extended",
+        "CoupledResourceLookup": "disabled",
+        "include-deprecated": "no"
+    },
+    "notes": [
+        "Additional notes about this test case",
+        "Expected behavior or specific features being tested"
+    ],
+    "metadata": {
+        "created": "YYYY-MM-DD",
+        "author": "Your Name",
+        "version": "1.0"
+    }
+}

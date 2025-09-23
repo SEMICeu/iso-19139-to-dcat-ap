@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:adms="http://www.w3.org/ns/adms#"
+         xmlns:cnt="http://www.w3.org/2011/content#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcat="http://www.w3.org/ns/dcat#"
+         xmlns:dct="http://purl.org/dc/terms/"
+         xmlns:dctype="http://purl.org/dc/dcmitype/"
+         xmlns:dqv="http://www.w3.org/ns/dqv#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:geodcatap="http://data.europa.eu/930/"
+         xmlns:gsp="http://www.opengis.net/ont/geosparql#"
+         xmlns:locn="http://www.w3.org/ns/locn#"
+         xmlns:org="http://www.w3.org/ns/org#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:prov="http://www.w3.org/ns/prov#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:schema="http://schema.org/"
+         xmlns:sdmx-attribute="http://purl.org/linked-data/sdmx/2009/attribute#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:vcard="http://www.w3.org/2006/vcard/ns#">
+   <rdf:Description>
+      <foaf:isPrimaryTopicOf>
+         <rdf:Description>
+            <rdf:type rdf:resource="http://www.w3.org/ns/dcat#CatalogRecord"/>
+            <dct:conformsTo>
+               <dct:Standard rdf:about="http://data.europa.eu/930/"/>
+            </dct:conformsTo>
+            <dct:language>
+               <dct:LinguisticSystem rdf:about="http://publications.europa.eu/resource/authority/language/ENG"/>
+            </dct:language>
+            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-01-01</dct:modified>
+            <dcat:contactPoint>
+               <rdf:Description>
+                  <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Organization"/>
+                  <vcard:fn xml:lang="en">Test Organization</vcard:fn>
+                  <vcard:hasEmail rdf:resource="mailto:contact@test.org"/>
+               </rdf:Description>
+            </dcat:contactPoint>
+            <prov:qualifiedAttribution>
+               <prov:Attribution>
+                  <prov:agent>
+                     <rdf:Description>
+                        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+                        <foaf:name xml:lang="en">Test Organization</foaf:name>
+                        <foaf:mbox rdf:resource="mailto:contact@test.org"/>
+                     </rdf:Description>
+                  </prov:agent>
+                  <dcat:hadRole>
+                     <dcat:Role rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
+                  </dcat:hadRole>
+               </prov:Attribution>
+            </prov:qualifiedAttribution>
+            <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">basic-dataset-001</dct:identifier>
+            <dct:source rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/dcat#CatalogRecord"/>
+               <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-01-01</dct:modified>
+               <cnt:characterEncoding rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UTF-8</cnt:characterEncoding>
+               <dct:conformsTo rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://purl.org/dc/terms/Standard"/>
+                  <dct:title xml:lang="en">ISO 19115:2003/19139</dct:title>
+                  <owl:versionInfo xml:lang="en">1.0</owl:versionInfo>
+               </dct:conformsTo>
+            </dct:source>
+         </rdf:Description>
+      </foaf:isPrimaryTopicOf>
+      <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+      <geodcatap:resourceType rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResourceType/dataset"/>
+      <dct:title xml:lang="en">Sample Dataset Title</dct:title>
+      <dct:description xml:lang="en">This is a sample dataset for testing the ISO 19139 to DCAT-AP transformation.</dct:description>
+      <geodcatap:topicCategory rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/environment"/>
+      <dcat:keyword xml:lang="en">test</dcat:keyword>
+      <dcat:keyword xml:lang="en">sample</dcat:keyword>
+      <dcat:keyword xml:lang="en">dataset</dcat:keyword>
+      <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sample-dataset-001</dct:identifier>
+      <dct:language>
+         <dct:LinguisticSystem rdf:about="http://publications.europa.eu/resource/authority/language/ENG"/>
+      </dct:language>
+      <dct:spatial rdf:parseType="Resource">
+         <rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"><![CDATA[POLYGON((-10.0 60.0,10.0 60.0,10.0 40.0,-10.0 40.0,-10.0 60.0))]]></dcat:bbox>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#gmlLiteral"><![CDATA[<gml:Envelope srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84"><gml:lowerCorner>-10.0 40.0</gml:lowerCorner><gml:upperCorner>10.0 60.0</gml:upperCorner></gml:Envelope>]]></dcat:bbox>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#geoJSONLiteral"><![CDATA[{"type":"Polygon","coordinates":[[[-10.0,60.0],[10.0,60.0],[10.0,40.0],[-10.0,40.0],[-10.0,60.0]]]}]]></dcat:bbox>
+      </dct:spatial>
+      <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-01-01</dct:created>
+      <dct:provenance>
+         <dct:ProvenanceStatement>
+            <dct:description xml:lang="en">This is a test dataset created for validation purposes.</dct:description>
+         </dct:ProvenanceStatement>
+      </dct:provenance>
+      <dcat:landingPage>
+         <foaf:Document rdf:about="https://example.com/dataset/sample-dataset-001">
+            <dct:title xml:lang="en">Download Sample Dataset</dct:title>
+            <dct:description xml:lang="en">Direct download link for the sample dataset</dct:description>
+         </foaf:Document>
+      </dcat:landingPage>
+      <dct:publisher>
+         <rdf:Description>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+            <foaf:name xml:lang="en">Data Provider Organization</foaf:name>
+         </rdf:Description>
+      </dct:publisher>
+      <prov:qualifiedAttribution>
+         <prov:Attribution>
+            <prov:agent>
+               <rdf:Description>
+                  <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+                  <foaf:name xml:lang="en">Data Provider Organization</foaf:name>
+               </rdf:Description>
+            </prov:agent>
+            <dcat:hadRole>
+               <dcat:Role rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/publisher"/>
+            </dcat:hadRole>
+         </prov:Attribution>
+      </prov:qualifiedAttribution>
+   </rdf:Description>
+</rdf:RDF>

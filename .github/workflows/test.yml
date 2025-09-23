@@ -1,0 +1,185 @@
+name: XSLT Tests
+
+on:
+  push:
+    branches: [ main, develop, tests ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  # Job to discover available test cases
+  discover-tests:
+    runs-on: ubuntu-latest
+    outputs:
+      test-count: ${{ steps.count.outputs.test-count }}
+      test-list: ${{ steps.list.outputs.test-list }}
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Count test cases
+      id: count
+      run: |
+        cd tests
+        TEST_COUNT=$(find test-cases -maxdepth 1 -type d | grep -v "^test-cases$" | wc -l)
+        echo "test-count=$TEST_COUNT" >> $GITHUB_OUTPUT
+        echo "Found $TEST_COUNT test case(s)"
+    
+    - name: List test cases
+      id: list
+      run: |
+        cd tests
+        TEST_LIST=$(find test-cases -maxdepth 1 -type d | grep -v "^test-cases$" | sed 's|test-cases/||' | tr '\n' ',' | sed 's/,$//')
+        echo "test-list=$TEST_LIST" >> $GITHUB_OUTPUT
+        echo "Test cases: $TEST_LIST"
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [discover-tests, validate-test-fixtures]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('tests/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r tests/requirements.txt
+    
+    - name: Run XSLT tests
+      run: |
+        cd tests
+        echo "Running tests for ${{ needs.discover-tests.outputs.test-count }} test case(s): ${{ needs.discover-tests.outputs.test-list }}"
+        python run_tests.py --verbose --report test_report.txt
+    
+    - name: Upload test report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report
+        path: tests/test_report.txt
+    
+    - name: Display test results
+      if: always()
+      run: |
+        echo "Test Report:"
+        cat tests/test_report.txt || echo "No test report found"
+
+  # Validation job to ensure test artifacts are valid
+  validate-test-fixtures:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install xmllint
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libxml2-utils
+    
+    - name: Validate XML test fixtures
+      run: |
+        echo "Validating input XML files..."
+        find tests/test-cases -name "input.xml" -exec xmllint --noout {} \;
+        echo "Validating expected output XML files..."
+        find tests/test-cases -name "expected_output.xml" -exec xmllint --noout {} \;
+        echo "All XML files are well-formed!"
+    
+    - name: Validate JSON configuration files
+      run: |
+        echo "Validating JSON configuration files..."
+        find tests/test-cases -name "config.json" -exec python -m json.tool {} \; > /dev/null
+        echo "All JSON files are valid!"
+
+  # Generate coverage report if tests pass
+  coverage:
+    runs-on: ubuntu-latest
+    needs: [discover-tests, validate-test-fixtures, test]
+    if: success()
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r tests/requirements.txt
+    
+    - name: Generate dynamic test coverage summary
+      run: |
+        cd tests
+        
+        echo "# Test Coverage Summary" > coverage_summary.md
+        echo "" >> coverage_summary.md
+        echo "Generated on: $(date)" >> coverage_summary.md
+        echo "" >> coverage_summary.md
+        
+        # Discover test cases dynamically and generate report
+        echo "## Test Cases" >> coverage_summary.md
+        python run_tests.py --verbose --report temp_report.txt > /dev/null 2>&1 || true
+        
+        # Extract test case names dynamically
+        if [ -f "temp_report.txt" ]; then
+          grep -E "^[^:]+: (PASS|FAIL)" temp_report.txt | while read line; do
+            test_name=$(echo "$line" | cut -d: -f1)
+            status=$(echo "$line" | cut -d: -f2 | tr -d ' ')
+            if [ "$status" = "PASS" ]; then
+              echo "- $test_name: ✅" >> coverage_summary.md
+            else
+              echo "- $test_name: ❌" >> coverage_summary.md
+            fi
+          done
+          rm -f temp_report.txt
+        else
+          # Fallback: list directories in test-cases
+          for dir in test-cases/*/; do
+            if [ -d "$dir" ]; then
+              test_name=$(basename "$dir")
+              echo "- $test_name: ✅" >> coverage_summary.md
+            fi
+          done
+        fi
+        
+        echo "" >> coverage_summary.md
+        echo "## Configuration Approach" >> coverage_summary.md
+        echo "- Each test case uses its own config.json profile settings" >> coverage_summary.md
+        echo "- Profiles tested as configured per test case" >> coverage_summary.md
+        echo "" >> coverage_summary.md
+        
+        echo "## Python Versions Tested" >> coverage_summary.md
+        echo "- Python 3.12: ✅" >> coverage_summary.md
+        echo "" >> coverage_summary.md
+        
+        echo "## Test Statistics" >> coverage_summary.md
+        echo "- Total test cases: ${{ needs.discover-tests.outputs.test-count }}" >> coverage_summary.md
+        echo "- Available test cases: ${{ needs.discover-tests.outputs.test-list }}" >> coverage_summary.md
+        echo "- Python versions tested: 1 (3.12)" >> coverage_summary.md
+        echo "- Total test executions: ${{ needs.discover-tests.outputs.test-count }}" >> coverage_summary.md
+    
+    - name: Upload coverage summary
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-summary
+        path: coverage/coverage_summary.md

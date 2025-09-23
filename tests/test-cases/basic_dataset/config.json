@@ -1,0 +1,8 @@
+{
+    "description": "Basic dataset metadata transformation test",
+    "parameters": {
+        "profile": "extended",
+        "CoupledResourceLookup": "disabled",
+        "include-deprecated": "no"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "description": "Multilingual metadata, issue #73",
+    "parameters": {
+        "profile": "extended",
+        "CoupledResourceLookup": "disabled",
+        "include-deprecated": "no"
+    }
+}

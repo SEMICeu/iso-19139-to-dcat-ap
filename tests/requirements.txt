@@ -1,0 +1,4 @@
+# Test dependencies for ISO 19139 to DCAT-AP XSLT
+saxonche>=11.0.0
+rdflib>=6.0.0
+PyYAML>=6.0

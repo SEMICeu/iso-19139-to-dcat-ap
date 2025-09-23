@@ -1,7 +1,72 @@
-.vscode
-env
-venv
+# IDE and editor files
+.vscode/
+.idea/
+*.code-workspace
+
+# Python environments and virtual environments
+env/
+venv/
 .env
+.venv
+ENV/
+env.bak/
+venv.bak/
+__pypackages__/
+
+# Python compiled files and cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# Test and coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+tests/test_report.txt
+tests/test_report_*.txt
+*.test.xml
+*.test.json
+
+# Distribution and packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+profile_default/
+ipython_config.py
 
 # Examples
 output
@@ -9,3 +74,34 @@ documentation/examples/*/iso19139-to-geodcatap.xsl
 
 # Configuration files
 documentation/examples/*/config.yaml
+
+# XSLT processor temporary files
+/tmp/iso19139-to-geodcatap.xsl
+**/iso19139-to-geodcatap.xsl
+*.saxon-*
+.saxon/
+
+# RDF/XML temporary files
+*.rdf.tmp
+*.xml.tmp
+
+# Log files
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup and temporary files
+*.bak
+*.backup
+*~
+*.tmp
+*.temp
