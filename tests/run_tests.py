@@ -51,6 +51,13 @@ class TestCase:
             self.expected_output_files = {}
 
 @dataclass
+class SkippedTestCase:
+    """Represents a skipped test case."""
+    name: str
+    reason: str
+    description: str = ""
+
+@dataclass
 class TestResult:
     """Represents the result of running a test case."""
     test_case: TestCase
@@ -140,18 +147,19 @@ class TestRunner:
         self.transformer = XSLTTransformer(xslt_file)
         self.test_dir = Path(test_dir)
         
-    def discover_test_cases(self) -> List[TestCase]:
+    def discover_test_cases(self) -> Tuple[List[TestCase], List[SkippedTestCase]]:
         """Discover test cases in the test directory.
         
         Returns:
-            List of discovered test cases
+            Tuple of (valid_test_cases, skipped_test_cases)
         """
         test_cases = []
+        skipped_cases = []
         test_cases_dir = self.test_dir / "test-cases"
         
         if not test_cases_dir.exists():
             logger.warning(f"Test cases directory not found: {test_cases_dir}")
-            return test_cases
+            return test_cases, skipped_cases
         
         for test_case_dir in test_cases_dir.iterdir():
             if not test_case_dir.is_dir():
@@ -170,10 +178,6 @@ class TestRunner:
             if ttl_file.exists():
                 expected_files["turtle"] = str(ttl_file)
             
-            if not input_file.exists() or not expected_files:
-                logger.warning(f"Skipping incomplete test case: {test_case_dir.name} (missing input or expected output files)")
-                continue
-            
             # Load test configuration if available
             parameters = {}
             description = ""
@@ -186,6 +190,25 @@ class TestRunner:
                 except Exception as e:
                     logger.warning(f"Failed to load config for {test_case_dir.name}: {e}")
             
+            # Check if test case is complete
+            if not input_file.exists() or not expected_files:
+                reasons = []
+                if not input_file.exists():
+                    reasons.append("missing input.xml")
+                if not expected_files:
+                    reasons.append("missing expected output files")
+                
+                reason = f"incomplete test case ({', '.join(reasons)})"
+                logger.warning(f"Skipping {test_case_dir.name}: {reason}")
+                
+                skipped_case = SkippedTestCase(
+                    name=test_case_dir.name,
+                    reason=reason,
+                    description=description
+                )
+                skipped_cases.append(skipped_case)
+                continue
+            
             test_case = TestCase(
                 name=test_case_dir.name,
                 input_file=str(input_file),
@@ -196,7 +219,7 @@ class TestRunner:
             test_cases.append(test_case)
             logger.debug(f"Discovered test case: {test_case.name} with formats: {list(expected_files.keys())}")
         
-        return test_cases
+        return test_cases, skipped_cases
     
     def run_test_case(self, test_case: TestCase) -> TestResult:
         """Run a single test case.
@@ -319,50 +342,78 @@ class TestRunner:
         with open(xml_file, 'r', encoding='utf-8') as f:
             return self._normalize_xml(f.read())
     
-    def run_all_tests(self) -> List[TestResult]:
+    def run_all_tests(self) -> Tuple[List[TestResult], List[SkippedTestCase]]:
         """Run all discovered test cases.
         
         Returns:
-            List of test results
+            Tuple of (test_results, skipped_test_cases)
         """
-        test_cases = self.discover_test_cases()
-        if not test_cases:
+        test_cases, skipped_cases = self.discover_test_cases()
+        
+        if not test_cases and not skipped_cases:
             logger.warning("No test cases found")
-            return []
+            return [], []
         
-        logger.info(f"Running {len(test_cases)} test cases")
-        results = []
+        if skipped_cases:
+            logger.info(f"Found {len(skipped_cases)} skipped test case(s)")
         
-        for test_case in test_cases:
-            result = self.run_test_case(test_case)
-            results.append(result)
-        
-        return results
+        if test_cases:
+            logger.info(f"Running {len(test_cases)} test cases")
+            results = []
+            
+            for test_case in test_cases:
+                result = self.run_test_case(test_case)
+                results.append(result)
+            
+            return results, skipped_cases
+        else:
+            logger.warning("No runnable test cases found")
+            return [], skipped_cases
     
-    def generate_report(self, results: List[TestResult], output_file: Optional[str] = None) -> str:
+    def generate_report(self, results: List[TestResult], skipped_cases: List[SkippedTestCase] = None, output_file: Optional[str] = None) -> str:
         """Generate a test report.
         
         Args:
             results: List of test results
+            skipped_cases: List of skipped test cases
             output_file: Optional file to write the report to
             
         Returns:
             Report content as string
         """
+        if skipped_cases is None:
+            skipped_cases = []
+            
         passed_count = sum(1 for r in results if r.passed)
         failed_count = len(results) - passed_count
+        skipped_count = len(skipped_cases)
+        total_discovered = len(results) + skipped_count
         total_time = sum(r.execution_time for r in results)
         
         report_lines = [
             "=" * 60,
             "ISO 19139 to DCAT-AP XSLT Test Report",
             "=" * 60,
-            f"Total tests: {len(results)}",
+            f"Total discovered: {total_discovered}",
+            f"Tests run: {len(results)}",
             f"Passed: {passed_count}",
             f"Failed: {failed_count}",
+            f"Skipped: {skipped_count}",
             f"Total execution time: {total_time:.2f}s",
             ""
         ]
+        
+        if skipped_count > 0:
+            report_lines.extend([
+                "SKIPPED TESTS:",
+                "-" * 20
+            ])
+            for skipped in skipped_cases:
+                report_lines.append(f"• {skipped.name}")
+                report_lines.append(f"  Reason: {skipped.reason}")
+                if skipped.description:
+                    report_lines.append(f"  Description: {skipped.description}")
+                report_lines.append("")
         
         if failed_count > 0:
             report_lines.extend([
@@ -376,19 +427,20 @@ class TestRunner:
                         report_lines.append(f"  Error: {result.error_message}")
                     report_lines.append("")
         
-        report_lines.extend([
-            "DETAILED RESULTS:",
-            "-" * 20
-        ])
-        
-        for result in results:
-            status = "PASS" if result.passed else "FAIL"
-            report_lines.append(f"{result.test_case.name}: {status} ({result.execution_time:.2f}s)")
-            if result.test_case.description:
-                report_lines.append(f"  Description: {result.test_case.description}")
-            if result.error_message:
-                report_lines.append(f"  Error: {result.error_message}")
-            report_lines.append("")
+        if len(results) > 0:
+            report_lines.extend([
+                "DETAILED RESULTS:",
+                "-" * 20
+            ])
+            
+            for result in results:
+                status = "PASS" if result.passed else "FAIL"
+                report_lines.append(f"{result.test_case.name}: {status} ({result.execution_time:.2f}s)")
+                if result.test_case.description:
+                    report_lines.append(f"  Description: {result.test_case.description}")
+                if result.error_message:
+                    report_lines.append(f"  Error: {result.error_message}")
+                report_lines.append("")
         
         report_content = "\n".join(report_lines)
         
@@ -533,22 +585,32 @@ def main():
         # Run tests
         if args.test_case:
             # Run specific test case
-            test_cases = runner.discover_test_cases()
+            test_cases, skipped_cases = runner.discover_test_cases()
             test_case = next((tc for tc in test_cases if tc.name == args.test_case), None)
-            if not test_case:
+            
+            # Check if the requested test case is skipped
+            skipped_case = next((sc for sc in skipped_cases if sc.name == args.test_case), None)
+            
+            if test_case:
+                results = [runner.run_test_case(test_case)]
+                test_skipped_cases = []
+            elif skipped_case:
+                logger.error(f"Test case '{args.test_case}' is skipped: {skipped_case.reason}")
+                results = []
+                test_skipped_cases = [skipped_case]
+            else:
                 logger.error(f"Test case not found: {args.test_case}")
                 sys.exit(1)
-            results = [runner.run_test_case(test_case)]
         else:
             # Run all test cases
-            results = runner.run_all_tests()
+            results, test_skipped_cases = runner.run_all_tests()
         
-        if not results:
-            logger.error("No tests were run")
+        if not results and not test_skipped_cases:
+            logger.error("No tests were found")
             sys.exit(1)
         
         # Generate and display report
-        report = runner.generate_report(results, args.report)
+        report = runner.generate_report(results, test_skipped_cases, args.report)
         print(report)
         
         # Exit with non-zero code if any tests failed
