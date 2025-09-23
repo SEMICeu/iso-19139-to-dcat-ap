@@ -69,7 +69,7 @@ jobs:
     
     - name: Upload test report
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: test-report
         path: tests/test_report.txt
@@ -179,7 +179,7 @@ jobs:
         echo "- Total test executions: ${{ needs.discover-tests.outputs.test-count }}" >> coverage_summary.md
     
     - name: Upload coverage summary
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-summary
-        path: coverage/coverage_summary.md
+        path: tests/coverage_summary.md
