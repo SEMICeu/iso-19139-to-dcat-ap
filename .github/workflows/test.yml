@@ -11,6 +11,7 @@ jobs:
   # Job to discover available test cases
   discover-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       test-count: ${{ steps.count.outputs.test-count }}
       test-list: ${{ steps.list.outputs.test-list }}
@@ -37,6 +38,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: [discover-tests, validate-test-fixtures]
     
     steps:
@@ -83,6 +85,7 @@ jobs:
   # Validation job to ensure test artifacts are valid
   validate-test-fixtures:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     
     steps:
     - name: Checkout repository
@@ -90,8 +93,10 @@ jobs:
     
     - name: Install xmllint
       run: |
-        sudo apt-get update
-        sudo apt-get install -y libxml2-utils
+        sudo apt-get update -qq
+        sudo apt-get install -y --no-install-recommends libxml2-utils
+      env:
+        DEBIAN_FRONTEND: noninteractive
     
     - name: Validate XML test fixtures
       run: |
@@ -110,6 +115,7 @@ jobs:
   # Generate coverage report if tests pass
   coverage:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: [discover-tests, validate-test-fixtures, test]
     if: success()
     
