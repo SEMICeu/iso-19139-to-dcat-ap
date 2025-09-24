@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:adms="http://www.w3.org/ns/adms#"
+         xmlns:cnt="http://www.w3.org/2011/content#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcat="http://www.w3.org/ns/dcat#"
+         xmlns:dct="http://purl.org/dc/terms/"
+         xmlns:dctype="http://purl.org/dc/dcmitype/"
+         xmlns:dqv="http://www.w3.org/ns/dqv#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:geodcatap="http://data.europa.eu/930/"
+         xmlns:gsp="http://www.opengis.net/ont/geosparql#"
+         xmlns:local="urn:local"
+         xmlns:locn="http://www.w3.org/ns/locn#"
+         xmlns:org="http://www.w3.org/ns/org#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:prov="http://www.w3.org/ns/prov#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:schema="http://schema.org/"
+         xmlns:sdmx-attribute="http://purl.org/linked-data/sdmx/2009/attribute#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:vcard="http://www.w3.org/2006/vcard/ns#">
+   <rdf:Description rdf:about="https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50">
+      <foaf:isPrimaryTopicOf>
+         <rdf:Description>
+            <rdf:type rdf:resource="http://www.w3.org/ns/dcat#CatalogRecord"/>
+            <foaf:primaryTopic rdf:resource="https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50"/>
+            <dct:conformsTo>
+               <dct:Standard rdf:about="http://data.europa.eu/930/"/>
+            </dct:conformsTo>
+            <dct:language>
+               <dct:LinguisticSystem rdf:about="http://publications.europa.eu/resource/authority/language/CZE"/>
+            </dct:language>
+            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2025-03-06</dct:modified>
+            <dcat:contactPoint>
+               <rdf:Description>
+                  <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Individual"/>
+                  <vcard:fn xml:lang="cs">Vlček, Bohumil, Ing.</vcard:fn>
+                  <vcard:organization-name xml:lang="cs">Český úřad zeměměřický a katastrální</vcard:organization-name>
+                  <vcard:organization-name xml:lang="locale-en">Czech Office for Surveying, Mapping and Cadastre</vcard:organization-name>
+                  <vcard:hasTelephone rdf:resource="tel:+420284044455"/>
+                  <vcard:hasEmail rdf:resource="mailto:bohumil.vlcek@cuzk.gov.cz"/>
+                  <vcard:hasEmail rdf:resource="mailto:podpora.zums@cuzk.gov.cz"/>
+                  <vcard:hasURL rdf:resource="https://geoportal.cuzk.gov.cz"/>
+                  <vcard:hasAddress>
+                     <vcard:Address>
+                        <vcard:street-address>Pod sídlištěm 1800/9</vcard:street-address>
+                        <vcard:locality>Praha 8</vcard:locality>
+                        <vcard:postal-code>182 11</vcard:postal-code>
+                        <vcard:country-name>Česká republika</vcard:country-name>
+                     </vcard:Address>
+                  </vcard:hasAddress>
+               </rdf:Description>
+            </dcat:contactPoint>
+            <prov:qualifiedAttribution>
+               <prov:Attribution>
+                  <prov:agent>
+                     <rdf:Description>
+                        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+                        <foaf:name xml:lang="cs">Vlček, Bohumil, Ing.</foaf:name>
+                        <org:memberOf>
+                           <foaf:Organization>
+                              <foaf:name xml:lang="cs">Český úřad zeměměřický a katastrální</foaf:name>
+                              <foaf:name xml:lang="locale-en">Czech Office for Surveying, Mapping and Cadastre</foaf:name>
+                           </foaf:Organization>
+                        </org:memberOf>
+                        <foaf:phone rdf:resource="tel:+420284044455"/>
+                        <foaf:mbox rdf:resource="mailto:bohumil.vlcek@cuzk.gov.cz"/>
+                        <foaf:mbox rdf:resource="mailto:podpora.zums@cuzk.gov.cz"/>
+                        <foaf:workplaceHomepage rdf:resource="https://geoportal.cuzk.gov.cz"/>
+                        <locn:address>
+                           <locn:Address>
+                              <locn:thoroughfare>Pod sídlištěm 1800/9</locn:thoroughfare>
+                              <locn:postName>Praha 8</locn:postName>
+                              <locn:postCode>182 11</locn:postCode>
+                              <locn:adminUnitL1>Česká republika</locn:adminUnitL1>
+                           </locn:Address>
+                        </locn:address>
+                     </rdf:Description>
+                  </prov:agent>
+                  <dcat:hadRole>
+                     <dcat:Role rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
+                  </dcat:hadRole>
+               </prov:Attribution>
+            </prov:qualifiedAttribution>
+            <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CZ-CUZK-ATOM-DATA50</dct:identifier>
+            <dct:source rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/dcat#CatalogRecord"/>
+               <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2025-03-06</dct:modified>
+               <cnt:characterEncoding rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UTF-8</cnt:characterEncoding>
+               <dct:conformsTo rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://purl.org/dc/terms/Standard"/>
+                  <dct:title xml:lang="cs">ISO 19119/INSPIRE_TG2/CZ4/CUZK</dct:title>
+                  <owl:versionInfo xml:lang="cs">2.0</owl:versionInfo>
+               </dct:conformsTo>
+            </dct:source>
+         </rdf:Description>
+      </foaf:isPrimaryTopicOf>
+      <rdf:type rdf:resource="http://www.w3.org/ns/dcat#DataService"/>
+      <geodcatap:resourceType rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service"/>
+      <dct:title xml:lang="cs">Stahovací služba ATOM pro Data50</dct:title>
+      <dct:title xml:lang="locale-en">ATOM Download Service for the Data50</dct:title>
+      <dct:description xml:lang="cs">Stahovací služba ATOM pro Data50 je veřejná stahovací služba pro poskytování dat digitálního geografického modelu Data50. Služba poskytuje data pro celou republiku ve formátu shapefile. Data se skládají z 8 tematických oblastí- Sídelní, kulturní a hospodářské objekty, Komunikace, Produktovody a elektrické vedení, Vodstvo, Hranice územních jednotek, Vegetace a povrch, Terénní reliéf a Popis. Služba splňuje technické pokyny pro INSPIRE stahovací služby verze 3.1. Pro stažení je datová sada komprimována (ZIP).</dct:description>
+      <dct:description xml:lang="locale-en">The ATOM download service for Data50 is publicly available and it provides data of the geographical model Data50. The service provides data for the whole territory of the Czech Republic in shapefile data format. Data is divided into 8 thematic groups - Settlements and cultural and industrial buildings, Transportation, Pipelines and electric lines, Hydrography, Boundary of territorial units, Vegetation and bare surface, Terrain and Names. Data can be downloaded by thematic groups or all layers in one file. The service fulfills the technical instructions for INSPIRE Download Services in the version 3.1. Datasets are compressed (ZIP) for downloading.</dct:description>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/tn"/>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/hy"/>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/au"/>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/gn"/>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/el"/>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/bu"/>
+      <dcat:theme rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4006&amp;l=administrativni-hranice"/>
+      <dcat:theme rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4388&amp;l=dopravni-infrastruktura"/>
+      <dcat:theme rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4477&amp;l=geograficke-nazvoslovi"/>
+      <dcat:theme rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=5452&amp;l=vedeni-technickeho-vybaveni--site-technickeho-vybaveni"/>
+      <dcat:theme rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4151&amp;l=vyskopis"/>
+      <dcat:keyword xml:lang="cs">bezešvá databáze</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">seamless database</dcat:keyword>
+      <dcat:keyword xml:lang="cs">topografická databáze</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">topographic database</dcat:keyword>
+      <dcat:keyword xml:lang="cs">1:50 000</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">1:50,000</dcat:keyword>
+      <dcat:keyword xml:lang="cs">1:500000</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">1:500000</dcat:keyword>
+      <dcat:keyword xml:lang="cs">50 000</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">50,000</dcat:keyword>
+      <dcat:keyword xml:lang="cs">50000</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">50000</dcat:keyword>
+      <dcat:keyword xml:lang="cs">databáze České republiky</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">database of the Czech Republic</dcat:keyword>
+      <dcat:keyword xml:lang="cs">doprava</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">transportation</dcat:keyword>
+      <dcat:keyword xml:lang="cs">sídla</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">settlements</dcat:keyword>
+      <dcat:keyword xml:lang="cs">vrstevnice</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">contour</dcat:keyword>
+      <dcat:keyword xml:lang="cs">stahovací služba</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">download service</dcat:keyword>
+      <dcat:keyword xml:lang="cs">stahování dat</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">data downloading</dcat:keyword>
+      <dcat:keyword xml:lang="cs">ATOM</dcat:keyword>
+      <dcat:keyword xml:lang="locale-en">ATOM</dcat:keyword>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoProductAccessService"/>
+      <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
+      <geodcatap:serviceType rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download"/>
+      <dct:spatial rdf:parseType="Resource">
+         <rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"><![CDATA[POLYGON((12.09 51.06,18.86 51.06,18.86 48.55,12.09 48.55,12.09 51.06))]]></dcat:bbox>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#gmlLiteral"><![CDATA[<gml:Envelope srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84"><gml:lowerCorner>12.09 48.55</gml:lowerCorner><gml:upperCorner>18.86 51.06</gml:upperCorner></gml:Envelope>]]></dcat:bbox>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#geoJSONLiteral"><![CDATA[{"type":"Polygon","coordinates":[[[12.09,51.06],[18.86,51.06],[18.86,48.55],[12.09,48.55],[12.09,51.06]]]}]]></dcat:bbox>
+      </dct:spatial>
+      <dct:spatial>
+         <dct:Location rdf:about="http://publications.europa.eu/resource/authority/country/CZE"/>
+      </dct:spatial>
+      <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-03-27</dct:modified>
+      <dct:accessRights>
+         <dct:RightsStatement rdf:about="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations"/>
+      </dct:accessRights>
+      <dct:license>
+         <dct:LicenseDocument rdf:about="https://geoportal.cuzk.gov.cz/Dokumenty/Podminky.pdf"/>
+      </dct:license>
+      <dct:conformsTo>
+         <dct:Standard rdf:about="http://data.europa.eu/eli/reg/2009/976"/>
+      </dct:conformsTo>
+      <prov:wasUsedBy>
+         <prov:Activity>
+            <prov:used>
+               <prov:Entity rdf:about="https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50"/>
+            </prov:used>
+            <prov:qualifiedAssociation rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Association"/>
+               <prov:hadPlan rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+                  <prov:wasDerivedFrom>
+                     <prov:Entity rdf:about="http://data.europa.eu/eli/reg/2009/976"/>
+                  </prov:wasDerivedFrom>
+               </prov:hadPlan>
+            </prov:qualifiedAssociation>
+            <prov:generated rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+               <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
+               <dct:description xml:lang="cs">Testování souladu síťové služby s prováděcími pravidly INSPIRE pro síťové služby.</dct:description>
+               <dct:description xml:lang="locale-en">Network service conformity testing with INSPIRE implementing rules for network services.</dct:description>
+            </prov:generated>
+         </prov:Activity>
+      </prov:wasUsedBy>
+      <prov:wasUsedBy>
+         <prov:Activity>
+            <prov:used>
+               <prov:Entity rdf:about="https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50"/>
+            </prov:used>
+            <prov:qualifiedAssociation rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Association"/>
+               <prov:hadPlan rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+                  <prov:wasDerivedFrom rdf:parseType="Resource">
+                     <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+                     <dct:title xml:lang="cs">Technical Guidance for the implementation of INSPIRE Download Services</dct:title>
+                     <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2013-08-09</dct:issued>
+                  </prov:wasDerivedFrom>
+               </prov:hadPlan>
+            </prov:qualifiedAssociation>
+            <prov:generated rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+               <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
+               <dct:description xml:lang="cs">Testování souladu INSPIRE ATOM stahovací služby s technickými pokyny pro implementaci INSPIRE stahovacích služeb.</dct:description>
+               <dct:description xml:lang="locale-en">INSPIRE ATOM download service conformity testing with the Technical Guidance for the implementation of INSPIRE Download Services.</dct:description>
+            </prov:generated>
+         </prov:Activity>
+      </prov:wasUsedBy>
+      <dct:conformsTo rdf:parseType="Resource">
+         <rdf:type rdf:resource="http://purl.org/dc/terms/Standard"/>
+         <dct:title xml:lang="cs">Technical Guidance for the implementation of INSPIRE Download Services</dct:title>
+         <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2013-08-09</dct:issued>
+      </dct:conformsTo>
+      <prov:wasUsedBy>
+         <prov:Activity>
+            <prov:used>
+               <prov:Entity rdf:about="https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50"/>
+            </prov:used>
+            <prov:qualifiedAssociation rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Association"/>
+               <prov:hadPlan rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+                  <prov:wasDerivedFrom>
+                     <prov:Entity rdf:about="http://data.europa.eu/eli/reg/2009/976"/>
+                  </prov:wasDerivedFrom>
+               </prov:hadPlan>
+            </prov:qualifiedAssociation>
+            <prov:generated rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+               <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
+               <dct:description xml:lang="cs">Testování souladu síťové služby s prováděcími pravidly INSPIRE pro síťové služby.</dct:description>
+               <dct:description xml:lang="locale-en">Network service conformity testing with INSPIRE implementing rules for network services.</dct:description>
+            </prov:generated>
+         </prov:Activity>
+      </prov:wasUsedBy>
+      <prov:wasUsedBy>
+         <prov:Activity>
+            <prov:used>
+               <prov:Entity rdf:about="https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50"/>
+            </prov:used>
+            <prov:qualifiedAssociation rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Association"/>
+               <prov:hadPlan rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+                  <prov:wasDerivedFrom rdf:parseType="Resource">
+                     <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+                     <dct:title xml:lang="cs">Technical Guidance for the implementation of INSPIRE Download Services</dct:title>
+                     <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2013-08-09</dct:issued>
+                  </prov:wasDerivedFrom>
+               </prov:hadPlan>
+            </prov:qualifiedAssociation>
+            <prov:generated rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+               <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
+               <dct:description xml:lang="cs">Testování souladu INSPIRE ATOM stahovací služby s technickými pokyny pro implementaci INSPIRE stahovacích služeb.</dct:description>
+               <dct:description xml:lang="locale-en">INSPIRE ATOM download service conformity testing with the Technical Guidance for the implementation of INSPIRE Download Services.</dct:description>
+            </prov:generated>
+         </prov:Activity>
+      </prov:wasUsedBy>
+      <dcat:endpointURL rdf:resource="https://atom.cuzk.gov.cz/Data50/Data50.xml"/>
+      <dcat:endpointDescription rdf:resource="https://atom.cuzk.gov.cz/Data50/Data50.xml"/>
+      <geodcatap:custodian>
+         <rdf:Description>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+            <foaf:name xml:lang="cs">Český úřad zeměměřický a katastrální</foaf:name>
+            <foaf:name xml:lang="locale-en">Czech Office for Surveying, Mapping and Cadastre</foaf:name>
+            <foaf:phone rdf:resource="tel:+420284044455"/>
+            <foaf:mbox rdf:resource="mailto:cuzk.helpdesk@cuzk.gov.cz"/>
+            <foaf:workplaceHomepage rdf:resource="https://geoportal.cuzk.gov.cz"/>
+            <locn:address>
+               <locn:Address>
+                  <locn:thoroughfare>Pod sídlištěm 1800/9</locn:thoroughfare>
+                  <locn:postName>Praha 8</locn:postName>
+                  <locn:postCode>182 11</locn:postCode>
+                  <locn:adminUnitL1>Česká republika</locn:adminUnitL1>
+               </locn:Address>
+            </locn:address>
+         </rdf:Description>
+      </geodcatap:custodian>
+      <prov:qualifiedAttribution>
+         <prov:Attribution>
+            <prov:agent>
+               <rdf:Description>
+                  <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+                  <foaf:name xml:lang="cs">Český úřad zeměměřický a katastrální</foaf:name>
+                  <foaf:name xml:lang="locale-en">Czech Office for Surveying, Mapping and Cadastre</foaf:name>
+                  <foaf:phone rdf:resource="tel:+420284044455"/>
+                  <foaf:mbox rdf:resource="mailto:cuzk.helpdesk@cuzk.gov.cz"/>
+                  <foaf:workplaceHomepage rdf:resource="https://geoportal.cuzk.gov.cz"/>
+                  <locn:address>
+                     <locn:Address>
+                        <locn:thoroughfare>Pod sídlištěm 1800/9</locn:thoroughfare>
+                        <locn:postName>Praha 8</locn:postName>
+                        <locn:postCode>182 11</locn:postCode>
+                        <locn:adminUnitL1>Česká republika</locn:adminUnitL1>
+                     </locn:Address>
+                  </locn:address>
+               </rdf:Description>
+            </prov:agent>
+            <dcat:hadRole>
+               <dcat:Role rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/custodian"/>
+            </dcat:hadRole>
+         </prov:Attribution>
+      </prov:qualifiedAttribution>
+   </rdf:Description>
+</rdf:RDF>
