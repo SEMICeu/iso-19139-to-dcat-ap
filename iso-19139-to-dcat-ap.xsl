@@ -69,6 +69,7 @@
     xmlns:gsp    = "http://www.opengis.net/ont/geosparql#"
     xmlns:i      = "http://inspire.ec.europa.eu/schemas/common/1.0"
     xmlns:i-gp   = "http://inspire.ec.europa.eu/schemas/geoportal/1.0"
+    xmlns:local  = "urn:local"
     xmlns:locn   = "http://www.w3.org/ns/locn#"
     xmlns:owl    = "http://www.w3.org/2002/07/owl#"
     xmlns:org    = "http://www.w3.org/ns/org#"
@@ -405,6 +406,51 @@
 <!-- INSPIRE glossary URI -->
 
   <xsl:param name="inspire-mt" select="concat($inspire,'media-types/')"/>
+
+<!--
+
+  Helper Functions
+  ================
+
+-->
+
+  <!-- 
+    Function to extract text content from ISO 19139 multilingual elements.
+    Handles three patterns:
+    1. gmx:Anchor - returns the text content
+    2. gco:CharacterString - returns the text content  
+    3. gmd:PT_FreeText with LocalisedCharacterStrings - returns English text if available, otherwise first available
+  -->
+  <xsl:function name="local:getTextContent">
+    <xsl:param name="element"/>
+    <xsl:choose>
+      <!-- Handle gmx:Anchor -->
+      <xsl:when test="$element/gmx:Anchor">
+        <xsl:value-of select="normalize-space($element/gmx:Anchor)"/>
+      </xsl:when>
+      <!-- Handle gco:CharacterString -->
+      <xsl:when test="$element/gco:CharacterString">
+        <xsl:value-of select="normalize-space($element/gco:CharacterString)"/>
+      </xsl:when>
+      <!-- Handle PT_FreeText with LocalisedCharacterStrings -->
+      <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString">
+        <xsl:choose>
+          <!-- Try to find English locale first -->
+          <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale='#locale-en']">
+            <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale='#locale-en'][1])"/>
+          </xsl:when>
+          <!-- Otherwise use the first available LocalisedCharacterString -->
+          <xsl:otherwise>
+            <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[1])"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <!-- Fallback to normalize-space of all child elements (backward compatibility) -->
+      <xsl:otherwise>
+        <xsl:value-of select="normalize-space($element/*)"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
 
 <!--
 
@@ -1714,10 +1760,10 @@
     <xsl:param name="Address">
       <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address">
         <xsl:variable name="deliveryPoint" select="normalize-space(string-join(gmd:deliveryPoint/*, ' '))"/>
-        <xsl:variable name="city" select="normalize-space(gmd:city/*)"/>
-        <xsl:variable name="administrativeArea" select="normalize-space(gmd:administrativeArea/*)"/>
-        <xsl:variable name="postalCode" select="normalize-space(gmd:postalCode/*)"/>
-        <xsl:variable name="country" select="normalize-space(gmd:country/*)"/>
+        <xsl:variable name="city" select="local:getTextContent(gmd:city)"/>
+        <xsl:variable name="administrativeArea" select="local:getTextContent(gmd:administrativeArea)"/>
+        <xsl:variable name="postalCode" select="local:getTextContent(gmd:postalCode)"/>
+        <xsl:variable name="country" select="local:getTextContent(gmd:country)"/>
         <xsl:if test="$deliveryPoint != '' or $city != '' or $administrativeArea != '' or $postalCode != '' or $country != ''">
           <locn:address>
             <locn:Address>
@@ -1745,10 +1791,10 @@
     <xsl:param name="Address-vCard">
       <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address">
         <xsl:variable name="deliveryPoint" select="normalize-space(string-join(gmd:deliveryPoint/*, ' '))"/>
-        <xsl:variable name="city" select="normalize-space(gmd:city/*)"/>
-        <xsl:variable name="administrativeArea" select="normalize-space(gmd:administrativeArea/*)"/>
-        <xsl:variable name="postalCode" select="normalize-space(gmd:postalCode/*)"/>
-        <xsl:variable name="country" select="normalize-space(gmd:country/*)"/>
+        <xsl:variable name="city" select="local:getTextContent(gmd:city)"/>
+        <xsl:variable name="administrativeArea" select="local:getTextContent(gmd:administrativeArea)"/>
+        <xsl:variable name="postalCode" select="local:getTextContent(gmd:postalCode)"/>
+        <xsl:variable name="country" select="local:getTextContent(gmd:country)"/>
         <xsl:if test="$deliveryPoint != '' or $city != '' or $administrativeArea != '' or $postalCode != '' or $country != ''">
           <vcard:hasAddress>
             <vcard:Address>
