@@ -49,6 +49,78 @@ def convert_xml_to_turtle(xml_file: Path, ttl_file: Path) -> bool:
         logger.error(f"Failed to convert {xml_file}: {e}")
         return False
 
+def discover_updateable_test_cases(test_dir: str, specific_test_case: str = None):
+    """Discover test cases that can be updated (including those with missing expected outputs).
+    
+    Args:
+        test_dir: Directory containing test cases
+        specific_test_case: Optional specific test case name to find
+        
+    Returns:
+        List of test cases that have input files (expected outputs will be created)
+    """
+    from run_tests import TestCase
+    import json
+    
+    test_cases = []
+    test_cases_dir = Path(test_dir) / "test-cases"
+    
+    if not test_cases_dir.exists():
+        logger.error("test-cases directory not found")
+        return test_cases
+    
+    for test_case_dir in test_cases_dir.iterdir():
+        if not test_case_dir.is_dir():
+            continue
+            
+        # Skip if we're looking for a specific test case and this isn't it
+        if specific_test_case and test_case_dir.name != specific_test_case:
+            continue
+            
+        input_file = test_case_dir / "input.xml"
+        config_file = test_case_dir / "config.json"
+        
+        # We only need input.xml to be able to update/create expected outputs
+        if not input_file.exists():
+            logger.warning(f"Skipping {test_case_dir.name}: no input.xml found")
+            continue
+        
+        # Load test configuration if available
+        parameters = {}
+        description = ""
+        if config_file.exists():
+            try:
+                with open(config_file, 'r') as f:
+                    config = json.load(f)
+                    parameters = config.get('parameters', {})
+                    description = config.get('description', '')
+            except Exception as e:
+                logger.warning(f"Failed to load config for {test_case_dir.name}: {e}")
+        
+        # Create expected output files dict (may be empty, will be populated)
+        expected_files = {}
+        xml_file = test_case_dir / "expected_output.xml"
+        ttl_file = test_case_dir / "expected_output.ttl"
+        
+        if xml_file.exists():
+            expected_files["xml"] = str(xml_file)
+        if ttl_file.exists():
+            expected_files["turtle"] = str(ttl_file)
+        
+        test_case = TestCase(
+            name=test_case_dir.name,
+            input_file=str(input_file),
+            expected_output_files=expected_files,
+            parameters=parameters,
+            description=description
+        )
+        test_cases.append(test_case)
+        
+        status = "existing expected outputs" if expected_files else "will create expected outputs"
+        logger.debug(f"Found updateable test case: {test_case.name} ({status})")
+    
+    return test_cases
+
 def update_expected_outputs(xslt_file: str, test_dir: str, test_case: str = None, generate_turtle: bool = True):
     """Update expected output files for test cases.
     
@@ -62,19 +134,15 @@ def update_expected_outputs(xslt_file: str, test_dir: str, test_case: str = None
         # Initialize transformer
         transformer = XSLTTransformer(xslt_file)
         
-        # Discover test cases
-        runner = TestRunner(xslt_file, test_dir)
-        test_cases = runner.discover_test_cases()
+        # Discover updateable test cases (including those with missing expected outputs)
+        test_cases = discover_updateable_test_cases(test_dir, test_case)
         
-        if test_case:
-            # Filter to specific test case
-            test_cases = [tc for tc in test_cases if tc.name == test_case]
-            if not test_cases:
-                logger.error(f"Test case not found: {test_case}")
-                return False
+        if test_case and not test_cases:
+            logger.error(f"Test case not found or has no input.xml: {test_case}")
+            return False
         
         if not test_cases:
-            logger.error("No test cases found")
+            logger.error("No updateable test cases found")
             return False
         
         logger.info(f"Updating expected outputs for {len(test_cases)} test case(s)")
@@ -90,24 +158,26 @@ def update_expected_outputs(xslt_file: str, test_dir: str, test_case: str = None
                     test_case_obj.parameters
                 )
                 
-                # Get the XML expected output file path
+                # Determine the XML expected output file path
                 xml_expected_file = test_case_obj.expected_output_files.get('xml')
                 if not xml_expected_file:
-                    # Fallback for old test case structure or create default
+                    # Create path for new expected output file
                     xml_expected_file = str(Path(test_case_obj.input_file).parent / "expected_output.xml")
                 
-                # Write to expected output file
+                # Write to expected output file (create or update)
                 with open(xml_expected_file, 'w', encoding='utf-8') as f:
                     f.write(output)
                 
-                logger.info(f"✓ Updated {xml_expected_file}")
+                action = "Updated" if test_case_obj.expected_output_files.get('xml') else "Created"
+                logger.info(f"✓ {action} {xml_expected_file}")
                 
                 # Generate Turtle version if requested
                 if generate_turtle:
                     xml_file = Path(xml_expected_file)
                     ttl_file = xml_file.with_suffix('.ttl')
                     if convert_xml_to_turtle(xml_file, ttl_file):
-                        logger.info(f"✓ Generated {ttl_file.name}")
+                        ttl_action = "Updated" if test_case_obj.expected_output_files.get('turtle') else "Created"
+                        logger.info(f"✓ {ttl_action} {ttl_file.name}")
                     else:
                         logger.warning(f"✗ Failed to generate Turtle for {test_case_obj.name}")
                 
