@@ -1,5 +1,5 @@
 {
-    "description": "Basic dataset metadata transformation test",
+    "description": "Basic dataset metadata transformation test, based on https://github.com/INSPIRE-MIF/helpdesk-validator/blob/master/examples/Dataset_metadata_2.0_example.xml",
     "parameters": {
         "profile": "extended",
         "CoupledResourceLookup": "disabled",

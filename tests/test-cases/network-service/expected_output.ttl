@@ -1,0 +1,81 @@
+@prefix cnt: <http://www.w3.org/2011/content#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix geodcatap: <http://data.europa.eu/930/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+geodcatap: a dcterms:Standard .
+
+<http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply> a dcterms:LicenseDocument .
+
+<http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d> a dcterms:RightsStatement .
+
+<http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/owner> a dcat:Role .
+
+<http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact> a dcat:Role .
+
+<http://publications.europa.eu/resource/authority/language/ENG> a dcterms:LinguisticSystem .
+
+<http://www.opengeospatial.org/standards/wms> a dcterms:Standard .
+
+<http://data.europa.eu/eli/reg/2009/976> a dcterms:Standard,
+        prov:Entity .
+
+[] a dcat:DataService ;
+    geodcatap:resourceType <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service> ;
+    geodcatap:serviceProtocol <http://www.opengeospatial.org/standards/wms> ;
+    geodcatap:serviceType <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view> ;
+    dcterms:accessRights <http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d> ;
+    dcterms:conformsTo <http://data.europa.eu/eli/reg/2009/976> ;
+    dcterms:created "2019-05-15"^^xsd:date ;
+    dcterms:description "This service provides a map of the land use distribution of MyCountry. To be used only at scales lower than 1:10000."@en ;
+    dcterms:license <http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply> ;
+    dcterms:rightsHolder [ a prov:Agent,
+                foaf:Organization ;
+            foaf:mbox <mailto:info@my-organisation.eu> ;
+            foaf:name "MyOrganisation"@en ] ;
+    dcterms:spatial [ a dcterms:Location ;
+            dcat:bbox "{\"type\":\"Polygon\",\"coordinates\":[[[14.18,36.08],[14.58,36.08],[14.58,35.81],[14.18,35.81],[14.18,36.08]]]}"^^geo:geoJSONLiteral,
+                "<gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"><gml:lowerCorner>14.18 35.81</gml:lowerCorner><gml:upperCorner>14.58 36.08</gml:upperCorner></gml:Envelope>"^^geo:gmlLiteral,
+                "POLYGON((14.18 36.08,14.58 36.08,14.58 35.81,14.18 35.81,14.18 36.08))"^^geo:wktLiteral ] ;
+    dcterms:title "Land Use map of MyCountry"@en ;
+    dcat:endpointDescription <http://www.my-organisation.eu/wms?VERSION=1.3.0&SERVICE=WMS&REQUEST=GetCapabilities> ;
+    dcat:endpointURL <http://www.my-organisation.eu/wms> ;
+    dcat:theme <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoMapAccessService>,
+        <https://www.eionet.europa.eu/gemet/en/concept/11323>,
+        <https://www.eionet.europa.eu/gemet/en/concept/4614> ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/owner> ;
+            prov:agent [ a prov:Agent,
+                        foaf:Organization ;
+                    foaf:mbox <mailto:info@my-organisation.eu> ;
+                    foaf:name "MyOrganisation"@en ] ] ;
+    prov:wasUsedBy [ a prov:Activity ;
+            prov:generated [ a prov:Entity ;
+                    dcterms:description "This data set is conformant with the INSPIRE Implementing Rules for Network Services"@en ;
+                    dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
+            prov:qualifiedAssociation [ a prov:Association ;
+                    prov:hadPlan [ a prov:Plan ;
+                            prov:wasDerivedFrom <http://data.europa.eu/eli/reg/2009/976> ] ] ] ;
+    foaf:isPrimaryTopicOf [ a dcat:CatalogRecord ;
+            dcterms:conformsTo geodcatap: ;
+            dcterms:identifier "123e4567-e89b-12d3-a456-426655440123"^^xsd:string ;
+            dcterms:language <http://publications.europa.eu/resource/authority/language/ENG> ;
+            dcterms:modified "2019-05-15T09:00:00"^^xsd:dateTime ;
+            dcterms:source [ a dcat:CatalogRecord ;
+                    dcterms:modified "2019-05-15"^^xsd:date ;
+                    cnt:characterEncoding "UTF-8"^^xsd:string ] ;
+            dcat:contactPoint [ a vcard:Organization ;
+                    vcard:fn "MyOrganisation"@en ;
+                    vcard:hasEmail <mailto:info@my-organisation.eu> ] ;
+            prov:qualifiedAttribution [ a prov:Attribution ;
+                    dcat:hadRole <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact> ;
+                    prov:agent [ a prov:Agent,
+                                foaf:Organization ;
+                            foaf:mbox <mailto:info@my-organisation.eu> ;
+                            foaf:name "MyOrganisation"@en ] ] ] .
+

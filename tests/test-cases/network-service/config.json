@@ -1,0 +1,8 @@
+{
+    "description": "Network service transformation test, based on https://github.com/INSPIRE-MIF/helpdesk-validator/blob/master/examples/NetworkService_WMS_metadata_2.0_example.xml",
+    "parameters": {
+        "profile": "extended",
+        "CoupledResourceLookup": "disabled",
+        "include-deprecated": "no"
+    }
+}

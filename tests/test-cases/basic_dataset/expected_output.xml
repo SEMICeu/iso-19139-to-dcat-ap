@@ -9,6 +9,7 @@
          xmlns:foaf="http://xmlns.com/foaf/0.1/"
          xmlns:geodcatap="http://data.europa.eu/930/"
          xmlns:gsp="http://www.opengis.net/ont/geosparql#"
+         xmlns:local="urn:local"
          xmlns:locn="http://www.w3.org/ns/locn#"
          xmlns:org="http://www.w3.org/ns/org#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -19,22 +20,23 @@
          xmlns:sdmx-attribute="http://purl.org/linked-data/sdmx/2009/attribute#"
          xmlns:skos="http://www.w3.org/2004/02/skos/core#"
          xmlns:vcard="http://www.w3.org/2006/vcard/ns#">
-   <rdf:Description>
+   <rdf:Description rdf:about="http://www.my-organisation.eu/so/lu/land-use-map">
       <foaf:isPrimaryTopicOf>
          <rdf:Description>
             <rdf:type rdf:resource="http://www.w3.org/ns/dcat#CatalogRecord"/>
+            <foaf:primaryTopic rdf:resource="http://www.my-organisation.eu/so/lu/land-use-map"/>
             <dct:conformsTo>
                <dct:Standard rdf:about="http://data.europa.eu/930/"/>
             </dct:conformsTo>
             <dct:language>
                <dct:LinguisticSystem rdf:about="http://publications.europa.eu/resource/authority/language/ENG"/>
             </dct:language>
-            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-01-01</dct:modified>
+            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-05-15T09:00:00</dct:modified>
             <dcat:contactPoint>
                <rdf:Description>
                   <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Organization"/>
-                  <vcard:fn xml:lang="en">Test Organization</vcard:fn>
-                  <vcard:hasEmail rdf:resource="mailto:contact@test.org"/>
+                  <vcard:fn xml:lang="en">MyOrganisation</vcard:fn>
+                  <vcard:hasEmail rdf:resource="mailto:info@my-organisation.eu"/>
                </rdf:Description>
             </dcat:contactPoint>
             <prov:qualifiedAttribution>
@@ -43,8 +45,8 @@
                      <rdf:Description>
                         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
                         <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
-                        <foaf:name xml:lang="en">Test Organization</foaf:name>
-                        <foaf:mbox rdf:resource="mailto:contact@test.org"/>
+                        <foaf:name xml:lang="en">MyOrganisation</foaf:name>
+                        <foaf:mbox rdf:resource="mailto:info@my-organisation.eu"/>
                      </rdf:Description>
                   </prov:agent>
                   <dcat:hadRole>
@@ -52,67 +54,153 @@
                   </dcat:hadRole>
                </prov:Attribution>
             </prov:qualifiedAttribution>
-            <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">basic-dataset-001</dct:identifier>
+            <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">123e4567-e89b-12d3-a456-426655440000</dct:identifier>
             <dct:source rdf:parseType="Resource">
                <rdf:type rdf:resource="http://www.w3.org/ns/dcat#CatalogRecord"/>
-               <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-01-01</dct:modified>
+               <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2019-05-15T09:00:00</dct:modified>
                <cnt:characterEncoding rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UTF-8</cnt:characterEncoding>
-               <dct:conformsTo rdf:parseType="Resource">
-                  <rdf:type rdf:resource="http://purl.org/dc/terms/Standard"/>
-                  <dct:title xml:lang="en">ISO 19115:2003/19139</dct:title>
-                  <owl:versionInfo xml:lang="en">1.0</owl:versionInfo>
-               </dct:conformsTo>
             </dct:source>
          </rdf:Description>
       </foaf:isPrimaryTopicOf>
       <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
       <geodcatap:resourceType rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResourceType/dataset"/>
-      <dct:title xml:lang="en">Sample Dataset Title</dct:title>
-      <dct:description xml:lang="en">This is a sample dataset for testing the ISO 19139 to DCAT-AP transformation.</dct:description>
-      <geodcatap:topicCategory rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/environment"/>
-      <dcat:keyword xml:lang="en">test</dcat:keyword>
-      <dcat:keyword xml:lang="en">sample</dcat:keyword>
-      <dcat:keyword xml:lang="en">dataset</dcat:keyword>
-      <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sample-dataset-001</dct:identifier>
+      <dct:title xml:lang="en">Land Use map of MyCountry</dct:title>
+      <dct:description xml:lang="en">This dataset provides a map of the land use distribution of MyCountry.</dct:description>
+      <geodcatap:topicCategory rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/planningCadastre"/>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/lu"/>
+      <dcat:theme rdf:resource="https://www.eionet.europa.eu/gemet/en/concept/4614"/>
+      <dcat:theme rdf:resource="https://www.eionet.europa.eu/gemet/en/concept/11323"/>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/national"/>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/PriorityDataset/dir-2000-60"/>
+      <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
       <dct:language>
          <dct:LinguisticSystem rdf:about="http://publications.europa.eu/resource/authority/language/ENG"/>
       </dct:language>
       <dct:spatial rdf:parseType="Resource">
          <rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
-         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"><![CDATA[POLYGON((-10.0 60.0,10.0 60.0,10.0 40.0,-10.0 40.0,-10.0 60.0))]]></dcat:bbox>
-         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#gmlLiteral"><![CDATA[<gml:Envelope srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84"><gml:lowerCorner>-10.0 40.0</gml:lowerCorner><gml:upperCorner>10.0 60.0</gml:upperCorner></gml:Envelope>]]></dcat:bbox>
-         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#geoJSONLiteral"><![CDATA[{"type":"Polygon","coordinates":[[[-10.0,60.0],[10.0,60.0],[10.0,40.0],[-10.0,40.0],[-10.0,60.0]]]}]]></dcat:bbox>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"><![CDATA[POLYGON((14.18 36.08,14.58 36.08,14.58 35.81,14.18 35.81,14.18 36.08))]]></dcat:bbox>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#gmlLiteral"><![CDATA[<gml:Envelope srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84"><gml:lowerCorner>14.18 35.81</gml:lowerCorner><gml:upperCorner>14.58 36.08</gml:upperCorner></gml:Envelope>]]></dcat:bbox>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#geoJSONLiteral"><![CDATA[{"type":"Polygon","coordinates":[[[14.18,36.08],[14.58,36.08],[14.58,35.81],[14.18,35.81],[14.18,36.08]]]}]]></dcat:bbox>
       </dct:spatial>
-      <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-01-01</dct:created>
+      <dct:temporal>
+         <dct:PeriodOfTime>
+            <dcat:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2019-04-29</dcat:startDate>
+         </dct:PeriodOfTime>
+      </dct:temporal>
+      <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2019-05-15</dct:created>
       <dct:provenance>
          <dct:ProvenanceStatement>
-            <dct:description xml:lang="en">This is a test dataset created for validation purposes.</dct:description>
+            <dct:description xml:lang="en">The Land Use Map is built with the privileged support of a basic layer, which covers the entire territory and whose theme presents a close connection with land use. The method used is based on five successive steps: 1. The base layer is crossed by geoprocessing with other themes providing additional information on land use. 2. The resulting information is summarized at the scale of the surface features of the base layer. 3. The application of a typology then makes it possible to classify these surface entities (polygons) in the different occupation classes differentiated in the legend. 4. At the end of this classification, some base layer polygons with mixed land occupations are treated in a specific way (division and reallocation). 5. The final step is to produce the final land use map by a process of aggregation (dissolution) of polygons belonging to the same occupancy class. This last manipulation can be done by considering different levels of detail of the legend. The last version was carried out by photo-interpretation on the basis of Orthophotos 2006 - 2007 in combination with the national 10,000 basemap, the axes of the railway, road and hydrographic networks.</dct:description>
          </dct:ProvenanceStatement>
       </dct:provenance>
-      <dcat:landingPage>
-         <foaf:Document rdf:about="https://example.com/dataset/sample-dataset-001">
-            <dct:title xml:lang="en">Download Sample Dataset</dct:title>
-            <dct:description xml:lang="en">Direct download link for the sample dataset</dct:description>
-         </foaf:Document>
-      </dcat:landingPage>
-      <dct:publisher>
+      <geodcatap:referenceSystem>
+         <rdf:Description rdf:about="http://www.opengis.net/def/crs/EPSG/0/4258">
+            <rdf:type rdf:resource="http://purl.org/dc/terms/Standard"/>
+            <dct:type rdf:resource="http://inspire.ec.europa.eu/glossary/SpatialReferenceSystem"/>
+         </rdf:Description>
+      </geodcatap:referenceSystem>
+      <dqv:hasQualityMeasurement>
+         <dqv:QualityMeasurement>
+            <dqv:isMeasurementOf>
+               <dqv:Metric rdf:about="http://data.europa.eu/930/spatialResolutionAsScale"/>
+            </dqv:isMeasurementOf>
+            <dqv:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.00002</dqv:value>
+         </dqv:QualityMeasurement>
+      </dqv:hasQualityMeasurement>
+      <dct:conformsTo>
+         <dct:Standard rdf:about="http://data.europa.eu/eli/reg/2010/1089"/>
+      </dct:conformsTo>
+      <prov:wasUsedBy>
+         <prov:Activity>
+            <prov:used>
+               <prov:Entity rdf:about="http://www.my-organisation.eu/so/lu/land-use-map"/>
+            </prov:used>
+            <prov:qualifiedAssociation rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Association"/>
+               <prov:hadPlan rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+                  <prov:wasDerivedFrom>
+                     <prov:Entity rdf:about="http://data.europa.eu/eli/reg/2010/1089"/>
+                  </prov:wasDerivedFrom>
+               </prov:hadPlan>
+            </prov:qualifiedAssociation>
+            <prov:generated rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+               <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
+               <dct:description xml:lang="en">This data set is conformant with the INSPIRE Implementing Rules for the interoperability of spatial data sets and services</dct:description>
+            </prov:generated>
+         </prov:Activity>
+      </prov:wasUsedBy>
+      <dcat:distribution>
+         <dcat:Distribution>
+            <dct:title xml:lang="en">WMS GetCapabilities request for viewing the data set related to Land Use</dct:title>
+            <dcat:accessService rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/dcat#DataService"/>
+               <dct:title xml:lang="en">WMS GetCapabilities request for viewing the data set related to Land Use</dct:title>
+               <dcat:endpointURL rdf:resource="https://geoserver.epsilon-italia.it/geoserver/LU_sample/wms"/>
+               <dcat:endpointDescription rdf:resource="https://geoserver.epsilon-italia.it/geoserver/LU_sample/wms?service=WMS&amp;version=1.3.0&amp;request=GetCapabilities"/>
+               <geodcatap:serviceProtocol>
+                  <dct:Standard rdf:about="http://www.opengeospatial.org/standards/wms"/>
+               </geodcatap:serviceProtocol>
+            </dcat:accessService>
+            <dcat:accessURL rdf:resource="https://geoserver.epsilon-italia.it/geoserver/LU_sample/wms?service=WMS&amp;version=1.3.0&amp;request=GetCapabilities"/>
+            <dct:license>
+               <dct:LicenseDocument rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply"/>
+            </dct:license>
+            <dct:accessRights>
+               <dct:RightsStatement rdf:about="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d"/>
+            </dct:accessRights>
+            <adms:representationTechnique rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/vector"/>
+            <dcat:mediaType>
+               <dct:MediaType rdf:about="https://www.iana.org/assignments/media-types/application/gml+xml"/>
+            </dcat:mediaType>
+         </dcat:Distribution>
+      </dcat:distribution>
+      <dcat:distribution>
+         <dcat:Distribution>
+            <dct:title xml:lang="en">WFS GetCapabilities request for downloading the data set related to Land Use</dct:title>
+            <dcat:accessService rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/dcat#DataService"/>
+               <dct:title xml:lang="en">WFS GetCapabilities request for downloading the data set related to Land Use</dct:title>
+               <dcat:endpointURL rdf:resource="https://geoserver.epsilon-italia.it/geoserver/LU_sample/ows"/>
+               <dcat:endpointDescription rdf:resource="https://geoserver.epsilon-italia.it/geoserver/LU_sample/ows?service=WFS&amp;version=2.0.0&amp;request=GetCapabilities"/>
+               <geodcatap:serviceProtocol>
+                  <dct:Standard rdf:about="http://www.opengeospatial.org/standards/wfs"/>
+               </geodcatap:serviceProtocol>
+            </dcat:accessService>
+            <dcat:accessURL rdf:resource="https://geoserver.epsilon-italia.it/geoserver/LU_sample/ows?service=WFS&amp;version=2.0.0&amp;request=GetCapabilities"/>
+            <dct:license>
+               <dct:LicenseDocument rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply"/>
+            </dct:license>
+            <dct:accessRights>
+               <dct:RightsStatement rdf:about="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d"/>
+            </dct:accessRights>
+            <adms:representationTechnique rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/vector"/>
+            <dcat:mediaType>
+               <dct:MediaType rdf:about="https://www.iana.org/assignments/media-types/application/gml+xml"/>
+            </dcat:mediaType>
+         </dcat:Distribution>
+      </dcat:distribution>
+      <dct:rightsHolder>
          <rdf:Description>
             <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
             <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
-            <foaf:name xml:lang="en">Data Provider Organization</foaf:name>
+            <foaf:name xml:lang="en">MyOrganisation</foaf:name>
+            <foaf:mbox rdf:resource="mailto:info@my-organisation.eu"/>
          </rdf:Description>
-      </dct:publisher>
+      </dct:rightsHolder>
       <prov:qualifiedAttribution>
          <prov:Attribution>
             <prov:agent>
                <rdf:Description>
                   <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
                   <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
-                  <foaf:name xml:lang="en">Data Provider Organization</foaf:name>
+                  <foaf:name xml:lang="en">MyOrganisation</foaf:name>
+                  <foaf:mbox rdf:resource="mailto:info@my-organisation.eu"/>
                </rdf:Description>
             </prov:agent>
             <dcat:hadRole>
-               <dcat:Role rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/publisher"/>
+               <dcat:Role rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/owner"/>
             </dcat:hadRole>
          </prov:Attribution>
       </prov:qualifiedAttribution>
