@@ -8,9 +8,8 @@ Comments and inquiries should be sent via the [issue tracker](https://github.com
 
 ## Usage for High-Value Datasets (HVDs)
 
-Note that this XSLT, or its output, needs to be adjusted by each data publisher to produce HVD compliant metadata records.
-Especially the areas of Data Service identification, License information and Persistent Identifiers are not covered by this proof-of-concept.
 See [DCAT-AP HVD](https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/) for the HVD technical requirements.
+The XSLT has been updated to support the [HVD tagging good practice](https://github.com/INSPIRE-MIF/GeoDCAT-AP-pilot/tree/main/good-practices/hvd-tagging).
 
 ## How to use the XSLT
 
