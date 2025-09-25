@@ -10,6 +10,8 @@ Comments and inquiries should be sent via the [issue tracker](https://github.com
 
 See [DCAT-AP HVD](https://semiceu.github.io/DCAT-AP/releases/3.0.0-hvd/) for the HVD technical requirements.
 The XSLT has been updated to support the [HVD tagging good practice](https://github.com/INSPIRE-MIF/GeoDCAT-AP-pilot/tree/main/good-practices/hvd-tagging).
+However, this only handles tagging on the Dataset level.
+Implementers still need to add correct tagging to the Distribution (applicable legislation) and Data Service levels (applicable legislation and HVD category) for those distributions and data services of the dataset, which comply with the HVD IR.
 
 ## How to use the XSLT
 
