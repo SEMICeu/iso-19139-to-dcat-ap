@@ -64,18 +64,6 @@ geodcatap:spatialResolutionAsScale a dqv:Metric .
     dcat:distribution [ a dcat:Distribution ;
             dcterms:accessRights <http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d> ;
             dcterms:license <http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply> ;
-            dcterms:title "WMS GetCapabilities request for viewing the data set related to Land Use"@en ;
-            adms:representationTechnique <http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/vector> ;
-            dcat:accessService [ a dcat:DataService ;
-                    geodcatap:serviceProtocol <http://www.opengeospatial.org/standards/wms> ;
-                    dcterms:title "WMS GetCapabilities request for viewing the data set related to Land Use"@en ;
-                    dcat:endpointDescription <https://geoserver.epsilon-italia.it/geoserver/LU_sample/wms?service=WMS&version=1.3.0&request=GetCapabilities> ;
-                    dcat:endpointURL <https://geoserver.epsilon-italia.it/geoserver/LU_sample/wms> ] ;
-            dcat:accessURL <https://geoserver.epsilon-italia.it/geoserver/LU_sample/wms?service=WMS&version=1.3.0&request=GetCapabilities> ;
-            dcat:mediaType <https://www.iana.org/assignments/media-types/application/gml+xml> ],
-        [ a dcat:Distribution ;
-            dcterms:accessRights <http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d> ;
-            dcterms:license <http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply> ;
             dcterms:title "WFS GetCapabilities request for downloading the data set related to Land Use"@en ;
             adms:representationTechnique <http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/vector> ;
             dcat:accessService [ a dcat:DataService ;
@@ -84,6 +72,18 @@ geodcatap:spatialResolutionAsScale a dqv:Metric .
                     dcat:endpointDescription <https://geoserver.epsilon-italia.it/geoserver/LU_sample/ows?service=WFS&version=2.0.0&request=GetCapabilities> ;
                     dcat:endpointURL <https://geoserver.epsilon-italia.it/geoserver/LU_sample/ows> ] ;
             dcat:accessURL <https://geoserver.epsilon-italia.it/geoserver/LU_sample/ows?service=WFS&version=2.0.0&request=GetCapabilities> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/gml+xml> ],
+        [ a dcat:Distribution ;
+            dcterms:accessRights <http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d> ;
+            dcterms:license <http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply> ;
+            dcterms:title "WMS GetCapabilities request for viewing the data set related to Land Use"@en ;
+            adms:representationTechnique <http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/vector> ;
+            dcat:accessService [ a dcat:DataService ;
+                    geodcatap:serviceProtocol <http://www.opengeospatial.org/standards/wms> ;
+                    dcterms:title "WMS GetCapabilities request for viewing the data set related to Land Use"@en ;
+                    dcat:endpointDescription <https://geoserver.epsilon-italia.it/geoserver/LU_sample/wms?service=WMS&version=1.3.0&request=GetCapabilities> ;
+                    dcat:endpointURL <https://geoserver.epsilon-italia.it/geoserver/LU_sample/wms> ] ;
+            dcat:accessURL <https://geoserver.epsilon-italia.it/geoserver/LU_sample/wms?service=WMS&version=1.3.0&request=GetCapabilities> ;
             dcat:mediaType <https://www.iana.org/assignments/media-types/application/gml+xml> ] ;
     dcat:theme <http://inspire.ec.europa.eu/metadata-codelist/PriorityDataset/dir-2000-60>,
         <http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/national>,
