@@ -3142,7 +3142,6 @@
               <xsl:if test="$ResourceType = 'service'">
 <!-- Mapping moved to core profile for compliance with DCAT-AP 2 -->
 <!-- Mapping added for compliance with DCAT-AP 2 -->
-                <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
                 <xsl:if test="$profile = $extended">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
                   <xsl:if test="$include-deprecated = 'yes'">

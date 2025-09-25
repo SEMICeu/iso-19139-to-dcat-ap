@@ -117,6 +117,15 @@ geodcatap: a dcterms:Standard .
                     foaf:workplaceHomepage <https://geoportal.cuzk.gov.cz> ] ] ;
     prov:wasUsedBy [ a prov:Activity ;
             prov:generated [ a prov:Entity ;
+                    dcterms:description "Testování souladu síťové služby s prováděcími pravidly INSPIRE pro síťové služby."@cs,
+                        "Network service conformity testing with INSPIRE implementing rules for network services."@locale-en ;
+                    dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
+            prov:qualifiedAssociation [ a prov:Association ;
+                    prov:hadPlan [ a prov:Plan ;
+                            prov:wasDerivedFrom <http://data.europa.eu/eli/reg/2009/976> ] ] ;
+            prov:used <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ],
+        [ a prov:Activity ;
+            prov:generated [ a prov:Entity ;
                     dcterms:description "Testování souladu INSPIRE ATOM stahovací služby s technickými pokyny pro implementaci INSPIRE stahovacích služeb."@cs,
                         "INSPIRE ATOM download service conformity testing with the Technical Guidance for the implementation of INSPIRE Download Services."@locale-en ;
                     dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
@@ -125,15 +134,6 @@ geodcatap: a dcterms:Standard .
                             prov:wasDerivedFrom [ a prov:Entity ;
                                     dcterms:issued "2013-08-09"^^xsd:date ;
                                     dcterms:title "Technical Guidance for the implementation of INSPIRE Download Services"@cs ] ] ] ;
-            prov:used <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ],
-        [ a prov:Activity ;
-            prov:generated [ a prov:Entity ;
-                    dcterms:description "Testování souladu síťové služby s prováděcími pravidly INSPIRE pro síťové služby."@cs,
-                        "Network service conformity testing with INSPIRE implementing rules for network services."@locale-en ;
-                    dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
-            prov:qualifiedAssociation [ a prov:Association ;
-                    prov:hadPlan [ a prov:Plan ;
-                            prov:wasDerivedFrom <http://data.europa.eu/eli/reg/2009/976> ] ] ;
             prov:used <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ],
         [ a prov:Activity ;
             prov:generated [ a prov:Entity ;

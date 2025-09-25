@@ -1,0 +1,8 @@
+{
+    "description": "HVD dataset metadata transformation test for https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/83, based on https://github.com/INSPIRE-MIF/GeoDCAT-AP-pilot/blob/main/good-practices/hvd-tagging/ISO_HVD_Tagging_Anchor_Multilingual-clarification.xml",
+    "parameters": {
+        "profile": "extended",
+        "CoupledResourceLookup": "disabled",
+        "include-deprecated": "no"
+    }
+}
