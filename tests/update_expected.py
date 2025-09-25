@@ -99,11 +99,11 @@ def discover_updateable_test_cases(test_dir: str, specific_test_case: str = None
         
         # Create expected output files dict (may be empty, will be populated)
         expected_files = {}
-        xml_file = test_case_dir / "expected_output.xml"
+        rdf_file = test_case_dir / "expected_output.rdf"
         ttl_file = test_case_dir / "expected_output.ttl"
-        
-        if xml_file.exists():
-            expected_files["xml"] = str(xml_file)
+
+        if rdf_file.exists():
+            expected_files["RDF/XML"] = str(rdf_file)
         if ttl_file.exists():
             expected_files["turtle"] = str(ttl_file)
         
@@ -158,24 +158,24 @@ def update_expected_outputs(xslt_file: str, test_dir: str, test_case: str = None
                     test_case_obj.parameters
                 )
                 
-                # Determine the XML expected output file path
-                xml_expected_file = test_case_obj.expected_output_files.get('xml')
-                if not xml_expected_file:
+                # Determine the RDF/XML expected output file path
+                rdf_expected_file = test_case_obj.expected_output_files.get('RDF/XML')
+                if not rdf_expected_file:
                     # Create path for new expected output file
-                    xml_expected_file = str(Path(test_case_obj.input_file).parent / "expected_output.xml")
-                
+                    rdf_expected_file = str(Path(test_case_obj.input_file).parent / "expected_output.rdf")
+
                 # Write to expected output file (create or update)
-                with open(xml_expected_file, 'w', encoding='utf-8') as f:
+                with open(rdf_expected_file, 'w', encoding='utf-8') as f:
                     f.write(output)
-                
-                action = "Updated" if test_case_obj.expected_output_files.get('xml') else "Created"
-                logger.info(f"✓ {action} {xml_expected_file}")
-                
+
+                action = "Updated" if test_case_obj.expected_output_files.get('RDF/XML') else "Created"
+                logger.info(f"✓ {action} {rdf_expected_file}")
+
                 # Generate Turtle version if requested
                 if generate_turtle:
-                    xml_file = Path(xml_expected_file)
-                    ttl_file = xml_file.with_suffix('.ttl')
-                    if convert_xml_to_turtle(xml_file, ttl_file):
+                    rdf_file = Path(rdf_expected_file)
+                    ttl_file = rdf_file.with_suffix('.ttl')
+                    if convert_xml_to_turtle(rdf_file, ttl_file):
                         ttl_action = "Updated" if test_case_obj.expected_output_files.get('turtle') else "Created"
                         logger.info(f"✓ {ttl_action} {ttl_file.name}")
                     else:
@@ -222,18 +222,18 @@ def generate_turtle_only(test_dir: str, test_case: str = None):
             if test_case and test_case_dir.name != test_case:
                 continue
                 
-            xml_file = test_case_dir / "expected_output.xml"
+            rdf_file = test_case_dir / "expected_output.rdf"
             ttl_file = test_case_dir / "expected_output.ttl"
-            
-            if not xml_file.exists():
-                logger.warning(f"No expected_output.xml found in {test_case_dir.name}")
+
+            if not rdf_file.exists():
+                logger.warning(f"No expected_output.rdf found in {test_case_dir.name}")
                 continue
-                
+
             if ttl_file.exists():
                 logger.info(f"Turtle file already exists for {test_case_dir.name}, skipping")
                 continue
-                
-            if convert_xml_to_turtle(xml_file, ttl_file):
+
+            if convert_xml_to_turtle(rdf_file, ttl_file):
                 converted_count += 1
             else:
                 failed_count += 1

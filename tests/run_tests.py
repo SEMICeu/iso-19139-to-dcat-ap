@@ -164,20 +164,20 @@ class TestRunner:
         for test_case_dir in test_cases_dir.iterdir():
             if not test_case_dir.is_dir():
                 continue
-                
+
             input_file = test_case_dir / "input.xml"
             config_file = test_case_dir / "config.json"
-            
+
             # Look for expected output files in different formats
             expected_files = {}
-            xml_file = test_case_dir / "expected_output.xml"
+            rdf_file = test_case_dir / "expected_output.rdf"
             ttl_file = test_case_dir / "expected_output.ttl"
-            
-            if xml_file.exists():
-                expected_files["xml"] = str(xml_file)
+
+            if rdf_file.exists():
+                expected_files["RDF/XML"] = str(rdf_file)
             if ttl_file.exists():
                 expected_files["turtle"] = str(ttl_file)
-            
+
             # Load test configuration if available
             parameters = {}
             description = ""
@@ -189,7 +189,7 @@ class TestRunner:
                         description = config.get('description', '')
                 except Exception as e:
                     logger.warning(f"Failed to load config for {test_case_dir.name}: {e}")
-            
+
             # Check if test case is complete
             if not input_file.exists() or not expected_files:
                 reasons = []
@@ -197,10 +197,10 @@ class TestRunner:
                     reasons.append("missing input.xml")
                 if not expected_files:
                     reasons.append("missing expected output files")
-                
+
                 reason = f"incomplete test case ({', '.join(reasons)})"
                 logger.warning(f"Skipping {test_case_dir.name}: {reason}")
-                
+
                 skipped_case = SkippedTestCase(
                     name=test_case_dir.name,
                     reason=reason,
@@ -208,7 +208,7 @@ class TestRunner:
                 )
                 skipped_cases.append(skipped_case)
                 continue
-            
+
             test_case = TestCase(
                 name=test_case_dir.name,
                 input_file=str(input_file),
@@ -275,11 +275,11 @@ class TestRunner:
     
     def _compare_rdf_outputs(self, actual_output: str, expected_files: Dict[str, str]) -> bool:
         """Compare RDF outputs for semantic equality.
-        
+
         Args:
             actual_output: The actual transformation output (RDF/XML)
             expected_files: Dictionary mapping format names to file paths
-            
+
         Returns:
             True if outputs are semantically equivalent
         """
@@ -287,43 +287,43 @@ class TestRunner:
             # Parse actual output as RDF/XML
             actual_graph = Graph()
             actual_graph.parse(data=actual_output, format="xml")
-            
+
             # Try to compare with each expected format
             for format_name, expected_file in expected_files.items():
                 try:
                     expected_graph = Graph()
-                    
+
                     # Determine RDFLib format from our format name
-                    if format_name == "xml":
+                    if format_name == "RDF/XML":
                         rdf_format = "xml"
                     elif format_name == "turtle":
                         rdf_format = "turtle"
                     else:
                         logger.warning(f"Unknown format: {format_name}, skipping")
                         continue
-                        
+
                     expected_graph.parse(expected_file, format=rdf_format)
-                    
+
                     # Compare graph isomorphism
                     if compare.isomorphic(actual_graph, expected_graph):
                         logger.debug(f"RDF comparison passed using {format_name} format")
                         return True
                     else:
                         logger.debug(f"RDF comparison failed with {format_name} format")
-                        
+
                 except Exception as e:
                     logger.warning(f"Failed to parse expected output {expected_file} as {format_name}: {e}")
                     continue
-            
+
             # If we get here, none of the expected formats matched
             logger.warning("RDF comparison failed with all available expected formats")
             return False
-            
+
         except Exception as e:
             logger.warning(f"RDF comparison failed completely: {e}")
-            # Fallback to XML string comparison if we have an XML expected file
-            if "xml" in expected_files:
-                return self._normalize_xml(actual_output) == self._normalize_xml_file(expected_files["xml"])
+            # Fallback to XML string comparison if we have an RDF/XML expected file
+            if "RDF/XML" in expected_files:
+                return self._normalize_xml(actual_output) == self._normalize_xml_file(expected_files["RDF/XML"])
             return False
     
     def _normalize_xml(self, xml_content: str) -> str:
@@ -390,7 +390,8 @@ class TestRunner:
         total_discovered = len(results) + skipped_count
         total_time = sum(r.execution_time for r in results)
         
-        report_lines = [
+        # Prepare report sections
+        summary_lines = [
             "=" * 60,
             "ISO 19139 to DCAT-AP XSLT Test Report",
             "=" * 60,
@@ -402,47 +403,50 @@ class TestRunner:
             f"Total execution time: {total_time:.2f}s",
             ""
         ]
-        
+
+        skipped_lines = []
         if skipped_count > 0:
-            report_lines.extend([
+            skipped_lines.extend([
                 "SKIPPED TESTS:",
                 "-" * 20
             ])
             for skipped in skipped_cases:
-                report_lines.append(f"• {skipped.name}")
-                report_lines.append(f"  Reason: {skipped.reason}")
+                skipped_lines.append(f"• {skipped.name}")
+                skipped_lines.append(f"  Reason: {skipped.reason}")
                 if skipped.description:
-                    report_lines.append(f"  Description: {skipped.description}")
-                report_lines.append("")
-        
+                    skipped_lines.append(f"  Description: {skipped.description}")
+                skipped_lines.append("")
+
+        failed_lines = []
         if failed_count > 0:
-            report_lines.extend([
+            failed_lines.extend([
                 "FAILED TESTS:",
                 "-" * 20
             ])
             for result in results:
                 if not result.passed:
-                    report_lines.append(f"• {result.test_case.name}")
+                    failed_lines.append(f"• {result.test_case.name}")
                     if result.error_message:
-                        report_lines.append(f"  Error: {result.error_message}")
-                    report_lines.append("")
-        
+                        failed_lines.append(f"  Error: {result.error_message}")
+                    failed_lines.append("")
+
+        detailed_lines = []
         if len(results) > 0:
-            report_lines.extend([
+            detailed_lines.extend([
                 "DETAILED RESULTS:",
                 "-" * 20
             ])
-            
             for result in results:
                 status = "PASS" if result.passed else "FAIL"
-                report_lines.append(f"{result.test_case.name}: {status} ({result.execution_time:.2f}s)")
+                detailed_lines.append(f"{result.test_case.name}: {status} ({result.execution_time:.2f}s)")
                 if result.test_case.description:
-                    report_lines.append(f"  Description: {result.test_case.description}")
+                    detailed_lines.append(f"  Description: {result.test_case.description}")
                 if result.error_message:
-                    report_lines.append(f"  Error: {result.error_message}")
-                report_lines.append("")
-        
-        report_content = "\n".join(report_lines)
+                    detailed_lines.append(f"  Error: {result.error_message}")
+                detailed_lines.append("")
+
+        # Print detailed results first, then skipped/failed, then summary
+        report_content = "\n".join(detailed_lines + skipped_lines + failed_lines + summary_lines)
         
         if output_file:
             with open(output_file, 'w', encoding='utf-8') as f:
