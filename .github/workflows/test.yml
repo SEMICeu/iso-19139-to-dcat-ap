@@ -151,13 +151,17 @@ jobs:
         echo "Generated on: $(date)" >> coverage_summary.md
         echo "" >> coverage_summary.md
         
-        # Discover test cases dynamically and generate report
+        # Run tests and capture results
         echo "## Test Cases" >> coverage_summary.md
         python run_tests.py --verbose --report temp_report.txt > /dev/null 2>&1 || true
         
-        # Extract test case names dynamically
+        # Extract test results - fix the pipeline issue by using a temp file
         if [ -f "temp_report.txt" ]; then
-          grep -E "^[^:]+: (PASS|FAIL)" temp_report.txt | while read line; do
+          # Extract test results from the detailed results section
+          grep -E "^[^:]+: (PASS|FAIL)" temp_report.txt > test_results.tmp
+          
+          # Process each result
+          while IFS= read -r line; do
             test_name=$(echo "$line" | cut -d: -f1)
             status=$(echo "$line" | cut -d: -f2 | tr -d ' ')
             if [ "$status" = "PASS" ]; then
@@ -165,33 +169,27 @@ jobs:
             else
               echo "- $test_name: ❌" >> coverage_summary.md
             fi
-          done
-          rm -f temp_report.txt
+          done < test_results.tmp
+          
+          # Clean up temp files
+          rm -f temp_report.txt test_results.tmp
         else
-          # Fallback: list directories in test-cases
-          for dir in test-cases/*/; do
-            if [ -d "$dir" ]; then
-              test_name=$(basename "$dir")
-              echo "- $test_name: ✅" >> coverage_summary.md
-            fi
-          done
+          # Fallback: Run a simple test discovery
+          echo "- Tests status: ⚠️ (Could not generate detailed report)" >> coverage_summary.md
         fi
         
         echo "" >> coverage_summary.md
-        echo "## Configuration Approach" >> coverage_summary.md
-        echo "- Each test case uses its own config.json profile settings" >> coverage_summary.md
-        echo "- Profiles tested as configured per test case" >> coverage_summary.md
-        echo "" >> coverage_summary.md
-        
-        echo "## Python Versions Tested" >> coverage_summary.md
-        echo "- Python 3.12: ✅" >> coverage_summary.md
+        echo "## Test Configuration" >> coverage_summary.md
+        echo "- **Environment**: Python 3.12 on Ubuntu Latest" >> coverage_summary.md
+        echo "- **XSLT Processor**: Saxon-HE" >> coverage_summary.md
+        echo "- **Test Approach**: Each test case uses individual config.json settings" >> coverage_summary.md
+        echo "- **Validation**: Semantic RDF graph comparison (XML and Turtle formats)" >> coverage_summary.md
         echo "" >> coverage_summary.md
         
         echo "## Test Statistics" >> coverage_summary.md
-        echo "- Total test cases: ${{ needs.discover-tests.outputs.test-count }}" >> coverage_summary.md
-        echo "- Available test cases: ${{ needs.discover-tests.outputs.test-list }}" >> coverage_summary.md
-        echo "- Python versions tested: 1 (3.12)" >> coverage_summary.md
-        echo "- Total test executions: ${{ needs.discover-tests.outputs.test-count }}" >> coverage_summary.md
+        echo "- **Total discovered**: ${{ needs.discover-tests.outputs.test-count }} test cases" >> coverage_summary.md
+        echo "- **Test cases**: ${{ needs.discover-tests.outputs.test-list }}" >> coverage_summary.md
+        echo "- **CI Environment**: Ubuntu Latest with Python 3.12" >> coverage_summary.md
         
         # Add coverage summary to GitHub Actions job summary
         cat coverage_summary.md >> $GITHUB_STEP_SUMMARY
@@ -201,4 +199,4 @@ jobs:
       with:
         name: coverage-summary
         path: tests/coverage_summary.md
-        compression-level: 0
+        compression-level: 9
