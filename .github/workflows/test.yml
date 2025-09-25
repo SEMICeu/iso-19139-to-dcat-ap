@@ -75,12 +75,21 @@ jobs:
       with:
         name: test-report
         path: tests/test_report.txt
+        compression-level: 9
     
     - name: Display test results
       if: always()
       run: |
         echo "Test Report:"
         cat tests/test_report.txt || echo "No test report found"
+        
+        # Also add to GitHub Actions job summary for easy viewing
+        if [ -f tests/test_report.txt ]; then
+          echo "## Test Report" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat tests/test_report.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+        fi
 
   # Validation job to ensure test artifacts are valid
   validate-test-fixtures:
@@ -183,9 +192,13 @@ jobs:
         echo "- Available test cases: ${{ needs.discover-tests.outputs.test-list }}" >> coverage_summary.md
         echo "- Python versions tested: 1 (3.12)" >> coverage_summary.md
         echo "- Total test executions: ${{ needs.discover-tests.outputs.test-count }}" >> coverage_summary.md
+        
+        # Add coverage summary to GitHub Actions job summary
+        cat coverage_summary.md >> $GITHUB_STEP_SUMMARY
     
     - name: Upload coverage summary
       uses: actions/upload-artifact@v4
       with:
         name: coverage-summary
         path: tests/coverage_summary.md
+        compression-level: 0
