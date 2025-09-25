@@ -2,6 +2,13 @@
 
 Unless specified otherwise, the entries in this changelog apply to file [`iso-19139-to-dcat-ap.xsl`](./iso-19139-to-dcat-ap.xsl).
 
+## Updates since v3.1
+* Added testing support and several test cases
+* Added implementation of the [HVD tagging good practice](https://github.com/INSPIRE-MIF/GeoDCAT-AP-pilot/tree/main/good-practices/hvd-tagging) (https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/83, https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/45)
+* Added `r5r` namespace, needed for HVD
+* Clarified what is still needed to adjust for proper HVD compliance (https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/66)
+* Fixed handling of multilingual strings in Address (https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/73)
+
 ## 2024-09-30: Revised version (v3.1)
 This version includes additional revisions from the community.
 
