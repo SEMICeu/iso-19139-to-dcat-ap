@@ -3138,34 +3138,18 @@
             </xsl:when>
 <!-- In case the concept's URI is provided -->
             <xsl:when test="gmx:Anchor/@xlink:href">
-              <xsl:choose>
-                <xsl:when test="$ResourceType != 'service'">
-                  <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
-<!--
-                  <skos:Concept rdf:about="{gmx:Anchor/@xlink:href}">
-                    <skos:prefLabel xml:lang="{$MetadataLanguage}">
-                      <xsl:value-of select="gmx:Anchor"/>
-                    </skos:prefLabel>
-                    <skos:inScheme>
-                      <skos:ConceptScheme>
-                        <xsl:copy-of select="$OriginatingControlledVocabulary"/>
-                      </skos:ConceptScheme>
-                    </skos:inScheme>
-                  </skos:Concept>
--->
-                </xsl:when>
-                <xsl:otherwise>
+              <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
+              <xsl:if test="$ResourceType = 'service'">
 <!-- Mapping moved to core profile for compliance with DCAT-AP 2 -->
 <!-- Mapping added for compliance with DCAT-AP 2 -->
-                  <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
-                  <xsl:if test="$profile = $extended">
+                <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
+                <xsl:if test="$profile = $extended">
 <!-- DEPRECATED: Mapping kept for backward compatibility with GeoDCAT-AP v1.* -->
-                    <xsl:if test="$include-deprecated = 'yes'">
-                      <dct:subject rdf:resource="{gmx:Anchor/@xlink:href}"/>
-                    </xsl:if>
+                  <xsl:if test="$include-deprecated = 'yes'">
+                    <dct:subject rdf:resource="{gmx:Anchor/@xlink:href}"/>
                   </xsl:if>
-                </xsl:otherwise>
-              </xsl:choose>
+                </xsl:if>
+              </xsl:if>
             </xsl:when>
           </xsl:choose>
         </xsl:otherwise>
