@@ -69,9 +69,9 @@
       <dct:description xml:lang="en">This dataset provides a map of the land use distribution of MyCountry.</dct:description>
       <geodcatap:topicCategory rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/planningCadastre"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/lu"/>
-      <dcat:theme rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
-      <dcat:theme rdf:resource="http://data.europa.eu/bna/c_dd313021"/>
-      <dcat:theme rdf:resource="http://data.europa.eu/bna/c_f399050e"/>
+      <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
+      <dcatap:hvdCategory rdf:resource="http://data.europa.eu/bna/c_dd313021"/>
+      <dcatap:hvdCategory rdf:resource="http://data.europa.eu/bna/c_f399050e"/>
       <dcat:theme rdf:resource="https://www.eionet.europa.eu/gemet/en/concept/4614"/>
       <dcat:theme rdf:resource="https://www.eionet.europa.eu/gemet/en/concept/11323"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/national"/>

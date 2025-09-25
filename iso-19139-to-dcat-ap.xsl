@@ -3138,7 +3138,24 @@
             </xsl:when>
 <!-- In case the concept's URI is provided -->
             <xsl:when test="gmx:Anchor/@xlink:href">
-              <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
+              
+              <xsl:choose>
+                <!-- HVD applicable legislation -->
+                <xsl:when test="gmx:Anchor/@xlink:href = 'http://data.europa.eu/eli/reg_impl/2023/138/oj'">
+                  <dcatap:applicableLegislation rdf:resource="{gmx:Anchor/@xlink:href}"/>
+                </xsl:when>
+                
+                <!-- HVD Category -->
+                <xsl:when test="../gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href = 'http://data.europa.eu/bna/asd487ae75'">
+                  <dcatap:hvdCategory rdf:resource="{gmx:Anchor/@xlink:href}"/>
+                </xsl:when>
+
+                <!-- Regular dcat:theme -->
+                <xsl:otherwise>
+                  <dcat:theme rdf:resource="{gmx:Anchor/@xlink:href}"/>
+                </xsl:otherwise>
+              </xsl:choose>
+              
               <xsl:if test="$ResourceType = 'service'">
 <!-- Mapping moved to core profile for compliance with DCAT-AP 2 -->
 <!-- Mapping added for compliance with DCAT-AP 2 -->
