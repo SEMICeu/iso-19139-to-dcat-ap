@@ -99,13 +99,6 @@ jobs:
         echo "Running tests for ${{ needs.discover-tests.outputs.test-count }} test case(s): ${{ needs.discover-tests.outputs.test-list }}"
         python run_tests.py --verbose --report test_report.txt
     
-    - name: Upload test report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-report
-        path: tests/test_report.txt
-        compression-level: 9
     
     - name: Display test results and generate coverage summary
       if: always()
