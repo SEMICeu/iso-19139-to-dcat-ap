@@ -126,56 +126,59 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: [discover-tests, validate-test-fixtures, test]
-    if: success()
+    if: always()
     
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
     
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v4
+    - name: Download test report
+      uses: actions/download-artifact@v4
       with:
-        python-version: '3.12'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r tests/requirements.txt
+        name: test-report
+        path: ./
     
     - name: Generate dynamic test coverage summary
-      run: |
-        cd tests
-        
+      run: |        
         echo "# Test Coverage Summary" > coverage_summary.md
         echo "" >> coverage_summary.md
         echo "Generated on: $(date)" >> coverage_summary.md
         echo "" >> coverage_summary.md
         
-        # Run tests and capture results
+        # Use the actual test results from the test job
         echo "## Test Cases" >> coverage_summary.md
-        python run_tests.py --verbose --report temp_report.txt > /dev/null 2>&1 || true
-        
-        # Extract test results - fix the pipeline issue by using a temp file
-        if [ -f "temp_report.txt" ]; then
+        if [ -f "test_report.txt" ]; then
+          echo "<!-- Debug: Found test_report.txt -->" >> coverage_summary.md
+          
           # Extract test results from the detailed results section
-          grep -E "^[^:]+: (PASS|FAIL)" temp_report.txt > test_results.tmp
+          grep -E "^[^:]+: (PASS|FAIL)" test_report.txt > test_results.tmp 2>/dev/null || true
           
-          # Process each result
-          while IFS= read -r line; do
-            test_name=$(echo "$line" | cut -d: -f1)
-            status=$(echo "$line" | cut -d: -f2 | tr -d ' ')
-            if [ "$status" = "PASS" ]; then
-              echo "- $test_name: ✅" >> coverage_summary.md
-            else
-              echo "- $test_name: ❌" >> coverage_summary.md
-            fi
-          done < test_results.tmp
-          
-          # Clean up temp files
-          rm -f temp_report.txt test_results.tmp
+          if [ -s test_results.tmp ]; then
+            echo "<!-- Debug: Found $(wc -l < test_results.tmp) test results -->" >> coverage_summary.md
+            
+            # Process each result
+            while IFS= read -r line; do
+              test_name=$(echo "$line" | cut -d: -f1)
+              status=$(echo "$line" | cut -d: -f2 | tr -d ' ')
+              echo "<!-- Debug: Processing '$line' -> name='$test_name' status='$status' -->" >> coverage_summary.md
+              
+              if [ "$status" = "PASS" ]; then
+                echo "- $test_name: ✅" >> coverage_summary.md
+              elif [ "$status" = "FAIL" ]; then
+                echo "- $test_name: ❌" >> coverage_summary.md
+              else
+                echo "- $test_name: ⚠️ (Unknown status: '$status')" >> coverage_summary.md
+              fi
+            done < test_results.tmp
+            rm -f test_results.tmp
+          else
+            echo "- Tests status: ⚠️ (Could not parse test results - no matching lines found)" >> coverage_summary.md
+            echo "<!-- Debug: First 10 lines of test_report.txt:" >> coverage_summary.md
+            head -10 test_report.txt | sed 's/^/<!-- /' | sed 's/$/ -->/' >> coverage_summary.md
+          fi
         else
-          # Fallback: Run a simple test discovery
-          echo "- Tests status: ⚠️ (Could not generate detailed report)" >> coverage_summary.md
+          echo "- Tests status: ⚠️ (Test report not found)" >> coverage_summary.md
+          echo "<!-- Debug: Available files: $(ls -la) -->" >> coverage_summary.md
         fi
         
         echo "" >> coverage_summary.md
