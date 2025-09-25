@@ -2,7 +2,7 @@ name: XSLT Tests
 
 on:
   push:
-    branches: [ main, tests ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
