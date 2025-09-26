@@ -4155,7 +4155,7 @@
       <xsl:variable name="value" select="normalize-space(.)"/>
       <xsl:variable name="langs">
         <xsl:call-template name="Alpha3-to-Alpha2">
-          <xsl:with-param name="lang" select="translate(translate(@locale, $uppercase, $lowercase), '#', '')"/>
+          <xsl:with-param name="lang" select="substring-after(translate(translate(@locale, $uppercase, $lowercase), '#', ''), 'locale-')"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:if test="$value != ''">

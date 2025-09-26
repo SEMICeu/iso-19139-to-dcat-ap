@@ -39,11 +39,11 @@ geodcatap: a dcterms:Standard .
                     locn:thoroughfare "Pod sídlištěm 1800/9" ] ;
             foaf:mbox <mailto:cuzk.helpdesk@cuzk.gov.cz> ;
             foaf:name "Český úřad zeměměřický a katastrální"@cs,
-                "Czech Office for Surveying, Mapping and Cadastre"@locale-en ;
+                "Czech Office for Surveying, Mapping and Cadastre"@en ;
             foaf:phone <tel:+420284044455> ;
             foaf:workplaceHomepage <https://geoportal.cuzk.gov.cz> ] ;
     geodcatap:purpose "Služba byla vytvořena na základě směrnice o vybudování infrastruktury prostorových dat ve Společenství (INSPIRE), která vstoupila v platnost 15. května 2007. Do národní legislativy byla Směrnice v České republice transponována zákonem č. 380/2009 Sb., kterým se měnily zákon č. 123/1998 Sb., o právu na informace o životním prostředí, ve znění pozdějších předpisů, a zákon č. 200/1994 Sb., o zeměměřictví a o změně a doplnění některých zákonů souvisejících s jeho zavedením, ve znění pozdějších předpisů. Celá transpozice byla doplněna vyhláškou č. 103/2010 Sb., o provedení některých ustanovení zákona o poskytování informací o životním prostředí."@cs,
-        "Service was created on the the Directive on construction of spatial data infrastructure in the European Community (INSPIRE), which is valid from 15 May 2007. Into national legislation in the Czech Republic, the Directive was transposed by the Act No. 380/2009 Coll., amending Act No. 123/1998 Coll., establishing the right to information on the environment, as subsequently amended, and Act No. 200/1994 Coll., on surveying and amending and supplementing certain acts related to its introduction, as amended. Full transposition was supplemented by Decree No. 103/2010 Coll., implementing certain provisions of the Act to provide environmental information."@locale-en ;
+        "Service was created on the the Directive on construction of spatial data infrastructure in the European Community (INSPIRE), which is valid from 15 May 2007. Into national legislation in the Czech Republic, the Directive was transposed by the Act No. 380/2009 Coll., amending Act No. 123/1998 Coll., establishing the right to information on the environment, as subsequently amended, and Act No. 200/1994 Coll., on surveying and amending and supplementing certain acts related to its introduction, as amended. Full transposition was supplemented by Decree No. 103/2010 Coll., implementing certain provisions of the Act to provide environmental information."@en ;
     geodcatap:resourceType <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service> ;
     geodcatap:serviceType <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download> ;
     dcterms:accessRights <http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations> ;
@@ -52,7 +52,7 @@ geodcatap: a dcterms:Standard .
             dcterms:title "Technical Guidance for the implementation of INSPIRE Download Services"@cs ],
         <http://data.europa.eu/eli/reg/2009/976> ;
     dcterms:description "Stahovací služba ATOM pro Data50 je veřejná stahovací služba pro poskytování dat digitálního geografického modelu Data50. Služba poskytuje data pro celou republiku ve formátu shapefile. Data se skládají z 8 tematických oblastí- Sídelní, kulturní a hospodářské objekty, Komunikace, Produktovody a elektrické vedení, Vodstvo, Hranice územních jednotek, Vegetace a povrch, Terénní reliéf a Popis. Služba splňuje technické pokyny pro INSPIRE stahovací služby verze 3.1. Pro stažení je datová sada komprimována (ZIP)."@cs,
-        "The ATOM download service for Data50 is publicly available and it provides data of the geographical model Data50. The service provides data for the whole territory of the Czech Republic in shapefile data format. Data is divided into 8 thematic groups - Settlements and cultural and industrial buildings, Transportation, Pipelines and electric lines, Hydrography, Boundary of territorial units, Vegetation and bare surface, Terrain and Names. Data can be downloaded by thematic groups or all layers in one file. The service fulfills the technical instructions for INSPIRE Download Services in the version 3.1. Datasets are compressed (ZIP) for downloading."@locale-en ;
+        "The ATOM download service for Data50 is publicly available and it provides data of the geographical model Data50. The service provides data for the whole territory of the Czech Republic in shapefile data format. Data is divided into 8 thematic groups - Settlements and cultural and industrial buildings, Transportation, Pipelines and electric lines, Hydrography, Boundary of territorial units, Vegetation and bare surface, Terrain and Names. Data can be downloaded by thematic groups or all layers in one file. The service fulfills the technical instructions for INSPIRE Download Services in the version 3.1. Datasets are compressed (ZIP) for downloading."@en ;
     dcterms:identifier ""^^xsd:string ;
     dcterms:license <https://geoportal.cuzk.gov.cz/Dokumenty/Podminky.pdf> ;
     dcterms:modified "2023-03-27"^^xsd:date ;
@@ -62,7 +62,7 @@ geodcatap: a dcterms:Standard .
                 "POLYGON((12.09 51.06,18.86 51.06,18.86 48.55,12.09 48.55,12.09 51.06))"^^geo:wktLiteral ],
         <http://publications.europa.eu/resource/authority/country/CZE> ;
     dcterms:title "Stahovací služba ATOM pro Data50"@cs,
-        "ATOM Download Service for the Data50"@locale-en ;
+        "ATOM Download Service for the Data50"@en ;
     dcat:endpointDescription <https://atom.cuzk.gov.cz/Data50/Data50.xml> ;
     dcat:endpointURL <https://atom.cuzk.gov.cz/Data50/Data50.xml> ;
     dcat:keyword "1:50 000"@cs,
@@ -78,19 +78,19 @@ geodcatap: a dcterms:Standard .
         "sídla"@cs,
         "topografická databáze"@cs,
         "vrstevnice"@cs,
-        "1:50,000"@locale-en,
-        "1:500000"@locale-en,
-        "50,000"@locale-en,
-        "50000"@locale-en,
-        "ATOM"@locale-en,
-        "contour"@locale-en,
-        "data downloading"@locale-en,
-        "database of the Czech Republic"@locale-en,
-        "download service"@locale-en,
-        "seamless database"@locale-en,
-        "settlements"@locale-en,
-        "topographic database"@locale-en,
-        "transportation"@locale-en ;
+        "1:50,000"@en,
+        "1:500000"@en,
+        "50,000"@en,
+        "50000"@en,
+        "ATOM"@en,
+        "contour"@en,
+        "data downloading"@en,
+        "database of the Czech Republic"@en,
+        "download service"@en,
+        "seamless database"@en,
+        "settlements"@en,
+        "topographic database"@en,
+        "transportation"@en ;
     dcat:theme <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoProductAccessService>,
         <http://inspire.ec.europa.eu/theme/au>,
         <http://inspire.ec.europa.eu/theme/bu>,
@@ -114,13 +114,24 @@ geodcatap: a dcterms:Standard .
                             locn:thoroughfare "Pod sídlištěm 1800/9" ] ;
                     foaf:mbox <mailto:cuzk.helpdesk@cuzk.gov.cz> ;
                     foaf:name "Český úřad zeměměřický a katastrální"@cs,
-                        "Czech Office for Surveying, Mapping and Cadastre"@locale-en ;
+                        "Czech Office for Surveying, Mapping and Cadastre"@en ;
                     foaf:phone <tel:+420284044455> ;
                     foaf:workplaceHomepage <https://geoportal.cuzk.gov.cz> ] ] ;
     prov:wasUsedBy [ a prov:Activity ;
             prov:generated [ a prov:Entity ;
+                    dcterms:description "Testování souladu INSPIRE ATOM stahovací služby s technickými pokyny pro implementaci INSPIRE stahovacích služeb."@cs,
+                        "INSPIRE ATOM download service conformity testing with the Technical Guidance for the implementation of INSPIRE Download Services."@en ;
+                    dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
+            prov:qualifiedAssociation [ a prov:Association ;
+                    prov:hadPlan [ a prov:Plan ;
+                            prov:wasDerivedFrom [ a prov:Entity ;
+                                    dcterms:issued "2013-08-09"^^xsd:date ;
+                                    dcterms:title "Technical Guidance for the implementation of INSPIRE Download Services"@cs ] ] ] ;
+            prov:used <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ],
+        [ a prov:Activity ;
+            prov:generated [ a prov:Entity ;
                     dcterms:description "Testování souladu síťové služby s prováděcími pravidly INSPIRE pro síťové služby."@cs,
-                        "Network service conformity testing with INSPIRE implementing rules for network services."@locale-en ;
+                        "Network service conformity testing with INSPIRE implementing rules for network services."@en ;
                     dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
             prov:qualifiedAssociation [ a prov:Association ;
                     prov:hadPlan [ a prov:Plan ;
@@ -129,18 +140,7 @@ geodcatap: a dcterms:Standard .
         [ a prov:Activity ;
             prov:generated [ a prov:Entity ;
                     dcterms:description "Testování souladu INSPIRE ATOM stahovací služby s technickými pokyny pro implementaci INSPIRE stahovacích služeb."@cs,
-                        "INSPIRE ATOM download service conformity testing with the Technical Guidance for the implementation of INSPIRE Download Services."@locale-en ;
-                    dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
-            prov:qualifiedAssociation [ a prov:Association ;
-                    prov:hadPlan [ a prov:Plan ;
-                            prov:wasDerivedFrom [ a prov:Entity ;
-                                    dcterms:issued "2013-08-09"^^xsd:date ;
-                                    dcterms:title "Technical Guidance for the implementation of INSPIRE Download Services"@cs ] ] ] ;
-            prov:used <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ],
-        [ a prov:Activity ;
-            prov:generated [ a prov:Entity ;
-                    dcterms:description "Testování souladu INSPIRE ATOM stahovací služby s technickými pokyny pro implementaci INSPIRE stahovacích služeb."@cs,
-                        "INSPIRE ATOM download service conformity testing with the Technical Guidance for the implementation of INSPIRE Download Services."@locale-en ;
+                        "INSPIRE ATOM download service conformity testing with the Technical Guidance for the implementation of INSPIRE Download Services."@en ;
                     dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
             prov:qualifiedAssociation [ a prov:Association ;
                     prov:hadPlan [ a prov:Plan ;
@@ -151,7 +151,7 @@ geodcatap: a dcterms:Standard .
         [ a prov:Activity ;
             prov:generated [ a prov:Entity ;
                     dcterms:description "Testování souladu síťové služby s prováděcími pravidly INSPIRE pro síťové služby."@cs,
-                        "Network service conformity testing with INSPIRE implementing rules for network services."@locale-en ;
+                        "Network service conformity testing with INSPIRE implementing rules for network services."@en ;
                     dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
             prov:qualifiedAssociation [ a prov:Association ;
                     prov:hadPlan [ a prov:Plan ;
@@ -180,7 +180,7 @@ geodcatap: a dcterms:Standard .
                     vcard:hasTelephone <tel:+420284044455> ;
                     vcard:hasURL <https://geoportal.cuzk.gov.cz> ;
                     vcard:organization-name "Český úřad zeměměřický a katastrální"@cs,
-                        "Czech Office for Surveying, Mapping and Cadastre"@locale-en ] ;
+                        "Czech Office for Surveying, Mapping and Cadastre"@en ] ;
             prov:qualifiedAttribution [ a prov:Attribution ;
                     dcat:hadRole <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact> ;
                     prov:agent [ a prov:Agent,
@@ -192,7 +192,7 @@ geodcatap: a dcterms:Standard .
                                     locn:thoroughfare "Pod sídlištěm 1800/9" ] ;
                             org:memberOf [ a foaf:Organization ;
                                     foaf:name "Český úřad zeměměřický a katastrální"@cs,
-                                        "Czech Office for Surveying, Mapping and Cadastre"@locale-en ] ;
+                                        "Czech Office for Surveying, Mapping and Cadastre"@en ] ;
                             foaf:mbox <mailto:bohumil.vlcek@cuzk.gov.cz>,
                                 <mailto:podpora.zums@cuzk.gov.cz> ;
                             foaf:name "Vlček, Bohumil, Ing."@cs ;
