@@ -782,6 +782,17 @@
         </xsl:call-template>
       </xsl:for-each>
     </xsl:param>
+
+    <xsl:param name="ResourcePurpose">
+      <xsl:for-each select="gmd:identificationInfo[1]/*/gmd:purpose">
+        <geodcatap:purpose xml:lang="{$MetadataLanguage}">
+          <xsl:value-of select="normalize-space(gco:CharacterString)"/>
+        </geodcatap:purpose>
+        <xsl:call-template name="LocalisedString">
+          <xsl:with-param name="term">geodcatap:purpose</xsl:with-param>
+        </xsl:call-template>
+      </xsl:for-each>
+    </xsl:param>
 <!--
     <xsl:param name="Lineage">
       <xsl:value-of select="gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString"/>
@@ -1226,6 +1237,7 @@
       </dct:description>
 -->
       <xsl:copy-of select="$ResourceAbstract"/>
+      <xsl:copy-of select="$ResourcePurpose"/>
 <!-- Maintenance information (tentative) -->
       <xsl:for-each select="gmd:identificationInfo/*/gmd:resourceMaintenance">
         <xsl:apply-templates select="gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode"/>

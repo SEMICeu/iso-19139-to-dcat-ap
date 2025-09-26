@@ -8,6 +8,8 @@ Unless specified otherwise, the entries in this changelog apply to file [`iso-19
 * Added `r5r` namespace, needed for HVD
 * Clarified what is still needed to adjust for proper HVD compliance (https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/66)
 * Fixed handling of multilingual strings in Address (https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/73)
+* Added missing items to `MD_MaintenanceFrequencyCode` mapping (https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/79)
+* Added transformation of ResourcePurpose (https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/70)
 
 ## 2024-09-30: Revised version (v3.1)
 This version includes additional revisions from the community.
