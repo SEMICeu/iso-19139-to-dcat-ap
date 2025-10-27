@@ -2509,10 +2509,10 @@
   <xsl:template name="GeographicBoundingBox" match="gmd:identificationInfo[1]/*/*[self::gmd:extent|self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox">
 -->
   <xsl:template name="GeographicBoundingBox" match="gmd:EX_GeographicBoundingBox">
-    <xsl:param name="north" select="gmd:northBoundLatitude/gco:Decimal"/>
-    <xsl:param name="east"  select="gmd:eastBoundLongitude/gco:Decimal"/>
-    <xsl:param name="south" select="gmd:southBoundLatitude/gco:Decimal"/>
-    <xsl:param name="west"  select="gmd:westBoundLongitude/gco:Decimal"/>
+    <xsl:param name="north" select="format-number(gmd:northBoundLatitude/gco:Decimal, '0.0######')"/>
+    <xsl:param name="east"  select="format-number(gmd:eastBoundLongitude/gco:Decimal, '0.0######')"/>
+    <xsl:param name="south" select="format-number(gmd:southBoundLatitude/gco:Decimal, '0.0######')"/>
+    <xsl:param name="west"  select="format-number(gmd:westBoundLongitude/gco:Decimal, '0.0######')"/>
 
 <!-- Bbox as a dct:Box -->
 <!-- Need to check whether this is correct - in particular, the "projection" parameter -->
