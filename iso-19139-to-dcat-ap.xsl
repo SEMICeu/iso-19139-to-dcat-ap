@@ -825,19 +825,6 @@
       </xsl:choose>
     </xsl:param>
 
-    <xsl:param name="UniqueResourceIdentifier">
-      <xsl:for-each select="gmd:identificationInfo[1]/*/gmd:citation/*/gmd:identifier/*">
-        <xsl:choose>
-          <xsl:when test="gmd:codeSpace/gco:CharacterString/text() != ''">
-            <xsl:value-of select="concat(gmd:codeSpace/gco:CharacterString/text(),gmd:code/gco:CharacterString/text())"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="gmd:code/gco:CharacterString/text()"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:for-each>
-    </xsl:param>
-
     <xsl:param name="ConstraintsRelatedToAccessAndUse">
       <xsl:apply-templates select="gmd:identificationInfo[1]/*/gmd:resourceConstraints/*">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
@@ -4407,3 +4394,4 @@
   </xsl:template>
 
 </xsl:transform>
+
