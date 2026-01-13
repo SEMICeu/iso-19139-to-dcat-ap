@@ -1435,7 +1435,7 @@
               </xsl:otherwise>
             </xsl:choose>
           </xsl:variable>
-          
+
           <xsl:variable name="FileSize">
             <xsl:choose>
               <xsl:when test="../../gmd:transferSize/gco:Real != ''">
@@ -4417,5 +4417,6 @@
   </xsl:template>
 
 </xsl:transform>
+
 
 
