@@ -4417,6 +4417,3 @@
   </xsl:template>
 
 </xsl:transform>
-
-
-
