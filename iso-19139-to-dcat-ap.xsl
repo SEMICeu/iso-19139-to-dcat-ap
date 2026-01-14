@@ -1431,6 +1431,14 @@
             </xsl:choose>
           </xsl:variable>
 
+          <xsl:variable name="FileSize">
+            <xsl:choose>
+              <xsl:when test="../../gmd:transferSize/gco:Real != ''">
+                <dcat:byteSize rdf:datatype="{$xsd}nonNegativeInteger"><xsl:value-of select="format-number(round(../../gmd:transferSize/gco:Real * 1000000), '#')"/></dcat:byteSize>
+              </xsl:when>
+            </xsl:choose>
+          </xsl:variable>
+  
           <xsl:choose>
 <!-- Mapping added to the core profile for compliance with DCAT-AP 2 -->
             <xsl:when test="$ResourceType = 'service'">
@@ -1499,6 +1507,8 @@
                       <xsl:if test="$profile = $extended">
                         <xsl:copy-of select="$SpatialRepresentationType"/>
                       </xsl:if>
+<!-- File size -->
+                      <xsl:copy-of select="$FileSize"/>
 <!-- Encoding -->
                       <xsl:copy-of select="$Encoding"/>
 <!-- Resource character encoding -->
