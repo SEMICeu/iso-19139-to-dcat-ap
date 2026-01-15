@@ -1,0 +1,8 @@
+{
+    "description": "TransferSize to byteSize transformation test for https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/95, based on https://metadata.naturalsciences.be/geonetwork/srv/api/records/bmdc.be:dataset:2100/formatters/xml",
+    "parameters": {
+        "profile": "extended",
+        "CoupledResourceLookup": "disabled",
+        "include-deprecated": "no"
+    }
+}
