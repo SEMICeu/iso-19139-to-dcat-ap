@@ -1368,11 +1368,27 @@
 
       <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution">
 <!-- Encoding -->
-        <xsl:variable name="Encoding">
-          <xsl:apply-templates select="(gmd:distributionFormat | gmd:distributorFormat)/gmd:MD_Format/gmd:name/*"/>
+        <xsl:variable name="DistributionFormat">
+          <xsl:apply-templates select="gmd:distributionFormat/gmd:MD_Format/gmd:name/*"/>
         </xsl:variable>
 <!-- Resource locators (access / download URLs) -->
         <xsl:for-each select="(gmd:transferOptions | gmd:distributor/gmd:MD_Distributor/gmd:distributorTransferOptions)/*/gmd:onLine/*">
+
+          <xsl:variable name="DistributorFormat">
+            <xsl:if test="../../../../gmd:distributorFormat">
+              <xsl:apply-templates select="../../../../gmd:distributorFormat/gmd:MD_Format/gmd:name/*"/>
+            </xsl:if>
+          </xsl:variable>
+          <xsl:variable name="Encoding">
+            <xsl:choose>
+              <xsl:when test="$DistributorFormat != ''">
+                <xsl:copy-of select="$DistributorFormat"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:copy-of select="$DistributionFormat"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:variable>
 
           <xsl:variable name="url" select="gmd:linkage/gmd:URL"/>
 
@@ -3429,8 +3445,7 @@
   </xsl:template>
 
 <!-- Encoding -->
-
-  <xsl:template name="Encoding" match="gmd:distributionFormat/gmd:MD_Format/gmd:name/*">
+  <xsl:template name="Encoding" match="(gmd:distributionFormat|gmd:distributorFormat)/gmd:MD_Format/gmd:name/*">
     <xsl:param name="format-label">
       <xsl:value-of select="normalize-space(.)"/>
     </xsl:param>
