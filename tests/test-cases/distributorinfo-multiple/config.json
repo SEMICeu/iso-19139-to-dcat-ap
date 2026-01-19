@@ -1,0 +1,8 @@
+{
+    "description": "Multiple DistriburInfo with different formats transformation test, based on https://metadata.naturalsciences.be/geonetwork/srv/api/records/rbins:dataset::idod_winmon/formatters/xml",
+    "parameters": {
+        "profile": "extended",
+        "CoupledResourceLookup": "disabled",
+        "include-deprecated": "no"
+    }
+}
