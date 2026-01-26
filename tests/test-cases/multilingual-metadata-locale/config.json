@@ -1,0 +1,10 @@
+{
+    "description": "Configurable prefix for locale transformation test, issue #90",
+    "parameters": {
+        "profile": "extended",
+        "CoupledResourceLookup": "disabled",
+        "include-deprecated": "no",
+	"locale-prefix": "",
+	"locale-default-lang": "en"
+    }
+}
