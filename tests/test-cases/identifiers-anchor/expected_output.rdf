@@ -73,6 +73,7 @@
       <dcat:theme rdf:resource="https://www.eionet.europa.eu/gemet/en/concept/11323"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/national"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/PriorityDataset/dir-2000-60"/>
+      <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">org-id/123456</dct:identifier>
       <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://www.my-organisation.eu/so/lu/land-use-map</dct:identifier>
       <dct:language>
          <dct:LinguisticSystem rdf:about="http://publications.europa.eu/resource/authority/language/ENG"/>
@@ -151,8 +152,7 @@
             <dct:accessRights>
                <dct:RightsStatement rdf:about="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d"/>
             </dct:accessRights>
-	    <adms:representationTechnique rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/vector"/>
-	    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">213701</dcat:byteSize>
+            <adms:representationTechnique rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/vector"/>
             <dcat:mediaType>
                <dct:MediaType rdf:about="https://www.iana.org/assignments/media-types/application/gml+xml"/>
             </dcat:mediaType>

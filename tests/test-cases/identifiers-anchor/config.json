@@ -1,0 +1,8 @@
+{
+    "description": "Multiple identifiers (including gmx:anchor) dataset metadata transformation test for https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/78",
+    "parameters": {
+        "profile": "extended",
+        "CoupledResourceLookup": "disabled",
+        "include-deprecated": "no"
+    }
+}

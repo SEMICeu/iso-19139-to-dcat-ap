@@ -84,7 +84,7 @@
     xmlns:vcard  = "http://www.w3.org/2006/vcard/ns#"
     xmlns:wdrs   = "http://www.w3.org/2007/05/powder-s#"
     xmlns:xlink  = "http://www.w3.org/1999/xlink"
-    xmlns:xs	   = "http://www.w3.org/2001/XMLSchema"
+    xmlns:xs     = "http://www.w3.org/2001/XMLSchema"
     xmlns:xsi    = "http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xsl    = "http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="earl gco gmd gml gmx i i-gp srv xlink xsi xsl wdrs"
@@ -452,8 +452,8 @@
       <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString">
         <xsl:choose>
           <!-- Try to find English locale first -->
-	  <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale='#{$locale-prefix}{$locale-default-lang}']">
-	    <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale='#${locale-prefix}{$locale-default-lang}'][1])"/>
+          <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale='#{$locale-prefix}{$locale-default-lang}']">
+            <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale='#${locale-prefix}{$locale-default-lang}'][1])"/>
           </xsl:when>
           <!-- Otherwise use the first available LocalisedCharacterString -->
           <xsl:otherwise>
@@ -1653,8 +1653,14 @@
     <xsl:param name="code">
       <xsl:value-of select="gmd:code/gco:CharacterString"/>
     </xsl:param>
+    <xsl:param name="anchor">
+      <xsl:value-of select="gmd:code/gmx:Anchor"/>
+    </xsl:param>
     <xsl:param name="id">
       <xsl:choose>
+        <xsl:when test="$anchor != ''">
+          <xsl:value-of select="$anchor"/>
+        </xsl:when>
         <xsl:when test="$ns != ''">
           <xsl:choose>
             <xsl:when test="substring($ns,string-length($ns),1) = '/'">

@@ -1,7 +1,6 @@
 @prefix adms: <http://www.w3.org/ns/adms#> .
 @prefix cnt: <http://www.w3.org/2011/content#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix dcatap: <http://data.europa.eu/r5r/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dqv: <http://www.w3.org/ns/dqv#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -40,13 +39,10 @@ geodcatap:spatialResolutionAsScale a dqv:Metric .
     geodcatap:referenceSystem <http://www.opengis.net/def/crs/EPSG/0/4258> ;
     geodcatap:resourceType <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/dataset> ;
     geodcatap:topicCategory <http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/planningCadastre> ;
-    dcatap:applicableLegislation <http://data.europa.eu/eli/reg_impl/2023/138/oj> ;
-    dcatap:hvdCategory <http://data.europa.eu/bna/c_dd313021>,
-        <http://data.europa.eu/bna/c_f399050e> ;
     dcterms:conformsTo <http://data.europa.eu/eli/reg/2010/1089> ;
     dcterms:created "2019-05-15"^^xsd:date ;
     dcterms:description "This dataset provides a map of the land use distribution of MyCountry."@en ;
-    dcterms:identifier "http://www.my-organisation.eu/so/lu/land-use-map"^^xsd:anyURI ;
+    dcterms:identifier "org-id/123456"^^xsd:string , "http://www.my-organisation.eu/so/lu/land-use-map"^^xsd:anyURI ;
     dcterms:language <http://publications.europa.eu/resource/authority/language/ENG> ;
     dcterms:provenance [ a dcterms:ProvenanceStatement ;
             dcterms:description "The Land Use Map is built with the privileged support of a basic layer, which covers the entire territory and whose theme presents a close connection with land use. The method used is based on five successive steps: 1. The base layer is crossed by geoprocessing with other themes providing additional information on land use. 2. The resulting information is summarized at the scale of the surface features of the base layer. 3. The application of a typology then makes it possible to classify these surface entities (polygons) in the different occupation classes differentiated in the legend. 4. At the end of this classification, some base layer polygons with mixed land occupations are treated in a specific way (division and reallocation). 5. The final step is to produce the final land use map by a process of aggregation (dissolution) of polygons belonging to the same occupancy class. This last manipulation can be done by considering different levels of detail of the legend. The last version was carried out by photo-interpretation on the basis of Orthophotos 2006 - 2007 in combination with the national 10,000 basemap, the axes of the railway, road and hydrographic networks."@en ] ;
