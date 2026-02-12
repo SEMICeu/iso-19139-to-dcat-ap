@@ -53,7 +53,7 @@ geodcatap: a dcterms:Standard .
         <http://data.europa.eu/eli/reg/2009/976> ;
     dcterms:description "Stahovací služba ATOM pro Data50 je veřejná stahovací služba pro poskytování dat digitálního geografického modelu Data50. Služba poskytuje data pro celou republiku ve formátu shapefile. Data se skládají z 8 tematických oblastí- Sídelní, kulturní a hospodářské objekty, Komunikace, Produktovody a elektrické vedení, Vodstvo, Hranice územních jednotek, Vegetace a povrch, Terénní reliéf a Popis. Služba splňuje technické pokyny pro INSPIRE stahovací služby verze 3.1. Pro stažení je datová sada komprimována (ZIP)."@cs,
         "The ATOM download service for Data50 is publicly available and it provides data of the geographical model Data50. The service provides data for the whole territory of the Czech Republic in shapefile data format. Data is divided into 8 thematic groups - Settlements and cultural and industrial buildings, Transportation, Pipelines and electric lines, Hydrography, Boundary of territorial units, Vegetation and bare surface, Terrain and Names. Data can be downloaded by thematic groups or all layers in one file. The service fulfills the technical instructions for INSPIRE Download Services in the version 3.1. Datasets are compressed (ZIP) for downloading."@en ;
-    dcterms:identifier ""^^xsd:string ;
+    dcterms:identifier "https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50"^^xsd:anyURI ;
     dcterms:license <https://geoportal.cuzk.gov.cz/Dokumenty/Podminky.pdf> ;
     dcterms:modified "2023-03-27"^^xsd:date ;
     dcterms:spatial [ a dcterms:Location ;

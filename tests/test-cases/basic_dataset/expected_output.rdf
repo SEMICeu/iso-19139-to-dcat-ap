@@ -73,7 +73,7 @@
       <dcat:theme rdf:resource="https://www.eionet.europa.eu/gemet/en/concept/11323"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/national"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/PriorityDataset/dir-2000-60"/>
-      <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
+      <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://www.my-organisation.eu/so/lu/land-use-map</dct:identifier>
       <dct:language>
          <dct:LinguisticSystem rdf:about="http://publications.europa.eu/resource/authority/language/ENG"/>
       </dct:language>
