@@ -28,6 +28,7 @@ geodcatap: a dcterms:Standard .
 [] a dcat:DataService ;
     geodcatap:resourceType <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service> ;
     geodcatap:serviceProtocol <http://www.opengeospatial.org/standards/wms> ;
+    geodcatap:serviceCategory <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoMapAccessService> ;
     geodcatap:serviceType <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view> ;
     dcterms:accessRights <http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d> ;
     dcterms:conformsTo <http://data.europa.eu/eli/reg/2009/976> ;
@@ -45,8 +46,7 @@ geodcatap: a dcterms:Standard .
     dcterms:title "Land Use map of MyCountry"@en ;
     dcat:endpointDescription <http://www.my-organisation.eu/wms?VERSION=1.3.0&SERVICE=WMS&REQUEST=GetCapabilities> ;
     dcat:endpointURL <http://www.my-organisation.eu/wms> ;
-    dcat:theme <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoMapAccessService>,
-        <https://www.eionet.europa.eu/gemet/en/concept/11323>,
+    dcat:theme <https://www.eionet.europa.eu/gemet/en/concept/11323>,
         <https://www.eionet.europa.eu/gemet/en/concept/4614> ;
     prov:qualifiedAttribution [ a prov:Attribution ;
             dcat:hadRole <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/owner> ;

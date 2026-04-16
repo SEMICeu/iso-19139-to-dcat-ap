@@ -143,7 +143,7 @@
       <dcat:keyword xml:lang="en">data downloading</dcat:keyword>
       <dcat:keyword xml:lang="cs">ATOM</dcat:keyword>
       <dcat:keyword xml:lang="en">ATOM</dcat:keyword>
-      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoProductAccessService"/>
+      <geodcatap:serviceCategory rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoProductAccessService"/>
       <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50</dct:identifier>
       <geodcatap:serviceType rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download"/>
       <dct:spatial rdf:parseType="Resource">
