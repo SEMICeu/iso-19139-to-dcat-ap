@@ -451,9 +451,17 @@
       <!-- Handle PT_FreeText with LocalisedCharacterStrings -->
       <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString">
         <xsl:choose>
-          <!-- Try to find English locale first -->
-          <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale='#{$locale-prefix}{$locale-default-lang}']">
-            <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale='#${locale-prefix}{$locale-default-lang}'][1])"/>
+          <!-- Try to find English locale with prefix (e.g. #locale-en) -->
+          <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',$locale-prefix,$locale-default-lang)]">
+            <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',$locale-prefix,$locale-default-lang)][1])"/>
+          </xsl:when>
+          <!-- Try to find English locale without prefix, uppercase (e.g. #EN) -->
+          <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',upper-case($locale-default-lang))]">
+            <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',upper-case($locale-default-lang))][1])"/>
+          </xsl:when>
+          <!-- Try to find English locale without prefix, lowercase (e.g. #en) -->
+          <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',lower-case($locale-default-lang))]">
+            <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',lower-case($locale-default-lang))][1])"/>
           </xsl:when>
           <!-- Otherwise use the first available LocalisedCharacterString -->
           <xsl:otherwise>
@@ -771,6 +779,7 @@
     <xsl:param name="ServiceCategory">
       <xsl:value-of select="gmd:identificationInfo/*/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gmx:Anchor[starts-with(@xlink:href, $SpatialDataServiceCategoryCodelistUri)]/@xlink:href"/>
     </xsl:param>
+
     <xsl:param name="ServiceType">
       <xsl:value-of select="gmd:identificationInfo/*/srv:serviceType/gco:LocalName"/>
     </xsl:param>
@@ -1261,6 +1270,7 @@
       <xsl:apply-templates select="gmd:identificationInfo/*/gmd:descriptiveKeywords/gmd:MD_Keywords">
         <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
         <xsl:with-param name="ResourceType" select="$ResourceType"/>
+																  
       </xsl:apply-templates>
 <!-- Identifier, 0..1 -->
 <!--
@@ -1419,7 +1429,7 @@
           <xsl:variable name="Title">
             <xsl:for-each select="gmd:name">
               <dct:title xml:lang="{$MetadataLanguage}">
-                <xsl:value-of select="normalize-space(*)"/>
+                <xsl:value-of select="normalize-space(*[1])"/>
               </dct:title>
               <xsl:call-template name="LocalisedString">
                 <xsl:with-param name="term">dct:title</xsl:with-param>
@@ -1453,8 +1463,8 @@
 
           <xsl:variable name="TitleOrDescriptionOrPlaceholder">
             <xsl:choose>
-              <xsl:when test="normalize-space(gmd:name/*) != ''">
-                <xsl:value-of select="normalize-space(gmd:name/*)"/>
+              <xsl:when test="normalize-space(gmd:name/*[1]) != ''">
+                <xsl:value-of select="normalize-space(gmd:name/*[1])"/>
               </xsl:when>
               <xsl:when test="normalize-space(gmd:description/*) != ''">
                 <xsl:value-of select="normalize-space(gmd:description)"/>
@@ -3037,6 +3047,7 @@
   <xsl:template name="Keyword" match="gmd:identificationInfo/*/gmd:descriptiveKeywords/gmd:MD_Keywords">
     <xsl:param name="MetadataLanguage"/>
     <xsl:param name="ResourceType"/>
+								   
     <xsl:param name="OriginatingControlledVocabularyURI" select="normalize-space(gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href)"/>
     <xsl:param name="OriginatingControlledVocabulary">
 <!--
@@ -4198,14 +4209,29 @@
 
   <xsl:template name="LocalisedString">
     <xsl:param name="term"/>
+    <xsl:variable name="primaryValue" select="normalize-space(*[self::gco:CharacterString|self::gmx:Anchor])"/>
     <xsl:for-each select="gmd:PT_FreeText/*/gmd:LocalisedCharacterString">
       <xsl:variable name="value" select="normalize-space(.)"/>
       <xsl:variable name="langs">
+        <!-- Extract raw value after '#' and lowercase it (handles both #EN and #locale-en) -->
+        <xsl:variable name="localeRaw" select="lower-case(substring-after(@locale, '#'))"/>
+        <!-- Strip the locale- prefix if present, so both #locale-en and #EN yield "en" -->
+        <xsl:variable name="localeCode">
+          <xsl:choose>
+            <xsl:when test="starts-with($localeRaw, lower-case($locale-prefix))">
+              <xsl:value-of select="substring-after($localeRaw, lower-case($locale-prefix))"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$localeRaw"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
         <xsl:call-template name="Alpha3-to-Alpha2">
-          <xsl:with-param name="lang" select="substring-after(translate(translate(@locale, $uppercase, $lowercase), '#', ''), $locale-prefix)"/>
+          <xsl:with-param name="lang" select="$localeCode"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:if test="$value != ''">
+      <!-- Skip locales whose value duplicates the primary gco:CharacterString/gmx:Anchor already output -->
+      <xsl:if test="$value != '' and not($primaryValue != '' and $value = $primaryValue)">
         <xsl:element name="{$term}">
           <xsl:attribute name="xml:lang"><xsl:value-of select="$langs"/></xsl:attribute>
           <xsl:value-of select="$value"/>
@@ -4454,4 +4480,3 @@
   </xsl:template>
 
 </xsl:transform>
-
