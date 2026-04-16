@@ -1314,7 +1314,7 @@
           <xsl:with-param name="MetadataLanguage" select="$MetadataLanguage"/>
         </xsl:apply-templates>
 -->
-	<xsl:if test="$ServiceCategory != ''">
+        <xsl:if test="$ServiceCategory != ''">
            <geodcatap:serviceCategory rdf:resource="{$ServiceCategory}"/>
         </xsl:if>
         <geodcatap:serviceType rdf:resource="{$SpatialDataServiceTypeCodelistUri}/{$ServiceType}"/>
