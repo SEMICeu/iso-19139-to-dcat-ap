@@ -45,6 +45,7 @@ geodcatap: a dcterms:Standard .
     geodcatap:purpose "Služba byla vytvořena na základě směrnice o vybudování infrastruktury prostorových dat ve Společenství (INSPIRE), která vstoupila v platnost 15. května 2007. Do národní legislativy byla Směrnice v České republice transponována zákonem č. 380/2009 Sb., kterým se měnily zákon č. 123/1998 Sb., o právu na informace o životním prostředí, ve znění pozdějších předpisů, a zákon č. 200/1994 Sb., o zeměměřictví a o změně a doplnění některých zákonů souvisejících s jeho zavedením, ve znění pozdějších předpisů. Celá transpozice byla doplněna vyhláškou č. 103/2010 Sb., o provedení některých ustanovení zákona o poskytování informací o životním prostředí."@cs,
         "Service was created on the the Directive on construction of spatial data infrastructure in the European Community (INSPIRE), which is valid from 15 May 2007. Into national legislation in the Czech Republic, the Directive was transposed by the Act No. 380/2009 Coll., amending Act No. 123/1998 Coll., establishing the right to information on the environment, as subsequently amended, and Act No. 200/1994 Coll., on surveying and amending and supplementing certain acts related to its introduction, as amended. Full transposition was supplemented by Decree No. 103/2010 Coll., implementing certain provisions of the Act to provide environmental information."@en ;
     geodcatap:resourceType <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service> ;
+    geodcatap:serviceCategory <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoProductAccessService> ;
     geodcatap:serviceType <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download> ;
     dcterms:accessRights <http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations> ;
     dcterms:conformsTo [ a dcterms:Standard ;
@@ -91,8 +92,7 @@ geodcatap: a dcterms:Standard .
         "settlements"@en,
         "topographic database"@en,
         "transportation"@en ;
-    dcat:theme <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoProductAccessService>,
-        <http://inspire.ec.europa.eu/theme/au>,
+    dcat:theme <http://inspire.ec.europa.eu/theme/au>,
         <http://inspire.ec.europa.eu/theme/bu>,
         <http://inspire.ec.europa.eu/theme/el>,
         <http://inspire.ec.europa.eu/theme/gn>,

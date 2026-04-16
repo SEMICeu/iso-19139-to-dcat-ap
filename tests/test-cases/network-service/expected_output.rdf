@@ -66,9 +66,9 @@
       <geodcatap:resourceType rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service"/>
       <dct:title xml:lang="en">Land Use map of MyCountry</dct:title>
       <dct:description xml:lang="en">This service provides a map of the land use distribution of MyCountry. To be used only at scales lower than 1:10000.</dct:description>
-      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoMapAccessService"/>
       <dcat:theme rdf:resource="https://www.eionet.europa.eu/gemet/en/concept/4614"/>
       <dcat:theme rdf:resource="https://www.eionet.europa.eu/gemet/en/concept/11323"/>
+      <geodcatap:serviceCategory rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoMapAccessService"/>
       <geodcatap:serviceType rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view"/>
       <dct:spatial rdf:parseType="Resource">
          <rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
