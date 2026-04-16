@@ -20,7 +20,8 @@
          xmlns:schema="http://schema.org/"
          xmlns:sdmx-attribute="http://purl.org/linked-data/sdmx/2009/attribute#"
          xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-         xmlns:vcard="http://www.w3.org/2006/vcard/ns#">
+         xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema">
    <rdf:Description rdf:about="https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50">
       <foaf:isPrimaryTopicOf>
          <rdf:Description>
@@ -80,6 +81,7 @@
                         </locn:address>
                      </rdf:Description>
                   </prov:agent>
+                  <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
                   <dcat:hadRole>
                      <dcat:Role rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
                   </dcat:hadRole>
@@ -98,6 +100,7 @@
             </dct:source>
          </rdf:Description>
       </foaf:isPrimaryTopicOf>
+      <rdf:type rdf:resource="http://purl.org/dc/dcmitype/Service"/>
       <rdf:type rdf:resource="http://www.w3.org/ns/dcat#DataService"/>
       <geodcatap:resourceType rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service"/>
       <dct:title xml:lang="cs">Stahovací služba ATOM pro Data50</dct:title>
@@ -107,49 +110,85 @@
       <geodcatap:purpose xml:lang="cs">Služba byla vytvořena na základě směrnice o vybudování infrastruktury prostorových dat ve Společenství (INSPIRE), která vstoupila v platnost 15. května 2007. Do národní legislativy byla Směrnice v České republice transponována zákonem č. 380/2009 Sb., kterým se měnily zákon č. 123/1998 Sb., o právu na informace o životním prostředí, ve znění pozdějších předpisů, a zákon č. 200/1994 Sb., o zeměměřictví a o změně a doplnění některých zákonů souvisejících s jeho zavedením, ve znění pozdějších předpisů. Celá transpozice byla doplněna vyhláškou č. 103/2010 Sb., o provedení některých ustanovení zákona o poskytování informací o životním prostředí.</geodcatap:purpose>
       <geodcatap:purpose xml:lang="en">Service was created on the the Directive on construction of spatial data infrastructure in the European Community (INSPIRE), which is valid from 15 May 2007. Into national legislation in the Czech Republic, the Directive was transposed by the Act No. 380/2009 Coll., amending Act No. 123/1998 Coll., establishing the right to information on the environment, as subsequently amended, and Act No. 200/1994 Coll., on surveying and amending and supplementing certain acts related to its introduction, as amended. Full transposition was supplemented by Decree No. 103/2010 Coll., implementing certain provisions of the Act to provide environmental information.</geodcatap:purpose>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/tn"/>
+      <dct:subject rdf:resource="http://inspire.ec.europa.eu/theme/tn"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/hy"/>
+      <dct:subject rdf:resource="http://inspire.ec.europa.eu/theme/hy"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/au"/>
+      <dct:subject rdf:resource="http://inspire.ec.europa.eu/theme/au"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/gn"/>
+      <dct:subject rdf:resource="http://inspire.ec.europa.eu/theme/gn"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/el"/>
+      <dct:subject rdf:resource="http://inspire.ec.europa.eu/theme/el"/>
       <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/bu"/>
+      <dct:subject rdf:resource="http://inspire.ec.europa.eu/theme/bu"/>
       <dcat:theme rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4006&amp;l=administrativni-hranice"/>
+      <dct:subject rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4006&amp;l=administrativni-hranice"/>
       <dcat:theme rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4388&amp;l=dopravni-infrastruktura"/>
+      <dct:subject rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4388&amp;l=dopravni-infrastruktura"/>
       <dcat:theme rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4477&amp;l=geograficke-nazvoslovi"/>
+      <dct:subject rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4477&amp;l=geograficke-nazvoslovi"/>
       <dcat:theme rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=5452&amp;l=vedeni-technickeho-vybaveni--site-technickeho-vybaveni"/>
+      <dct:subject rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=5452&amp;l=vedeni-technickeho-vybaveni--site-technickeho-vybaveni"/>
       <dcat:theme rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4151&amp;l=vyskopis"/>
+      <dct:subject rdf:resource="https://www.slovnikcuzk.eu/termin.php?tid=4151&amp;l=vyskopis"/>
       <dcat:keyword xml:lang="cs">bezešvá databáze</dcat:keyword>
       <dcat:keyword xml:lang="en">seamless database</dcat:keyword>
+      <dc:subject xml:lang="cs">bezešvá databáze</dc:subject>
+      <dc:subject xml:lang="en">seamless database</dc:subject>
       <dcat:keyword xml:lang="cs">topografická databáze</dcat:keyword>
       <dcat:keyword xml:lang="en">topographic database</dcat:keyword>
+      <dc:subject xml:lang="cs">topografická databáze</dc:subject>
+      <dc:subject xml:lang="en">topographic database</dc:subject>
       <dcat:keyword xml:lang="cs">1:50 000</dcat:keyword>
       <dcat:keyword xml:lang="en">1:50,000</dcat:keyword>
+      <dc:subject xml:lang="cs">1:50 000</dc:subject>
+      <dc:subject xml:lang="en">1:50,000</dc:subject>
       <dcat:keyword xml:lang="cs">1:500000</dcat:keyword>
-      <dcat:keyword xml:lang="en">1:500000</dcat:keyword>
+      <dc:subject xml:lang="cs">1:500000</dc:subject>
       <dcat:keyword xml:lang="cs">50 000</dcat:keyword>
       <dcat:keyword xml:lang="en">50,000</dcat:keyword>
+      <dc:subject xml:lang="cs">50 000</dc:subject>
+      <dc:subject xml:lang="en">50,000</dc:subject>
       <dcat:keyword xml:lang="cs">50000</dcat:keyword>
-      <dcat:keyword xml:lang="en">50000</dcat:keyword>
+      <dc:subject xml:lang="cs">50000</dc:subject>
       <dcat:keyword xml:lang="cs">databáze České republiky</dcat:keyword>
       <dcat:keyword xml:lang="en">database of the Czech Republic</dcat:keyword>
+      <dc:subject xml:lang="cs">databáze České republiky</dc:subject>
+      <dc:subject xml:lang="en">database of the Czech Republic</dc:subject>
       <dcat:keyword xml:lang="cs">doprava</dcat:keyword>
       <dcat:keyword xml:lang="en">transportation</dcat:keyword>
+      <dc:subject xml:lang="cs">doprava</dc:subject>
+      <dc:subject xml:lang="en">transportation</dc:subject>
       <dcat:keyword xml:lang="cs">sídla</dcat:keyword>
       <dcat:keyword xml:lang="en">settlements</dcat:keyword>
+      <dc:subject xml:lang="cs">sídla</dc:subject>
+      <dc:subject xml:lang="en">settlements</dc:subject>
       <dcat:keyword xml:lang="cs">vrstevnice</dcat:keyword>
       <dcat:keyword xml:lang="en">contour</dcat:keyword>
+      <dc:subject xml:lang="cs">vrstevnice</dc:subject>
+      <dc:subject xml:lang="en">contour</dc:subject>
       <dcat:keyword xml:lang="cs">stahovací služba</dcat:keyword>
       <dcat:keyword xml:lang="en">download service</dcat:keyword>
+      <dc:subject xml:lang="cs">stahovací služba</dc:subject>
+      <dc:subject xml:lang="en">download service</dc:subject>
       <dcat:keyword xml:lang="cs">stahování dat</dcat:keyword>
       <dcat:keyword xml:lang="en">data downloading</dcat:keyword>
+      <dc:subject xml:lang="cs">stahování dat</dc:subject>
+      <dc:subject xml:lang="en">data downloading</dc:subject>
       <dcat:keyword xml:lang="cs">ATOM</dcat:keyword>
-      <dcat:keyword xml:lang="en">ATOM</dcat:keyword>
-      <geodcatap:serviceCategory rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoProductAccessService"/>
+      <dc:subject xml:lang="cs">ATOM</dc:subject>
       <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50</dct:identifier>
+      <geodcatap:serviceCategory rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoProductAccessService"/>
       <geodcatap:serviceType rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download"/>
       <dct:spatial rdf:parseType="Resource">
          <rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
+         <locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"><![CDATA[POLYGON((12.09 51.06,18.86 51.06,18.86 48.55,12.09 48.55,12.09 51.06))]]></locn:geometry>
+         <locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#gmlLiteral"><![CDATA[<gml:Envelope srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84"><gml:lowerCorner>12.09 48.55</gml:lowerCorner><gml:upperCorner>18.86 51.06</gml:upperCorner></gml:Envelope>]]></locn:geometry>
+         <locn:geometry rdf:datatype="https://www.iana.org/assignments/media-types/application/vnd.geo+json"><![CDATA[{"type":"Polygon","coordinates":[[[12.09,51.06],[18.86,51.06],[18.86,48.55],[12.09,48.55],[12.09,51.06]]]}]]></locn:geometry>
+         <locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#geoJSONLiteral"><![CDATA[{"type":"Polygon","coordinates":[[[12.09,51.06],[18.86,51.06],[18.86,48.55],[12.09,48.55],[12.09,51.06]]]}]]></locn:geometry>
          <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"><![CDATA[POLYGON((12.09 51.06,18.86 51.06,18.86 48.55,12.09 48.55,12.09 51.06))]]></dcat:bbox>
          <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#gmlLiteral"><![CDATA[<gml:Envelope srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84"><gml:lowerCorner>12.09 48.55</gml:lowerCorner><gml:upperCorner>18.86 51.06</gml:upperCorner></gml:Envelope>]]></dcat:bbox>
+         <dcat:bbox rdf:datatype="https://www.iana.org/assignments/media-types/application/vnd.geo+json"><![CDATA[{"type":"Polygon","coordinates":[[[12.09,51.06],[18.86,51.06],[18.86,48.55],[12.09,48.55],[12.09,51.06]]]}]]></dcat:bbox>
          <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#geoJSONLiteral"><![CDATA[{"type":"Polygon","coordinates":[[[12.09,51.06],[18.86,51.06],[18.86,48.55],[12.09,48.55],[12.09,51.06]]]}]]></dcat:bbox>
       </dct:spatial>
       <dct:spatial>
@@ -304,6 +343,7 @@
                   </locn:address>
                </rdf:Description>
             </prov:agent>
+            <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/custodian"/>
             <dcat:hadRole>
                <dcat:Role rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/custodian"/>
             </dcat:hadRole>
