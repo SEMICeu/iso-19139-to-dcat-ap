@@ -20,7 +20,8 @@
          xmlns:schema="http://schema.org/"
          xmlns:sdmx-attribute="http://purl.org/linked-data/sdmx/2009/attribute#"
          xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-         xmlns:vcard="http://www.w3.org/2006/vcard/ns#">
+         xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema">
    <rdf:Description rdf:about="https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50">
       <foaf:isPrimaryTopicOf>
          <rdf:Description>
