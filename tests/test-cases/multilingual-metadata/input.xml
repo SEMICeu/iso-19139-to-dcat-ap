@@ -730,6 +730,14 @@
 								<gmd:protocol>
 									<gmx:Anchor xlink:href="https://tools.ietf.org/html/rfc4287">atom</gmx:Anchor>
 								</gmd:protocol>
+								<gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+									<gco:CharacterString>Stahovací služba ATOM pro Data50</gco:CharacterString>
+									<gmd:PT_FreeText>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#locale-en">ATOM download service for Data50</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
+									</gmd:PT_FreeText>
+								</gmd:name>
 							</gmd:CI_OnlineResource>
 						</gmd:onLine>
 					</gmd:MD_DigitalTransferOptions>
