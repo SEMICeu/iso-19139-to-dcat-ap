@@ -1,0 +1,8 @@
+{
+    "description": "Geographic BBox precision test for https://github.com/SEMICeu/iso-19139-to-dcat-ap/issues/112. Based on basic_dataset with modified BBox.",
+    "parameters": {
+        "profile": "extended",
+        "CoupledResourceLookup": "disabled",
+        "include-deprecated": "no"
+    }
+}
