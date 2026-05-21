@@ -451,15 +451,15 @@
       <!-- Handle PT_FreeText with LocalisedCharacterStrings -->
       <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString">
         <xsl:choose>
-          <!-- Try to find English locale with prefix (e.g. #locale-en) -->
+          <!-- Try to find preferred locale with prefix (e.g. #locale-en) -->
           <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',$locale-prefix,$locale-default-lang)]">
             <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',$locale-prefix,$locale-default-lang)][1])"/>
           </xsl:when>
-          <!-- Try to find English locale without prefix, uppercase (e.g. #EN) -->
+          <!-- Try to find preferred locale without prefix, uppercase (e.g. #EN) -->
           <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',upper-case($locale-default-lang))]">
             <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',upper-case($locale-default-lang))][1])"/>
           </xsl:when>
-          <!-- Try to find English locale without prefix, lowercase (e.g. #en) -->
+          <!-- Try to find preferred locale without prefix, lowercase (e.g. #en) -->
           <xsl:when test="$element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',lower-case($locale-default-lang))]">
             <xsl:value-of select="normalize-space($element/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale=concat('#',lower-case($locale-default-lang))][1])"/>
           </xsl:when>
