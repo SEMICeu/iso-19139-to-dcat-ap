@@ -435,7 +435,7 @@
     Handles three patterns:
     1. gmx:Anchor - returns the text content
     2. gco:CharacterString - returns the text content  
-    3. gmd:PT_FreeText with LocalisedCharacterStrings - returns English text if available, otherwise first available
+    3. gmd:PT_FreeText with LocalisedCharacterStrings - returns preferred localized text if available, otherwise first available
   -->
   <xsl:function name="local:getTextContent">
     <xsl:param name="element"/>
