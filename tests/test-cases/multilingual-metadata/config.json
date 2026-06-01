@@ -4,7 +4,6 @@
         "profile": "extended",
         "CoupledResourceLookup": "disabled",
         "include-deprecated": "no",
-        "locale-prefix": ""
-        "locale-default-lang": "FRE"
+        "locale-preferred-lang": "fre"
     }
 }
