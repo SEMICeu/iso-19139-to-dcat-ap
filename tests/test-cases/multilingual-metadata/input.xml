@@ -33,6 +33,9 @@
 						<gmd:textGroup>
 							<gmd:LocalisedCharacterString locale="#locale-en">Czech Office for Surveying, Mapping and Cadastre</gmd:LocalisedCharacterString>
 						</gmd:textGroup>
+						<gmd:textGroup>
+							<gmd:LocalisedCharacterString locale="#FR">Bureau tchèque de topographie, de cartographie et du cadastre</gmd:LocalisedCharacterString>
+						</gmd:textGroup>
 					</gmd:PT_FreeText>
 				</gmd:organisationName>
 				<gmd:contactInfo>
@@ -59,10 +62,14 @@
 									<gco:CharacterString>182 11</gco:CharacterString>
 								</gmd:postalCode>
 								<gmd:country xsi:type="gmd:PT_FreeText_PropertyType">
+									<!-- Fixture for gmd:PT_FreeText_PropertyType as gmx:Anchor -->
 									<gmx:Anchor xlink:href="http://publications.europa.eu/resource/authority/country/CZE">Česká republika</gmx:Anchor>
 									<gmd:PT_FreeText>
 										<gmd:textGroup>
 											<gmd:LocalisedCharacterString locale="#locale-en">Czech Republic</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#FR">République tchèque</gmd:LocalisedCharacterString>
 										</gmd:textGroup>
 									</gmd:PT_FreeText>
 								</gmd:country>
@@ -86,6 +93,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">Mo-Fr 7:00 AM - 5:00 PM CET</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Lun-Ven 7h00 - 17h00 CET</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:hoursOfService>
@@ -121,6 +131,19 @@
 				</gmd:characterEncoding>
 			</gmd:PT_Locale>
 		</gmd:locale>
+		<gmd:locale>
+			<gmd:PT_Locale id="FR">
+				<gmd:languageCode>
+					<gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fre">fre</gmd:LanguageCode>
+				</gmd:languageCode>
+				<gmd:country>
+					<gmd:Country codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#Country" codeListValue="FR">FR</gmd:Country>
+				</gmd:country>
+				<gmd:characterEncoding>
+					<gmd:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8">utf8</gmd:MD_CharacterSetCode>
+				</gmd:characterEncoding>
+			</gmd:PT_Locale>
+		</gmd:locale>
 		<gmd:identificationInfo>
 			<srv:SV_ServiceIdentification id="CZ-CUZK-ATOM-DATA50">
 				<gmd:citation>
@@ -131,6 +154,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">ATOM Download Service for the Data50</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Service de téléchargement ATOM pour Data50</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:title>
 						<gmd:alternateTitle xsi:type="gmd:PT_FreeText_PropertyType">
@@ -138,6 +164,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">ATOM Download Service - Data50</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Service de téléchargement ATOM - Data50</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:alternateTitle>
@@ -166,6 +195,9 @@
 										<gmd:textGroup>
 											<gmd:LocalisedCharacterString locale="#locale-en">Czech Office for Surveying, Mapping and Cadastre</gmd:LocalisedCharacterString>
 										</gmd:textGroup>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#FR">Bureau tchèque de topographie, de cartographie et du cadastre</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
 									</gmd:PT_FreeText>
 								</gmd:organisationName>
 								<gmd:contactInfo>
@@ -191,6 +223,9 @@
 						<gmd:textGroup>
 							<gmd:LocalisedCharacterString locale="#locale-en">The ATOM download service for Data50 is publicly available and it provides data of the geographical model Data50. The service provides data for the whole territory of the Czech Republic in shapefile data format. Data is divided into 8 thematic groups - Settlements and cultural and industrial buildings, Transportation, Pipelines and electric lines, Hydrography, Boundary of territorial units, Vegetation and bare surface, Terrain and Names. Data can be downloaded by thematic groups or all layers in one file. The service fulfills the technical instructions for INSPIRE Download Services in the version 3.1. Datasets are compressed (ZIP) for downloading.</gmd:LocalisedCharacterString>
 						</gmd:textGroup>
+						<gmd:textGroup>
+							<gmd:LocalisedCharacterString locale="#FR">Le service de téléchargement ATOM pour Data50 est accessible au public et fournit des données du modèle géographique Data50. Le service fournit des données pour l'ensemble du territoire de la République tchèque au format shapefile. Les données sont divisées en 8 groupes thématiques : Établissements et bâtiments culturels et industriels, Transports, Pipelines et lignes électriques, Hydrographie, Limites des unités territoriales, Végétation et surface nue, Terrain et Noms. Les données peuvent être téléchargées par groupes thématiques ou en un seul fichier. Le service respecte les instructions techniques pour les services de téléchargement INSPIRE version 3.1. Les jeux de données sont compressés (ZIP) pour le téléchargement.</gmd:LocalisedCharacterString>
+						</gmd:textGroup>
 					</gmd:PT_FreeText>
 				</gmd:abstract>
 				<gmd:purpose xsi:type="gmd:PT_FreeText_PropertyType">
@@ -198,6 +233,9 @@
 					<gmd:PT_FreeText>
 						<gmd:textGroup>
 							<gmd:LocalisedCharacterString locale="#locale-en">Service was created on the the Directive on construction of spatial data infrastructure in the European Community (INSPIRE), which is valid from 15 May 2007. Into national legislation in the Czech Republic, the Directive was transposed by the Act No. 380/2009 Coll., amending Act No. 123/1998 Coll., establishing the right to information on the environment, as subsequently amended, and Act No. 200/1994 Coll., on surveying and amending and supplementing certain acts related to its introduction, as amended. Full transposition was supplemented by Decree No. 103/2010 Coll., implementing certain provisions of the Act to provide environmental information.</gmd:LocalisedCharacterString>
+						</gmd:textGroup>
+						<gmd:textGroup>
+							<gmd:LocalisedCharacterString locale="#FR">Le service a été créé sur la base de la directive sur la construction d'une infrastructure de données spatiales dans la Communauté européenne (INSPIRE), en vigueur depuis le 15 mai 2007. Dans la législation nationale tchèque, la directive a été transposée par la loi n° 380/2009 Rec., modifiant la loi n° 123/1998 Rec. sur le droit à l'information sur l'environnement, et la loi n° 200/1994 Rec. sur la topographie. La transposition complète a été complétée par le décret n° 103/2010 Rec. mettant en œuvre certaines dispositions de la loi sur la fourniture d'informations environnementales.</gmd:LocalisedCharacterString>
 						</gmd:textGroup>
 					</gmd:PT_FreeText>
 				</gmd:purpose>
@@ -211,6 +249,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">Czech Office for Surveying, Mapping and Cadastre</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Bureau tchèque de topographie, de cartographie et du cadastre</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:organisationName>
@@ -238,10 +279,14 @@
 											<gco:CharacterString>182 11</gco:CharacterString>
 										</gmd:postalCode>
 										<gmd:country xsi:type="gmd:PT_FreeText_PropertyType">
-											<gmx:Anchor xlink:href="http://publications.europa.eu/resource/authority/country/CZE">Česká republika</gmx:Anchor>
+											<!-- Fixture for gmd:PT_FreeText_PropertyType as gco:CharacterString -->
+											<gco:CharacterString>Česká republika</gco:CharacterString>
 											<gmd:PT_FreeText>
 												<gmd:textGroup>
 													<gmd:LocalisedCharacterString locale="#locale-en">Czech Republic</gmd:LocalisedCharacterString>
+												</gmd:textGroup>
+												<gmd:textGroup>
+													<gmd:LocalisedCharacterString locale="#FR">République tchèque</gmd:LocalisedCharacterString>
 												</gmd:textGroup>
 											</gmd:PT_FreeText>
 										</gmd:country>
@@ -263,6 +308,9 @@
 										<gmd:textGroup>
 											<gmd:LocalisedCharacterString locale="#locale-en">Mo-Fr 7:00 AM - 5:00 PM CET</gmd:LocalisedCharacterString>
 										</gmd:textGroup>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#FR">Lun-Ven 7h00 - 17h00 CET</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
 									</gmd:PT_FreeText>
 								</gmd:hoursOfService>
 								<gmd:contactInstructions>
@@ -275,6 +323,171 @@
 						</gmd:role>
 					</gmd:CI_ResponsibleParty>
 				</gmd:pointOfContact>
+				<gmd:pointOfContact>
+					<gmd:CI_ResponsibleParty>
+						<gmd:individualName>
+							<gco:CharacterString/>
+						</gmd:individualName>
+						<gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+							<gco:CharacterString>Český úřad zeměměřický a katastrální</gco:CharacterString>
+							<gmd:PT_FreeText>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#locale-en">Czech Office for Surveying, Mapping and Cadastre</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Bureau tchèque de topographie, de cartographie et du cadastre</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+							</gmd:PT_FreeText>
+						</gmd:organisationName>
+						<gmd:contactInfo>
+							<gmd:CI_Contact>
+								<gmd:phone>
+									<gmd:CI_Telephone>
+										<gmd:voice>
+											<gco:CharacterString>+420 284 044 455</gco:CharacterString>
+										</gmd:voice>
+										<gmd:facsimile>
+											<gco:CharacterString>+420 284 041 557</gco:CharacterString>
+										</gmd:facsimile>
+									</gmd:CI_Telephone>
+								</gmd:phone>
+								<gmd:address>
+									<gmd:CI_Address>
+										<gmd:deliveryPoint>
+											<gmx:Anchor xlink:href="https://linked.cuzk.cz/resource/ruian/adresni-misto/25133616">Pod sídlištěm 1800/9</gmx:Anchor>
+										</gmd:deliveryPoint>
+										<gmd:city>
+											<gco:CharacterString>Praha 8</gco:CharacterString>
+										</gmd:city>
+										<gmd:postalCode>
+											<gco:CharacterString>182 11</gco:CharacterString>
+										</gmd:postalCode>
+										<gmd:country xsi:type="gmd:PT_FreeText_PropertyType">
+											<!-- Fixture for gmd:PT_FreeText_PropertyType as gmd:PT_FreeText with matching locale -->
+											<gmd:PT_FreeText>
+												<gmd:textGroup>
+													<gmd:LocalisedCharacterString locale="#locale-en">Czech Republic</gmd:LocalisedCharacterString>
+												</gmd:textGroup>
+												<gmd:textGroup>
+													<gmd:LocalisedCharacterString locale="#FR">République tchèque</gmd:LocalisedCharacterString>
+												</gmd:textGroup>
+											</gmd:PT_FreeText>
+										</gmd:country>
+										<gmd:electronicMailAddress>
+											<gco:CharacterString>cuzk.helpdesk@cuzk.gov.cz</gco:CharacterString>
+										</gmd:electronicMailAddress>
+									</gmd:CI_Address>
+								</gmd:address>
+								<gmd:onlineResource>
+									<gmd:CI_OnlineResource>
+										<gmd:linkage>
+											<gmd:URL>https://geoportal.cuzk.gov.cz</gmd:URL>
+										</gmd:linkage>
+									</gmd:CI_OnlineResource>
+								</gmd:onlineResource>
+								<gmd:hoursOfService xsi:type="gmd:PT_FreeText_PropertyType">
+									<gco:CharacterString>Po - Pá 7-17 CET</gco:CharacterString>
+									<gmd:PT_FreeText>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#locale-en">Mo-Fr 7:00 AM - 5:00 PM CET</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#FR">Lun-Ven 7h00 - 17h00 CET</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
+									</gmd:PT_FreeText>
+								</gmd:hoursOfService>
+								<gmd:contactInstructions>
+									<gco:CharacterString/>
+								</gmd:contactInstructions>
+							</gmd:CI_Contact>
+						</gmd:contactInfo>
+						<gmd:role>
+							<gmd:CI_RoleCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_RoleCode" codeListValue="publisher">publisher</gmd:CI_RoleCode>
+						</gmd:role>
+					</gmd:CI_ResponsibleParty>
+				</gmd:pointOfContact>
+				<gmd:pointOfContact>
+					<gmd:CI_ResponsibleParty>
+						<gmd:individualName>
+							<gco:CharacterString/>
+						</gmd:individualName>
+						<gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+							<gco:CharacterString>Český úřad zeměměřický a katastrální</gco:CharacterString>
+							<gmd:PT_FreeText>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#locale-en">Czech Office for Surveying, Mapping and Cadastre</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Bureau tchèque de topographie, de cartographie et du cadastre</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+							</gmd:PT_FreeText>
+						</gmd:organisationName>
+						<gmd:contactInfo>
+							<gmd:CI_Contact>
+								<gmd:phone>
+									<gmd:CI_Telephone>
+										<gmd:voice>
+											<gco:CharacterString>+420 284 044 455</gco:CharacterString>
+										</gmd:voice>
+										<gmd:facsimile>
+											<gco:CharacterString>+420 284 041 557</gco:CharacterString>
+										</gmd:facsimile>
+									</gmd:CI_Telephone>
+								</gmd:phone>
+								<gmd:address>
+									<gmd:CI_Address>
+										<gmd:deliveryPoint>
+											<gmx:Anchor xlink:href="https://linked.cuzk.cz/resource/ruian/adresni-misto/25133616">Pod sídlištěm 1800/9</gmx:Anchor>
+										</gmd:deliveryPoint>
+										<gmd:city>
+											<gco:CharacterString>Praha 8</gco:CharacterString>
+										</gmd:city>
+										<gmd:postalCode>
+											<gco:CharacterString>182 11</gco:CharacterString>
+										</gmd:postalCode>
+										<gmd:country xsi:type="gmd:PT_FreeText_PropertyType">
+											<!-- Fixture for gmd:PT_FreeText_PropertyType as gmd:PT_FreeText with no matching locale -->
+											<!-- no gmx:Anchor or gco:CharacterString -->
+											<gmd:PT_FreeText>
+												<gmd:textGroup>
+													<gmd:LocalisedCharacterString locale="#locale-en">Czech Republic</gmd:LocalisedCharacterString>
+												</gmd:textGroup>
+												<!-- no #FR locale -->
+											</gmd:PT_FreeText>
+										</gmd:country>
+										<gmd:electronicMailAddress>
+											<gco:CharacterString>cuzk.helpdesk@cuzk.gov.cz</gco:CharacterString>
+										</gmd:electronicMailAddress>
+									</gmd:CI_Address>
+								</gmd:address>
+								<gmd:onlineResource>
+									<gmd:CI_OnlineResource>
+										<gmd:linkage>
+											<gmd:URL>https://geoportal.cuzk.gov.cz</gmd:URL>
+										</gmd:linkage>
+									</gmd:CI_OnlineResource>
+								</gmd:onlineResource>
+								<gmd:hoursOfService xsi:type="gmd:PT_FreeText_PropertyType">
+									<gco:CharacterString>Po - Pá 7-17 CET</gco:CharacterString>
+									<gmd:PT_FreeText>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#locale-en">Mo-Fr 7:00 AM - 5:00 PM CET</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#FR">Lun-Ven 7h00 - 17h00 CET</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
+									</gmd:PT_FreeText>
+								</gmd:hoursOfService>
+								<gmd:contactInstructions>
+									<gco:CharacterString/>
+								</gmd:contactInstructions>
+							</gmd:CI_Contact>
+						</gmd:contactInfo>
+						<gmd:role>
+							<gmd:CI_RoleCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_RoleCode" codeListValue="user">user</gmd:CI_RoleCode>
+						</gmd:role>
+					</gmd:CI_ResponsibleParty>
+				</gmd:pointOfContact>
 				<gmd:descriptiveKeywords>
 					<gmd:MD_Keywords>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -282,6 +495,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">Transport networks</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Réseaux de transport</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -291,6 +507,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">Hydrography</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Hydrographie</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -298,6 +517,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">Administrative units</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Unités administratives</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -307,6 +529,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">Geographical names</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Noms géographiques</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -315,6 +540,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">Elevation</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Altitude</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -322,6 +550,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">Buildings</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Bâtiments</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -362,6 +593,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">administrative boundary</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">limite administrative</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -369,6 +603,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">infrastructure of traffic</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">infrastructure de transport</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -378,6 +615,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">geographical names, geographic names (US)</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">noms géographiques</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -386,6 +626,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">utilitity line</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">réseau d'utilité publique</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -393,6 +636,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">hypsography</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">hypsographie</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -403,6 +649,9 @@
 									<gmd:PT_FreeText>
 										<gmd:textGroup>
 											<gmd:LocalisedCharacterString locale="#locale-en">Terminological Dictionary of Land Surveying and Cadastre of Real Estate</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#FR">Dictionnaire terminologique de topographie et du cadastre immobilier</gmd:LocalisedCharacterString>
 										</gmd:textGroup>
 									</gmd:PT_FreeText>
 								</gmd:title>
@@ -424,6 +673,9 @@
 												<gmd:textGroup>
 													<gmd:LocalisedCharacterString locale="#locale-en">Czech Office for Surveying, Mapping and Cadastre</gmd:LocalisedCharacterString>
 												</gmd:textGroup>
+												<gmd:textGroup>
+													<gmd:LocalisedCharacterString locale="#FR">Bureau tchèque de topographie, de cartographie et du cadastre</gmd:LocalisedCharacterString>
+												</gmd:textGroup>
 											</gmd:PT_FreeText>
 										</gmd:organisationName>
 										<gmd:role>
@@ -443,6 +695,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">seamless database</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">base de données continue</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -450,6 +705,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">topographic database</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">base de données topographique</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -459,6 +717,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">1:50,000</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">1:50 000</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -466,6 +727,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">1:500000</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">1:500000</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -475,6 +739,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">50,000</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">50 000</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -482,6 +749,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">50000</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">50000</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -491,6 +761,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">database of the Czech Republic</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">base de données de la République tchèque</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -498,6 +771,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">transportation</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">transport</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -507,6 +783,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">settlements</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">agglomérations</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -514,6 +793,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">contour</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">courbe de niveau</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -523,6 +805,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">download service</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">service de téléchargement</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -531,6 +816,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">data downloading</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">téléchargement de données</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
 						<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
@@ -538,6 +826,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">ATOM</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">ATOM</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:keyword>
@@ -578,6 +869,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">No limitations to public access</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Pas de restrictions d'accès public</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:otherConstraints>
 					</gmd:MD_LegalConstraints>
@@ -592,6 +886,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">Data and Services Use Policy</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Politique d'utilisation des données et services</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:otherConstraints>
@@ -610,6 +907,9 @@
 							<gmd:PT_FreeText>
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">100% area of the Czech Republic, i.e. 78 870 km2 (to 31st December 2016).</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">100% du territoire de la République tchèque, soit 78 870 km² (au 31 décembre 2016).</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:description>
@@ -720,6 +1020,9 @@
 								<gmd:textGroup>
 									<gmd:LocalisedCharacterString locale="#locale-en">Area of the Czech Republic</gmd:LocalisedCharacterString>
 								</gmd:textGroup>
+								<gmd:textGroup>
+									<gmd:LocalisedCharacterString locale="#FR">Territoire de la République tchèque</gmd:LocalisedCharacterString>
+								</gmd:textGroup>
 							</gmd:PT_FreeText>
 						</gmd:unitsOfDistribution>
 						<gmd:onLine>
@@ -730,14 +1033,6 @@
 								<gmd:protocol>
 									<gmx:Anchor xlink:href="https://tools.ietf.org/html/rfc4287">atom</gmx:Anchor>
 								</gmd:protocol>
-								<gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
-									<gco:CharacterString>Stahovací služba ATOM pro Data50</gco:CharacterString>
-									<gmd:PT_FreeText>
-										<gmd:textGroup>
-											<gmd:LocalisedCharacterString locale="#locale-en">ATOM download service for Data50</gmd:LocalisedCharacterString>
-										</gmd:textGroup>
-									</gmd:PT_FreeText>
-								</gmd:name>
 							</gmd:CI_OnlineResource>
 						</gmd:onLine>
 					</gmd:MD_DigitalTransferOptions>
@@ -797,6 +1092,9 @@
 										<gmd:textGroup>
 											<gmd:LocalisedCharacterString locale="#locale-en">Network service conformity testing with INSPIRE implementing rules for network services.</gmd:LocalisedCharacterString>
 										</gmd:textGroup>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#FR">Test de conformité du service réseau avec les règles de mise en œuvre INSPIRE pour les services réseau.</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
 									</gmd:PT_FreeText>
 								</gmd:explanation>
 								<gmd:pass>
@@ -828,6 +1126,9 @@
 												<gmd:textGroup>
 													<gmd:LocalisedCharacterString locale="#locale-en">Technical Guidance for the implementation of INSPIRE Download Services</gmd:LocalisedCharacterString>
 												</gmd:textGroup>
+												<gmd:textGroup>
+													<gmd:LocalisedCharacterString locale="#FR">Orientations techniques pour la mise en œuvre des services de téléchargement INSPIRE</gmd:LocalisedCharacterString>
+												</gmd:textGroup>
 											</gmd:PT_FreeText>
 										</gmd:alternateTitle>
 										<gmd:date>
@@ -847,6 +1148,9 @@
 									<gmd:PT_FreeText>
 										<gmd:textGroup>
 											<gmd:LocalisedCharacterString locale="#locale-en">INSPIRE ATOM download service conformity testing with the Technical Guidance for the implementation of INSPIRE Download Services.</gmd:LocalisedCharacterString>
+										</gmd:textGroup>
+										<gmd:textGroup>
+											<gmd:LocalisedCharacterString locale="#FR">Test de conformité du service de téléchargement INSPIRE ATOM avec les orientations techniques pour la mise en œuvre des services de téléchargement INSPIRE.</gmd:LocalisedCharacterString>
 										</gmd:textGroup>
 									</gmd:PT_FreeText>
 								</gmd:explanation>
