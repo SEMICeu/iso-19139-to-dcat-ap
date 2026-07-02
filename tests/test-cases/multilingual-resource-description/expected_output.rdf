@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:adms="http://www.w3.org/ns/adms#"
+         xmlns:cnt="http://www.w3.org/2011/content#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcat="http://www.w3.org/ns/dcat#"
+         xmlns:dcatap="http://data.europa.eu/r5r/"
+         xmlns:dct="http://purl.org/dc/terms/"
+         xmlns:dctype="http://purl.org/dc/dcmitype/"
+         xmlns:dqv="http://www.w3.org/ns/dqv#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:geodcatap="http://data.europa.eu/930/"
+         xmlns:gsp="http://www.opengis.net/ont/geosparql#"
+         xmlns:local="urn:local"
+         xmlns:locn="http://www.w3.org/ns/locn#"
+         xmlns:org="http://www.w3.org/ns/org#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:prov="http://www.w3.org/ns/prov#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:schema="http://schema.org/"
+         xmlns:sdmx-attribute="http://purl.org/linked-data/sdmx/2009/attribute#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <rdf:Description rdf:about="http://www.shom.fr/OCEANO/MODELE_HYDRODYN">
+      <foaf:isPrimaryTopicOf>
+         <rdf:Description>
+            <rdf:type rdf:resource="http://www.w3.org/ns/dcat#CatalogRecord"/>
+            <foaf:primaryTopic rdf:resource="http://www.shom.fr/OCEANO/MODELE_HYDRODYN"/>
+            <dct:conformsTo>
+               <dct:Standard rdf:about="http://data.europa.eu/930/"/>
+            </dct:conformsTo>
+            <dct:language>
+               <dct:LinguisticSystem rdf:about="http://publications.europa.eu/resource/authority/language/FRE"/>
+            </dct:language>
+            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-07-25T14:56:54</dct:modified>
+            <dcat:contactPoint>
+               <rdf:Description>
+                  <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Organization"/>
+                  <vcard:fn xml:lang="fr">Shom</vcard:fn>
+                  <vcard:hasEmail rdf:resource="mailto:support@shom-support.zendesk.com"/>
+                  <vcard:hasAddress>
+                     <vcard:Address>
+                        <vcard:street-address>13 rue du Chatellier</vcard:street-address>
+                        <vcard:locality>BREST</vcard:locality>
+                        <vcard:postal-code>29200</vcard:postal-code>
+                        <vcard:country-name>France</vcard:country-name>
+                     </vcard:Address>
+                  </vcard:hasAddress>
+               </rdf:Description>
+            </dcat:contactPoint>
+            <prov:qualifiedAttribution>
+               <prov:Attribution>
+                  <prov:agent>
+                     <rdf:Description>
+                        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+                        <foaf:name xml:lang="fr">Shom</foaf:name>
+                        <foaf:mbox rdf:resource="mailto:support@shom-support.zendesk.com"/>
+                        <locn:address>
+                           <locn:Address>
+                              <locn:thoroughfare>13 rue du Chatellier</locn:thoroughfare>
+                              <locn:postName>BREST</locn:postName>
+                              <locn:postCode>29200</locn:postCode>
+                              <locn:adminUnitL1>France</locn:adminUnitL1>
+                           </locn:Address>
+                        </locn:address>
+                     </rdf:Description>
+                  </prov:agent>
+                  <dcat:hadRole>
+                     <dcat:Role rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
+                  </dcat:hadRole>
+               </prov:Attribution>
+            </prov:qualifiedAttribution>
+            <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OCEANO_MODELE_HYDRODYN.xml</dct:identifier>
+            <dct:source rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/dcat#CatalogRecord"/>
+               <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-07-25T14:56:54</dct:modified>
+               <cnt:characterEncoding rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UTF-8</cnt:characterEncoding>
+               <dct:conformsTo rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://purl.org/dc/terms/Standard"/>
+                  <dct:title xml:lang="fr">ISO 19115:2003/19139</dct:title>
+                  <owl:versionInfo xml:lang="fr">1.0</owl:versionInfo>
+               </dct:conformsTo>
+            </dct:source>
+         </rdf:Description>
+      </foaf:isPrimaryTopicOf>
+      <rdf:type rdf:resource="http://www.w3.org/ns/dcat#DatasetSeries"/>
+      <geodcatap:resourceType rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series"/>
+      <dct:title xml:lang="fr">Modèle hydrodynamique 3D d'évolution de l'océan</dct:title>
+      <dct:title xml:lang="en">3D hydrodynamic model for the evolution of the ocean</dct:title>
+      <dct:description xml:lang="fr">Pour modéliser l'évolution de l'océan (courant, température, salinité, hauteur d’eau), le Shom utilise des modèles numériques HYCOM 3D (Hybrid Coordinate Ocean Model). Ces modèles HYCOM 3D comportent une grille verticale évolutive (dans l'espace et le temps), particulièrement adaptée aux régions côtières et aux phénomènes physiques qu'elles comportent (notamment le passage d'une zone hauturière au plateau continental, la présence de zones frontales). Ces modèles ont été adaptés, au sein du Shom, à la modélisation des zones côtières, par la prise en compte, notamment, de la marée et des apports fluviaux. Ils permettent de modéliser, avec une haute fréquence temporelle (horaire) et une forte résolution spatiale (1/60 deg pour la maquette Manche Gascogne), l'évolution et la variabilité des différents processus physiques présents en zone côtière (plateaux et talus continentaux) tels que les fronts de marée, les panaches fluviaux, la marée et les ondes internes, les upwellings ou encore la dynamique de la couche de mélange.</dct:description>
+      <dct:description xml:lang="en">Shom uses HYCOM 3D (Hybrid Coordinate Ocean Model) digital models to model changes to the ocean environment (currents, temperature, salinity). These HYCOM 3D models include a scalable (space and time) vertical grid, which is particularly suitable for the coastal regions and physical phenomena modelled (particularly the transition from a deep sea zone to the continental shelf, and the presence of frontal zones). These models were adapted to coastal models at Shom, particularly by integrating tides and the effects of rivers. These models focus on changes and variability in the different physical processes affecting coastal areas (continental shelves and slopes), such as tidal fronts, river plumes, tides and internal waves, upwelling and the dynamics of the mixed layer at an hourly frequency and with high spatial resolution (1/60 deg for the Biscay Channel model).</dct:description>
+      <geodcatap:purpose xml:lang="fr">Outre la très bonne représentation de la circulation générale dans les grands bassins océaniques pour laquelle le modèle HYCOM a été conçu à l'origine, les développements numériques réalisés au Shom (révision des schémas numériques temporels, prise en compte de la surface libre, conditions aux limites...) et les propriétés de la coordonnée verticale hybride font d'HYCOM un modèle particulièrement adapté aux processus régionaux et côtiers tels que : - la marée barotrope et les bancs découvrants, - la marée interne, - les fronts thermohalins, - la dynamique tourbillonnaires, - la dynamique de la couche de mélange avec sa zone homogène et sa thermocline marquée.</geodcatap:purpose>
+      <geodcatap:purpose xml:lang="en">In addition to the effective modelling of general water circulation in the ocean basins, for which the HYCOM model was originally designed, thanks to the digital developments applied by Shom (review of time-based digital diagrams, consideration of the free surface, boundary conditions, etc.) and the properties of the hybrid vertical coordinates, HYCOM is ideal for modelling regional and coastal processes such as: - the barometric tide and shallow waters, - the internal tide, - thermohaline fronts, - vortex dynamics, - mixed layer dynamics with the homogeneous zone and the thermocline.</geodcatap:purpose>
+      <dct:accrualPeriodicity>
+         <dct:Frequency rdf:about="http://publications.europa.eu/resource/authority/frequency/DAILY"/>
+      </dct:accrualPeriodicity>
+      <geodcatap:topicCategory rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/oceans"/>
+      <dcat:keyword xml:lang="fr">modèle</dcat:keyword>
+      <dcat:keyword xml:lang="en">model</dcat:keyword>
+      <dcat:keyword xml:lang="fr">océanographie</dcat:keyword>
+      <dcat:keyword xml:lang="en">oceanography</dcat:keyword>
+      <dcat:keyword xml:lang="fr">température</dcat:keyword>
+      <dcat:keyword xml:lang="en">temperature</dcat:keyword>
+      <dcat:keyword xml:lang="fr">courant</dcat:keyword>
+      <dcat:keyword xml:lang="en">current</dcat:keyword>
+      <dcat:keyword xml:lang="fr">salinité</dcat:keyword>
+      <dcat:keyword xml:lang="en">salinity</dcat:keyword>
+      <dcat:keyword xml:lang="fr">hauteur d'eau</dcat:keyword>
+      <dcat:keyword xml:lang="en">sea level</dcat:keyword>
+      <dcat:keyword xml:lang="fr">Produit</dcat:keyword>
+      <dcat:keyword xml:lang="en">product</dcat:keyword>
+      <dcat:keyword xml:lang="fr">données ouvertes</dcat:keyword>
+      <dcat:keyword xml:lang="en">open data</dcat:keyword>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/of"/>
+      <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/national"/>
+      <dcat:theme rdf:resource="http://data.europa.eu/bna/c_dd313021"/>
+      <dct:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://www.shom.fr/OCEANO/MODELE_HYDRODYN</dct:identifier>
+      <dct:language>
+         <dct:LinguisticSystem rdf:about="http://publications.europa.eu/resource/authority/language/FRE"/>
+      </dct:language>
+      <dct:spatial rdf:parseType="Resource">
+         <rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral"><![CDATA[POLYGON((-15.00 51.00,12.00 51.00,12.00 38.00,-15.00 38.00,-15.00 51.00))]]></dcat:bbox>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#gmlLiteral"><![CDATA[<gml:Envelope srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84"><gml:lowerCorner>-15.00 38.00</gml:lowerCorner><gml:upperCorner>12.00 51.00</gml:upperCorner></gml:Envelope>]]></dcat:bbox>
+         <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#geoJSONLiteral"><![CDATA[{"type":"Polygon","coordinates":[[[-15.00,51.00],[12.00,51.00],[12.00,38.00],[-15.00,38.00],[-15.00,51.00]]]}]]></dcat:bbox>
+      </dct:spatial>
+      <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2017-02-21</dct:issued>
+      <dct:provenance>
+         <dct:ProvenanceStatement>
+            <dct:description xml:lang="fr">Les modèles HYCOM 3D du Shom tournent quotidiennement sur le calculateur Météo-France et fournissent un jour d’analyse (J-1) et cinq jours de prévision (de J à J+4). La profondeur de prévision dépend des forçages utilisés. Les forçages utilisés sont les suivant: Météorologie : modèle Arpège HR de Météo France Océanographie (frontières ouvertes) : modèle PSY4 de Mercator Ocean Hydrologie : débits fluviaux du SCHAPI Afin de limiter les flux de données, la donnée Hycom mise à disposition en ligne sur data.shom.fr est découpée de la façon suivante: HYCOM3D-SURF : un fichier netcdf par jour d’analyse ou prévision contenant 24 échéances temporelles de l’ensemble des paramètres en surface à une fréquence horaire (extraction de la première couche du modèle 3D en niveaux) HYCOM3D-MJ : un fichier netcdf par jour d’analyse ou prévision avec une échéance temporelle qui est la moyenne journalière de l’ensemble des paramètres (il s’agit d’une moyenne sur le jour considéré des échéances 00 à 23H centrée sur 12H mais ramenée à 11H30UTC). La donnée est reprojetée sur une grille verticale Z de 50 niveaux: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 600, 700, 800, 900, 1000, 1250, 1500, 2000, 2500, 3000, 4000, 5000.</dct:description>
+            <dct:description xml:lang="en">Shom HYCOM 3D models are processed on a daily basis using the Météo-France computing system and provide a daily analysis (D-1) and five days of forecasts (from D to D+4). The depth of the forecast depends on the forcing mechanisms used. The following forcing mechanisms are used: Meteorology: Météo France Oceanography HR Arpège model (open borders): Mercator Ocean Hydrology PSY4 model: SCHAPI river flows. The Hycom layer provided on-line via data.shom.fr is broken down as follows to limit data volumes: HYCOM3D-SURF: a netcdf file per analysis date or forecast containing 24 hourly deadlines for all surface parameters (extraction of the first layer of the 3D model) HYCOM3D-MJ: a netcdf file per analysis date or forecast with a deadline, representing the daily average for all parameters (this average value is valid for the date in question, with deadlines from 00 to 23:00 centred at 12:00, but adjusted to 11:30 UTC). The layer is reprojected on a vertical Z grid with 50 levels: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 600, 700, 800, 900, 1000, 1250, 1500, 2000, 2500, 3000, 4000, 5000.</dct:description>
+         </dct:ProvenanceStatement>
+      </dct:provenance>
+      <geodcatap:referenceSystem>
+         <rdf:Description rdf:about="http://www.opengis.net/def/crs/EPSG/0/4326">
+            <rdf:type rdf:resource="http://purl.org/dc/terms/Standard"/>
+            <dct:type rdf:resource="http://inspire.ec.europa.eu/glossary/SpatialReferenceSystem"/>
+         </rdf:Description>
+      </geodcatap:referenceSystem>
+      <dct:conformsTo>
+         <dct:Standard rdf:about="http://data.europa.eu/eli/reg/2010/1089/oj"/>
+      </dct:conformsTo>
+      <prov:wasUsedBy>
+         <prov:Activity>
+            <prov:used>
+               <prov:Entity rdf:about="http://www.shom.fr/OCEANO/MODELE_HYDRODYN"/>
+            </prov:used>
+            <prov:qualifiedAssociation rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Association"/>
+               <prov:hadPlan rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+                  <prov:wasDerivedFrom>
+                     <prov:Entity rdf:about="http://data.europa.eu/eli/reg/2010/1089/oj"/>
+                  </prov:wasDerivedFrom>
+               </prov:hadPlan>
+            </prov:qualifiedAssociation>
+            <prov:generated rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+               <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
+               <dct:description xml:lang="fr">Information sur la conformité au règlement d'interopérabilité des séries et des services de données géographiques.</dct:description>
+            </prov:generated>
+         </prov:Activity>
+      </prov:wasUsedBy>
+      <prov:wasUsedBy>
+         <prov:Activity>
+            <prov:used>
+               <prov:Entity rdf:about="http://www.shom.fr/OCEANO/MODELE_HYDRODYN"/>
+            </prov:used>
+            <prov:qualifiedAssociation rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Association"/>
+               <prov:hadPlan rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+                  <prov:wasDerivedFrom rdf:parseType="Resource">
+                     <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+                     <dct:title xml:lang="fr">INSPIRE Data Specification on Oceanographic geographical features – Technical Guidelines v3.0</dct:title>
+                     <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2013-12-10</dct:issued>
+                  </prov:wasDerivedFrom>
+               </prov:hadPlan>
+            </prov:qualifiedAssociation>
+            <prov:generated rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+               <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
+               <dct:description xml:lang="fr">Information sur la conformité de la ressource à une spécification (INSPIRE).</dct:description>
+            </prov:generated>
+         </prov:Activity>
+      </prov:wasUsedBy>
+      <dct:conformsTo rdf:parseType="Resource">
+         <rdf:type rdf:resource="http://purl.org/dc/terms/Standard"/>
+         <dct:title xml:lang="fr">INSPIRE Data Specification on Oceanographic geographical features – Technical Guidelines v3.0</dct:title>
+         <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2013-12-10</dct:issued>
+      </dct:conformsTo>
+      <prov:wasUsedBy>
+         <prov:Activity>
+            <prov:used>
+               <prov:Entity rdf:about="http://www.shom.fr/OCEANO/MODELE_HYDRODYN"/>
+            </prov:used>
+            <prov:qualifiedAssociation rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Association"/>
+               <prov:hadPlan rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+                  <prov:wasDerivedFrom>
+                     <prov:Entity rdf:about="http://data.europa.eu/eli/reg/2010/1089/oj"/>
+                  </prov:wasDerivedFrom>
+               </prov:hadPlan>
+            </prov:qualifiedAssociation>
+            <prov:generated rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+               <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
+               <dct:description xml:lang="fr">Information sur la conformité au règlement d'interopérabilité des séries et des services de données géographiques.</dct:description>
+            </prov:generated>
+         </prov:Activity>
+      </prov:wasUsedBy>
+      <prov:wasUsedBy>
+         <prov:Activity>
+            <prov:used>
+               <prov:Entity rdf:about="http://www.shom.fr/OCEANO/MODELE_HYDRODYN"/>
+            </prov:used>
+            <prov:qualifiedAssociation rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Association"/>
+               <prov:hadPlan rdf:parseType="Resource">
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Plan"/>
+                  <prov:wasDerivedFrom rdf:parseType="Resource">
+                     <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+                     <dct:title xml:lang="fr">INSPIRE Data Specification on Oceanographic geographical features – Technical Guidelines v3.0</dct:title>
+                     <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2013-12-10</dct:issued>
+                  </prov:wasDerivedFrom>
+               </prov:hadPlan>
+            </prov:qualifiedAssociation>
+            <prov:generated rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+               <dct:type rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant"/>
+               <dct:description xml:lang="fr">Information sur la conformité de la ressource à une spécification (INSPIRE).</dct:description>
+            </prov:generated>
+         </prov:Activity>
+      </prov:wasUsedBy>
+      <dcat:landingPage>
+         <foaf:Document rdf:about="https://data.shom.fr">
+            <dct:title xml:lang="fr">Portail d'information géographique du Shom</dct:title>
+            <dct:title xml:lang="en">Shom Geoportal</dct:title>
+            <dct:description xml:lang="fr">Portail d'information géographique du Shom 
+                  
+                    Shom Geoportal
+                  
+                </dct:description>
+            <dct:description xml:lang="en">Shom Geoportal</dct:description>
+         </foaf:Document>
+      </dcat:landingPage>
+      <dcat:distribution>
+         <dcat:Distribution>
+            <dct:title xml:lang="fr"/>
+            <dct:description xml:lang="fr">Access point / WMS 
+                  
+                    Access point / WMS
+                  
+                </dct:description>
+            <dct:description xml:lang="en">Access point / WMS</dct:description>
+            <dcat:accessService rdf:parseType="Resource">
+               <rdf:type rdf:resource="http://www.w3.org/ns/dcat#DataService"/>
+               <dct:title xml:lang="fr">Access point / WMS</dct:title>
+               <dcat:endpointURL rdf:resource="https://services.data.shom.fr/ncwms2/wms"/>
+               <dcat:endpointDescription rdf:resource="https://services.data.shom.fr/ncwms2/wms?service=WMS&amp;request=GetCapabilities&amp;version=1.3.0"/>
+               <geodcatap:serviceProtocol>
+                  <dct:Standard rdf:about="http://www.opengeospatial.org/standards/wms"/>
+               </geodcatap:serviceProtocol>
+            </dcat:accessService>
+            <dcat:accessURL rdf:resource="https://services.data.shom.fr/ncwms2/wms?service=WMS&amp;request=GetCapabilities&amp;version=1.3.0"/>
+            <dct:license>
+               <dct:LicenseDocument rdf:about="https://www.etalab.gouv.fr/licence-ouverte-open-licence"/>
+            </dct:license>
+            <dct:accessRights>
+               <dct:RightsStatement rdf:about="https://www.etalab.gouv.fr/licence-ouverte-open-licence"/>
+            </dct:accessRights>
+            <dct:accessRights>
+               <dct:RightsStatement rdf:about="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations"/>
+            </dct:accessRights>
+            <adms:representationTechnique rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/grid"/>
+            <dct:format>
+               <dct:MediaType rdf:about="http://publications.europa.eu/resource/authority/file-type/NETCDF"/>
+            </dct:format>
+            <cnt:characterEncoding rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UTF-8</cnt:characterEncoding>
+         </dcat:Distribution>
+      </dcat:distribution>
+      <dcat:contactPoint>
+         <rdf:Description>
+            <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Organization"/>
+            <vcard:fn xml:lang="fr">Shom</vcard:fn>
+            <vcard:hasEmail rdf:resource="mailto:support@shom-support.zendesk.com"/>
+            <vcard:hasAddress>
+               <vcard:Address>
+                  <vcard:street-address>13 rue du Chatellier</vcard:street-address>
+                  <vcard:locality>BREST</vcard:locality>
+                  <vcard:postal-code>29200</vcard:postal-code>
+                  <vcard:country-name>France</vcard:country-name>
+               </vcard:Address>
+            </vcard:hasAddress>
+         </rdf:Description>
+      </dcat:contactPoint>
+      <prov:qualifiedAttribution>
+         <prov:Attribution>
+            <prov:agent>
+               <rdf:Description>
+                  <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+                  <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+                  <foaf:name xml:lang="fr">Shom</foaf:name>
+                  <foaf:mbox rdf:resource="mailto:support@shom-support.zendesk.com"/>
+                  <locn:address>
+                     <locn:Address>
+                        <locn:thoroughfare>13 rue du Chatellier</locn:thoroughfare>
+                        <locn:postName>BREST</locn:postName>
+                        <locn:postCode>29200</locn:postCode>
+                        <locn:adminUnitL1>France</locn:adminUnitL1>
+                     </locn:Address>
+                  </locn:address>
+               </rdf:Description>
+            </prov:agent>
+            <dcat:hadRole>
+               <dcat:Role rdf:about="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact"/>
+            </dcat:hadRole>
+         </prov:Attribution>
+      </prov:qualifiedAttribution>
+   </rdf:Description>
+</rdf:RDF>
