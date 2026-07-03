@@ -1473,11 +1473,11 @@
 
           <xsl:variable name="TitleOrDescriptionOrPlaceholder">
             <xsl:choose>
-              <xsl:when test="normalize-space(gmd:name/*) != ''">
-                <xsl:value-of select="normalize-space(gmd:name/*)"/>
+              <xsl:when test="local:getTextContent(gmd:name) != ''">
+                <xsl:value-of select="local:getTextContent(gmd:name)"/>
               </xsl:when>
-              <xsl:when test="normalize-space(gmd:description/*) != ''">
-                <xsl:value-of select="normalize-space(gmd:description)"/>
+              <xsl:when test="local:getTextContent(gmd:description) != ''">
+                <xsl:value-of select="local:getTextContent(gmd:description)"/>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:text>N/A</xsl:text>
