@@ -166,21 +166,6 @@ geodcatap: a dcterms:Standard .
                     foaf:phone <tel:+420284044455> ;
                     foaf:workplaceHomepage <https://geoportal.cuzk.gov.cz> ] ],
         [ a prov:Attribution ;
-            dcat:hadRole <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/user> ;
-            prov:agent [ a prov:Agent,
-                        foaf:Organization ;
-                    locn:address [ a locn:Address ;
-                            locn:adminUnitL1 "Czech Republic" ;
-                            locn:postCode "182 11" ;
-                            locn:postName "Praha 8" ;
-                            locn:thoroughfare "Pod sídlištěm 1800/9" ] ;
-                    foaf:mbox <mailto:cuzk.helpdesk@cuzk.gov.cz> ;
-                    foaf:name "Český úřad zeměměřický a katastrální"@cs,
-                        "Czech Office for Surveying, Mapping and Cadastre"@en,
-                        "Bureau tchèque de topographie, de cartographie et du cadastre"@fr ;
-                    foaf:phone <tel:+420284044455> ;
-                    foaf:workplaceHomepage <https://geoportal.cuzk.gov.cz> ] ],
-        [ a prov:Attribution ;
             dcat:hadRole <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/custodian> ;
             prov:agent [ a prov:Agent,
                         foaf:Organization ;
@@ -194,9 +179,44 @@ geodcatap: a dcterms:Standard .
                         "Czech Office for Surveying, Mapping and Cadastre"@en,
                         "Bureau tchèque de topographie, de cartographie et du cadastre"@fr ;
                     foaf:phone <tel:+420284044455> ;
+                    foaf:workplaceHomepage <https://geoportal.cuzk.gov.cz> ] ],
+        [ a prov:Attribution ;
+            dcat:hadRole <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/user> ;
+            prov:agent [ a prov:Agent,
+                        foaf:Organization ;
+                    locn:address [ a locn:Address ;
+                            locn:adminUnitL1 "Czech Republic" ;
+                            locn:postCode "182 11" ;
+                            locn:postName "Praha 8" ;
+                            locn:thoroughfare "Pod sídlištěm 1800/9" ] ;
+                    foaf:mbox <mailto:cuzk.helpdesk@cuzk.gov.cz> ;
+                    foaf:name "Český úřad zeměměřický a katastrální"@cs,
+                        "Czech Office for Surveying, Mapping and Cadastre"@en,
+                        "Bureau tchèque de topographie, de cartographie et du cadastre"@fr ;
+                    foaf:phone <tel:+420284044455> ;
                     foaf:workplaceHomepage <https://geoportal.cuzk.gov.cz> ] ] ;
     prov:wasUsedBy [ a prov:Activity ;
             prov:generated [ a prov:Entity ;
+                    dcterms:description "Testování souladu síťové služby s prováděcími pravidly INSPIRE pro síťové služby."@cs,
+                        "Network service conformity testing with INSPIRE implementing rules for network services."@en,
+                        "Test de conformité du service réseau avec les règles de mise en œuvre INSPIRE pour les services réseau."@fr ;
+                    dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
+            prov:qualifiedAssociation [ a prov:Association ;
+                    prov:hadPlan [ a prov:Plan ;
+                            prov:wasDerivedFrom <http://data.europa.eu/eli/reg/2009/976> ] ] ;
+            prov:used <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ],
+        [ a prov:Activity ;
+            prov:generated [ a prov:Entity ;
+                    dcterms:description "Testování souladu síťové služby s prováděcími pravidly INSPIRE pro síťové služby."@cs,
+                        "Network service conformity testing with INSPIRE implementing rules for network services."@en,
+                        "Test de conformité du service réseau avec les règles de mise en œuvre INSPIRE pour les services réseau."@fr ;
+                    dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
+            prov:qualifiedAssociation [ a prov:Association ;
+                    prov:hadPlan [ a prov:Plan ;
+                            prov:wasDerivedFrom <http://data.europa.eu/eli/reg/2009/976> ] ] ;
+            prov:used <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ],
+        [ a prov:Activity ;
+            prov:generated [ a prov:Entity ;
                     dcterms:description "Testování souladu INSPIRE ATOM stahovací služby s technickými pokyny pro implementaci INSPIRE stahovacích služeb."@cs,
                         "INSPIRE ATOM download service conformity testing with the Technical Guidance for the implementation of INSPIRE Download Services."@en,
                         "Test de conformité du service de téléchargement INSPIRE ATOM avec les orientations techniques pour la mise en œuvre des services de téléchargement INSPIRE."@fr ;
@@ -218,26 +238,6 @@ geodcatap: a dcterms:Standard .
                             prov:wasDerivedFrom [ a prov:Entity ;
                                     dcterms:issued "2013-08-09"^^xsd:date ;
                                     dcterms:title "Technical Guidance for the implementation of INSPIRE Download Services"@cs ] ] ] ;
-            prov:used <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ],
-        [ a prov:Activity ;
-            prov:generated [ a prov:Entity ;
-                    dcterms:description "Testování souladu síťové služby s prováděcími pravidly INSPIRE pro síťové služby."@cs,
-                        "Network service conformity testing with INSPIRE implementing rules for network services."@en,
-                        "Test de conformité du service réseau avec les règles de mise en œuvre INSPIRE pour les services réseau."@fr ;
-                    dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
-            prov:qualifiedAssociation [ a prov:Association ;
-                    prov:hadPlan [ a prov:Plan ;
-                            prov:wasDerivedFrom <http://data.europa.eu/eli/reg/2009/976> ] ] ;
-            prov:used <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ],
-        [ a prov:Activity ;
-            prov:generated [ a prov:Entity ;
-                    dcterms:description "Testování souladu síťové služby s prováděcími pravidly INSPIRE pro síťové služby."@cs,
-                        "Network service conformity testing with INSPIRE implementing rules for network services."@en,
-                        "Test de conformité du service réseau avec les règles de mise en œuvre INSPIRE pour les services réseau."@fr ;
-                    dcterms:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ] ;
-            prov:qualifiedAssociation [ a prov:Association ;
-                    prov:hadPlan [ a prov:Plan ;
-                            prov:wasDerivedFrom <http://data.europa.eu/eli/reg/2009/976> ] ] ;
             prov:used <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ] ;
     foaf:isPrimaryTopicOf [ a dcat:CatalogRecord ;
             dcterms:conformsTo geodcatap: ;
@@ -251,7 +251,9 @@ geodcatap: a dcterms:Standard .
                     dcterms:modified "2025-03-06"^^xsd:date ;
                     cnt:characterEncoding "UTF-8"^^xsd:string ] ;
             dcat:contactPoint [ a vcard:Individual ;
-                    vcard:fn "Vlček, Bohumil, Ing."@cs ;
+                    vcard:fn "Vlček, Bohumil, Ing."@cs,
+                        "Vlček, Bohumil, Ing."@en,
+                        "Vlček, Bohumil, ing."@fr ;
                     vcard:hasAddress [ a vcard:Address ;
                             vcard:country-name "Česká republika" ;
                             vcard:locality "Praha 8" ;
@@ -279,7 +281,9 @@ geodcatap: a dcterms:Standard .
                                         "Bureau tchèque de topographie, de cartographie et du cadastre"@fr ] ;
                             foaf:mbox <mailto:bohumil.vlcek@cuzk.gov.cz>,
                                 <mailto:podpora.zums@cuzk.gov.cz> ;
-                            foaf:name "Vlček, Bohumil, Ing."@cs ;
+                            foaf:name "Vlček, Bohumil, Ing."@cs,
+                                "Vlček, Bohumil, Ing."@en,
+                                "Vlček, Bohumil, ing."@fr ;
                             foaf:phone <tel:+420284044455> ;
                             foaf:workplaceHomepage <https://geoportal.cuzk.gov.cz> ] ] ;
             foaf:primaryTopic <https://cuzk.cz/CZ-00025712-CUZK_ATOM_DATA50> ] .
