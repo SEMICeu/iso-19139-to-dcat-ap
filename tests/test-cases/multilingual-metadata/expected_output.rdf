@@ -38,6 +38,8 @@
                <rdf:Description>
                   <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Individual"/>
                   <vcard:fn xml:lang="cs">Vlček, Bohumil, Ing.</vcard:fn>
+                  <vcard:fn xml:lang="en">Vlček, Bohumil, Ing.</vcard:fn>
+                  <vcard:fn xml:lang="fr">Vlček, Bohumil, ing.</vcard:fn>
                   <vcard:organization-name xml:lang="cs">Český úřad zeměměřický a katastrální</vcard:organization-name>
                   <vcard:organization-name xml:lang="en">Czech Office for Surveying, Mapping and Cadastre</vcard:organization-name>
                   <vcard:organization-name xml:lang="fr">Bureau tchèque de topographie, de cartographie et du cadastre</vcard:organization-name>
@@ -62,6 +64,8 @@
                         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
                         <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
                         <foaf:name xml:lang="cs">Vlček, Bohumil, Ing.</foaf:name>
+                        <foaf:name xml:lang="en">Vlček, Bohumil, Ing.</foaf:name>
+                        <foaf:name xml:lang="fr">Vlček, Bohumil, ing.</foaf:name>
                         <org:memberOf>
                            <foaf:Organization>
                               <foaf:name xml:lang="cs">Český úřad zeměměřický a katastrální</foaf:name>
